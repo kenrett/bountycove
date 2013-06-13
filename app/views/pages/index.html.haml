@@ -1,8 +1,8 @@
-%h1 Welcome to DaddyShop!
+%h1 Welcome to ParentalFinanceEducation.com!
 - if @user && @user.errors.any?
   = render :partial => "shared/signup_errors", :user => @user
 .sign_up
-  = form_for User.new do |f|
+  = form_for User.new, :url => new_user_path do |f|
     = f.label :first_name
     = f.text_field :first_name
     %br
@@ -13,8 +13,5 @@
     = f.text_field :email
     %br
     = f.label :password
-    = f.text_field :password
-    %br
-    = f.label :password_confirmation
-    = f.text_field :password_confirmation
+    = f.text_field :password_digest
     = f.submit "Sign Up!"
