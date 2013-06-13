@@ -7,7 +7,6 @@ gem 'rails', '3.2.13'
 
 gem 'pg'
 
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -21,6 +20,7 @@ group :assets do
 end
 
 group :development, :test do
+  gem 'faker'
   gem 'sextant'
   gem 'better_errors'
   gem 'pry-rails'

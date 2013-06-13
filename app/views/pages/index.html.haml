@@ -1,6 +1,8 @@
 %h1 Welcome to DaddyShop!
+- if @user && @user.errors.any?
+  = render :partial => "shared/signup_errors", :user => @user
 .sign_up
-  = form_for @user.new do |f|
+  = form_for User.new do |f|
     = f.label :first_name
     = f.text_field :first_name
     %br
