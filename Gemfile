@@ -26,7 +26,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'quiet_assets'
   gem 'haml-rails'
-  gem 'binder_of_caller'
+  gem 'binding_of_caller'
 end
 
 gem 'jquery-rails'
