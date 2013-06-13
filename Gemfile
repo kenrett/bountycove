@@ -27,6 +27,7 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'haml-rails'
   gem 'binding_of_caller'
+  gem 'rspec-rails'
 end
 
 gem 'jquery-rails'
