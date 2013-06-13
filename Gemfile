@@ -28,6 +28,8 @@ group :development, :test do
   gem 'haml-rails'
   gem 'binding_of_caller'
   gem 'rspec-rails'
+  gem 'capybara'
+  gem 'factory_girl'
 end
 
 gem 'jquery-rails'
