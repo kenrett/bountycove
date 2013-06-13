@@ -1,0 +1,17 @@
+%h1 Welcome to DaddyShop!
+.sign_up
+  = form_for @user.new do |f|
+    = f.label :first_name
+    = f.text_field :first_name
+    %br
+    = f.label :last_name  
+    = f.text_field :last_name  
+    %br
+    = f.label :email
+    = f.text_field :email
+    %br
+    = f.label :password
+    = f.text_field :password
+    %br
+    = f.label :password_confirmation
+    = f.text_field :password_confirmation
