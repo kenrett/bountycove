@@ -2,16 +2,19 @@
 - if @user && @user.errors.any?
   = render :partial => "shared/signup_errors", :user => @user
 .sign_up
-  = form_for User.new, :url => new_user_path do |f|
+  = form_for @user do |f|
     = f.label :first_name
     = f.text_field :first_name
     %br
     = f.label :last_name  
     = f.text_field :last_name  
     %br
+    = f.label :username
+    = f.text_field :username
+    %br
     = f.label :email
     = f.text_field :email
     %br
     = f.label :password
-    = f.text_field :password_digest
+    = f.password_field :password
     = f.submit "Sign Up!"

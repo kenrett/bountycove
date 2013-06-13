@@ -22,6 +22,7 @@ end
 group :development, :test do
   gem 'faker'
   gem 'sextant'
+  gem 'meta_request'
   gem 'better_errors'
   gem 'pry-rails'
   gem 'quiet_assets'

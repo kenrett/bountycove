@@ -1,6 +1,7 @@
 Daddyshop::Application.routes.draw do
 
-  resources :user, :except => :index
+  resources :users, :except => :index
   root :to => "pages#index"
+  post "/user/logout" => "users#logout"
 
 end
