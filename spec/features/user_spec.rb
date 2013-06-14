@@ -2,9 +2,10 @@ require 'spec_helper'
 
 describe 'User' do
   context 'signing up' do
+    let(:user) { build(:user) }
+
     before do
       visit root_path
-      user = build(:user)
 
       fill_in 'user_first_name', with: user.first_name
       fill_in 'user_last_name', with: user.last_name
@@ -17,9 +18,10 @@ describe 'User' do
     context 'with valid information' do
       describe 'when all inputs are filled in' do
         it 'will create a new account', js: true do
-          click_button 'Sign Up'
-
-          expect { visit user_path(User.last) }.to change(User, :count).by(1)
+          expect {
+            click_button 'Sign Up'
+            visit user_path(User.last)
+          }.to change(User, :count).by(1)
         end
       end
     end

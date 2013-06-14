@@ -5,7 +5,7 @@ $(document).ready(function(){
   });//end on ajax:error
 
   $(".sign_up form").on('ajax:success', function(event, data){
-    window.location.href = data;  
+    window.location.href = data.responseText;
   });//end on ajax:success
-  
+
 });//end ready
