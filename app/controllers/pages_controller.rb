@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
 
   def index
-    @user = User.new
+    @captain = Captain.new
   end
 
 end
