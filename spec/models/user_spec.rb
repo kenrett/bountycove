@@ -16,11 +16,11 @@ describe 'User' do
 
     describe 'with duplicate username' do
       it 'will not create user' do
-        user = User.create( first_name: 'Dexter',
-                            last_name: 'Vu',
-                            email: 'dex@dex.com',
-                            username: 'dextervu',
-                            password: 'password')
+        User.create(  first_name: 'Dexter',
+                      last_name: 'Vu',
+                      email: 'dex@dex.com',
+                      username: 'dextervu',
+                      password: 'password')
 
         user2 = User.create(  first_name: 'Dexter',
                               last_name: 'Vu',

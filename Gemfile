@@ -30,7 +30,8 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'rspec-rails'
   gem 'capybara'
-  gem 'factory_girl'
+  gem 'factory_girl_rails'
+  gem 'selenium-webdriver'
 end
 
 gem 'jquery-rails'
