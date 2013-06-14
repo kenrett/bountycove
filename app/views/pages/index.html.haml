@@ -1,13 +1,15 @@
 %h1 Welcome to ParentalFinanceEducation.com!
 .error
+  - if flash[:errors_signup]
+    = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:errors_signup]}
 .sign_up
   Sign Up!
-  = form_for @user, :remote => true do |f|
+  = form_for @captain do |f|
     = f.label :first_name
     = f.text_field :first_name
     %br
-    = f.label :last_name  
-    = f.text_field :last_name  
+    = f.label :last_name
+    = f.text_field :last_name
     %br
     = f.label :username
     = f.text_field :username
@@ -25,9 +27,11 @@
 %br
 %br
 .error_login
+  - if flash[:errors_login]
+    = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:errors_login]}
 .login
   Login!
-  = form_tag login_path, :method => :get, :remote => true do
+  = form_tag login_path do
     = label_tag :username
     = text_field_tag :username
     %br

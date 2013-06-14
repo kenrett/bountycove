@@ -1,3 +1,11 @@
+%h1
+  Hello username:
+%p
+  = @captain.first_name
+
+  = form_tag logout_path, :method => :post do
+    = submit_tag "Logout"
+
 %h3 Hello, #{@user.first_name}
 %table.parent_admin
   %tr

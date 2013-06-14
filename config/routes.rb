@@ -1,17 +1,12 @@
 Daddyshop::Application.routes.draw do
 
-  get "parent_controller/new"
-
-  get "parent_controller/create"
-
-  resources :users, :except => :index do
-    resources :items
+  resources :captains, :except => :index do
+    resources :loots
   end
-
 
   root :to => "pages#index"
 
-  get "/login" => "session#login"
-  get "/logout" => "session#logout"
+  post "/login" => "session#login"
+  post "/logout" => "session#logout"
 
 end
