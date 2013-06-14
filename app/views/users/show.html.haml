@@ -1,4 +1,16 @@
-%h1 
-  Hello username:
-%p
-  = @user.first_name
+%h3 Hello, #{@user.first_name}
+%table.parent_admin
+  %tr
+    %td
+      .check_status
+        #text Child Status
+    %td
+      .add_reward
+        #text Add Reward
+  %tr
+    %td
+      .add_task
+        #text Add Task
+    %td
+      .add_event
+        #text Add Event
