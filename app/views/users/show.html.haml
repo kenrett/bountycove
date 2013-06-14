@@ -1,7 +1,4 @@
 %h1 
-  Hello 
-  = @user.first_name 
-  you are logged in
-  %p
-  = form_tag("/logout") do
-    = submit_tag("Logout!")
+  Hello username:
+%p
+  = @user.first_name
