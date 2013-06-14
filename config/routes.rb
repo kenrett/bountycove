@@ -8,6 +8,7 @@ Daddyshop::Application.routes.draw do
     resources :items
   end
 
+
   root :to => "pages#index"
 
   get "/login" => "session#login"
