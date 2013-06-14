@@ -18,18 +18,18 @@ describe 'User' do
           pending
         end
 
-      describe 'such as email' do
+        describe 'such as email' do
+          it 'will return errors' do
+            pending
+          end
+        end
+      end
+
+      context 'without any information' do
         it 'will return errors' do
           pending
         end
       end
     end
-
-    context 'without any information' do
-      it 'will return errors' do
-        pending
-      end
-    end
   end
-
 end
