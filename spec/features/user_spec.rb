@@ -70,8 +70,7 @@ describe 'User' do
       context 'with valid info' do
         describe 'fields filled in' do
           it 'will login user', js: true do
-            sleep 0.1
-            expect(current_path).to eq(user_path(user))
+            expect(page).to eq(user_path(user))
           end
         end
       end
@@ -99,4 +98,4 @@ describe 'User' do
       end
     end  
   end
-  
+

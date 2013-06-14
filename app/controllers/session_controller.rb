@@ -5,9 +5,10 @@ class SessionController < ApplicationController
     
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      render :json => user_path(@user).to_json
+      redirect_to user_path(@user)
     else
-      render :json => 'Invalid username or password' , :status => :unprocessable_entity
+      flash[:errors_login] = ["Invalid username or password"]
+      redirect_to root_path
     end
   end
 

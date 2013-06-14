@@ -5,11 +5,10 @@ class UsersController < ApplicationController
     
     if @user.save
       session[:user_id] = @user.id
-      render :json => user_path(@user).to_json
+      render :show
     else
-      @user.errors.delete(:password_digest)
-      errors = render_to_string(:partial => 'shared/signup_errors', :locals => {:user => @user})
-      render :json => errors, :status => :unprocessable_entity
+      p flash[:errors_signup] = @user.errors.full_messages
+      redirect_to root_path
     end
   end
 

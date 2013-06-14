@@ -1,4 +1,8 @@
 %ul
-  - user.errors.full_messages.each do |message|
+  - if errors.length > 1
+    Errors
+  - else
+    Error
+  - errors.each do |message|
     %li
       = message
