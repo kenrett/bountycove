@@ -75,15 +75,28 @@ describe 'User' do
           end
         end
       end
-
-      context 'with invalid' do 
-        describe 'username' do
-          it 'will return errors' do
-            fill_in 'username', with: 'nobody'
-            click_button 'Login!'
-            expect(page).to have_content 'Invalid username or password'
-          end
-        end
-      end   
     end
+
+    context 'with invalid' do 
+      before do
+        visit root_path
+        fill_in 'username', with: 'nothing'
+        fill_in 'password', with: 'nothing'
+      end
+
+      describe 'username' do
+        it 'will return errors' do
+          click_button 'Login!'
+          expect(page).to have_content 'Invalid username or password'
+        end
+      end
+
+      describe 'password' do
+        it 'will return errors' do
+          click_button 'Login!'
+          expect(page).to have_content 'Invalid username or password'
+        end
+      end
+    end  
   end
+  

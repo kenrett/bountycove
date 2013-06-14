@@ -7,11 +7,7 @@ class SessionController < ApplicationController
       session[:user_id] = @user.id
       render :json => user_path(@user).to_json
     else
-      p params
-      p 'asdfdafsoibsfadidsuhdfhasdhfkjhskdlfjhasdlkfjhaskjdhfkljsh'
-      @user.errors.delete(:password_digest)
-      errors = render_to_string(:partial => 'shared/signup_errors', :locals => {:user => @user.errors})
-      render :json => { :errors => 'Invalid username or password' }, :status => :unprocessable_entity
+      render :json => 'Invalid username or password' , :status => :unprocessable_entity
     end
   end
 
