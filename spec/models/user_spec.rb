@@ -9,7 +9,38 @@ describe 'User' do
                             email: 'dex@dex.com',
                             username: 'dextervu',
                             password: 'password')
+
         expect(user.valid?).to be_true
+      end
+    end
+
+    describe 'with duplicate username' do
+      it 'will not create user' do
+        user = User.create( first_name: 'Dexter',
+                            last_name: 'Vu',
+                            email: 'dex@dex.com',
+                            username: 'dextervu',
+                            password: 'password')
+
+        user2 = User.create(  first_name: 'Dexter',
+                              last_name: 'Vu',
+                              email: 'dex@dex.com',
+                              username: 'dextervu',
+                              password: 'password')
+
+        expect(user2.invalid?).to be_true
+      end
+    end
+
+    describe 'with invalid email address' do
+      it 'will not create user' do
+        user = User.create( first_name: 'Dexter',
+                            last_name: 'Vu',
+                            email: 'd',
+                            username: 'dextervu',
+                            password: 'password')
+
+        expect(user.invalid?).to be_true
       end
     end
 
