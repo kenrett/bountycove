@@ -1,8 +1,7 @@
 %h1 Welcome to ParentalFinanceEducation.com!
-- if @user && @user.errors.any?
-  = render :partial => "shared/signup_errors", :user => @user
+.error
 .sign_up
-  = form_for @user do |f|
+  = form_for @user, :remote => true do |f|
     = f.label :first_name
     = f.text_field :first_name
     %br
