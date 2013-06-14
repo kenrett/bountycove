@@ -1,6 +1,7 @@
 %h1 Welcome to ParentalFinanceEducation.com!
 .error
 .sign_up
+  Sign Up!
   = form_for @user, :remote => true do |f|
     = f.label :first_name
     = f.text_field :first_name
@@ -20,3 +21,16 @@
     = f.label :password_confirmation
     = f.password_field :password_confirmation
     = f.submit "Sign Up!"
+%br
+%br
+%br
+.error_login
+.login
+  Login!
+  = form_tag login_path, :method => :get, :remote => true do
+    = label_tag :username
+    = text_field_tag :username
+    %br
+    = label_tag :password
+    = password_field_tag :password
+    = submit_tag "Login!"
