@@ -1,3 +1,6 @@
+- if flash[:notice]
+  .notice= flash[:notice]
+
 %h3 Create Reward
 
 = form_for [:user, Item.new] do |f|
