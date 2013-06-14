@@ -2,8 +2,9 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+    
     if @user.save
-      render :json => user_path(@user), :status => :created
+      render :json => user_path(@user).to_json
     else
       @user.errors.delete(:password_digest)
       errors = render_to_string(:partial => 'shared/signup_errors', :locals => {:user => @user})

@@ -1,4 +1,6 @@
 %h1 
-  Hello username:
-%p
+  Hello user:
   = @user.first_name
+
+  = form_tag logout_path, :method => :get do
+    = submit_tag "Logout"

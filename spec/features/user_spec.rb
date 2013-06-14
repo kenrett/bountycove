@@ -20,6 +20,7 @@ describe 'User' do
         it 'will create a new account', js: true do
           expect {
             click_button 'Sign Up'
+            sleep 0.5
             visit user_path(User.last)
           }.to change(User, :count).by(1)
         end
