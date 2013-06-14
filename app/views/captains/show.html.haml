@@ -2,3 +2,6 @@
   Hello username:
 %p
   = @captain.first_name
+
+  = form_tag logout_path, :method => :post do
+    = submit_tag "Logout"

@@ -3,16 +3,16 @@ class CaptainsController < ApplicationController
   def create
     @captain = Captain.new(params[:captain])
     if @captain.save
-      render :json => captain_path(@captain), :status => :created
+      session[:user_id] = @captain.id
+      redirect_to captain_path(@captain.username)
     else
       @captain.errors.delete(:password_digest)
-      errors = render_to_string(:partial => 'shared/signup_errors', :locals => {:captain => @captain})
-      render :json => errors, :status => :unprocessable_entity
+      flash[:errors_signup] = @captain.errors.full_messages
+      redirect_to root_path
     end
   end
 
   def show
     @captain = Captain.find_by_username(params[:id])
   end
-
 end

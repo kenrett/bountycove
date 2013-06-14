@@ -31,7 +31,7 @@
     = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:errors_login]}
 .login
   Login!
-  = form_tag login_path, :method => :get do
+  = form_tag login_path do
     = label_tag :username
     = text_field_tag :username
     %br
