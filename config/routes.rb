@@ -4,6 +4,6 @@ Daddyshop::Application.routes.draw do
   root :to => "pages#index"
 
   get "/login" => "session#login"
-  get "/logout" => "session#logout"
+  post "/logout" => "session#logout"
 
 end

@@ -4,6 +4,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     
     if @user.save
+      session[:user_id] = @user.id
       render :json => user_path(@user).to_json
     else
       @user.errors.delete(:password_digest)
@@ -14,6 +15,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+
+    if @user && session[:user_id] == @user.id
+      user_path(@user)
+    else
+      redirect_to root_path
+    end
   end
 
 end
