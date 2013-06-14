@@ -7,7 +7,6 @@ gem 'rails', '3.2.13'
 
 gem 'pg'
 
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -21,12 +20,19 @@ group :assets do
 end
 
 group :development, :test do
+  gem 'faker'
   gem 'sextant'
+  gem 'meta_request'
   gem 'better_errors'
   gem 'pry-rails'
   gem 'quiet_assets'
   gem 'haml-rails'
   gem 'binding_of_caller'
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'factory_girl_rails'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end
 
 gem 'jquery-rails'
@@ -44,4 +50,4 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+gem 'debugger'
