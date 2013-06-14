@@ -1,0 +1,16 @@
+%h3 Create Reward
+
+= form_for @item, :remote => true do |f|
+  = f.label :name
+  = f.text_field :name
+  %br
+  = f.label :description  
+  = f.text_field :description  
+  %br
+  = f.label :photo
+  = f.text_field :photo
+  %br
+  = f.label :price
+  = f.text_field :price
+  %br
+  = f.submit "Create Reward" 
