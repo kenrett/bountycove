@@ -6,7 +6,6 @@
   = form_tag logout_path, :method => :post do
     = submit_tag "Logout"
 
-%h3 Hello, #{@user.first_name}
 %table.parent_admin
   %tr
     %td
@@ -16,7 +15,7 @@
     %td
       .add_reward
         #text 
-        = link_to "Add Loot", new_user_item_path(@user)
+        = link_to "Add Loot", new_captain_treasure_path(@captain.first_name)
   %tr
     %td
       .add_task
