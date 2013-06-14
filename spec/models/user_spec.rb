@@ -4,7 +4,7 @@ describe 'User' do
   context 'when created' do
     describe 'with required valid inputs' do
       it 'will create user' do
-        user = User.create( first_name: 'Dexter',
+        user = Captain.create( first_name: 'Dexter',
                             last_name: 'Vu',
                             email: 'dex@dex.com',
                             username: 'dextervu',
@@ -16,13 +16,13 @@ describe 'User' do
 
     describe 'with duplicate username' do
       it 'will not create user' do
-        User.create(  first_name: 'Dexter',
+       Captain.create(  first_name: 'Dexter',
                       last_name: 'Vu',
                       email: 'dex@dex.com',
                       username: 'dextervu',
                       password: 'password')
 
-        user2 = User.create(  first_name: 'Dexter',
+        user2 = Captain.create(  first_name: 'Dexter',
                               last_name: 'Vu',
                               email: 'dex@dex.com',
                               username: 'dextervu',
@@ -34,7 +34,7 @@ describe 'User' do
 
     describe 'with invalid email address' do
       it 'will not create user' do
-        user = User.create( first_name: 'Dexter',
+        user = Captain.create( first_name: 'Dexter',
                             last_name: 'Vu',
                             email: 'd',
                             username: 'dextervu',
@@ -46,7 +46,7 @@ describe 'User' do
 
     describe 'without any inputs' do
       it 'will not create user' do
-        user = User.create( first_name: '',
+        user = Captain.create( first_name: '',
                             last_name: '',
                             email: '',
                             username: '',
