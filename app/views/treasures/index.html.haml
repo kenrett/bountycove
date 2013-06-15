@@ -31,5 +31,7 @@
   %br
   = treasure.price
   %br
+  = link_to "Edit", edit_captain_treasure_path(current_user.id, treasure)
+  = link_to "Delete", captain_treasure_path(current_user.id, treasure), :method => :delete
   
 
