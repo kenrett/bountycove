@@ -3,8 +3,13 @@ class TreasuresController < ApplicationController
 
   include UsersHelper
 
+  def index
+    @treasures = Treasure.find_all_by_captain_id(params[:captain_id])
+  end
+
   def new
     @treasure = Treasure.new
+    render :new
   end
 
   def create
@@ -15,7 +20,7 @@ class TreasuresController < ApplicationController
   private
 
   def check_limit
-    captain = Captain.find_by_username(params[:captain_id])
+    captain = Captain.find(params[:captain_id])
     treasure = Treasure.find_all_by_captain_id(captain.id)
     if treasure && treasure.count < 6
       true
