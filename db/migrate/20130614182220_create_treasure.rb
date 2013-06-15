@@ -5,7 +5,7 @@ class CreateTreasure < ActiveRecord::Migration
       t.string :description
       t.string :photo
       t.string :price
-      t.integer :parent_id
+      t.integer :captain_id
 
       t.timestamps
     end

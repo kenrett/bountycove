@@ -6,20 +6,20 @@ class TreasuresController < ApplicationController
   end
 
   def create
-    @treasure = Treasure.create(params[:treasure])
+    current_user.treasures << Treasure.create(params[:treasure])
     render :new
   end
 
   private
 
   def check_limit
-    @treasure = Treasure.find_all_by_parent_id(params[:captain_id])
-    if @treasure && @treasure.count < 6
+    captain = Captain.find_by_username(params[:captain_id])
+    treasure = Treasure.find_all_by_captain_id(captain.id)
+    if treasure && treasure.count < 6
       true
     else
-      flash[:error_add_treasure] = @treasure.errors.full_messages
+      flash[:error_add_treasure] = treasure.errors.full_messages
       render 'treasures/new'
     end
   end
-
 end

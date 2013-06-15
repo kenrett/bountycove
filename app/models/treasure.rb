@@ -3,4 +3,7 @@ class Treasure < ActiveRecord::Base
   validates :name, :uniqueness => true
   validates :photo, :uniqueness => true
   validates :name, :description, :price, :presence => true, :on => :create
+
+  belongs_to :captain
+
 end
