@@ -1,85 +1,68 @@
-# require 'spec_helper'
+require 'spec_helper'
 
-# describe 'Task' do
+describe 'Task' do
 
-#   context 'with valid information' do
-#     describe 'when all inputs are filled in' do
-#       it 'will create a new account' do
-#         click_button 'Sign Up'
-#         expect(page.current_path).to eq captain_path(Captain.last.username)
-#       end
-#     end
-#   end
+  context 'with valid information' do
+    let(:captain) { build(:captain) }
+    let(:task) { build(:task) }
+    
+    before do
+      visit root_path
 
-#   context 'with invalid' do
-#     describe 'password confirmation' do
-#       it 'will return errors' do
-#         fill_in 'captain_password_confirmation', with: 'yeah'
-#         click_button 'Sign Up'
+      fill_in 'captain_first_name', with: captain.first_name
+      fill_in 'captain_last_name', with: captain.last_name
+      fill_in 'captain_username', with: captain.username
+      fill_in 'captain_email', with: captain.email
+      fill_in 'captain_password', with: captain.password
+      fill_in 'captain_password_confirmation', with: captain.password_confirmation
+      click_button 'Sign Up'
 
-#         expect(page).to have_content "Password doesn't match confirmation"
-#       end
-#     end
+      visit new_captain_task_path(captain)
 
-#     describe 'email' do
-#       it 'will return errors' do
-#         fill_in 'captain_email', with: 'yeah'
-#         click_button 'Sign Up'
+      fill_in 'task_name', with: task.name
+      fill_in 'task_description', with: task.description
+      fill_in 'task_worth', with: task.worth
+    end
 
-#         expect(page).to have_content 'Email is invalid'
-#       end
-#     end
-#   end
+    describe 'when all inputs are filled in correctly' do
+      it 'will create a new task' do
+        click_button 'Create Task'
+        expect(page.current_path).to eq captain_tasks_path(captain)
+      end
+    end
+  end
 
-#   context 'without any information' do
-#     it 'will return errors' do
-#       visit current_path
-#       click_button 'Sign Up'
+  context 'with invalid' do
+    pending
+    # describe 'field entries' do
+    #   it 'will return errors' do
+    #     fill_in 'task_name', with: ''
+    #     click_button 'Create Task'
 
-#       expect(page).to have_content 'Email is invalid' && "Password can't be blank"
-#     end
-#   end
+    #     expect(page).to have_content "Password doesn't match confirmation"
+    #   end
+    # end
 
+    describe 'worth value (non-integer)' do
+      pending
+      # it 'will return errors' do
+      #   fill_in 'task_worth', with: 'yeah'
+      #   click_button 'Create Task'
 
-#   context 'logging in' do
-#     let(:captain) { create(:captain) }
-#     before do
-#       visit root_path
-#       fill_in 'username', with: captain.username
-#       fill_in 'password', with: captain.password
-#       click_button 'Login!'
-#     end
+      #   expect(page).to have_content 'Email is invalid'
+      # end
+    end
+  end
 
-#     context 'with valid info' do
-#       describe 'will login' do
-#         it 'user' do
-#           expect(page.current_path).to eq(captain_path(captain.username))
-#         end
-#       end
-#     end
-#   end
+  context 'without any information' do
+    pending
+    # it 'will return errors' do
+    #   visit new_captain_task_path(captain)
+    #   click_button 'Create Task'
 
-#   context 'with invalid' do 
-#     before do
-#       visit root_path
-#       fill_in 'username', with: 'nothing'
-#       fill_in 'password', with: 'nothing'
-#     end
-
-#     describe 'username' do
-#       it 'will return errors' do
-#         click_button 'Login!'
-#         expect(page).to have_content 'Invalid username or password'
-#       end
-#     end
-
-#     describe 'password' do
-#       it 'will return errors' do
-#         click_button 'Login!'
-#         expect(page).to have_content 'Invalid username or password'
-#       end
-#     end
-#   end
-# end  
+    #   expect(page).to have_content 'Email is invalid' && "Password can't be blank"
+    # end
+  end
+end  
 
 
