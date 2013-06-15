@@ -9,6 +9,7 @@ class TreasuresController < ApplicationController
 
   def new
     @treasure = Treasure.new
+    render :new
   end
 
   def create

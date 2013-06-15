@@ -4,6 +4,7 @@
 
 %h3 Create Treasure
 
+
 .create_treasure_form
   = form_for [:captain, Treasure.new] do |f|
     = f.label :name
@@ -20,7 +21,6 @@
     %br
     = f.submit "Create Treasure" 
 
-
 - @treasures.each do |treasure|
   %br
   %br
@@ -34,5 +34,6 @@
   %br
   = link_to "Edit", edit_captain_treasure_path(current_user.id, treasure)
   = link_to "Delete", captain_treasure_path(current_user.id, treasure), :method => :delete
+
   
 
