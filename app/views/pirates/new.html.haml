@@ -1,0 +1,9 @@
+%h1 Add a new pirate
+
+= form_for @captain do |f|
+  = f.text_field(:name, :placeholder =>  "Name")
+  = f.text_area(:username, :placeholder => "Username")
+  = f.text_field(:email, :placeholder => "Email")
+  = f.password_field :password
+  = f.password_field :password_confirmation
+  = f.submit "Create an account for my pirate!"

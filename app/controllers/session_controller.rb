@@ -9,7 +9,7 @@ class SessionController < ApplicationController
       if @user.type == 'Captain'
         redirect_to captain_path(@user.username)
       else
-        redirect_to pirate_path(@user.username)
+        redirect_to captain_pirate_path(@user.username)
       end
     else
       flash[:errors_login] = ["Invalid username or password"]

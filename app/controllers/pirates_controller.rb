@@ -15,4 +15,8 @@ class PiratesController < ApplicationController
     @pirate = Pirate.find_by_username(params[:id])
   end
 
+  def new
+    @captain = Captain.new
+  end
+
 end
