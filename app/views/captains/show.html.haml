@@ -1,7 +1,7 @@
 %h1
-  Hello username:
+  #{@captain.username}
 %p
-  = @captain.first_name
+  = 'Hello ' "#{@captain.first_name}!"
 
   = form_tag logout_path, :method => :post do
     = submit_tag "Logout"
@@ -15,12 +15,12 @@
     %td
       .add_reward
         #text 
-        = link_to "Add Loot", new_captain_treasure_path(@captain.username)
+        = link_to "Add Loot", new_captain_treasure_path(@captain)
   %tr
     %td
       .add_task
         #text 
-        = link_to "Create Adventure", "#"
+        = link_to "Create Adventure", captain_tasks_path(@captain)
     %td
       .add_event
         #text 
