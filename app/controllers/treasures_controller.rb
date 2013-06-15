@@ -1,6 +1,8 @@
 class TreasuresController < ApplicationController
   before_filter :check_limit, :only => [:create]
 
+  include UsersHelper
+
   def new
     @treasure = Treasure.new
   end
