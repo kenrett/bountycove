@@ -9,12 +9,11 @@ class TreasuresController < ApplicationController
 
   def new
     @treasure = Treasure.new
-    render :new
   end
 
   def create
     current_user.treasures << Treasure.create(params[:treasure])
-    render :new
+    redirect_to captain_treasures_path(current_user.id)
   end
 
   def edit
@@ -22,8 +21,7 @@ class TreasuresController < ApplicationController
   end
 
   def update
-    treasure = Treasure.find(params[:id])
-    treasure.update_attributes(params[:treasure])
+    Treasure.find(params[:id]).update_attributes(params[:treasure])
     redirect_to captain_treasures_path(current_user.id)
   end
 
