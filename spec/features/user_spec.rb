@@ -1,28 +1,25 @@
 require 'spec_helper'
 
-describe 'User' do
+describe 'Captain' do
 
   context 'signing up' do
-    let(:user) { build(:user) }
+    let(:captain) { build(:captain) }
     before do
       visit root_path
 
-      fill_in 'user_first_name', with: user.first_name
-      fill_in 'user_last_name', with: user.last_name
-      fill_in 'user_username', with: user.username
-      fill_in 'user_email', with: user.email
-      fill_in 'user_password', with: user.password
-      fill_in 'user_password_confirmation', with: user.password_confirmation
+      fill_in 'captain_first_name', with: captain.first_name
+      fill_in 'captain_last_name', with: captain.last_name
+      fill_in 'captain_username', with: captain.username
+      fill_in 'captain_email', with: captain.email
+      fill_in 'captain_password', with: captain.password
+      fill_in 'captain_password_confirmation', with: captain.password_confirmation
     end
 
     context 'with valid information' do
       describe 'when all inputs are filled in' do
-        it 'will create a new account', js: true do
-          expect {
-            click_button 'Sign Up'
-            sleep 0.2
-            visit user_path(User.last)
-            }.to change(User, :count).by(1)
+        it 'will create a new account' do
+          click_button 'Sign Up'
+          expect(page.current_path).to eq captain_path(Captain.last.username)
           end
         end
       end
@@ -30,7 +27,7 @@ describe 'User' do
       context 'with invalid' do
         describe 'password confirmation' do
           it 'will return errors' do
-            fill_in 'user_password_confirmation', with: 'yeah'
+            fill_in 'captain_password_confirmation', with: 'yeah'
             click_button 'Sign Up'
 
             expect(page).to have_content "Password doesn't match confirmation"
@@ -39,7 +36,7 @@ describe 'User' do
 
         describe 'email' do
           it 'will return errors' do
-            fill_in 'user_email', with: 'yeah'
+            fill_in 'captain_email', with: 'yeah'
             click_button 'Sign Up'
 
             expect(page).to have_content 'Email is invalid'
@@ -59,18 +56,18 @@ describe 'User' do
     end
 
     context 'logging in' do
-      let(:user) { create(:user) }
+      let(:captain) { create(:captain) }
       before do
         visit root_path
-        fill_in 'username', with: user.username
-        fill_in 'password', with: user.password
+        fill_in 'username', with: captain.username
+        fill_in 'password', with: captain.password
         click_button 'Login!'
       end
 
       context 'with valid info' do
-        describe 'fields filled in' do
-          it 'will login user', js: true do
-            expect(page).to eq(user_path(user))
+        describe 'will login' do
+          it 'user' do
+            expect(page.current_path).to eq(captain_path(captain.username))
           end
         end
       end
