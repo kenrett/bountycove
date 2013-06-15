@@ -6,4 +6,8 @@ class Captain < User
   def parent?
     true
   end
+
+  def to_param
+    username
+  end
 end

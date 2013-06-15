@@ -2,6 +2,7 @@ Daddyshop::Application.routes.draw do
 
   resources :captains, :except => :index do
     resources :treasures
+    resources :tasks
   end
 
   root :to => "pages#index"
