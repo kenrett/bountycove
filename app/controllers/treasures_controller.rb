@@ -20,8 +20,9 @@ class TreasuresController < ApplicationController
     if treasure && treasure.count < 6
       true
     else
-      flash[:error_add_treasure] = treasure.errors.full_messages
+      flash[:errors_treasure] = ["ARgh! Me treasure box be too full!"]
       render 'treasures/new'
     end
   end
 end
+
