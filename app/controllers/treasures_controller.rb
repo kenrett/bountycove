@@ -4,7 +4,7 @@ class TreasuresController < ApplicationController
   include UsersHelper
 
   def index
-    @treasures = Treasure.find_all_by_captain_id(params[:captain_id])
+    @treasures = Treasure.find_all_by_captain_id(current_user.id)
   end
 
   def new
@@ -15,6 +15,21 @@ class TreasuresController < ApplicationController
   def create
     current_user.treasures << Treasure.create(params[:treasure])
     render :new
+  end
+
+  def edit
+    @treasure = Treasure.find(params[:id])
+  end
+
+  def update
+    treasure = Treasure.find(params[:id])
+    treasure.update_attributes(params[:treasure])
+    redirect_to captain_treasures_path(current_user.id)
+  end
+
+  def destroy
+    Treasure.find(params[:id]).destroy
+    redirect_to captain_treasures_path(current_user.id)
   end
 
   private
