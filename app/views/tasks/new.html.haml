@@ -1,0 +1,8 @@
+#form-box
+  .title-form
+    %h1 Create a new task
+  = render 'form', :task => @task, :captain => @captain
+  - if @errors
+    %ul
+      - @errors.each do |error|
+        %li= error
