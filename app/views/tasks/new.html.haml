@@ -1,8 +1,8 @@
 #form-box
   .title-form
+  .error
+  - if flash[:errors]
+    = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:errors]}
     %h1 Create a new adventure for your 'lil pirate
   = render 'form', :task => @task, :captain => @captain
-  - if @errors
-    %ul
-      - @errors.each do |error|
-        %li= error
+ 
