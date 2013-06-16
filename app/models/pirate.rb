@@ -4,6 +4,7 @@ class Pirate < User
 
   belongs_to :captain, :foreign_key => :captain_id
   has_many :treasures
+  has_many :tasks
 
 
   def validate_email?
