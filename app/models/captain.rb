@@ -10,6 +10,6 @@ class Captain < User
   end
 
   def to_param
-    username
+    username.downcase
   end
 end

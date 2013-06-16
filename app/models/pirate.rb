@@ -11,6 +11,6 @@ class Pirate < User
   end
 
   def to_param
-    username
+    username.downcase
   end
 end

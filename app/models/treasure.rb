@@ -5,7 +5,7 @@ class Treasure < ActiveRecord::Base
   belongs_to :captain
   belongs_to :pirate
 
-  STATUS = {on_sale: 1, bought: 2, delivered: 3}
+  STATUS = {wish_list: 0, on_sale: 1, bought: 2, delivered: 3}
 
   STATUS.each do |key, value|
     define_method("#{key.to_s}?") { status == value }

@@ -4,26 +4,22 @@ class TreasuresController < ApplicationController
   include UsersHelper
 
   def index
-    if current_user.type == 'Captain'
-      @treasures = current_user.treasures
-    else
-      @treasures = current_user.captain.treasures
-    end
+    @treasures = current_user.treasures if current_user_is_captain
+    @treasures = current_user.captain.treasures if current_user_is_pirate
   end
 
   def new
     @treasure = Treasure.new
-    render :new
   end
 
   def create
-    if treasure_full?
+    unless treasure_box_full?
       current_user.treasures << Treasure.create(params[:treasure])
-      redirect_to captain_treasures_path(current_user)
     else
       flash[:errors_treasure] = ["ARgh! Me treasure box be too full!"]
-      redirect_to captain_treasures_path(current_user)
     end
+
+    redirect_to_captain_or_pirate_path
   end
 
   def edit
@@ -32,18 +28,26 @@ class TreasuresController < ApplicationController
 
   def update
     Treasure.find(params[:id]).update_attributes(params[:treasure])
-    redirect_to captain_treasures_path(current_user)
+    redirect_to_captain_or_pirate_path
   end
 
   def destroy
     Treasure.find(params[:id]).destroy
-    redirect_to captain_treasures_path(current_user)
+    redirect_to_captain_or_pirate_path
   end
 
   private
 
-  def treasure_full?
-    current_user.treasures.length < 6
+  def treasure_box_full?
+    current_user.treasures.length > 6
+  end
+
+  def redirect_to_captain_or_pirate_path
+    if current_user_is_captain
+        redirect_to captain_treasures_path(current_user)
+      else
+        redirect_to pirate_treasures_path(current_user)
+    end
   end
 end
 
