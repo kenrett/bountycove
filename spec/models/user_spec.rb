@@ -62,7 +62,7 @@ describe 'Pirate' do
   context 'when created' do
     describe 'with required valid inputs' do
       it 'will create user' do
-       Pirate.create(  first_name: 'Ken',
+      user = Pirate.create(  first_name: 'Ken',
                       last_name: 'Kenny',
                       email: 'kenny@kenster.com',
                       username: 'kennyboy',
