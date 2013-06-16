@@ -1,0 +1,20 @@
+.error
+  - if flash[:error_add_treasure]
+    = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:error_add_treasure]}
+
+%h3 Edit Wishful Treasure
+
+= form_for [:pirate, @treasure] do |f|
+  = f.label :name
+  = f.text_field :name, :required => true
+  %br
+  = f.label :description
+  = f.text_field :description, :required => true
+  %br
+  = f.label :photo
+  = f.text_field :photo
+  %br
+  = f.label :price
+  = f.text_field :price, :required => true
+  %br
+  = f.submit "Edit Treasure"

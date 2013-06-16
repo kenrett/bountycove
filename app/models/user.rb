@@ -20,4 +20,12 @@ class User < ActiveRecord::Base
     self.first_name = full_name[0..-2].join(' ')
     self.last_name  = full_name.last
   end
+
+  def is_a_captain?
+    type == 'Captain'
+  end
+
+  def is_a_pirate?
+    type =='Pirate'
+  end
 end

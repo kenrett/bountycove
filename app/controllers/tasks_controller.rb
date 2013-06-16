@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_filter :get_captain#, :except => [:edit, :update]
+  before_filter :get_captain
   before_filter :get_task, :except => [:index, :new, :create]
 
   def index
@@ -12,7 +12,7 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(params[:task])
-      p @captain
+      @captain
     if @task.save
       redirect_to captain_tasks_path(@captain)
     else
@@ -24,7 +24,7 @@ class TasksController < ApplicationController
   def show
   end
 
-  def edit  
+  def edit
     @task = Task.find(params[:id])
   end
 

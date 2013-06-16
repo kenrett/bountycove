@@ -27,11 +27,10 @@ class PiratesController < ApplicationController
     treasure = Treasure.find(params[:treasure_id])
     if treasure.bought!
       current_user.treasures << treasure
-      redirect_to pirate_treasures_path(current_user)
     else
       flash[:errors_buying] = 'Argh! Something went wrong with buying!'
-      redirect_to pirate_treasures_path(current_user)
     end
+    redirect_to pirate_treasures_path(current_user)
   end
 
   private

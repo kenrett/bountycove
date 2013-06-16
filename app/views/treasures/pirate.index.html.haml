@@ -1,0 +1,16 @@
+.error
+  - if flash[:errors_treasure]
+    = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:errors_treasure]}
+
+- @treasures.each do |treasure|
+  %br
+  %br
+  = treasure.name
+  %br
+  = treasure.description
+  %br
+  = treasure.photo
+  %br
+  = treasure.price
+  %br
+  = button_to 'Buy', pirate_buys_path(current_user, treasure)

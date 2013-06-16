@@ -1,11 +1,13 @@
 class TreasuresController < ApplicationController
-  before_filter :treasure_full?, :only => [:create]
+  before_filter :treasure_box_full?, :only => [:create]
 
   include UsersHelper
 
   def index
     @treasures = current_user.treasures if current_user_is_captain
     @treasures = current_user.captain.treasures if current_user_is_pirate
+
+    render_local_pirate_or_captain_view 'index'
   end
 
   def new
@@ -24,6 +26,8 @@ class TreasuresController < ApplicationController
 
   def edit
     @treasure = Treasure.find(params[:id])
+
+    render_local_pirate_or_captain_view 'edit'
   end
 
   def update
