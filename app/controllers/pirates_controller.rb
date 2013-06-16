@@ -1,5 +1,9 @@
 class PiratesController < ApplicationController
   before_filter :find_captain
+  
+  def new
+    @pirate = Pirate.new
+  end
 
   def new
     @pirate = Pirate.new
