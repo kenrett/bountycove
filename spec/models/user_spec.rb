@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'User' do
+describe 'Captain' do
   context 'when created' do
     describe 'with required valid inputs' do
       it 'will create user' do
@@ -53,6 +53,96 @@ describe 'User' do
                             password: '')
 
         expect(user.invalid?).to be_true
+      end
+    end
+  end
+end
+
+describe 'Pirate' do
+  context 'when created' do
+    describe 'with required valid inputs' do
+      it 'will create user' do
+      user = Pirate.create(  first_name: 'Ken',
+                      last_name: 'Kenny',
+                      email: 'kenny@kenster.com',
+                      username: 'kennyboy',
+                      password: 'password')
+
+        expect(user.valid?).to be_true
+      end
+    end  
+
+    describe 'with duplicate username' do
+      it 'will not create user' do
+       Pirate.create(  first_name: 'Ken',
+                      last_name: 'Kenny',
+                      email: 'kenny@kenster.com',
+                      username: 'kennyboy',
+                      password: 'password')
+
+        user2 = Pirate.create(  first_name: 'Ken',
+                              last_name: 'Kenny',
+                              email: 'kenny@kenster.com',
+                              username: 'kennyboy',
+                              password: 'password')
+
+        expect(user2.invalid?).to be_true
+      end
+    end
+
+    describe 'with no email address' do
+      it 'will create user' do
+        user = Pirate.create( first_name: 'Ken',
+                            last_name: 'Kenny',
+                            email: '',
+                            username: 'kennyboy',
+                            password: 'password')
+
+        expect(user.valid?).to be_true
+      end
+    end    
+
+    describe 'with invalid email address' do
+      it 'will create user' do
+        user = Pirate.create( first_name: 'Ken',
+                            last_name: 'Kenny',
+                            email: 'd',
+                            username: 'kennyboy',
+                            password: 'password')
+
+        expect(user.invalid?).to be_true
+      end
+    end
+
+    describe 'without any inputs' do
+      it 'will not create user' do
+        user = Pirate.create( first_name: '',
+                            last_name: '',
+                            email: '',
+                            username: '',
+                            password: '')
+
+        expect(user.invalid?).to be_true
+      end
+    end    
+
+    describe 'when belongs to Captain' do
+      it 'Pirate will be associated' do
+        captain = Captain.create( first_name: 'Dexter',
+                            last_name: 'Vu',
+                            email: 'dex@dex.com',
+                            username: 'dextervu',
+                            password: 'password')
+
+        pirate = Pirate.create( first_name: 'Ken',
+                            last_name: 'Kenny',
+                            email: 'kenny@kenster.com',
+                            username: 'kennyboy',
+                            password: 'password')
+        
+        captain.pirates << pirate
+
+        expect(captain.id).to eq(pirate.captain_id)
       end
     end
   end
