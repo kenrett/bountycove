@@ -15,7 +15,7 @@ class PiratesController < ApplicationController
     else
       @pirate.errors.delete(:password_digest)
       flash[:errors_signup] = @pirate.errors.full_messages
-      render 'pirates/new'
+      render :new
     end
   end
 
