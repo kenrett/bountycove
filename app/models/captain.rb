@@ -4,8 +4,8 @@ class Captain < User
   has_many :pirates
   has_many :treasures
   has_many :tasks
-  
-  def parent?
+
+  def validate_email?
     true
   end
 
