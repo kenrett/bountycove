@@ -3,10 +3,10 @@ Daddyshop::Application.routes.draw do
   resources :captains, :except => :index do
     resources :treasures
     resources :tasks
-    resources :pirates
+    resources :pirates, :except => :show
   end
 
-  resources :pirates
+  resources :pirates, :only => :show
 
   root :to => "pages#index"
 

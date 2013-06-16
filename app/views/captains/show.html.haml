@@ -11,11 +11,11 @@
     %td
       .check_status
         #text 
-        = link_to "Add Pirate", "#"
+        = link_to "Add Pirate", new_captain_pirate_path(@captain)
     %td
       .add_reward
         #text 
-        = link_to "Add Loot", new_captain_treasure_path(@captain.username)
+        = link_to "Add Loot", new_captain_treasure_path(@captain)
   %tr
     %td
       .add_task
