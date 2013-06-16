@@ -33,3 +33,5 @@
   - if current_user.type == 'Captain'
     = link_to "Edit", edit_captain_treasure_path(current_user, treasure)
     = link_to "Delete", captain_treasure_path(current_user, treasure), :method => :delete
+  - else
+    = button_to 'Buy', pirate_buys_path(current_user, treasure)

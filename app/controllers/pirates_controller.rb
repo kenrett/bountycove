@@ -21,6 +21,11 @@ class PiratesController < ApplicationController
     @pirate = Pirate.find_by_username(params[:id])
   end
 
+  def buys
+    debugger
+    
+  end
+
   private
 
   def find_captain
