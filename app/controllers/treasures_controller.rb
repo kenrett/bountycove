@@ -3,19 +3,37 @@ class TreasuresController < ApplicationController
 
   include UsersHelper
 
+  def index
+    @treasures = Treasure.find_all_by_captain_id(current_user.id)
+  end
+
   def new
     @treasure = Treasure.new
   end
 
   def create
     current_user.treasures << Treasure.create(params[:treasure])
-    render :new
+    redirect_to captain_treasures_path(current_user.id)
+  end
+
+  def edit
+    @treasure = Treasure.find(params[:id])
+  end
+
+  def update
+    Treasure.find(params[:id]).update_attributes(params[:treasure])
+    redirect_to captain_treasures_path(current_user.id)
+  end
+
+  def destroy
+    Treasure.find(params[:id]).destroy
+    redirect_to captain_treasures_path(current_user.id)
   end
 
   private
 
   def check_limit
-    captain = Captain.find_by_username(params[:captain_id])
+    captain = Captain.find(params[:captain_id])
     treasure = Treasure.find_all_by_captain_id(captain.id)
     if treasure && treasure.count < 6
       true
