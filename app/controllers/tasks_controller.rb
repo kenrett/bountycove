@@ -1,9 +1,16 @@
 class TasksController < ApplicationController
-  before_filter :get_captain#, :except => [:edit, :update]
+  before_filter :get_captain, :get_pirate
   before_filter :get_task, :except => [:index, :new, :create]
+
+  include UsersHelper
 
   def index
     @tasks = Task.all
+    if current_user.type == 'Captain'
+      @tasks = Task.find_all_by_captain_id(current_user.id)
+    else
+      @tasks = current_user.captain.tasks
+    end
   end
 
   def new
@@ -12,8 +19,8 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(params[:task])
-      p @captain
     if @task.save
+      @captain.tasks << @task
       redirect_to captain_tasks_path(@captain)
     else
       flash[:errors] = @task.errors.full_messages
@@ -22,6 +29,7 @@ class TasksController < ApplicationController
   end
 
   def show
+    @task = Task.find(params[:id])
   end
 
   def edit  
@@ -42,6 +50,10 @@ class TasksController < ApplicationController
 
   def get_captain
     @captain = Captain.find_by_username(params[:captain_id])
+  end
+
+  def get_pirate
+    @pirate = Pirate.find_by_username(params[:pirate_id])
   end
 
   def get_task
