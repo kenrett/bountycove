@@ -5,4 +5,5 @@
   %br
   Value: #{@task.worth} points
 
+= button_to 'Add task', pirate_adds_path(current_user, @task)
 = link_to "Back", pirate_tasks_path(current_user)

@@ -1,4 +1,8 @@
 %h1 All Adventures for a #{current_user.type}
+
+- if flash[:task_assigned]
+  = flash[:task_assigned]
+
 %ul
   - @tasks.each do |task|
     %li

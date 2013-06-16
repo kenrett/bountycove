@@ -2,6 +2,9 @@
   - if flash[:errors_treasure]
     = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:errors_treasure]}
 
+.treasure_bought
+  - if flash[:treasure_bought]
+    = flash[:treasure_bought]
 - @treasures.each do |treasure|
   %br
   %br
