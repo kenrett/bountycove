@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'Task' do
   let(:captain) { build(:captain) }
   let(:task) { build(:task) }
-  
+
   before do
     visit root_path
 
@@ -19,13 +19,10 @@ describe 'Task' do
 
   context 'with valid information' do
     describe 'when all inputs are filled in correctly' do
-      before do 
+      it 'will create a new task' do
         fill_in 'task_name', with: task.name
         fill_in 'task_description', with: task.description
         fill_in 'task_worth', with: task.worth
-      end
-        
-      it 'will create a new task' do
         click_button 'Create Task'
         expect(page.current_path).to eq captain_tasks_path(captain)
       end
@@ -33,22 +30,6 @@ describe 'Task' do
   end
 
   context 'with invalid information:' do
-    describe 'existing name' do
-      it 'will return errors' do
-        fill_in 'task_name', with: 'TEST'
-        fill_in 'task_description', with: 'ssdfkjsd'
-        fill_in 'task_worth', with: '32'
-        click_button 'Create Task'
-        visit new_captain_task_path(captain)
-        fill_in 'task_name', with: 'TEST'
-        fill_in 'task_description', with: 'ssdfkjsd'
-        fill_in 'task_worth', with: '32'
-        click_button 'Create Task'
-
-        expect(page).to have_content "Name has already been taken"
-      end
-    end
-
     describe 'worth value is not an integer' do
       it 'will return errors' do
         fill_in 'task_worth', with: 'yeah'
@@ -66,4 +47,4 @@ describe 'Task' do
       end
     end
   end
-end  
+end

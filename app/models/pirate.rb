@@ -3,12 +3,14 @@
 class Pirate < User
 
   belongs_to :captain, :foreign_key => :captain_id
+  has_many :treasures
 
-  def parent?
-    false
+
+  def validate_email?
+    email.present?
   end
 
   def to_param
-    username
+    username.downcase
   end
 end

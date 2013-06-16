@@ -1,6 +1,8 @@
 class PiratesController < ApplicationController
   before_filter :find_captain
 
+  include UsersHelper
+
   def new
     @pirate = Pirate.new
   end
@@ -22,8 +24,14 @@ class PiratesController < ApplicationController
   end
 
   def buys
-    debugger
-
+    treasure = Treasure.find(params[:treasure_id])
+    if treasure.bought!
+      current_user.treasures << treasure
+      redirect_to pirate_treasures_path(current_user)
+    else
+      flash[:errors_buying] = 'Argh! Something went wrong with buying!'
+      redirect_to pirate_treasures_path(current_user)
+    end
   end
 
   private

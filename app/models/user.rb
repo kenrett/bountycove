@@ -5,13 +5,13 @@ class User < ActiveRecord::Base
   validates :email,
             :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
                          :on => :create },
-            :if => :parent?
+            :if => :validate_email?
   validates :password, :presence => true, :on => :create
 
   has_secure_password
 
   def name
-    "#{first_name} #{last_name}"    
+    "#{first_name} #{last_name}"
   end
 
   def name=(name)

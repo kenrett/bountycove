@@ -13,22 +13,6 @@ describe 'Treasure' do
       end
     end
 
-    describe 'with duplicate name' do
-      it 'will not create treasure' do
-        Treasure.create( name: 'gold coins',
-                         description: '50 gold coins',
-                         photo: 'www.pirate.com/images',
-                         price: '10')
-
-        treasure_2 = Treasure.create( name: 'gold coins',
-                                      description: '50 gold coins',
-                                      photo: 'www.pirate.com/images',
-                                      price: '10')
-
-        expect(treasure_2.invalid?).to be_true
-      end
-    end
-
     describe 'without price' do
       it 'will not create treasure' do
         treasure = Treasure.create( name: 'gold',

@@ -4,6 +4,5 @@ class Task < ActiveRecord::Base
   belongs_to :captain
 
   validates :worth, :presence => true, :numericality => { :only_integer => true }
-  validates :name, :uniqueness => true
   validates :description, :presence => true
 end
