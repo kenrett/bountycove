@@ -1,11 +1,11 @@
 class TreasuresController < ApplicationController
-  before_filter :check_limit, :only => [:create]
+  before_filter :treasure_full?, :only => [:create]
 
   include UsersHelper
 
   def index
     if current_user.type == 'Captain'
-      @treasures = Treasure.find_all_by_captain_id(current_user.id)
+      @treasures = current_user.treasures
     else
       @treasures = current_user.captain.treasures
     end
@@ -17,8 +17,13 @@ class TreasuresController < ApplicationController
   end
 
   def create
-    current_user.treasures << Treasure.create(params[:treasure])
-    redirect_to captain_treasures_path(current_user.id)
+    if treasure_full?
+      current_user.treasures << Treasure.create(params[:treasure])
+      redirect_to captain_treasures_path(current_user)
+    else
+      flash[:errors_treasure] = ["ARgh! Me treasure box be too full!"]
+      redirect_to captain_treasures_path(current_user)
+    end
   end
 
   def edit
@@ -27,25 +32,18 @@ class TreasuresController < ApplicationController
 
   def update
     Treasure.find(params[:id]).update_attributes(params[:treasure])
-    redirect_to captain_treasures_path(current_user.id)
+    redirect_to captain_treasures_path(current_user)
   end
 
   def destroy
     Treasure.find(params[:id]).destroy
-    redirect_to captain_treasures_path(current_user.id)
+    redirect_to captain_treasures_path(current_user)
   end
 
   private
 
-  def check_limit
-    captain = Captain.find(params[:captain_id])
-    treasure = Treasure.find_all_by_captain_id(captain.id)
-    if treasure && treasure.count < 6
-      true
-    else
-      flash[:errors_treasure] = ["ARgh! Me treasure box be too full!"]
-      render 'treasures/new'
-    end
+  def treasure_full?
+    current_user.treasures.length < 6
   end
 end
 

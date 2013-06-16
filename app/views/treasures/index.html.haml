@@ -1,6 +1,6 @@
 .error
-  - if flash[:error_add_treasure]
-    = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:error_add_treasure]}
+  - if flash[:errors_treasure]
+    = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:errors_treasure]}
 - if current_user.type == 'Captain'
   %h3 Create Treasure
   .create_treasure_form
