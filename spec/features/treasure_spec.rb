@@ -1,11 +1,15 @@
-# require 'spec_helper'
+require 'spec_helper'
 
-# describe 'Treasure' do
-#   context 'adding treasure' do
-#     let(:user) { build(:user) }
-#     let(:treasure) { build(:treasure) }
+describe 'User Profile', :js => true do
+  context 'when signing in' do
+   it 'will redirect to user profile page' do
+    captain = FactoryGirl.create(:captain, :username => 'acsart')
+    visit '/captains/acsart/'
+    expect(page).to have_link("Add Loot")
+    end
+  end
+end
 
-#     before do
-#       visit root_path
 
-      
+
+
