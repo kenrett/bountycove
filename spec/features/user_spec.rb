@@ -20,7 +20,7 @@ describe 'Captain' do
       describe 'when all inputs are filled in' do
         it 'will create a new account' do
           click_button 'Sign Up'
-          expect(page.current_path).to eq captain_path(Captain.last.username)
+          expect(page.current_path).to eq captain_path(captain.username)
           end
         end
       end
@@ -74,7 +74,7 @@ describe 'Captain' do
       end
     end
 
-    context 'with invalid' do 
+    context 'with invalid' do
       before do
         visit root_path
         fill_in 'username', with: 'nothing'
@@ -94,6 +94,6 @@ describe 'Captain' do
           expect(page).to have_content 'Invalid username or password'
         end
       end
-    end  
+    end
   end
 
