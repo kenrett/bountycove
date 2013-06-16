@@ -3,8 +3,6 @@
     = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:error_add_treasure]}
 
 %h3 Create Treasure
-
-
 .create_treasure_form
   = form_for [:captain, Treasure.new] do |f|
     = f.label :name
@@ -34,6 +32,3 @@
   %br
   = link_to "Edit", edit_captain_treasure_path(current_user.id, treasure)
   = link_to "Delete", captain_treasure_path(current_user.id, treasure), :method => :delete
-
-  
-

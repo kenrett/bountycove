@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+
 describe 'Treasure' do
   context 'adding loot' do
     it 'will create a new treasure' do
@@ -38,6 +39,7 @@ describe 'Treasure' do
   #     expect(page).to have_selector("div.create_treasure_form")
   #     expect(page).to have_selector("form")
   #     expect(page).to have_selector("input")
+
 
 
 
