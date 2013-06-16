@@ -1,6 +1,6 @@
 class PiratesController < ApplicationController
   before_filter :find_captain
-  
+
   def new
     @pirate = Pirate.new
   end
@@ -19,6 +19,11 @@ class PiratesController < ApplicationController
 
   def show
     @pirate = Pirate.find_by_username(params[:id])
+  end
+
+  def buys
+    debugger
+
   end
 
   private

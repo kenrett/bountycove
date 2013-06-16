@@ -6,6 +6,10 @@ Daddyshop::Application.routes.draw do
     resources :pirates, :except => :show
   end
 
+  resources :pirates, :only => :show do
+    resources :treasures, :only => :index
+  end
+
   resources :pirates, :only => :show
 
   root :to => "pages#index"
@@ -13,4 +17,6 @@ Daddyshop::Application.routes.draw do
   post "/login" => "session#login"
   post "/logout" => "session#logout"
 
+  # Pirates
+  post "/pirates/:pirate_id/treasures/:treasure_id/buy" => "pirates#buys", :as => 'pirate_buys'
 end
