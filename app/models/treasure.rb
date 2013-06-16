@@ -1,6 +1,10 @@
 class Treasure < ActiveRecord::Base
-  attr_accessible :name, :description, :photo, :price
-  validates :name, :description, :price, :presence => true, :on => :create
+  attr_accessible :name, :description, :photo, :price, :status
+  validates :name, :description, :presence => true, :on => :create
+  validates :price,
+              :presence => true,
+              :numericality => { :only_integer => true },
+              :if => :validate_price?
 
   belongs_to :captain
   belongs_to :pirate
@@ -10,5 +14,9 @@ class Treasure < ActiveRecord::Base
   STATUS.each do |key, value|
     define_method("#{key.to_s}?") { status == value }
     define_method("#{key.to_s}!") { self.status = value; self.save }
+  end
+
+  def validate_price?
+    status == 1
   end
 end

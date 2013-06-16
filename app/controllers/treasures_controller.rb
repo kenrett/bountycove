@@ -6,12 +6,15 @@ class TreasuresController < ApplicationController
   def index
     @treasures = current_user.treasures if current_user_is_captain
     @treasures = current_user.captain.treasures if current_user_is_pirate
+    @wishlist  = current_user.treasures if current_user_is_pirate
 
     render_local_pirate_or_captain_view 'index'
   end
 
   def new
     @treasure = Treasure.new
+
+    render_local_pirate_or_captain_view 'new'
   end
 
   def create

@@ -7,7 +7,7 @@ Daddyshop::Application.routes.draw do
   end
 
   resources :pirates, :only => :show do
-    resources :treasures, :only => :index
+    resources :treasures
     resources :tasks, :only => [:index, :show]
   end
 
