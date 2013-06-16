@@ -4,20 +4,21 @@
 
 %h3 Create Treasure
 
-= form_for [:captain, Treasure.new] do |f|
-  = f.label :name
-  = f.text_field :name, :required => true
-  %br
-  = f.label :description  
-  = f.text_field :description, :required => true  
-  %br
-  = f.label :photo
-  = f.text_field :photo
-  %br
-  = f.label :price
-  = f.text_field :price, :required => true
-  %br
-  = f.submit "Create Treasure" 
+.create_treasure_form
+  = form_for [:captain, Treasure.new] do |f|
+    = f.label :name
+    = f.text_field :name, :required => true
+    %br
+    = f.label :description  
+    = f.text_field :description, :required => true  
+    %br
+    = f.label :photo
+    = f.text_field :photo
+    %br
+    = f.label :price
+    = f.text_field :price, :required => true
+    %br
+    = f.submit "Create Treasure" 
 
 
 - @treasures.each do |treasure|
