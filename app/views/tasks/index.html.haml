@@ -1,5 +1,14 @@
-%h1 All Current Adventures:
-- @tasks.each do |task|
-  = link_to "#{task.name}", captain_task_path(@captain, task)
-%p=link_to "Create new adventure", new_captain_task_path(@captain)
-  
+%h1 All Adventures for a #{current_user.type}
+%ul
+  - @tasks.each do |task|
+    %li
+      - if current_user.type == 'Captain'
+        = link_to "#{task.name}", captain_task_path(current_user, task)
+      - else
+        = link_to "#{task.name}", pirate_task_path(current_user, task)
+
+- if current_user.type == 'Captain'
+  %p=link_to "Create new adventure", new_captain_task_path(@captain)
+  = link_to "Back", captain_path(current_user)
+- else
+  %p=link_to "Back", pirate_path(current_user)

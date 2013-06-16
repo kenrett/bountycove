@@ -10,3 +10,7 @@ p = Pirate.create(name: 'magic dog', username: 'p', password: 'p', password_conf
 t = Treasure.create(name: 'dog', description: 'dog', price: 100)
 c.pirates << p
 c.treasures << t
+
+2.times do |n|
+  c.tasks << Task.create(name: "task #{n}", description: 'generated task', worth: n)
+end
