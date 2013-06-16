@@ -4,8 +4,11 @@ class Task < ActiveRecord::Base
   belongs_to :captain
   belongs_to :pirate
 
-  validates :worth, :presence => true, :numericality => { :only_integer => true }
+  validates :name, :presence => true
+  validate :name, :format => { :with => /(\D+)/ }
   validates :description, :presence => true
+  validates :description, :format => { :with => /\w+/ }
+  validates :worth, :presence => true, :numericality => { :only_integer => true }
 
   STATUS = {on_board: 1, assigned: 2, completed: 3}
 
@@ -13,4 +16,8 @@ class Task < ActiveRecord::Base
     define_method("#{key.to_s}?") { status == value }
     define_method("#{key.to_s}!") { self.status = value; self.save }
   end
+
+  def string?
+
+  end 
 end
