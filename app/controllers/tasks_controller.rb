@@ -7,10 +7,14 @@ class TasksController < ApplicationController
   def index
     @tasks = current_user.tasks if current_user_is_captain
     @tasks = current_user.captain.tasks if current_user_is_pirate
+
+    render_local_pirate_or_captain_view 'index'
   end
 
   def new
     @task = Task.new
+
+    render_local_pirate_or_captain_view 'new'
   end
 
   def create
@@ -26,10 +30,14 @@ class TasksController < ApplicationController
 
   def show
     @task = Task.find(params[:id])
+
+    render_local_pirate_or_captain_view 'show'
   end
 
   def edit
     @task = Task.find(params[:id])
+
+    render_local_pirate_or_captain_view 'edit'
   end
 
   def update

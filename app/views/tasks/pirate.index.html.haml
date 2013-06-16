@@ -1,0 +1,8 @@
+%h1 All Adventures for a #{current_user.type}
+%ul
+  - @tasks.each do |task|
+    %li
+      = link_to "#{task.name}", pirate_task_path(current_user, task)
+
+%p
+  =link_to "Back", pirate_path(current_user)
