@@ -5,9 +5,8 @@ class TasksController < ApplicationController
   include UsersHelper
 
   def index
-    @tasks = Task.all
     if current_user.type == 'Captain'
-      @tasks = Task.find_all_by_captain_id(current_user.id)
+      @tasks = current_user.tasks
     else
       @tasks = current_user.captain.tasks
     end
