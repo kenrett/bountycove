@@ -7,7 +7,7 @@ class CreateTreasure < ActiveRecord::Migration
       t.integer :price
       t.integer :captain_id
       t.integer :pirate_id
-      t.integer :status
+      t.integer :status, :default => 1
 
       t.timestamps
     end
