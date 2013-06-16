@@ -1,14 +1,19 @@
 class PiratesController < ApplicationController
   before_filter :find_captain
+  
+  def new
+    @pirate = Pirate.new
+  end
 
   def create
-    @pirate = Pirate.new(params[:captain])
+    @pirate = Pirate.new(params[:pirate])
     if @pirate.save
-      redirect_to captain_path(@captain.username)
+      @captain.pirates << @pirate
+      redirect_to captain_path(@captain)
     else
       @pirate.errors.delete(:password_digest)
       flash[:errors_signup] = @pirate.errors.full_messages
-      redirect_to root_path
+      render 'pirates/new'
     end
   end
 
