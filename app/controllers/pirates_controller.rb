@@ -5,10 +5,6 @@ class PiratesController < ApplicationController
     @pirate = Pirate.new
   end
 
-  def new
-    @pirate = Pirate.new
-  end
-
   def create
     @pirate = Pirate.new(params[:pirate])
     if @pirate.save

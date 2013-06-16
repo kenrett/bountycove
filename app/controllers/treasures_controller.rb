@@ -4,7 +4,11 @@ class TreasuresController < ApplicationController
   include UsersHelper
 
   def index
-    @treasures = Treasure.find_all_by_captain_id(current_user.id)
+    if current_user.type == 'Captain'
+      @treasures = Treasure.find_all_by_captain_id(current_user.id)
+    else
+      @treasures = current_user.captain.treasures
+    end
   end
 
   def new

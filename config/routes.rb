@@ -6,7 +6,9 @@ Daddyshop::Application.routes.draw do
     resources :pirates, :except => :show
   end
 
-  resources :pirates, :only => :show
+  resources :pirates, :only => :show do
+    resources :treasures, :only => :index
+  end
 
   root :to => "pages#index"
 

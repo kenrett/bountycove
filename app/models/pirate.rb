@@ -8,4 +8,8 @@ class Pirate < User
   def parent?
     false
   end
+
+  def to_param
+    username
+  end
 end
