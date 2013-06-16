@@ -15,6 +15,5 @@ FactoryGirl.define do
     email { Faker::Internet.email }
     password 'password'
     password_confirmation 'password'
-    captain_id { rand(10) }
   end
 end
