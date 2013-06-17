@@ -24,7 +24,10 @@ class TreasuresController < ApplicationController
   end
 
   def create
-    return flash[:error] = ["ARgh! me treasure box be too full!"] if treasure_box_full?
+    if treasure_box_full?
+      flash[:error] = ["ARgh! me treasure box be too full!"]
+      return redirect_to_captain_or_pirate_path
+    end
 
     add_specific_attributes_to_params_based_on_current_user_type
 
@@ -74,9 +77,9 @@ class TreasuresController < ApplicationController
   def treasure_box_full?
     case current_user.type
     when 'Captain'
-      current_user_treasures(Treasure::WISHLIST).length >= 6  
-    when 'Pirate'
       current_user_treasures(Treasure::ON_SALE).length >= 6
+    when 'Pirate'
+      current_user_treasures(Treasure::WISHLIST).length >= 6
     end
 
   end

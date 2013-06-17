@@ -42,13 +42,6 @@ describe 'Task' do
          expect(task.valid?).to be_false
       end
 
-      it 'of name not being a string' do
-        task = Task.create(name: '',
-                             description: "Description",
-                             worth: 12)
-        expect(task.valid?).to be_false
-      end
-
       it 'of description not being a string' do
         task = Task.create(name: 'Ben',
                              description: '',
