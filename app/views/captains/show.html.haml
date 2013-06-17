@@ -10,25 +10,28 @@
 .row
   .large-10.large-offset-1.small-10.columns.small-offset-1.captain_profile_treasures         
     .row
-      - @treasures.each do |t|
+      - @treasures.each do |treasure|
         .large-3.columns.treasure_item
-          = t.name
+          %img{:src => "http://us.cdn1.123rf.com/168nwm/orla/orla1010/orla101000044/8041795-wooden-treasure-chest-with-gold-coins-printed-with-royal-crown--3d-render.jpg"}/
+          %br
+          = link_to "#{treasure.name}", captain_task_path(current_user, treasure)
         .large-1.columns
     %br  
     = link_to "Add Treasure", captain_treasures_path(@captain)
 %br
-.row
-  .large-4.column.large-offset-1.small-11.captain_profile    
+.row.box
+  .large-4.column.large-offset-1.small-11.captain_profile  
     .row
-      - @pirates.each do |t|
-        .large-12.columns.captain_profile_pirates
-          = t.name
-    %br
+      - @pirates.each do |pirate|
+        .large-12.columns.t_and_e
+          = link_to "#{pirate.name}", 
+          captain_pirate_path(current_user, pirate) 
+          / NEED A CAPTAIN PIRATE SHOW ROUTE
     = link_to "Add Pirate", new_captain_pirate_path(@captain)
-  .large-4.column.large-offset-1.small-11 
+  .large-4.column.large-offset-1.small-11.captain_profile
     .row
       - @tasks.each do |t|
-        .large-12.columns
+        .large-12.columns.t_and_e
           = t.name
     = link_to "Create Adventure", captain_tasks_path(@captain) 
   .large-1.small-1.column
