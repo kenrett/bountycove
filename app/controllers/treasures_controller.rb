@@ -23,6 +23,7 @@ class TreasuresController < ApplicationController
 
   def create
     unless treasure_box_full?
+      params[:treasure][:status] = 0 if current_user_is_pirate
       current_user.treasures << Treasure.create(params[:treasure])
     else
       flash[:errors_treasure] = ["ARgh! Me treasure box be too full!"]
