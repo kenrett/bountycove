@@ -25,12 +25,18 @@ class PiratesController < ApplicationController
 
   def buys
     treasure = Treasure.find(params[:treasure_id])
-    if treasure.bought!
-      flash[:treasure_bought] = 'You bought that treasure!'
+
+    if purchaseable?(treasure)
+      current_user.coins -= treasure.price
+      current_user.save
       current_user.treasures << treasure
+      treasure.bought!
+
+      flash[:treasure_bought] = 'You bought that treasure!'
     else
-      flash[:errors_buying] = 'Argh! Something went wrong with buying!'
+      flash[:errors_buying] = 'Argh! You need more gold to purchase!'
     end
+
     redirect_to pirate_treasures_path(current_user)
   end
 
@@ -47,6 +53,10 @@ class PiratesController < ApplicationController
   end
 
   private
+
+  def purchaseable?(treasure)
+    current_user.coins >= treasure.price
+  end
 
   def find_captain
     @captain = Captain.find_by_username(params[:captain_id])

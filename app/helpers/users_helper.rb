@@ -12,6 +12,10 @@ module UsersHelper
     current_user.is_a_captain?
   end
 
+  def current_user_treasures(status)
+    current_user.treasures.where(status: status)
+  end
+
   def render_local_pirate_or_captain_view(action)
     render "captain.#{action}.html.haml" if current_user_is_captain
     render "pirate.#{action}.html.haml" if current_user_is_pirate
