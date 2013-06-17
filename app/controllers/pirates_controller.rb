@@ -38,7 +38,6 @@ class PiratesController < ApplicationController
       flash[:treasure_bought] = 'You bought that treasure!'
     else
       flash[:error_deficit_gold] = 'Argh! You need more gold to purchase!'
-
     end
 
     redirect_to pirate_treasures_path(current_user)
