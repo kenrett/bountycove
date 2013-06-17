@@ -12,6 +12,7 @@ class TreasuresController < ApplicationController
       @treasures_wishlist = current_user_treasures(Treasure::WISHLIST)
 
       @treasures_on_sale  = current_user.captain.treasures.where(status: Treasure::ON_SALE)
+
     end
 
     render_local_pirate_or_captain_view 'index'
@@ -74,6 +75,7 @@ class TreasuresController < ApplicationController
     when 'Pirate'
       current_user_treasures(Treasure::ON_SALE).length >= 6
     end
+
   end
 
   def redirect_to_captain_or_pirate_path

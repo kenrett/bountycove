@@ -30,6 +30,7 @@ class PiratesController < ApplicationController
 
     if purchaseable?(treasure)
       current_user.coins -= treasure.total_price
+
       current_user.save
       current_user.treasures << treasure
       treasure.bought!
@@ -37,6 +38,7 @@ class PiratesController < ApplicationController
       flash[:treasure_bought] = 'You bought that treasure!'
     else
       flash[:error_deficit_gold] = 'Argh! You need more gold to purchase!'
+
     end
 
     redirect_to pirate_treasures_path(current_user)
