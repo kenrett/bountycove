@@ -26,12 +26,7 @@ class TreasuresController < ApplicationController
   def create
     return flash[:error] = ["ARgh! me treasure box be too full!"] if treasure_box_full?
 
-    case current_user.type
-    when 'Captain'
-      params[:treasure][:tax] = tax_of(params[:treasure][:price])  
-    when 'Pirate'
-      params[:treasure][:status] = Treasure::WISHLIST  
-    end
+    add_specific_attributes_to_params_based_on_current_user_type
 
     treasure = Treasure.new(params[:treasure])
 
@@ -65,6 +60,15 @@ class TreasuresController < ApplicationController
 
   def tax_of(price)
     ( (current_user.tax_rate/100.0) * price.to_f ).round
+  end
+
+  def add_specific_attributes_to_params_based_on_current_user_type
+    case current_user.type
+    when 'Captain'
+      params[:treasure][:tax] = tax_of(params[:treasure][:price])  
+    when 'Pirate'
+      params[:treasure][:status] = Treasure::WISHLIST  
+    end
   end
 
   def treasure_box_full?
