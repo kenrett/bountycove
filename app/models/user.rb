@@ -1,5 +1,12 @@
 class User < ActiveRecord::Base
-  attr_accessible :first_name, :last_name, :username, :email, :password, :password_confirmation, :name
+  attr_accessible :first_name,
+                  :last_name,
+                  :username,
+                  :email,
+                  :password,
+                  :password_confirmation,
+                  :name,
+                  :tax_rate
 
   validates :username, :uniqueness => true, :presence => true
   validates :first_name, :presence => true
