@@ -10,10 +10,14 @@
     %h1 Treasures on Sale
     - @treasures_on_sale.each do |treasure|
       %li
-        = treasure.name
-        = treasure.description
-        = treasure.photo
-        = treasure.price
+        Name: = treasure.name
+        Description: = treasure.description
+        - if treasure.photo
+          Photo: = treasure.photo
+        Price: = treasure.price
+        Tax: = (treasure.price * .09).round 2
+        Total Price: = (treasure.price * 1.09).round 2
+
         = button_to 'Buy', pirate_buys_path(current_user, treasure)
 .treasure_bought
   %ul
