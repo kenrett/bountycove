@@ -5,8 +5,12 @@ class TreasuresController < ApplicationController
 
   def index
     @treasures = current_user.treasures if current_user_is_captain
-    @treasures = current_user.captain.treasures if current_user_is_pirate
-    @wishlist  = current_user.treasures if current_user_is_pirate
+
+    if current_user_is_pirate
+      @treasures_on_sale = current_user.captain.treasures.where(status: Treasure::ON_SALE)
+      @treasures_bought = current_user.treasures.where(status: Treasure::BOUGHT)
+      @treasures_wishlist  = current_user.treasures.where(status: Treasure::WISHLIST)
+    end
 
     render_local_pirate_or_captain_view 'index'
   end
@@ -46,7 +50,8 @@ class TreasuresController < ApplicationController
   private
 
   def treasure_box_full?
-    current_user.treasures.length > 6
+    current_user.treasures.where(status: Treasure::WISHLIST).length >= 6 if current_user_is_pirate
+    current_user.treasures.where(status: Treasure::ON_SALE).length >= 6 if current_user_is_captain
   end
 
   def redirect_to_captain_or_pirate_path
