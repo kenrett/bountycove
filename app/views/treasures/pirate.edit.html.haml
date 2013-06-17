@@ -4,7 +4,7 @@
 
 %h3 Edit Wishful Treasure
 
-= form_for [:pirate, @treasure] do |f|
+= form_for [current_user, @treasure] do |f|
   = f.label :name
   = f.text_field :name, :required => true
   %br
@@ -13,8 +13,5 @@
   %br
   = f.label :photo
   = f.text_field :photo
-  %br
-  = f.label :price
-  = f.text_field :price, :required => true
   %br
   = f.submit "Edit Treasure"
