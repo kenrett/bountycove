@@ -1,6 +1,10 @@
 class Treasure < ActiveRecord::Base
   attr_accessible :name, :description, :photo, :price, :status
+  
   validates :name, :description, :presence => true, :on => :create
+  validates :name, :format => { :with => /(\D+)/ }
+  validates :description, :format => { :with => /\w+/ }
+  validates :price, :format => { :with => /\d/ }
   validates :price,
               :presence => true,
               :numericality => { :only_integer => true },
