@@ -4,7 +4,7 @@
 
 %h3 Create Treasure
 .create_treasure_form
-  = form_for [:captain, Treasure.new] do |f|
+  = form_for [current_user, Treasure.new] do |f|
     = f.label :name
     = f.text_field :name, :required => true
     %br
@@ -17,18 +17,40 @@
     = f.label :price
     = f.text_field :price, :required => true
     %br
+    Tax Rate:
+    = number_to_percentage(current_user.tax_rate, :precision => 2)
+    %br
+    %br
     = f.submit "Create Treasure"
 
-- @treasures.each do |treasure|
-  %br
-  %br
-  = treasure.name
-  %br
-  = treasure.description
-  %br
-  = treasure.photo
-  %br
-  = treasure.price
-  %br
-  = link_to "Edit", edit_captain_treasure_path(current_user, treasure)
-  = link_to "Delete", captain_treasure_path(current_user, treasure), :method => :delete
+.success
+  - if flash[:success_treasure]
+    =flash[:success_treasure]
+
+.treasures_on_sale
+  %ul
+    %h1 Treasure On Sale
+    - @treasures.each do |treasure|
+      %li.treasure
+        %li
+          Name:
+          = treasure.name
+        %li
+          Description:
+          = treasure.description
+        %li
+          Photo:
+          = treasure.photo
+        %li
+          Price:
+          = treasure.price
+        %li
+          Tax:
+          = treasure.tax
+        %li
+          Total:
+          = treasure.total_price
+        %li
+          = link_to "Edit", edit_captain_treasure_path(current_user, treasure)
+        %li
+          = link_to "Delete", captain_treasure_path(current_user, treasure), :method => :delete

@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 c = Captain.create(name: 'magic mike', username: 'c', password: 'c', password_confirmation: 'c', email: 'c@c.com')
 p = Pirate.create(name: 'magic dog', username: 'p', password: 'p', password_confirmation: 'p')
-t = Treasure.create(name: 'dog', description: 'dog', price: 100)
+t = Treasure.create(name: 'dog', description: 'dog', price: 100, tax: 5)
 c.pirates << p
 c.treasures << t
 

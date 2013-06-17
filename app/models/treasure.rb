@@ -1,5 +1,5 @@
 class Treasure < ActiveRecord::Base
-  attr_accessible :name, :description, :photo, :price, :status
+  attr_accessible :name, :description, :photo, :price, :status, :tax
 
   validates :name, :description, :presence => true, :on => :create
   validates :name, :format => { :with => /(\D+)/ }
@@ -32,5 +32,9 @@ class Treasure < ActiveRecord::Base
 
   def validate_price?
     status == 1
+  end
+
+  def total_price
+    price + tax
   end
 end
