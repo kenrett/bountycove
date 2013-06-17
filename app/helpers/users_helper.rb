@@ -5,11 +5,11 @@ module UsersHelper
   end
 
   def current_user_is_pirate
-    current_user.type == 'Pirate'
+    current_user.is_a_pirate?
   end
 
   def current_user_is_captain
-    current_user.type == 'Captain'
+    current_user.is_a_captain?
   end
 
   def render_local_pirate_or_captain_view(action)
