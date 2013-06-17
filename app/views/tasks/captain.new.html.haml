@@ -5,4 +5,5 @@
     = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:errors]}
     %h1 Create a new adventure for your 'lil pirate
   = render 'form', :task => @task, :captain => @captain
-
+  %p
+    = link_to "Back", captain_tasks_path(@captain)

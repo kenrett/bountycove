@@ -20,4 +20,9 @@ module UsersHelper
     render "captain.#{action}.html.haml" if current_user_is_captain
     render "pirate.#{action}.html.haml" if current_user_is_pirate
   end
+
+  def pirate_captain_profile_link
+    current_user_is_pirate ? pirate_path(current_user) : captain_path(current_user)
+  end
+
 end

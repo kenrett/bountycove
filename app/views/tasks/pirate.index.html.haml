@@ -1,6 +1,9 @@
 %h1 All Adventures for the Pirate #{current_user.username} 
 %h5 Total Gold: #{current_user.coins}
 
+%p
+  =link_to "Back", pirate_path(current_user)
+
 - if flash[:task_assigned]
   = flash[:task_assigned]
 
@@ -41,5 +44,3 @@
     %li Value: #{task.worth}
     %li Date Verified: #{task.updated_at.strftime('%m/%d/%Y')}
     %br
-%p
-  =link_to "Back", pirate_path(current_user)
