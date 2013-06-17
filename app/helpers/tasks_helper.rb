@@ -8,4 +8,12 @@ module TasksHelper
     Task.count(:conditions => "status = 1")
   end
   
+  def time_format(task)
+    if task.updated_at.strftime('%m/%d/%Y') == Date.today.strftime('%m/%d/%Y')
+      '%l:%M %P'
+    else
+      '%m/%d/%Y'
+    end
+  end
+
 end
