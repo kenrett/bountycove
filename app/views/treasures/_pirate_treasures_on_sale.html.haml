@@ -1,0 +1,23 @@
+- treasures_on_sale.each do |treasure|
+  %li.treasure
+    %li
+      Name:
+      = treasure.name
+    %li
+      Description:
+      = treasure.description
+    %li
+      Photo:
+      = treasure.photo
+    %li
+      Price:
+      = treasure.price
+    %li
+      Tax:
+      = (treasure.price * 0.09).round 2
+    %li
+      Total Price:
+      = (treasure.price * 1.09).round 2
+
+    = button_to 'Buy', pirate_buys_path(current_user, treasure)
+

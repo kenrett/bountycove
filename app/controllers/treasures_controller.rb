@@ -12,7 +12,6 @@ class TreasuresController < ApplicationController
       @treasures_wishlist = current_user_treasures(Treasure::WISHLIST)
 
       @treasures_on_sale  = current_user.captain.treasures.where(status: Treasure::ON_SALE)
-
     end
 
     render_local_pirate_or_captain_view 'index'
