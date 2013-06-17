@@ -14,11 +14,3 @@ c.treasures << t
 10.times do |n|
   c.tasks << Task.create(name: "task #{n}", description: 'generated task', worth: n)
 end
-
-10.times do |n| 
-	Task.create(worth: n*rand(50),
-	 captain_id: 1,
-	 name: "dog man #{n}",
-	 description: "fun #{n}",
-	 pirate_id: 1)
-end

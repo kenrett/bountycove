@@ -7,7 +7,8 @@ class Task < ActiveRecord::Base
   validate :name, :format => { :with => /(\D+)/ }
   validates :description, :presence => true
   validates :description, :format => { :with => /\w+/ }
-  validates :worth, :presence => true, :numericality => { :only_integer => true }
+  validates :worth, :presence => true,
+            :numericality => { :only_integer => true, :greater_than => 0 }
 
   ON_BOARD    = 1
   ASSIGNED    = 2
