@@ -30,27 +30,4 @@
 .treasures_on_sale
   %ul
     %h1 Treasure On Sale
-    - @treasures.each do |treasure|
-      %li.treasure
-        %li
-          Name:
-          = treasure.name
-        %li
-          Description:
-          = treasure.description
-        %li
-          Photo:
-          = treasure.photo
-        %li
-          Price:
-          = treasure.price
-        %li
-          Tax:
-          = treasure.tax
-        %li
-          Total:
-          = treasure.total_price
-        %li
-          = link_to "Edit", edit_captain_treasure_path(current_user, treasure)
-        %li
-          = link_to "Delete", captain_treasure_path(current_user, treasure), :method => :delete
+    = render 'captain_treasures', :treasures => @treasures

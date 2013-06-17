@@ -17,7 +17,7 @@ Daddyshop::Application.routes.draw do
   post "/logout" => "session#logout"
 
   # Pirate buys treasure
-  post "/pirates/:pirate_id/treasures/:treasure_id/buys" => "pirates#buys", :as => "pirate_buys"
+  post "/pirates/:pirate_id/treasures/:treasure_id/buys_treasure" => "pirates#buys_treasure", :as => "pirate_buys_treasure"
 
   # Pirate add task
   post "/pirates/:pirate_id/tasks/:task_id/adds" => "pirates#adds", :as => "pirate_adds"
