@@ -5,9 +5,13 @@ class TasksController < ApplicationController
   include UsersHelper
 
   def index
-    @tasks = current_user.tasks if current_user_is_captain
-    @tasks = current_user.captain.tasks if current_user_is_pirate
+    @tasks = current_user.tasks if current_user_is_captain 
+    @tasks = current_user.captain.tasks if current_user_is_pirate 
 
+    @tasks_on_board = @tasks.where(status: Task::ON_BOARD)
+    @tasks_assigned = @tasks.where(status: Task::ASSIGNED)
+    @tasks_completed = @tasks.where(status: Task::COMPLETED)
+    
     render_local_pirate_or_captain_view 'index'
   end
 

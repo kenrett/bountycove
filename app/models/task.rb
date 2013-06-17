@@ -22,8 +22,4 @@ class Task < ActiveRecord::Base
     define_method("#{key.to_s}?") { status == value }
     define_method("#{key.to_s}!") { self.status = value; self.save }
   end
-
-  def string?
-
-  end
 end
