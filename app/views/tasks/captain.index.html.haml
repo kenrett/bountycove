@@ -8,39 +8,19 @@
 .task_on_board
   %h3 Available Tasks
   %ul
-    - @tasks_on_board.each do |task|
-      %li Name: #{link_to task.name, captain_task_path(current_user, task)}
-      %li Description: #{task.description}
-      %li Value: #{task.worth}
-      %li Posted: #{task.created_at.strftime(time_format(task))}
-      %br
+    = render :partial => "captain_tasks", :locals => {:tasks => @tasks_on_board, :button => false, :assigned => false }
 
 .task_assigned
   %h3 Assigned Tasks
   %ul
-    - @tasks_assigned.each do |task|
-      %li Name: #{link_to task.name, captain_task_path(current_user, task)}
-      %li Assigned to: #{task.pirate.username}
-      %li Value: #{task.worth}
-      %li Posted: #{task.created_at.strftime(time_format(task))}
-      %br
+    = render :partial => "captain_tasks", :locals => {:tasks => @tasks_assigned, :button => false, :assigned => true }
 
 .task_need_verify
   %h3 Verify Tasks
   %ul
-    - @tasks_need_verify.each do |task|
-      %li Name: #{link_to task.name, captain_task_path(current_user, task)}
-      %li Assigned to: #{task.pirate.username}
-      %li Value: #{task.worth}
-      %li Posted: #{task.created_at.strftime(time_format(task))}
-      = button_to 'Confirm Task Complete?', captain_confirms_path(current_user, task) 
-      %br
+    = render :partial => "captain_tasks", :locals => {:tasks => @tasks_need_verify, :button => true , :assigned => false}
 
 .task_completed
   %h3 Completed Tasks
   %ul
-    - @tasks_completed.each do |task|
-      %li Name: #{link_to task.name, captain_task_path(current_user, task)}
-      %li Value: #{task.worth}
-      %li Posted: #{task.created_at.strftime(time_format(task))}
-      %br
+    = render :partial => "captain_tasks", :locals => {:tasks => @tasks_completed, :button => false, :assigned => false }
