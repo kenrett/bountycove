@@ -1,10 +1,11 @@
-%h1 All Adventures for the Pirate #{current_user.username}
+%h1 All Adventures for the Pirate #{current_user.username} 
+%h5 Total Gold: #{current_user.coins}
 
 - if flash[:task_assigned]
   = flash[:task_assigned]
 
 .task_on_board
-  %h3 Available Tasks
+  %h4 Available Tasks
   %ul
     - @tasks_on_board.each do |task|
       %li Name: #{link_to task.name, pirate_task_path(current_user, task)}
@@ -14,7 +15,7 @@
       %br
 
 .task_assigned
-  %h3 Assigned Tasks
+  %h4 Assigned Tasks
   %ul
     - @tasks_assigned.each do |task|
       %li Name: #{link_to task.name, pirate_task_path(current_user, task)}
@@ -24,7 +25,7 @@
       %br
 
 .task_need_verify
-  %h3 Tasks waiting for Verification
+  %h4 Tasks waiting for Verification
   %ul
     - @tasks_need_verify.each do |task|
       %li Name: #{link_to task.name, pirate_task_path(current_user, task)}
@@ -33,7 +34,7 @@
       %br
   
 .task_completed
-%h3 Completed Tasks
+%h4 Completed Tasks
 %ul
   - @tasks_completed.each do |task|
     %li Name: #{link_to task.name, pirate_task_path(current_user, task)}

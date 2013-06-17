@@ -22,6 +22,7 @@ class CaptainsController < ApplicationController
     task = Task.find(params[:task_id])
     if task.completed!
       flash[:task_completed] = "Nice Work you Finished the Task!"
+      task.pirate.update_attribute('coins',(task.pirate.coins + task.worth))
     else
       flash[:error_adding] = 'ArgH! Something went wrong'
     end
