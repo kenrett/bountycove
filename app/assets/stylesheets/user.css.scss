@@ -1,50 +1,51 @@
-// // Place all the styles related to the user controller here.
-// // They will automatically be included in application.css.
-// // You can use Sass (SCSS) here: http://sass-lang.com/
 
-// // .loot {
-// //   width: 80%;
-// //   margin: 0 auto;
-// //   height: 400px;
-// // }
 * {
   border: 1px solid black
 }
 
 
-.captain_profile_treasures {
+.captain_profile_treasures a {
+  margin-left: 75%; 
 }
 
 .captain_profile {
-  
+  text-align: center;
+  height: 335px;
+
+  a {
+    position: absolute;
+    bottom: 0;
+  }
 }
 
 .treasure_item {
-  height: 100px;
+  height: 190px;
+  text-align: center;
+
+  a {
+    margin-left: 0%;
+  }
+} 
+
+.box {
+  height: 335px;
 }
 
-.captain_profile_pirates {
-  height: 100px;
+.captain_profile {
+  text-align: center;
+  height: 335px;
+
+  a {
+    margin-left: -18%;
+    // can't center the effing left links...
+  }
 }
-// .kids,
-// .adventures {
-//   height: 250px;
-//   width: 300px;
-// }
 
-// .check_status,
-// .add_task,
-// .add_event {
-//   border: 1px;
-//   background: #ccc;
-//   width: 250px;
-//   height: 250px;
-//   padding: auto;
-//   text-align: center;
-//   font-family: sans-serif;
-// }
+.t_and_e {
+  height: 75px;
+  text-align: center;
 
-// .parent_admin td{
-//   padding: 10px;
-// }
+  a {
+  }
+}
 
