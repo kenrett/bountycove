@@ -29,7 +29,7 @@ class PiratesController < ApplicationController
     treasure = Treasure.find(params[:treasure_id])
 
     if purchaseable?(treasure)
-      current_user.coins -= treasure.price + treasure.tax
+      current_user.coins -= treasure.total_price
       current_user.save
       current_user.treasures << treasure
       treasure.bought!
@@ -68,7 +68,7 @@ class PiratesController < ApplicationController
   private
 
   def purchaseable?(treasure)
-    current_user.coins >= treasure.price
+    current_user.coins >= treasure.total_price
   end
 
   def find_captain

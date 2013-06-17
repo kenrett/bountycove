@@ -9,7 +9,7 @@ class Treasure < ActiveRecord::Base
               :if => :validate_price?
   validates :price,
               :presence => true,
-              :numericality => { :only_integer => true },
+              :numericality => { :only_integer => true, :greater_than => 0 },
               :if => :validate_price?
 
   belongs_to :captain
