@@ -4,8 +4,10 @@ class TreasuresController < ApplicationController
   include UsersHelper
 
   def index
-    @treasures = current_user_treasures(Treasure::ON_SALE) if current_user_is_captain
-    if current_user_is_pirate
+    case current_user.type
+    when 'Captain'
+      @treasures = current_user_treasures(Treasure::ON_SALE)  
+    when 'Pirate'
       @treasures_bought   = current_user_treasures(Treasure::BOUGHT)
       @treasures_wishlist = current_user_treasures(Treasure::WISHLIST)
 
@@ -22,20 +24,22 @@ class TreasuresController < ApplicationController
   end
 
   def create
-    unless treasure_box_full?
-      params[:treasure][:status] = Treasure::WISHLIST if current_user_is_pirate
-      params[:treasure][:tax] = tax_of(params[:treasure][:price]) if current_user_is_captain
+    return flash[:error] = ["ARgh! me treasure box be too full!"] if treasure_box_full?
 
-      treasure = Treasure.new(params[:treasure])
+    case current_user.type
+    when 'Captain'
+      params[:treasure][:tax] = tax_of(params[:treasure][:price])  
+    when 'Pirate'
+      params[:treasure][:status] = Treasure::WISHLIST  
+    end
 
-      if treasure.save
-        current_user.treasures << treasure
-        flash[:success_treasure] = 'Argh! Ye treasure was made!'
-      else
-        flash[:error] = treasure.errors.full_messages
-      end
+    treasure = Treasure.new(params[:treasure])
+
+    if treasure.save
+      current_user.treasures << treasure
+      flash[:success_treasure] = 'Argh! Ye treasure was made!'
     else
-      flash[:error] = ["ARgh! Me treasure box be too full!"]
+      flash[:error] = treasure.errors.full_messages
     end
 
     redirect_to_captain_or_pirate_path
@@ -64,16 +68,17 @@ class TreasuresController < ApplicationController
   end
 
   def treasure_box_full?
-    current_user_treasures(Treasure::WISHLIST).length >= 6 if current_user_is_pirate
-    current_user_treasures(Treasure::ON_SALE).length >= 6 if current_user_is_captain
+    case current_user.type
+    when 'Captain'
+      current_user_treasures(Treasure::WISHLIST).length >= 6  
+    when 'Pirate'
+      current_user_treasures(Treasure::ON_SALE).length >= 6
+    end
   end
 
   def redirect_to_captain_or_pirate_path
-    if current_user_is_captain
-        redirect_to captain_treasures_path(current_user)
-      else
-        redirect_to pirate_treasures_path(current_user)
-    end
+    redirect_to captain_treasures_path(current_user) if current_user_is_captain
+    redirect_to pirate_treasures_path(current_user) if current_user_is_pirate
   end
 end
 
