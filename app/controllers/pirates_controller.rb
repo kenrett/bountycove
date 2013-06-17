@@ -9,6 +9,8 @@ class PiratesController < ApplicationController
 
   def create
     @pirate = Pirate.new(params[:pirate])
+    @pirate.tax_rate = nil
+
     if @pirate.save
       @captain.pirates << @pirate
       redirect_to captain_path(@captain)
@@ -23,11 +25,11 @@ class PiratesController < ApplicationController
     @pirate = Pirate.find_by_username(params[:id])
   end
 
-  def buys
+  def buys_treasure
     treasure = Treasure.find(params[:treasure_id])
 
     if purchaseable?(treasure)
-      current_user.coins -= treasure.price
+      current_user.coins -= treasure.price + treasure.tax
       current_user.save
       current_user.treasures << treasure
       treasure.bought!

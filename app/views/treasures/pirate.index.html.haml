@@ -1,4 +1,3 @@
-%h1 Wishlist
 .error
   - if flash[:errors_treasure]
     = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:errors_treasure]}
@@ -12,7 +11,7 @@
   %ul
     %h1 Treasures on Sale
     - if @treasures_on_sale
-      = render 'pirate_treasures_on_sale', :treasures_on_sale => @treasures_on_sale
+      = render 'pirate_treasures', :treasures => @treasures_on_sale
 
 = link_to 'Add a treasure to the wishlist', new_pirate_treasure_path(current_user)
 .wishlist
@@ -20,15 +19,9 @@
     %h1 Wishlist
     - @treasures_wishlist.each do |treasure|
       %li.treasure
-        %li
-          Name:
-          = treasure.name
-        %li
-          Description:
-          = treasure.description
-        %li
-          Photo:
-          = treasure.photo
+        %li Name: #{treasure.name}
+        %li Description: #{treasure.description}
+        %li Photo: #{treasure.photo}
 
         = link_to 'Edit', edit_pirate_treasure_path(current_user, treasure)
         = button_to 'Delete', pirate_treasure_path(current_user, treasure), :method => :delete, :confirm => "Are you sure you want to delete this?"
@@ -36,24 +29,4 @@
 .treasure_bought
   %ul
     %h1 Treasures Bought
-    - @treasures_bought.each do |treasure|
-      %li.treasure
-        %li
-          Name:
-          = treasure.name
-        %li
-          Description:
-          = treasure.description
-        %li
-          Photo:
-          = treasure.photo
-        %li
-          Price:
-          = treasure.price
-        %li
-          Tax:
-          = (treasure.price * 0.09).round 2
-        %li
-          Total Price:
-          = (treasure.price * 1.09).round 2
-
+    = render 'pirate_treasures', :treasures => @treasures_bought

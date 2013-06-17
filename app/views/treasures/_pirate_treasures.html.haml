@@ -1,0 +1,11 @@
+- treasures.each do |treasure|
+  %li.treasure
+    %li Name: #{treasure.name}
+    %li Description: #{treasure.description}
+    %li Photo: #{treasure.photo}
+    %li Price: #{treasure.price}
+    %li Tax: #{treasure.tax}
+    %li Total Price: #{treasure.total_price}
+
+    = button_to 'Buy', pirate_buys_treasure_path(current_user, treasure)
+
