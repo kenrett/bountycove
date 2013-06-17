@@ -24,7 +24,7 @@ class TreasuresController < ApplicationController
   def create
     unless treasure_box_full?
       params[:treasure][:status] = Treasure::WISHLIST if current_user_is_pirate
-      params[:treasure][:tax] = tax_of(params[:treasure][:price])
+      params[:treasure][:tax] = tax_of(params[:treasure][:price]) if current_user_is_captain
 
       treasure = Treasure.new(params[:treasure])
 
