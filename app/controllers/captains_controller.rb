@@ -1,7 +1,8 @@
 class CaptainsController < ApplicationController
 
   include UsersHelper
-
+  include TasksHelper
+  
   def create
     @captain = Captain.new(params[:captain])
     if @captain.save
