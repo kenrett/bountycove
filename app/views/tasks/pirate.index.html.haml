@@ -8,5 +8,34 @@
     %li
       = link_to "#{task.name}", pirate_task_path(current_user, task)
 
+.task_on_board
+  %h3 Available Tasks
+  %ul
+    - @tasks_on_board.each do |task|
+      %li Date Posted: #{task.created_at.strftime('%m/%d/%Y')}
+      %li Name: #{task.name}
+      %li Description: #{task.description}
+      %li Value: #{task.worth}
+      %br
+
+.task_assigned
+  %h3 Assigned Tasks
+  %ul
+    - @tasks_assigned.each do |task|
+      %li Date Posted: #{task.created_at.strftime('%m/%d/%Y')}
+      %li Name: #{task.name}
+      %li Description: #{task.description}
+      %li Value: #{task.worth}
+      %br
+
+.task_completed
+  %h3 Completed Tasks
+  %ul
+    - @tasks_completed.each do |task|
+      %li Date Posted: #{task.created_at.strftime('%m/%d/%Y')}
+      %li Name: #{task.name}
+      %li Value: #{task.worth}
+      %br
+  
 %p
   =link_to "Back", pirate_path(current_user)
