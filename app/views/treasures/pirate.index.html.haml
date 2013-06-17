@@ -5,23 +5,29 @@
 .treasure_bought
   - if flash[:treasure_bought]
     = flash[:treasure_bought]
-- @treasures.each do |treasure|
-  %br
-  %br
-  = treasure.name
-  %br
-  = treasure.description
-  %br
-  = treasure.photo
-  %br
-  = treasure.price
-  %br
-  = button_to 'Buy', pirate_buys_path(current_user, treasure)
+.treasure_on_sale
+  %ul
+    %h1 Treasures on Sale
+    - @treasures_on_sale.each do |treasure|
+      %li
+        = treasure.name
+        = treasure.description
+        = treasure.photo
+        = treasure.price
+        = button_to 'Buy', pirate_buys_path(current_user, treasure)
+.treasure_bought
+  %ul
+    %h1 Treasures Bought
+    - @treasures_bought.each do |treasure|
+      %li
+        = treasure.name
+        = treasure.description
+        = treasure.photo
+        = treasure.price
 
 = link_to 'Add a treasure to the wishlist', new_pirate_treasure_path(current_user)
-
 .wishlist
   %h1 Wishlist
   %ul
-    - @wishlist.each do |treasure|
+    - @treasures_wishlist.each do |treasure|
       %li= treasure.name
