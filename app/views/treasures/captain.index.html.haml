@@ -27,7 +27,6 @@
   - if flash[:success_treasure]
     =flash[:success_treasure]
 
-.treasures_on_sale
-  %ul
-    %h1 Treasure On Sale
-    = render 'captain_treasures', :treasures => @treasures
+%ul.treasures_on_sale
+  %h1 Treasure On Sale
+  = render 'captain_treasures', :treasures => @treasures

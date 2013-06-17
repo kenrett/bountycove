@@ -1,13 +1,13 @@
 - treasures.each do |treasure|
-  %li.treasure
+  %ul.treasure
     %li Name: #{treasure.name}
     %li Description: #{treasure.description}
     %li Photo: #{treasure.photo}
     %li Price: #{treasure.price}
     %li Tax: #{treasure.tax}
-    %li Total Price:
+    %li
+      Total Price:
       %span.total_price
-      -# make js add this up dynamically
       
     = link_to "Edit", edit_captain_treasure_path(current_user, treasure)
     = link_to "Delete", captain_treasure_path(current_user, treasure), :method => :delete
