@@ -1,7 +1,8 @@
 .error
   - if flash[:errors_treasure]
     = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:errors_treasure]}
-
+  -if flash[:error_deficit_gold]
+    = flash[:error_deficit_gold]
 .treasure_bought
   - if flash[:treasure_bought]
     = flash[:treasure_bought]
@@ -9,28 +10,8 @@
 .treasure_on_sale
   %ul
     %h1 Treasures on Sale
-    - @treasures_on_sale.each do |treasure|
-      %li.treasure
-        %li
-          Name:
-          = treasure.name
-        %li
-          Description:
-          = treasure.description
-        %li
-          Photo:
-          = treasure.photo
-        %li
-          Price:
-          = treasure.price
-        %li
-          Tax:
-          = (treasure.price * 0.09).round 2
-        %li
-          Total Price:
-          = (treasure.price * 1.09).round 2
-
-        = button_to 'Buy', pirate_buys_path(current_user, treasure)
+    - if @treasures_on_sale
+      = render 'pirate_treasures_on_sale', :treasures_on_sale => @treasures_on_sale
 
 = link_to 'Add a treasure to the wishlist', new_pirate_treasure_path(current_user)
 .wishlist
