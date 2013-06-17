@@ -1,41 +1,44 @@
-%h1 All Adventures for a pirate
+%h1 All Adventures for the Pirate #{current_user.username}
 
 - if flash[:task_assigned]
   = flash[:task_assigned]
-
-%ul
-  - @tasks.each do |task|
-    %li
-      = link_to "#{task.name}", pirate_task_path(current_user, task)
 
 .task_on_board
   %h3 Available Tasks
   %ul
     - @tasks_on_board.each do |task|
-      %li Date Posted: #{task.created_at.strftime('%m/%d/%Y')}
-      %li Name: #{task.name}
-      %li Description: #{task.description}
+      %li Name: #{link_to task.name, pirate_task_path(current_user, task)}
       %li Value: #{task.worth}
+      %li Date Posted: #{task.created_at.strftime('%m/%d/%Y')}
+      = button_to 'Accept task', pirate_adds_path(current_user, task)
       %br
 
 .task_assigned
   %h3 Assigned Tasks
   %ul
     - @tasks_assigned.each do |task|
-      %li Date Posted: #{task.created_at.strftime('%m/%d/%Y')}
-      %li Name: #{task.name}
-      %li Description: #{task.description}
+      %li Name: #{link_to task.name, pirate_task_path(current_user, task)}
       %li Value: #{task.worth}
+      %li Date Assigned: #{task.updated_at.strftime('%m/%d/%Y')}
+      = button_to 'Task Complete!', pirate_completes_path(current_user, task)
       %br
 
-.task_completed
-  %h3 Completed Tasks
+.task_need_verify
+  %h3 Tasks waiting for Verification
   %ul
-    - @tasks_completed.each do |task|
-      %li Date Posted: #{task.created_at.strftime('%m/%d/%Y')}
-      %li Name: #{task.name}
+    - @tasks_need_verify.each do |task|
+      %li Name: #{link_to task.name, pirate_task_path(current_user, task)}
       %li Value: #{task.worth}
+      %li Date Completed: #{task.updated_at.strftime('%m/%d/%Y')}
       %br
   
+.task_completed
+%h3 Completed Tasks
+%ul
+  - @tasks_completed.each do |task|
+    %li Name: #{link_to task.name, pirate_task_path(current_user, task)}
+    %li Value: #{task.worth}
+    %li Date Verified: #{task.updated_at.strftime('%m/%d/%Y')}
+    %br
 %p
   =link_to "Back", pirate_path(current_user)

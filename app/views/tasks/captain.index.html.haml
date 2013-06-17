@@ -1,9 +1,48 @@
-%h1 All Adventures for a captain
-%ul
-  - @tasks.each do |task|
-    %li
-      = link_to "#{task.name}", captain_task_path(current_user, task)
+%h1 All Adventures for Captain #{current_user.username}
 
 %p
   = link_to "Create new adventure", new_captain_task_path(@captain)
   = link_to "Back", captain_path(current_user)
+
+.task_on_board
+  %h3 Available Tasks
+  %ul
+    - @tasks_on_board.each do |task|
+      %li Name: #{link_to task.name, captain_task_path(current_user, task)}
+      %li Description: #{task.description}
+      %li Value: #{task.worth}
+      %li Date Posted: #{task.created_at.strftime('%m/%d/%Y')}
+      %br
+
+.task_assigned
+  %h3 Assigned Tasks
+  %ul
+    - @tasks_assigned.each do |task|
+      %li Name: #{link_to task.name, captain_task_path(current_user, task)}
+      %li Assigned to: #{task.pirate.username}
+      %li Value: #{task.worth}
+      %li Date Posted: #{task.created_at.strftime('%m/%d/%Y')}
+      %br
+
+.task_need_verify
+  %h3 Verify Tasks
+  %ul
+    - @tasks_need_verify.each do |task|
+      %li Name: #{link_to task.name, captain_task_path(current_user, task)}
+      %li Assigned to: #{task.pirate.username}
+      %li Value: #{task.worth}
+      %li Date Posted: #{task.created_at.strftime('%m/%d/%Y')}
+      = button_to 'Confirm Task Complete?', captain_confirms_path(current_user, task) 
+      %br
+
+.task_completed
+  %h3 Completed Tasks
+  %ul
+    - @tasks_completed.each do |task|
+      %li Name: #{link_to task.name, captain_task_path(current_user, task)}
+      %li Value: #{task.worth}
+      %li Date Posted: #{task.created_at.strftime('%m/%d/%Y')}
+      %br
+
+%p
+  =link_to "Back", pirate_path(current_user)

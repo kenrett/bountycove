@@ -6,32 +6,6 @@
   = form_tag logout_path, :method => :post do
     = submit_tag "Logout"
 
-.task_on_board
-  %h1 Current Tasks
-  - unless @tasks_on_board.nil?
-    - @tasks_on_board.each do |task|
-      = task.created_at
-      = task.name
-      = task.description
-      = task.worth
-
-.task_assigned
-  %h1 Assigned Tasks
-  - unless @tasks_assigned.nil?
-    - @tasks_assigned.each do |task|
-      = task.created_at
-      = task.name
-      = task.description
-      = task.worth
-
-.task_completed
-  %h1 Completed Tasks
-  - unless @tasks_on_board.nil?
-    - @tasks_completed.each do |task|
-      = task.created_at
-      = task.name
-      = task.worth
-
 %table.parent_admin
   %tr
     %td

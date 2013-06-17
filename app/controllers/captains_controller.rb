@@ -1,5 +1,7 @@
 class CaptainsController < ApplicationController
 
+  include UsersHelper
+
   def create
     @captain = Captain.new(params[:captain])
     if @captain.save
@@ -14,5 +16,16 @@ class CaptainsController < ApplicationController
 
   def show
     @captain = Captain.find_by_username(params[:id])
+  end
+
+  def confirm
+    task = Task.find(params[:task_id])
+    if task.completed!
+      flash[:task_completed] = "Nice Work you Finished the Task!"
+    else
+      flash[:error_adding] = 'ArgH! Something went wrong'
+    end
+
+    redirect_to captain_tasks_path(current_user)
   end
 end
