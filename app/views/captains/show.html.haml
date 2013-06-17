@@ -1,28 +1,38 @@
 - content_for :title, "Captain's Page"
-%h1
-  #{@captain.username}
-%p
-  = 'Hello ' "#{@captain.first_name}!"
-
-  = form_tag logout_path, :method => :post do
-    = submit_tag "Logout"
-
-%table.parent_admin
-  %tr
-    %td
-      .check_status
-        #text 
-        = link_to "Add Pirate", new_captain_pirate_path(@captain)
-    %td
-      .add_reward
-        #text 
-        = link_to "Add Loot", captain_treasures_path(@captain)
-  %tr
-    %td
-      .add_task
-        #text 
-        = link_to "Create Adventure", captain_tasks_path(@captain)
-    %td
-      .add_event
-        #text 
-        = link_to "Add Event", "#"
+.row
+  .large-12.columns
+    %h1
+      = 'Nav Bar is here'
+.row
+  .large-12.columns
+    %h1 Captain #{@captain.username}
+    %p Hello #{@captain.first_name}!
+.row
+  .large-10.large-offset-1.small-10.columns.small-offset-1.captain_profile_treasures         
+    .row
+      - @treasures.each do |t|
+        .large-3.columns.treasure_item
+          = t.name
+        .large-1.columns
+    %br  
+    = link_to "Add Treasure", captain_treasures_path(@captain)
+%br
+.row
+  .large-4.column.large-offset-1.small-11.captain_profile    
+    .row
+      - @pirates.each do |t|
+        .large-12.columns.captain_profile_pirates
+          = t.name
+    %br
+    = link_to "Add Pirate", new_captain_pirate_path(@captain)
+  .large-4.column.large-offset-1.small-11 
+    .row
+      - @tasks.each do |t|
+        .large-12.columns
+          = t.name
+    = link_to "Create Adventure", captain_tasks_path(@captain) 
+  .large-1.small-1.column
+%br
+.row 
+  .large-12.columns
+    %p Footer goes here...

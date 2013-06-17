@@ -1,23 +1,52 @@
-// Place all the styles related to the user controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// // Place all the styles related to the user controller here.
+// // They will automatically be included in application.css.
+// // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.check_status,
-.add_reward,
-.add_task,
-.add_event {
-  border: 1px;
-  background: #ccc;
-  width: 250px;
-  height: 250px;
-  padding: auto;
-  text-align: center;
-  font-family: sans-serif;
+// // .loot {
+// //   width: 80%;
+// //   margin: 0 auto;
+// //   height: 400px;
+// // }
+* {
+  border: 1px solid black
 }
 
-.parent_admin td{
-  padding: 10px;
+
+.captain_profile_treasures {
 }
+
+.captain_profile {
+  
+}
+
+.treasure_item {
+  height: 100px;
+}
+
+.captain_profile_pirates {
+  height: 100px;
+}
+// .kids,
+// .adventures {
+//   height: 250px;
+//   width: 300px;
+// }
+
+// .check_status,
+// .add_task,
+// .add_event {
+//   border: 1px;
+//   background: #ccc;
+//   width: 250px;
+//   height: 250px;
+//   padding: auto;
+//   text-align: center;
+//   font-family: sans-serif;
+// }
+
+// .parent_admin td{
+//   padding: 10px;
+// }
 
 html,body,img,form,textarea,input,fieldset,div,p,div,ul,li,ol,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,code { margin: 0; padding: 0;}
 
