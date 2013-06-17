@@ -5,7 +5,6 @@ class TreasuresController < ApplicationController
 
   def index
     @treasures = current_user_treasures(Treasure::ON_SALE) if current_user_is_captain
-
     if current_user_is_pirate
       @treasures_bought   = current_user_treasures(Treasure::BOUGHT)
       @treasures_wishlist = current_user_treasures(Treasure::WISHLIST)
@@ -24,15 +23,17 @@ class TreasuresController < ApplicationController
 
   def create
     unless treasure_box_full?
-      if current_user_is_pirate
-        params[:treasure][:status] = Treasure::WISHLIST
-        current_user.treasures << Treasure.create(params[:treasure])
-      else
-        params[:treasure][:tax] = tax_of(params[:treasure][:price])
-        current_user.treasures << Treasure.create(params[:treasure])
-      end
+      params[:treasure][:status] = Treasure::WISHLIST if current_user_is_pirate
+      params[:treasure][:tax] = tax_of(params[:treasure][:price])
 
-      flash[:error] = 'Argh! Ye treasure was made!'
+      treasure = Treasure.new(params[:treasure])
+
+      if treasure.save
+        current_user.treasures << treasure
+        flash[:success_treasure] = 'Argh! Ye treasure was made!'
+      else
+        flash[:error] = treasure.errors.full_messages
+      end
     else
       flash[:error] = ["ARgh! Me treasure box be too full!"]
     end
