@@ -1,12 +1,13 @@
-.nav
-  %p 
-    Logged in as: #{link_to "#{current_user.type} #{current_user.username}", pirate_captain_profile_link}
-    
-  - if current_user_is_captain
-    - if count_of_tasks_need_verify > 0
-      You have tasks pending for #{link_to "Verification!", captain_tasks_path(current_user)}
+-if current_user
+  .nav
+    %p 
+      Logged in as: #{link_to "#{current_user.type} #{current_user.username}", pirate_captain_profile_link}
 
-  - if current_user_is_pirate
-    Total Gold: #{current_user.coins}
-    - if count_of_available_tasks > 0
-      There are #{link_to "available tasks!", pirate_tasks_path(current_user)}
+    - if current_user_is_captain
+      - if count_of_tasks_need_verify > 0
+        You have tasks pending for #{link_to "Verification!", captain_tasks_path(current_user)}
+
+    - if current_user_is_pirate
+      Total Gold: #{current_user.coins}
+      - if count_of_available_tasks > 0
+        There are #{link_to "available tasks!", pirate_tasks_path(current_user)}
