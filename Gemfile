@@ -33,6 +33,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
+  gem 'zurb-foundation'
 end
 
 gem 'jquery-rails'
