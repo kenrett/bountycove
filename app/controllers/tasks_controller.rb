@@ -10,8 +10,9 @@ class TasksController < ApplicationController
 
     @tasks_on_board = @tasks.where(status: Task::ON_BOARD)
     @tasks_assigned = @tasks.where(status: Task::ASSIGNED)
+    @tasks_need_verify = @tasks.where(status: Task::NEED_VERIFY)
     @tasks_completed = @tasks.where(status: Task::COMPLETED)
-    
+
     render_local_pirate_or_captain_view 'index'
   end
 

@@ -51,6 +51,17 @@ class PiratesController < ApplicationController
 
     redirect_to pirate_tasks_path(current_user)
   end
+  
+  def completes
+    task = Task.find(params[:task_id])
+    if task.need_verify!
+      flash[:task_sent_for_verify] = "Nice Work you Finished the Task!"
+    else
+      flash[:error_adding] = 'ArgH! Something went wrong'
+    end
+
+    redirect_to pirate_tasks_path(current_user)
+  end
 
   private
 
