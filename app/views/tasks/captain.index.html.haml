@@ -1,5 +1,8 @@
 %h1 All Adventures for Captain #{current_user.username}
 
+.error
+  - if flash[:errors]
+    = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:errors]}
 %p
   = link_to "Create new adventure", new_captain_task_path(@captain)
 %p

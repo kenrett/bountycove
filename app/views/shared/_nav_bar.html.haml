@@ -1,10 +1,9 @@
 -if current_user
   .nav
-    = form_tag logout_path, :method => :post do
-      = submit_tag "Logout"
     %ul
       %li
         Logged in as: #{link_to "#{current_user.type} #{current_user.username}", pirate_captain_profile_link}
+        (#{link_to "Logout", logout_path, :method => :post})
 
       - if current_user_is_captain && count_of_tasks_need_verify > 0
         %li
@@ -16,3 +15,4 @@
         - if count_of_available_tasks > 0
           %li
             There are #{link_to "available tasks!", pirate_tasks_path(current_user)}
+    
