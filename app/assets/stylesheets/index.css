@@ -30,7 +30,11 @@ html,body,img,form,textarea,input,fieldset,div,p,div,ul,li,ol,dl,dt,dd,h1,h2,h3,
   top: 1%;
 }
  
- /*need to remove px*/
+.banner_index_small {
+  width: 100%;
+  height: 50px;
+}
+
 .break_1 {
   width: 100%;
   height: 18%;
@@ -67,11 +71,33 @@ html,body,img,form,textarea,input,fieldset,div,p,div,ul,li,ol,dl,dt,dd,h1,h2,h3,
     letter-spacing: 15%;
 }
 
+.small_forms {
+  background-image: linear-gradient(bottom, #FFFFFF 0%, #A5DAF5 100%);
+  background-image: -o-linear-gradient(bottom, #FFFFFF 0%, #A5DAF5 100%);
+  background-image: -moz-linear-gradient(bottom, #FFFFFF 0%, #A5DAF5 100%);
+  background-image: -webkit-linear-gradient(bottom, #FFFFFF 0%, #A5DAF5 100%);
+  background-image: -ms-linear-gradient(bottom, #FFFFFF 0%, #A5DAF5 100%);
+
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0, #FFFFFF),
+    color-stop(1, #A5DAF5)
+  );
+    height: 100%;
+    font-family: 'Pathway Gothic One', sans-serif;
+    font-size: 25px;
+    /*color: #faaf40;*/
+    color: #e89b36;
+    letter-spacing: 15%;
+}
+
+
 .index_forms {
   height: 100%;
   width: 100%;
   margin-top: 15%;
->>>>>>> stage one foundation index
 }
 
 .login {
@@ -103,12 +129,15 @@ html,body,img,form,textarea,input,fieldset,div,p,div,ul,li,ol,dl,dt,dd,h1,h2,h3,
   z-index: 9999;
   position: relative;
   /*top: 0%;*/
-  
 }
 
- /*need to remove px*/
-#username,
-#password {
+
+.small_footer {
+  width: 100%;
+  height: 50px;
+}
+
+.login input {
   border: 0;
 /*  width: 100%;
   height: 20%;*/
@@ -122,13 +151,21 @@ html,body,img,form,textarea,input,fieldset,div,p,div,ul,li,ol,dl,dt,dd,h1,h2,h3,
   color: #fff;
 }
 
- /*need to remove px*/
-#captain_first_name,
-#captain_last_name,
-#captain_username,
-#captain_email,
-#captain_password,
-#captain_password_confirmation {
+.login_small input {
+  border: 0;
+/*  width: 100%;
+  height: 20%;*/
+  padding: 2%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background: #ccc;
+  font-family: 'Pathway Gothic One', sans-serif;
+  font-size: 20px;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+.sign_up input {
   border: 0;
   /*width: 230px;
   height: 20px;
@@ -141,6 +178,21 @@ html,body,img,form,textarea,input,fieldset,div,p,div,ul,li,ol,dl,dt,dd,h1,h2,h3,
   letter-spacing: 1px;
   color: #fff;
 }
+
+.sign_up_small input {
+  border: 0;
+  /*width: 230px;
+  height: 20px;
+  padding: 5px;*/
+/*  margin-top: 5px;
+  margin-bottom: 5px;*/
+  background: #ccc;
+  font-family: 'Pathway Gothic One', sans-serif;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
 
 
 .html {

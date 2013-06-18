@@ -3,7 +3,7 @@
   .banner_index.hide-for-small
   .break_1.hide-for-small
     
-.forms
+.forms.hide-for-small
   .form_errors
     .row
       .error.large-6.columns
@@ -12,7 +12,7 @@
       .error_login.large-6.columns
         - if flash[:errors_login]
           = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:errors_login]}
-  .index_forms.hide-for-small
+  .index_forms
     .row
       .sign_up.large-4.offset-1.push-1.columns
         = form_for @captain do |f|
@@ -48,7 +48,54 @@
           %br
           = submit_tag "Login!", :class => 'fish_button'
 
-  
+  .underwater_index.hide-for-small        
 
-  .underwater_index.hide-for-small
+.small_forms.show-for-small
+  .form_errors
+    .row
+      .error.large-6.columns
+        - if flash[:errors_signup]
+          = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:errors_signup]}
+      .error_login.large-6.columns
+        - if flash[:errors_login]
+          = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:errors_login]}
+  .index_forms
+    .row
+      .sign_up_small.large-4.offset-1.push-1.columns
+        = form_for @captain do |f|
+          = f.label :first_name
+          = f.text_field :first_name
+          %br
+          = f.label :last_name
+          = f.text_field :last_name
+          %br
+          = f.label :username
+          = f.text_field :username
+          %br
+          = f.label :email
+          = f.text_field :email
+          %br
+          = f.label :password
+          = f.password_field :password
+          %br
+          = f.label :password_confirmation
+          = f.password_field :password_confirmation
+          %br
+          = f.submit "Sign Up!", :class => 'fish_button'
+
+      .login_small.large-4.offset-1.pull-1.columns
+        = form_tag login_path, :class => 'captain_login' do
+          = label_tag :username
+          %br
+          = text_field_tag :username
+          %br
+          = label_tag :password
+          %br
+          = password_field_tag :password
+          %br
+          = submit_tag "Login!", :class => 'fish_button'
+
+  .small_footer.show-for-small
+
+  
 
