@@ -1,50 +1,55 @@
-.nav
-  %h1
+
 .banner
-  .break_1
   .banner_index
+  .break_1
+    
+
 
 .forms
-  .error
+  .
+  .error.large-6.columns
     - if flash[:errors_signup]
       = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:errors_signup]}
+  .row
+    .sign_up.large-12.columns
+      = form_for @captain do |f|
+        = f.label :first_name
+        = f.text_field :first_name
+        %br
+        = f.label :last_name
+        = f.text_field :last_name
+        %br
+        = f.label :username
+        = f.text_field :username
+        %br
+        = f.label :email
+        = f.text_field :email
+        %br
+        = f.label :password
+        = f.password_field :password
+        %br
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation
+        %br
+        = f.submit "Sign Up!", :class => 'button'
 
-  .sign_up
-    = form_for @captain do |f|
-      = f.label :first_name
-      = f.text_field :first_name
-      %br
-      = f.label :last_name
-      = f.text_field :last_name
-      %br
-      = f.label :username
-      = f.text_field :username
-      %br
-      = f.label :email
-      = f.text_field :email
-      %br
-      = f.label :password
-      = f.password_field :password
-      %br
-      = f.label :password_confirmation
-      = f.password_field :password_confirmation
-      %br
-      = f.submit "Sign Up!", :class => 'button'
 
+    .error_login.large-6.columns
+      - if flash[:errors_login]
+        = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:errors_login]}
+    
+    .login.large-12.columns
+      = form_tag login_path, :class => 'captain_login' do
+        = label_tag :username
+        %br
+        = text_field_tag :username
+        %br
+        = label_tag :password
+        %br
+        = password_field_tag :password
+        %br
+        = submit_tag "Login!", :class => 'button'
 
-  .error_login
-    - if flash[:errors_login]
-      = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:errors_login]}
-  .login
-    = form_tag login_path, :class => 'captain_login' do
-      = label_tag :username
-      %br
-      = text_field_tag :username
-      %br
-      = label_tag :password
-      %br
-      = password_field_tag :password
-      %br
-      = submit_tag "Login!", :class => 'button'
+.row  
   .underwater_index
 
