@@ -1,4 +1,4 @@
-function List(elem,title,content) {
+function List(elem, title, content) {
   this.elem = elem;
   this.title = title;
   this.content = content;
@@ -16,7 +16,24 @@ List.prototype = {
   }
 }
 
+function TreasureError(elem, message) {
+  this.elem = elem;
+  this.message = message;
+}
+
+TreasureError.prototype = {
+  renderToPage: function() {
+    this.createTemplate('Error', this.message);
+    $(this.elem).html(this.template);
+  },
+
+  createTemplate: function(title, message) {
+    this.template = "<ul class='treasure-error'><h1>" +title+ "</h1>" +"<li>" +message+ "</li></ul>";
+  } 
+}
+
 $(document).ready(function(){
+  // Clicking "Treasure Cove" to render treasure view
   $('.captain_treasure_index').on('ajax:success', function(e, data, status, xhr){
     leftBox  = new List('.captain_profile_left', 'Treasure bought', data.treasures_bought);
     rightBox = new List('.captain_profile_right', 'Add Treasures!', data.new_treasure_form);
@@ -26,4 +43,15 @@ $(document).ready(function(){
     rightBox.renderToPage();
     botBox.renderToPage();
   });//end on
+
+  // Adding a new treasure
+  $('.captain_profile_right').on('ajax:success', 'form', function(e, data, status, xhr) {
+    if (data.error) {
+      treasureError = new TreasureError('.error_max_treasure_limit', data.error);
+      treasureError.renderToPage();
+    }
+    else {
+      
+    }
+  });//end adding new treasure
 });//end ready

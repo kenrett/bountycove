@@ -15,7 +15,7 @@ class TreasuresController < ApplicationController
                                   treasures: current_user.treasures_delivered,
                                   on_sale: false,
                                   bought: false})
-      
+
       new_treasure_form    = render_to_string :partial => 'form_treasures',
                                   :locals => {:treasure => Treasure.new}
 
@@ -37,10 +37,10 @@ class TreasuresController < ApplicationController
   def new
     case current_user.type
     when 'Captain'
-      form = render_to_string :partial => 'form_treasures',
-                              :locals => {:treasure => Treasure.new}
+      
+      # might not be needed anymore because of AJAXing
       debugger
-      render :json => {:form => form}
+      
     when 'Pirate'
       @treasure = Treasure.new
 
@@ -50,24 +50,19 @@ class TreasuresController < ApplicationController
 
   def create
     if treasure_box_full?
-      flash[:error] = ["ARgh! me treasure box be too full!"]
-      return redirect_to_captain_or_pirate_path
-    end
-
-    debugger
-
-    add_specific_attributes_to_params_based_on_current_user_type
-
-    treasure = Treasure.new(params[:treasure])
-    
-    if treasure.save
-      current_user.treasures << treasure
-      flash[:success_treasure_created] = 'Argh! Ye treasure was made!'
+      render :json => {:error => "ARgh! me treasure box be too full!"}
     else
-      flash[:error] = treasure.errors.full_messages
-    end
+      add_specific_attributes_to_params_based_on_current_user_type
 
-    redirect_to_captain_or_pirate_path
+      treasure = Treasure.new(params[:treasure])
+      
+      if treasure.save
+        current_user.treasures << treasure
+        flash[:success_treasure_created] = 'Argh! Ye treasure was made!'
+      else
+        flash[:error] = treasure.errors.full_messages
+      end
+    end
   end
 
   def edit
