@@ -1,8 +1,12 @@
 /*html,body,img,form,textarea,input,fieldset,div,p,div,ul,li,ol,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,code { margin: 0; padding: 0;}*/
 form,textarea,input { margin: 0; padding: 0;}
-.nav {
-  visibility: hidden;
-}
+
+/*.nav {
+  width: 100%;
+  height: 50px;
+  position: absolute;
+  color: #bada55;
+}*/
 
 
 .banner {
@@ -38,6 +42,7 @@ form,textarea,input { margin: 0; padding: 0;}
 .banner_index_small {
   width: 100%;
   min-height: 50px;
+
 }
 
 .break_1 {
@@ -56,6 +61,7 @@ form,textarea,input { margin: 0; padding: 0;}
 }
 
 .forms {
+  background-image: linear-gradient(bottom, #273F87 2%, #007EC2 54%);
   background-image: -o-linear-gradient(bottom, #273F87 2%, #007EC2 54%);
   background-image: -moz-linear-gradient(bottom, #273F87 2%, #007EC2 54%);
   background-image: -webkit-linear-gradient(bottom, #273F87 2%, #007EC2 54%);
@@ -130,6 +136,13 @@ form,textarea,input { margin: 0; padding: 0;}
 
 /*###################################*/
 
+.small_footer {
+  width: 100%;
+  height: 50px;
+}
+
+/*###################################*/
+
 .login input {
   border: 0;
   /*width: 100%;*/
@@ -165,6 +178,20 @@ form,textarea,input { margin: 0; padding: 0;}
 /*###################################*/
 
 .login_small input {
+  border: 0;
+/*  width: 100%;
+  height: 20%;*/
+  /*padding: 2%;*/
+  /*margin-top: 5px;*/
+  /*margin-bottom: 5px;*/
+  background: #fff;
+  font-family: 'Pathway Gothic One', sans-serif;
+  /*font-size: 20px;*/
+  /*letter-spacing: 1px;*/
+  color: #444444;
+}
+
+.sign_up_small input {
   border: 0;
 /*  width: 100%;
   height: 20%;*/
