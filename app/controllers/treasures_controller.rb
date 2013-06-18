@@ -9,6 +9,25 @@ class TreasuresController < ApplicationController
       @treasures_on_sale   = current_user_treasures(Treasure::ON_SALE)
       @treasures_bought    = current_user_treasures(Treasure::BOUGHT)
       @treasures_delivered = current_user_treasures(Treasure::DELIVERED)    
+    
+      treasures_on_sale   = render_treasure_view_to_string({
+                                        treasures: @treasures_on_sale,
+                                        on_sale: true,
+                                        bought: false})
+
+      treasures_bought    = render_treasure_view_to_string({
+                                        treasures: @treasures_bought,
+                                        on_sale: true,
+                                        bought: false})
+
+      treasures_delivered = render_treasure_view_to_string({
+                                        treasures: @treasures_delivered,
+                                        on_sale: false,
+                                        bought: false})
+
+      render :json => {:treasures_on_sale => treasures_on_sale ,
+                       :treasures_bought => treasures_bought,
+                       :treasures_delivered => treasures_delivered}
     when 'Pirate'
       @treasures_bought    = current_user_treasures(Treasure::BOUGHT)
       @treasures_wishlist  = current_user_treasures(Treasure::WISHLIST)
@@ -18,7 +37,7 @@ class TreasuresController < ApplicationController
       @treasures_on_sale  = captain_treasures.where(status: Treasure::ON_SALE)
     end
 
-    render_local_pirate_or_captain_view 'index'
+    # render_local_pirate_or_captain_view 'index'
   end
 
   def new
@@ -91,6 +110,13 @@ class TreasuresController < ApplicationController
   def redirect_to_captain_or_pirate_path
     redirect_to captain_treasures_path(current_user) if current_user_is_captain
     redirect_to pirate_treasures_path(current_user) if current_user_is_pirate
+  end
+
+  def render_treasure_view_to_string(args)
+    render_to_string :partial => 'captain_treasures',
+                                    :locals => {:treasures => args[:treasures],
+                                                :on_sale => args[:on_sale],
+                                                :bought => args[:bought]}
   end
 end
 
