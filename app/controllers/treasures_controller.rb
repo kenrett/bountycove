@@ -20,9 +20,9 @@ class TreasuresController < ApplicationController
                                   treasures: current_user.treasures_delivered,
                                   on_sale: false,
                                   bought: false})
-
+      debugger
       render :json => {:treasures_on_sale => treasures_on_sale ,
-                       :treasures_bought => treasures_bought,
+                       :treasures_bought => treasures_to_deliver,
                        :treasures_delivered => treasures_delivered}
     when 'Pirate'
       @treasures_bought    = current_user_treasures(Treasure::BOUGHT)

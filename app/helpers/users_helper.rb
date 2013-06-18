@@ -11,10 +11,6 @@ module UsersHelper
   def current_user_is_captain
     current_user.is_a_captain?
   end
-
-  def current_user_treasures(status)
-    current_user.treasures.where(status: status)
-  end
   
   def current_user_tasks_assigned(status)
     current_user.tasks.where(status: status)
