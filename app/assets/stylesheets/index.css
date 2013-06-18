@@ -107,7 +107,6 @@ background-image: -webkit-gradient(
 .index_forms {
   height: 100%;
   width: 100%;
-<<<<<<< HEAD
   margin-top: 15%;
 }
 
@@ -120,7 +119,6 @@ background-image: -webkit-gradient(
   /*height: 30%;*/
 }
 
- /*need to remove px*/
 .sign_up {
   /*padding: 1%;*/
   /*margin-top: 180px;*/
@@ -130,16 +128,13 @@ background-image: -webkit-gradient(
   /*height: 30%;*/
 }
 
-.underwater_index {
-  background-image:url('/underwater_index.png');
-  /*background-size: contain;*/
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 270px;
-  width: 100%;
-  z-index: 9999;
-  position: relative;
-  /*top: 5%;*/
+.login {
+  padding: 10px;
+  margin-top: 180px;
+  margin-right: 340px;
+  float: right;
+  width: 250px;
+  height: 190px;
 }
 
 .small_footer {
@@ -147,7 +142,17 @@ background-image: -webkit-gradient(
   height: 50px;
 }
 
-/*###################################*/
+.underwater_index {
+  background-image:url('/underwater_index.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center 5px;
+  height: 270px;
+  z-index: 9999;
+  position: relative;
+  top: 690px;
+  
+}
 
 .login input {
   border: 0;
@@ -220,11 +225,5 @@ label {
   display: block;
   font-weight: 500;
   margin-bottom: 0;
-}
-
-input.fish_button {
-  width: 100%;
-  height: 100%;
-  background: orange;
 }
 
