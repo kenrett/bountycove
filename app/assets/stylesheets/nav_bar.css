@@ -1,6 +1,9 @@
 .nav {
-  background-color: #ddd;
-  padding-left: 10px;
-  height: 80px;
+  color: #bada55;
+  padding-left: 1em;
+  height: 18%;
   list-style: none;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }

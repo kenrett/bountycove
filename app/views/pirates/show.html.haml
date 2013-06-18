@@ -1,5 +1,30 @@
 - content_for :title, "Pirate's Page"
 %h1 I'm a fucking pirate!
 
-= link_to 'Tasks!', pirate_tasks_path(@pirate)
-= link_to 'Treasures!', pirate_treasures_path(@pirate)
+.row
+  .large-12.columns
+  %h1 Pirate #{current_user.username.titleize}
+  %p Hello #{current_user.name}
+  %br
+.row
+  .large-10.large-offset-1.small-10.columns.small-offset-1.captain_profile_treasures
+    .row 
+      %h2 Available Treasures
+      - @treasures.each do |treasure|
+        .large-3.columns.treasure_item
+          %img{:src => "http://us.cdn1.123rf.com/168nwm/orla/orla1010/orla101000044/8041795-wooden-treasure-chest-with-gold-coins-printed-with-royal-crown--3d-render.jpg"}/
+          %br
+          = link_to "#{treasure.name}", pirate_task_path(current_user, treasure)
+          .large-1.columns
+      %br
+      = link_to 'View All Treasures!', pirate_treasures_path(current_user)
+      %br 
+.row
+  .large-10.large-offset-1.small-10.columns.small-offset-1.captain_profile_treasures
+    .row
+      %h2 Available Quests
+      - @tasks.each do |task|
+        .large-12.columns.t_and_e
+          = t.name
+      %br  
+      = link_to 'View All Quests!', pirate_tasks_path(current_user)

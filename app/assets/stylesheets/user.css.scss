@@ -1,68 +1,10 @@
-
 * {
   border: 1px solid black
 }
 
-.nav {
-  height: 100%;
+.container {
+  position: relative;
+  top: 5em;
 }
 
-// Captain Profile Page 
-.captain_profile_treasures a {
-  margin-left: 75%; 
-}
 
-.captain_profile {
-  text-align: center;
-  height: 335px;
-
-  a {
-    position: absolute;
-    bottom: 0;
-  }
-}
-
-.treasure_item {
-  height: 190px;
-  text-align: center;
-
-  a {
-    margin-left: 0%;
-  }
-} 
-
-.box {
-  height: 335px;
-}
-
-.captain_profile {
-  text-align: center;
-  height: 335px;
-
-  a {
-    margin-left: -18%;
-    // can't center the effing left links...
-  }
-}
-
-.t_and_e {
-  height: 75px;
-  text-align: center;
-
-  a {
-  }
-}
-
-// Captain Tasks Index
-
-.top_links {
-  text-align: center;
-}
-
-h1, h2, h3, h4, h5 {
-  text-align: center;
-}
-
-ul {
-  list-style-type: none;
-}
