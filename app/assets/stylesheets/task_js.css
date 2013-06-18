@@ -1,0 +1,13 @@
+.captain_task {
+  z-index: 1;
+  display: none;
+  position: absolute;
+  width: 200px;
+  height: 300px;
+  top: 50px;
+  left: 300px;
+  border: 1px solid black;
+  border-radius: 15px;
+  background: white;
+  padding: 20px;
+}

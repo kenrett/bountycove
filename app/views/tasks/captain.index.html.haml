@@ -3,10 +3,11 @@
     %h1 All Quests for Captain #{current_user.username}'s Pirates
 
     %p.top_links
-      %a.button.round{:href => new_captain_task_path(@captain) } Create new adventure!
+      
+      .task_button= link_to "New Task", new_captain_task_path(@captain), remote: true
     
-      %a.button.round{:href => captain_path(current_user) } Back
-  
+      .captain_task
+
   .error
     - if flash[:errors]
       = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:errors]}
