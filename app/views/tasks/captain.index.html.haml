@@ -7,6 +7,9 @@
     
       %a.button.round{:href => captain_path(current_user) } Back
   
+.error
+  - if flash[:errors]
+    = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:errors]}
 
     .large-12.columns
       %h3 Available Quests

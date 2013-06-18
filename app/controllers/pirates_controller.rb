@@ -2,6 +2,7 @@ class PiratesController < ApplicationController
   before_filter :find_captain
 
   include UsersHelper
+  include TasksHelper
 
   def new
     @pirate = Pirate.new
@@ -45,11 +46,12 @@ class PiratesController < ApplicationController
 
   def adds
     task = Task.find(params[:task_id])
-    if task.assigned!
+    if current_user.tasks.count(:conditions => "status = 1") < 3
+      task.assigned!
       flash[:task_assigned] = "You just got assigned the task!"
       current_user.tasks << task
     else
-      flash[:error_adding] = 'ArgH! Something went wrong'
+      flash[:error_adding] = ['You can only have 3 tasks at a time']
     end
 
     redirect_to pirate_tasks_path(current_user)
