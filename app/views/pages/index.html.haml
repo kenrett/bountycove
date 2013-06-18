@@ -1,19 +1,20 @@
-.banner
-  .banner_index
-  .break_1
+.banner_index_small.show-for-small
+.banner.hide-for-small
+  .banner_index.hide-for-small
+  .break_1.hide-for-small
     
 .forms
   .form_errors
-    .error.large-6.columns
-      - if flash[:errors_signup]
-        = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:errors_signup]}
-    .error_login.large-6.columns
-      - if flash[:errors_login]
-        = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:errors_login]}
-
-  .index_forms
     .row
-      .sign_up.large-12.columns
+      .error.large-6.columns
+        - if flash[:errors_signup]
+          = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:errors_signup]}
+      .error_login.large-6.columns
+        - if flash[:errors_login]
+          = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:errors_login]}
+  .index_forms.hide-for-small
+    .row
+      .sign_up.large-4.offset-1.push-1.columns
         = form_for @captain do |f|
           = f.label :first_name
           = f.text_field :first_name
@@ -35,7 +36,7 @@
           %br
           = f.submit "Sign Up!", :class => 'fish_button'
 
-      .login.large-12.columns
+      .login.large-4.offset-1.pull-1.columns
         = form_tag login_path, :class => 'captain_login' do
           = label_tag :username
           %br
@@ -47,5 +48,7 @@
           %br
           = submit_tag "Login!", :class => 'fish_button'
 
-      .underwater_index
+  
+
+  .underwater_index.hide-for-small
 
