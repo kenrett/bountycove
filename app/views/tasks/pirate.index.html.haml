@@ -4,6 +4,10 @@
 %p
   =link_to "Back", pirate_path(current_user)
 
+.error
+  - if flash[:errors]
+    = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:errors]}
+
 - if flash[:task_assigned]
   = flash[:task_assigned]
 
@@ -23,6 +27,6 @@
     = render :partial => "pirate_tasks", :locals => {:tasks => @tasks_need_verify, :accept_button => false, :complete_button => false}
 
 .task_completed
-%h4 Completed Tasks
-%ul
-  = render :partial => "pirate_tasks", :locals => {:tasks => @tasks_completed, :accept_button => false, :complete_button => false}
+  %h4 Completed Tasks
+  %ul
+    = render :partial => "pirate_tasks", :locals => {:tasks => @tasks_completed, :accept_button => false, :complete_button => false}
