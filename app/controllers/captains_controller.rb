@@ -31,7 +31,7 @@ class CaptainsController < ApplicationController
       flash[:error_adding] = 'ArgH! Something went wrong'
     end
 
-    redirect_to captain_tasks_path(current_user)
+    redirect_to captain_path(current_user)
   end
 
   def delivers_treasure

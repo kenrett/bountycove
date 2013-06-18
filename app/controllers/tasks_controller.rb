@@ -10,28 +10,29 @@ class TasksController < ApplicationController
     when 'Captain'
       tasks_on_board = render_task_view_to_string({
                        tasks: current_user.tasks_on_board, 
-                       accept_button: true, 
-                       complete_button: false})
+                       button: false, 
+                       assigned: false})
 
       tasks_assigned = render_task_view_to_string({
                        tasks: current_user.tasks_assigned , 
-                       accept_button: false , 
-                       complete_button: true })
+                       button: false , 
+                       assigned: true })
 
       tasks_need_verify = render_task_view_to_string({
                        tasks: current_user.tasks_need_verify , 
-                       accept_button: false , 
-                       complete_button: false})
+                       button: true , 
+                       assigned: false})
         
       tasks_completed = render_task_view_to_string({
                        tasks: current_user.tasks_completed , 
-                       accept_button:false , 
-                       complete_button:false })
+                       button: false , 
+                       assigned: false })
       
       render :json => {:tasks_on_board => tasks_on_board,
                        :tasks_assigned => tasks_assigned,
                        :tasks_need_verify => tasks_need_verify,
                        :tasks_completed => tasks_completed }
+
     when 'Pirate'
       @tasks = current_user.captain.tasks
       
@@ -103,10 +104,10 @@ class TasksController < ApplicationController
   end
   
   def render_task_view_to_string(args)
-    render_to_string :partial => "pirate_tasks", :locals => {
-                     :tasks           => args[:tasks], 
-                     :accept_button   => args[:accept_button], 
-                     :complete_button => args[:complete_button]}
+    render_to_string :partial => "captain_tasks", :locals => {
+                     :tasks    => args[:tasks], 
+                     :button   => args[:button], 
+                     :assigned => args[:assigned]}
   end
 
 end

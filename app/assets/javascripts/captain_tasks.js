@@ -12,16 +12,18 @@ List.prototype = {
   },
 
   renderTemplate: function(header, content) {
-    this.template = "<ul class='captain_tasks'><h1>" +header+ "</h1>" +content+ "</ul>";
+    this.template = "<ul class='captain_tasks_show'><h1>" +header+ "</h1>" +content+ "</ul>";
   }
 }
 
 $(document).ready(function(){
-  $('.captain_treasure_index').on('ajax:success', function(e, data, status, xhr){
-    leftBox   = new List('.captain_profile_left', 'Available Tasks', data.tasks_on_board);
-    rightBox  = new List('.captain_profile_right', 'Assigned Tasks', data.tasks_assigned);
-    botBox    = new List('.treasures_delivered', 'Tasks to Verify', data.tasks_need_verify);
+  $('.captain_task_cove').on('ajax:success', function(e, data, status, xhr){
+    topBox    = new List('.captain_profile_treasures', 'Available Tasks', data.tasks_on_board);
+    leftBox   = new List('.captain_profile_left', 'Assigned Tasks', data.tasks_assigned);
+    rightBox  = new List('.captain_profile_right', 'Tasks to Verify', data.tasks_need_verify);
+    botBox    = new List('.captain_profile_bottom', 'Completed Tasks', data.tasks_completed);
     
+    topBox.renderToPage();
     leftBox.renderToPage();
     rightBox.renderToPage();
     botBox.renderToPage();
