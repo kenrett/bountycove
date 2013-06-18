@@ -6,12 +6,16 @@ class TreasuresController < ApplicationController
   def index
     case current_user.type
     when 'Captain'
-      @treasures = current_user_treasures(Treasure::ON_SALE)  
+      @treasures_on_sale   = current_user_treasures(Treasure::ON_SALE)
+      @treasures_bought    = current_user_treasures(Treasure::BOUGHT)
+      @treasures_delivered = current_user_treasures(Treasure::DELIVERED)    
     when 'Pirate'
-      @treasures_bought   = current_user_treasures(Treasure::BOUGHT)
-      @treasures_wishlist = current_user_treasures(Treasure::WISHLIST)
+      @treasures_bought    = current_user_treasures(Treasure::BOUGHT)
+      @treasures_wishlist  = current_user_treasures(Treasure::WISHLIST)
+      @treasures_delivered = current_user_treasures(Treasure::DELIVERED)
 
-      @treasures_on_sale  = current_user.captain.treasures.where(status: Treasure::ON_SALE)
+      captain_treasures   = current_user.captain.treasures
+      @treasures_on_sale  = captain_treasures.where(status: Treasure::ON_SALE)
     end
 
     render_local_pirate_or_captain_view 'index'
@@ -35,7 +39,7 @@ class TreasuresController < ApplicationController
 
     if treasure.save
       current_user.treasures << treasure
-      flash[:success_treasure] = 'Argh! Ye treasure was made!'
+      flash[:success_treasure_created] = 'Argh! Ye treasure was made!'
     else
       flash[:error] = treasure.errors.full_messages
     end
