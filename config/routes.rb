@@ -27,4 +27,7 @@ Daddyshop::Application.routes.draw do
 
   # Captain Confirm Task Complete
   post "/captains/:captain_id/tasks/:task_id/confirm" => "captains#confirm", :as => "captain_confirms"  
+
+  # Captain delivers treasure
+  post "/captains/:captain_id/treasures/:treasure_id/delivers_treasure" => "captains#delivers_treasure", :as => 'captain_delivers_treasure'
 end

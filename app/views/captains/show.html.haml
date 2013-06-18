@@ -16,11 +16,12 @@
           %br
           = link_to "#{treasure.name}", captain_task_path(current_user, treasure)
         .large-1.columns
-    %br  
-    = link_to "Add Treasure", captain_treasures_path(@captain)
+    %br
+    = link_to "Check oout your treasure cove", captain_treasures_path(current_user), :remote => true, :class => 'captain_treasure_index'
+    = link_to "Add Treasure", captain_treasures_path(@captain), :remote => true
 %br
 .row.box
-  .large-4.column.large-offset-1.small-11.captain_profile  
+  .large-4.column.large-offset-1.small-11.captain_profile_left  
     .row
       - @pirates.each do |pirate|
         .large-12.columns.t_and_e
@@ -28,7 +29,7 @@
           captain_pirate_path(current_user, pirate) 
           / NEED A CAPTAIN PIRATE SHOW ROUTE
     = link_to "Add Pirate", new_captain_pirate_path(@captain)
-  .large-4.column.large-offset-1.small-11.captain_profile
+  .large-4.column.large-offset-1.small-11.captain_profile_right
     .row
       - @tasks.each do |t|
         .large-12.columns.t_and_e

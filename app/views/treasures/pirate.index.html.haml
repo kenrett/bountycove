@@ -12,7 +12,7 @@
   %ul
     %h1 Treasures on Sale
     - if @treasures_on_sale
-      = render 'pirate_treasures', :treasures => @treasures_on_sale
+      = render :partial => 'pirate_treasures', :locals => {:treasures => @treasures_on_sale, :on_sale => true}
 
 = link_to 'Add a treasure to the wishlist', new_pirate_treasure_path(current_user)
 .wishlist
@@ -29,4 +29,9 @@
 .treasure_bought
   %ul
     %h1 Treasures Bought
-    = render 'pirate_treasures', :treasures => @treasures_bought
+    = render :partial => 'pirate_treasures', :locals => {:treasures => @treasures_bought, :on_sale => false}
+
+.treasure_delivered
+  %ul
+    %h1 Treasures Delivered
+    = render :partial => 'pirate_treasures', :locals => {:treasures => @treasures_delivered, :on_sale => false}

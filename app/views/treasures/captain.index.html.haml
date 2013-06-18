@@ -24,9 +24,26 @@
     = f.submit "Create Treasure"
 
 .success
-  - if flash[:success_treasure]
-    =flash[:success_treasure]
+  - if flash[:success_treasure_created]
+    = flash[:success_treasure_created]
 
 %ul.treasures_on_sale
   %h1 Treasure On Sale
-  = render 'captain_treasures', :treasures => @treasures
+  = render :partial => 'captain_treasures',
+                        :locals => {:treasures => @treasures_on_sale,
+                                    :on_sale => true,
+                                    :bought => false}
+
+%ul.treasures_bought
+  %h1 Treasure Sold!
+  = render :partial => 'captain_treasures',
+                        :locals => {:treasures => @treasures_bought,
+                                    :on_sale => false,
+                                    :bought => true}
+
+%ul.treasures_delivered
+  %h1 Treasure Delivered
+  = render :partial => 'captain_treasures',
+                        :locals => {:treasures => @treasures_delivered,
+                                    :on_sale => false,
+                                    :bought => false}
