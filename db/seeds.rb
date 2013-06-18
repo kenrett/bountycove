@@ -14,3 +14,9 @@ c.treasures << t
 10.times do |n|
   c.tasks << Task.create(name: "task #{n}", description: 'generated task', worth: n)
 end
+
+Treasure::STATUS.each do |status, value|
+  t = Treasure.create(name: status, description: status, price: 100, tax: 5, status: value)
+  c.treasures << t
+  p.treasures << t
+end
