@@ -57,7 +57,7 @@ class PiratesController < ApplicationController
 
     redirect_to pirate_tasks_path(current_user)
   end
-  
+
   def completes
     task = Task.find(params[:task_id])
     if task.need_verify!
@@ -78,7 +78,7 @@ class PiratesController < ApplicationController
   def find_captain
     @captain = Captain.find_by_username(params[:captain_id])
   end
-  
+
   def tasks_assigned_count?
     current_user_tasks_assigned(Task::ASSIGNED).length
   end
