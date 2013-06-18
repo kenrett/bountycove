@@ -19,8 +19,8 @@ class Pirate < User
                                   :class_name => 'Treasure',
                                   :conditions => {:status => Treasure::DELIVERED}
 
-  def captain
-    self.captain
+  def treasures_purchaseable
+    self.captain.treasures.on_sale
   end
 
   def validate_email?

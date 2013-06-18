@@ -42,3 +42,5 @@ class Treasure < ActiveRecord::Base
     price + tax
   end
 end
+
+p.treasures.wishlist
