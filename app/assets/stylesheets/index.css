@@ -32,8 +32,12 @@ form,textarea,input { margin: 0; padding: 0;}
   position: relative;
   top: 1%;
 }
+<<<<<<< HEAD
 
 
+=======
+ 
+>>>>>>> stage two foundation index
 .banner_index_small {
   width: 100%;
   height: 50px;
@@ -96,6 +100,29 @@ form,textarea,input { margin: 0; padding: 0;}
     letter-spacing: 15%;
 }
 
+.small_forms {
+  background-image: linear-gradient(bottom, #FFFFFF 0%, #A5DAF5 100%);
+  background-image: -o-linear-gradient(bottom, #FFFFFF 0%, #A5DAF5 100%);
+  background-image: -moz-linear-gradient(bottom, #FFFFFF 0%, #A5DAF5 100%);
+  background-image: -webkit-linear-gradient(bottom, #FFFFFF 0%, #A5DAF5 100%);
+  background-image: -ms-linear-gradient(bottom, #FFFFFF 0%, #A5DAF5 100%);
+
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0, #FFFFFF),
+    color-stop(1, #A5DAF5)
+  );
+    height: 100%;
+    font-family: 'Pathway Gothic One', sans-serif;
+    font-size: 25px;
+    /*color: #faaf40;*/
+    color: #e89b36;
+    letter-spacing: 15%;
+}
+
+
 .index_forms {
   height: 100%;
   width: 100%;
@@ -137,9 +164,9 @@ form,textarea,input { margin: 0; padding: 0;}
   z-index: 9999;
   position: relative;
   /*top: 0%;*/
-  
 }
 
+<<<<<<< HEAD
 .login input {
   border: 0;
   /*width: 100%;*/
@@ -157,6 +184,15 @@ form,textarea,input { margin: 0; padding: 0;}
 }
 
 .sign_up input {
+=======
+
+.small_footer {
+  width: 100%;
+  height: 50px;
+}
+
+.login input {
+>>>>>>> stage two foundation index
   border: 0;
   /*width: 230px;
   height: 20px;
@@ -178,12 +214,16 @@ form,textarea,input { margin: 0; padding: 0;}
  color: black;
 }
 
+<<<<<<< HEAD
 /*###################################*/
 
+=======
+>>>>>>> stage two foundation index
 .login_small input {
   border: 0;
 /*  width: 100%;
   height: 20%;*/
+<<<<<<< HEAD
   /*padding: 2%;*/
   /*margin-top: 5px;*/
   /*margin-bottom: 5px;*/
@@ -195,6 +235,19 @@ form,textarea,input { margin: 0; padding: 0;}
 }
 
 .sign_up_small input {
+=======
+  padding: 2%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background: #ccc;
+  font-family: 'Pathway Gothic One', sans-serif;
+  font-size: 20px;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+.sign_up input {
+>>>>>>> stage two foundation index
   border: 0;
   /*width: 230px;
   height: 20px;
@@ -213,7 +266,25 @@ form,textarea,input { margin: 0; padding: 0;}
   color: #fff;
 }
 
+<<<<<<< HEAD
 /*###################################*/
+=======
+.sign_up_small input {
+  border: 0;
+  /*width: 230px;
+  height: 20px;
+  padding: 5px;*/
+/*  margin-top: 5px;
+  margin-bottom: 5px;*/
+  background: #ccc;
+  font-family: 'Pathway Gothic One', sans-serif;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: #fff;
+}
+
+
+>>>>>>> stage two foundation index
 
 label {
   font-size: 1.4em;
