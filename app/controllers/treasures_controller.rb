@@ -6,24 +6,20 @@ class TreasuresController < ApplicationController
   def index
     case current_user.type
     when 'Captain'
-      @treasures_on_sale   = current_user_treasures(Treasure::ON_SALE)
-      @treasures_bought    = current_user_treasures(Treasure::BOUGHT)
-      @treasures_delivered = current_user_treasures(Treasure::DELIVERED)    
-    
-      treasures_on_sale   = render_treasure_view_to_string({
-                                        treasures: @treasures_on_sale,
-                                        on_sale: true,
-                                        bought: false})
+      treasures_on_sale    = render_treasure_view_to_string({
+                                  treasures: current_user.treasures_on_sale,
+                                  on_sale: true,
+                                  bought: false})
 
-      treasures_bought    = render_treasure_view_to_string({
-                                        treasures: @treasures_bought,
-                                        on_sale: true,
-                                        bought: false})
+      treasures_to_deliver = render_treasure_view_to_string({
+                                  treasures: current_user.treasures_to_deliver,
+                                  on_sale: true,
+                                  bought: false})
 
-      treasures_delivered = render_treasure_view_to_string({
-                                        treasures: @treasures_delivered,
-                                        on_sale: false,
-                                        bought: false})
+      treasures_delivered  = render_treasure_view_to_string({
+                                  treasures: current_user.treasures_delivered,
+                                  on_sale: false,
+                                  bought: false})
 
       render :json => {:treasures_on_sale => treasures_on_sale ,
                        :treasures_bought => treasures_bought,
@@ -91,9 +87,9 @@ class TreasuresController < ApplicationController
   def add_specific_attributes_to_params_based_on_current_user_type
     case current_user.type
     when 'Captain'
-      params[:treasure][:tax] = tax_of(params[:treasure][:price])  
+      params[:treasure][:tax] = tax_of(params[:treasure][:price])
     when 'Pirate'
-      params[:treasure][:status] = Treasure::WISHLIST  
+      params[:treasure][:status] = Treasure::WISHLIST
     end
   end
 
