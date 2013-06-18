@@ -18,7 +18,7 @@ class CaptainsController < ApplicationController
 
   def show
     @captain = Captain.find_by_username(params[:id])
-    @treasures = current_user_treasures(Treasure::ON_SALE)
+    @treasures = current_user.treasures.on_sale
     @pirates = @captain.pirates
     @tasks = @captain.tasks
 
