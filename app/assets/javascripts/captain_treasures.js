@@ -34,7 +34,8 @@ TreasureError.prototype = {
 
 $(document).ready(function(){
   // Clicking "Treasure Cove" to render treasure view
-  $('.captain_treasure_index').on('ajax:success', function(e, data, status, xhr){
+  $('.captain_treasure_cove').on('ajax:success', function(e, data, status, xhr){
+    $('body').append(data.new_treasure_form)
     leftBox  = new List('.captain_profile_left', 'Treasure to deliver', data.treasures_bought);
     rightBox = new List('.captain_profile_right', 'Add Treasures!', data.new_treasure_form);
     botBox   = new List('.captain_profile_bottom', 'Treasure delivered', data.treasures_delivered);
@@ -42,7 +43,7 @@ $(document).ready(function(){
     leftBox.renderToPage();
     rightBox.renderToPage();
     botBox.renderToPage();
-  });//end on
+  });//end on for rendering treasure profile view
 
   // Adding a new treasure
   $('.captain_profile_right').on('ajax:success', 'form', function(e, data, status, xhr) {
@@ -51,7 +52,25 @@ $(document).ready(function(){
       treasureError.renderToPage();
     }
     else {
-
+      // put in success
     }
-  });//end adding new treasure
+  });//end on for adding new treasure
+
+  // Showing treasure when clicked
+  $('.captain_treasure_show').on('ajax:success', function(e, data, status, xhr) {
+    $('.captain_treasure_show').removeClass('active');
+    $(this).addClass('captain_treasure_show active');
+
+    leftBox  = new List('.captain_profile_left', 'Treasure to deliver', data.treasures_bought);
+    rightBox = new List('.captain_profile_right', 'Edit Treasure!', data.new_treasure_form);
+    botBox   = new List('.captain_profile_bottom', 'Treasure delivered', data.treasures_delivered);
+    
+    leftBox.renderToPage();
+    rightBox.renderToPage();
+    botBox.renderToPage();
+
+    $('#treasure_price').on('keyup', function() {
+  
+    });
+  })//end on for editting treasure  
 });//end ready

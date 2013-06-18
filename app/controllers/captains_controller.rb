@@ -1,5 +1,4 @@
 class CaptainsController < ApplicationController
-  include UsersHelper
 
   include UsersHelper
   include TasksHelper
@@ -17,11 +16,9 @@ class CaptainsController < ApplicationController
   end
 
   def show
-    @captain = Captain.find_by_username(params[:id])
     @treasures = current_user.treasures.on_sale
-    @pirates = @captain.pirates
-    @tasks = @captain.tasks
-
+    @pirates = current_user.pirates
+    @tasks = current_user.tasks
   end
 
   def confirm

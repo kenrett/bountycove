@@ -1,15 +1,18 @@
+.error_max_treasure_limit
 = form_for [current_user, treasure], :remote => true do |f|
   = f.label :name
   = f.text_field :name, :required => true
-  %br
   = f.label :description
   = f.text_field :description, :required => true
-  %br
   = f.label :photo
   = f.text_field :photo
-  %br
   = f.label :price
   = f.text_field :price, :required => true
+  Tax Rate: #{number_to_percentage(current_user.tax_rate, :precision => 2)}
+  %br
+  %br
+  Total Price: 
+  %span#total_price
   %br
   = f.submit "Create Treasure"
-  .error_max_treasure_limit
+

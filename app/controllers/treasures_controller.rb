@@ -6,22 +6,7 @@ class TreasuresController < ApplicationController
   def index
     case current_user.type
     when 'Captain'
-      treasures_to_deliver = render_treasure_view_to_string({
-                                  treasures: current_user.treasures_to_deliver,
-                                  on_sale: false,
-                                  bought: true})
-
-      treasures_delivered  = render_treasure_view_to_string({
-                                  treasures: current_user.treasures_delivered,
-                                  on_sale: false,
-                                  bought: false})
-
-      new_treasure_form    = render_to_string :partial => 'form_treasures',
-                                  :locals => {:treasure => Treasure.new}
-
-      render :json => {:treasures_bought => treasures_to_deliver,
-                       :treasures_delivered => treasures_delivered,
-                       :new_treasure_form => new_treasure_form}
+      render_treasure_profile_to_json(Treasure.new)
     when 'Pirate'
       @treasures_bought    = current_user_treasures(Treasure::BOUGHT)
       @treasures_wishlist  = current_user_treasures(Treasure::WISHLIST)
@@ -31,7 +16,17 @@ class TreasuresController < ApplicationController
       @treasures_on_sale  = captain_treasures.where(status: Treasure::ON_SALE)
       render_local_pirate_or_captain_view 'index'
     end
+  end
 
+  def show
+    case current_user.type
+    when 'Captain'
+      treasure = Treasure.find(params[:id])
+      render_treasure_profile_to_json(treasure)
+    when 'Pirate'
+      # treasures#show pirate
+      debugger
+    end
   end
 
   def new
@@ -55,9 +50,8 @@ class TreasuresController < ApplicationController
       add_specific_attributes_to_params_based_on_current_user_type
 
       treasure = Treasure.new(params[:treasure])
-      
+      treasure.captain = current_user
       if treasure.save
-        current_user.treasures << treasure
         render :json => {:treasure => treasure}
       else
         redirect_to root_path
@@ -109,6 +103,26 @@ class TreasuresController < ApplicationController
   def redirect_to_captain_or_pirate_path
     redirect_to captain_treasures_path(current_user) if current_user_is_captain
     redirect_to pirate_treasures_path(current_user) if current_user_is_pirate
+  end
+
+  def render_treasure_profile_to_json(treasure)
+      treasures_to_deliver = render_treasure_view_to_string({
+                                  treasures: current_user.treasures_to_deliver,
+                                  on_sale: false,
+                                  bought: true})
+
+      treasures_delivered  = render_treasure_view_to_string({
+                                  treasures: current_user.treasures_delivered,
+                                  on_sale: false,
+                                  bought: false})
+
+      new_treasure_form    = render_to_string :partial => 'form_treasures',
+                                  :locals => {:treasure => treasure}
+
+      render :json => {:treasures_bought => treasures_to_deliver,
+                       :treasures_delivered => treasures_delivered,
+                       :new_treasure_form => new_treasure_form,
+                       :tax_rate => current_user.tax_rate}
   end
 
   def render_treasure_view_to_string(args)
