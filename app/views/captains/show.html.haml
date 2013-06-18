@@ -17,7 +17,7 @@
           = link_to "#{treasure.name}", captain_task_path(current_user, treasure)
         .large-1.columns
     %br
-    = link_to "Check oout your treasure cove", captain_treasures_path(current_user), :remote => true, :class => 'captain_treasure_index'
+    = link_to "Check treasure cove", captain_treasures_path(current_user), :remote => true, :class => 'captain_treasure_index'
     = link_to "Add Treasure", captain_treasures_path(@captain), :remote => true
 %br
 .row.box
@@ -37,6 +37,8 @@
     = link_to "Create Adventure", captain_tasks_path(@captain) 
   .large-1.small-1.column
 %br
+.row
+  .large-12.columns.treasures_delivered
 .row 
-  .large-12.columns
+  .large-12.columns.footer
     %p Footer goes here...

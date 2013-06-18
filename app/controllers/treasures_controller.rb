@@ -35,9 +35,9 @@ class TreasuresController < ApplicationController
 
       captain_treasures   = current_user.captain.treasures
       @treasures_on_sale  = captain_treasures.where(status: Treasure::ON_SALE)
+      render_local_pirate_or_captain_view 'index'
     end
 
-    # render_local_pirate_or_captain_view 'index'
   end
 
   def new
