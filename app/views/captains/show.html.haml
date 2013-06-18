@@ -10,7 +10,7 @@
     %p Hello #{current_user.first_name}!
 .row
   .large-10.large-offset-1.small-10.columns.small-offset-1.captain_profile_treasures
-    .row
+    .row.captain_profile_main
       - @treasures.each do |treasure|
         .large-3.columns.treasure_item
           %img{:src => "http://us.cdn1.123rf.com/168nwm/orla/orla1010/orla101000044/8041795-wooden-treasure-chest-with-gold-coins-printed-with-royal-crown--3d-render.jpg"}/

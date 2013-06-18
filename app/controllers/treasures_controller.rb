@@ -122,7 +122,8 @@ class TreasuresController < ApplicationController
       render :json => {:treasures_bought => treasures_to_deliver,
                        :treasures_delivered => treasures_delivered,
                        :new_treasure_form => new_treasure_form,
-                       :tax_rate => current_user.tax_rate}
+                       :tax_rate => current_user.tax_rate,
+                       :captain => current_user.name}
   end
 
   def render_treasure_view_to_string(args)

@@ -1,7 +1,26 @@
-var Treasure = {
-  taxRate: 0,
-  calculateTotal: function(price) {
-    return Math.round(price + price*(this.taxRate/100));
+var Tax = {
+  rate: 0,
+  
+  calculatePrice: function(price) {
+    return Math.round(price + price*(this.rate/100));
+  }
+}
+
+function Treasure(elem, treasure) {
+  this.elem = elem;
+  this.captain = window.location.pathname;
+  this.treasureId = treasure.id;
+  this.name = treasure.name;
+}
+
+Treasure.prototype = {
+  renderToPage: function() {
+    $(this.elem).append(this.template);
+  },
+
+  createTemplate: function() {
+    this.template = "<div class='.large-3.columns.treasure_item'><img src='http://us.cdn1.123rf.com/168nwm/orla/orla1010/orla101000044/8041795-wooden-treasure-chest-with-gold-coins-printed-with-royal-crown--3d-render.jpg' /><br />" +
+                       "<a href='/captains/" +this.captain+ "/treasures/" +this.treasureId+ "' class='captain_treasure_show' data-remote='true'>" +this.name+ "</a><div class='.large-1.columns'></div></div>";
   }
 }
 
@@ -50,7 +69,7 @@ $(document).ready(function(){
     rightBox.renderToPage();
     botBox.renderToPage();
 
-    Treasure.taxRate = data.tax_rate;
+    Tax.rate = data.tax_rate;
   });//end on for rendering treasure profile view
 
   // Adding a new treasure
@@ -60,9 +79,11 @@ $(document).ready(function(){
       treasureError.renderToPage();
     }
     else {
-      debugger;
+      newTreasure = new Treasure('.captain_profile_main', data.treasure);
+      debugger;      
       // put in success
     }
+
   });//end on for adding new treasure
 
   // Showing treasure when clicked
@@ -78,11 +99,11 @@ $(document).ready(function(){
     rightBox.renderToPage();
     botBox.renderToPage();
 
-    Treasure.taxRate = data.tax_rate;
+    Tax.rate = data.tax_rate;
   });//end on for editting treasure 
 
   $('.captain_profile_right').on('keyup', '#treasure_price', function(e) {
       var price = parseFloat(e.target.value);
-      $('#total_price').html(Treasure.calculateTotal(price));
+      $('#total_price').html(Tax.calculatePrice(price));
     }); 
 });//end ready
