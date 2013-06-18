@@ -49,6 +49,8 @@ $(document).ready(function(){
     leftBox.renderToPage();
     rightBox.renderToPage();
     botBox.renderToPage();
+
+    Treasure.taxRate = data.tax_rate;
   });//end on for rendering treasure profile view
 
   // Adding a new treasure
@@ -74,6 +76,7 @@ $(document).ready(function(){
     leftBox.renderToPage();
     rightBox.renderToPage();
     botBox.renderToPage();
+
     Treasure.taxRate = data.tax_rate;
   });//end on for editting treasure 
 
