@@ -1,5 +1,6 @@
 class PiratesController < ApplicationController
-  before_filter :find_captain, :tasks_assigned_count?, :only => [:adds]
+  before_filter :find_captain
+  before_filter :tasks_assigned_count?, :only => [:adds]
 
   include UsersHelper
   include TasksHelper
