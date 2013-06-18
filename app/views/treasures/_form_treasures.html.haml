@@ -8,7 +8,8 @@
   = f.text_field :photo
   = f.label :price
   = f.text_field :price, :required => true
-  Tax Rate: #{number_to_percentage(current_user.tax_rate, :precision => 2)}
+  Tax Rate: 
+  %span#tax_rate= number_to_percentage(current_user.tax_rate, :precision => 2)
   %br
   %br
   Total Price: 
