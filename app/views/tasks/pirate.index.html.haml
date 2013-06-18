@@ -1,28 +1,35 @@
-%h1 All Adventures for the Pirate #{current_user.username} 
-%h5 Total Gold: #{current_user.coins}
+.row
+  .large-12.columns    
+    %h1 All Quests for Pirate #{current_user.username} 
+    %h5 Total Gold: #{current_user.coins}
 
-%p
-  =link_to "Back", pirate_path(current_user)
+    %p.top_links
+      %a.button.round{:href => pirate_path(current_user) } Back
 
-- if flash[:task_assigned]
-  = flash[:task_assigned]
+    - if flash[:task_assigned]
+      = flash[:task_assigned]
+    
+    .large-12.columns
+      %h4 Available Quests
+      %ul
+        = render :partial => "pirate_tasks", :locals => {:tasks => @tasks_on_board, :accept_button => true, :complete_button => false}
+  .row
+    .large-6.columns
+      %h4 Assigned Quests
+      %ul
+        = render :partial => "pirate_tasks", :locals => {:tasks => @tasks_assigned, :accept_button => false, :complete_button => true}
 
-.task_on_board
-  %h4 Available Tasks
-  %ul
-    = render :partial => "pirate_tasks", :locals => {:tasks => @tasks_on_board, :accept_button => true, :complete_button => false}
-
-.task_assigned
-  %h4 Assigned Tasks
-  %ul
-    = render :partial => "pirate_tasks", :locals => {:tasks => @tasks_assigned, :accept_button => false, :complete_button => true}
-
-.task_need_verify
-  %h4 Tasks waiting for Verification
-  %ul
-    = render :partial => "pirate_tasks", :locals => {:tasks => @tasks_need_verify, :accept_button => false, :complete_button => false}
-
-.task_completed
-%h4 Completed Tasks
-%ul
-  = render :partial => "pirate_tasks", :locals => {:tasks => @tasks_completed, :accept_button => false, :complete_button => false}
+    .large-6.columns
+      %h4 Quests Awaiting Approval
+      %ul
+        = render :partial => "pirate_tasks", :locals => {:tasks => @tasks_need_verify, :accept_button => false, :complete_button => false}
+  .row
+    .large-12.columns
+    %h4 Completed Quests
+    %ul
+      = render :partial => "pirate_tasks", :locals => {:tasks => @tasks_completed, :accept_button => false, :complete_button => false}
+  %br
+.row 
+  .large-12.columns
+    %p Footer goes here...      
+     
