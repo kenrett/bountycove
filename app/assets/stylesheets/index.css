@@ -1,6 +1,14 @@
 /*html,body,img,form,textarea,input,fieldset,div,p,div,ul,li,ol,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,code { margin: 0; padding: 0;}*/
 form,textarea,input { margin: 0; padding: 0;}
 
+.nav {
+  width: 100%;
+  height: 0px;
+  /*position: absolute;*/
+  /*color: #bada55;*/
+}
+
+
 .banner {
   /*NEEDS TO BE CHANGED TO PERCENTAGE*/
   height: 700px; 
@@ -276,7 +284,7 @@ label {
   display: block;
   font-weight: 500;
   margin-bottom: 0;
-=======
+}
 
 input.fish_button {
   width: 100%;
