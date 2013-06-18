@@ -4,10 +4,6 @@ module TasksHelper
     Task.count(:conditions => "status = 3")
   end
   
-  def count_of_assigned_tasks(user)
-    user.tasks.count(:conditions => "status = 1")
-  end
-
   def count_of_available_tasks
     Task.count(:conditions => "status = 1")
   end

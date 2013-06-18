@@ -6,13 +6,16 @@ class TasksController < ApplicationController
   include TasksHelper
 
   def index
-    @tasks = current_user.tasks if current_user_is_captain 
-    @tasks = current_user.captain.tasks if current_user_is_pirate 
+    if current_user_is_captain 
+      @tasks = current_user.tasks 
+    else
+      @tasks = current_user.captain.tasks
+    end
 
-    @tasks_on_board = @tasks.where(status: Task::ON_BOARD)
-    @tasks_assigned = @tasks.where(status: Task::ASSIGNED)
+    @tasks_on_board    = @tasks.where(status: Task::ON_BOARD)
+    @tasks_assigned    = @tasks.where(status: Task::ASSIGNED)
     @tasks_need_verify = @tasks.where(status: Task::NEED_VERIFY)
-    @tasks_completed = @tasks.where(status: Task::COMPLETED)
+    @tasks_completed   = @tasks.where(status: Task::COMPLETED)
 
     render_local_pirate_or_captain_view 'index'
   end

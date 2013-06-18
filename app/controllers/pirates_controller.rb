@@ -1,5 +1,5 @@
 class PiratesController < ApplicationController
-  before_filter :find_captain
+  before_filter :find_captain, :tasks_assigned_count?, :only => [:adds]
 
   include UsersHelper
   include TasksHelper
@@ -46,12 +46,13 @@ class PiratesController < ApplicationController
 
   def adds
     task = Task.find(params[:task_id])
-    if current_user.tasks.count(:conditions => "status = 1") < 3
+    max_tasks = 3
+    if tasks_assigned_count? < max_tasks
       task.assigned!
       flash[:task_assigned] = "You just got assigned the task!"
       current_user.tasks << task
     else
-      flash[:error_adding] = ['You can only have 3 tasks at a time']
+      flash[:errors] = ["You can only have #{max_tasks} tasks at a time"]
     end
 
     redirect_to pirate_tasks_path(current_user)
@@ -77,5 +78,8 @@ class PiratesController < ApplicationController
   def find_captain
     @captain = Captain.find_by_username(params[:captain_id])
   end
-
+  
+  def tasks_assigned_count?
+    current_user_tasks_assigned(Task::ASSIGNED).length
+  end
 end
