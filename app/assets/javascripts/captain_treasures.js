@@ -27,8 +27,8 @@ TreasureError.prototype = {
     $(this.elem).html(this.template);
   },
 
-  createTemplate: function(title, message) {
-    this.template = "<ul class='treasure-error'><h1>" +title+ "</h1>" +"<li>" +message+ "</li></ul>";
+  createTemplate: function(message) {
+    this.template = "<div data-alert class='alert-box'>"+message+"<a href='#' class='close'>&times;</a></div>";
   } 
 }
 
@@ -51,7 +51,7 @@ $(document).ready(function(){
       treasureError.renderToPage();
     }
     else {
-      
+
     }
   });//end adding new treasure
 });//end ready
