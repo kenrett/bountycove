@@ -1,6 +1,11 @@
 class Treasure < ActiveRecord::Base
   attr_accessible :name, :description, :photo, :price, :status, :tax
 
+  WISHLIST  = 0
+  ON_SALE   = 1
+  BOUGHT    = 2
+  DELIVERED = 3
+
   validates :name, :description, :presence => true, :on => :create
   validates :description, :format => { :with => /\w+/ }
   validates :price,
@@ -14,10 +19,10 @@ class Treasure < ActiveRecord::Base
   belongs_to :captain
   belongs_to :pirate
 
-  WISHLIST  = 0
-  ON_SALE   = 1
-  BOUGHT    = 2
-  DELIVERED = 3
+  scope :wishlist, where(:status => WISHLIST)
+  scope :on_sale, where(status: ON_SALE)
+  scope :bought, where(status: BOUGHT)
+  scope :delivered, where(status: DELIVERED)
 
   STATUS = { wishlist: WISHLIST,
              on_sale: ON_SALE,
