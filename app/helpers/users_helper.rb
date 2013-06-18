@@ -15,6 +15,10 @@ module UsersHelper
   def current_user_treasures(status)
     current_user.treasures.where(status: status)
   end
+  
+  def current_user_tasks_assigned(status)
+    current_user.tasks.where(status: status)
+  end
 
   def render_local_pirate_or_captain_view(action)
     render "captain.#{action}.html.haml" if current_user_is_captain
