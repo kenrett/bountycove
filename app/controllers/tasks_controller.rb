@@ -3,6 +3,7 @@ class TasksController < ApplicationController
   before_filter :get_task, :except => [:index, :new, :create]
 
   include UsersHelper
+  include TasksHelper
 
   def index
     @tasks = current_user.tasks if current_user_is_captain 
@@ -17,9 +18,13 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = Task.new
-
-    render_local_pirate_or_captain_view 'new'
+    if count_of_available_tasks == 6
+      flash[:errors] = ["Only 6 available tasks allowed!"]
+      redirect_to captain_tasks_path(current_user)
+    else
+      @task = Task.new
+      render_local_pirate_or_captain_view 'new'
+    end
   end
 
   def create
