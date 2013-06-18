@@ -9,10 +9,5 @@
       Total Price:
       %span.total_price
 
-    - if on_sale
-      = link_to "Edit", edit_captain_treasure_path(current_user, treasure)
-      = link_to "Delete", captain_treasure_path(current_user, treasure),
-                        :method => :delete,
-                        :confirm => 'Are you sure?'
     - if bought
       = button_to 'Deliver', captain_delivers_treasure_path(current_user, treasure)

@@ -6,24 +6,22 @@ class TreasuresController < ApplicationController
   def index
     case current_user.type
     when 'Captain'
-      treasures_on_sale    = render_treasure_view_to_string({
-                                  treasures: current_user.treasures_on_sale,
-                                  on_sale: true,
-                                  bought: false})
-
       treasures_to_deliver = render_treasure_view_to_string({
                                   treasures: current_user.treasures_to_deliver,
-                                  on_sale: true,
-                                  bought: false})
+                                  on_sale: false,
+                                  bought: true})
 
       treasures_delivered  = render_treasure_view_to_string({
                                   treasures: current_user.treasures_delivered,
                                   on_sale: false,
                                   bought: false})
       
-      render :json => {:treasures_on_sale => treasures_on_sale ,
-                       :treasures_bought => treasures_to_deliver,
-                       :treasures_delivered => treasures_delivered}
+      new_treasure_form    = render_to_string :partial => 'form_treasures',
+                                  :locals => {:treasure => Treasure.new}
+
+      render :json => {:treasures_bought => treasures_to_deliver,
+                       :treasures_delivered => treasures_delivered,
+                       :new_treasure_form => new_treasure_form}
     when 'Pirate'
       @treasures_bought    = current_user_treasures(Treasure::BOUGHT)
       @treasures_wishlist  = current_user_treasures(Treasure::WISHLIST)
@@ -37,9 +35,17 @@ class TreasuresController < ApplicationController
   end
 
   def new
-    @treasure = Treasure.new
+    case current_user.type
+    when 'Captain'
+      form = render_to_string :partial => 'form_treasures',
+                              :locals => {:treasure => Treasure.new}
+      debugger
+      render :json => {:form => form}
+    when 'Pirate'
+      @treasure = Treasure.new
 
-    render_local_pirate_or_captain_view 'new'
+      render_local_pirate_or_captain_view 'new'
+    end
   end
 
   def create
@@ -48,10 +54,12 @@ class TreasuresController < ApplicationController
       return redirect_to_captain_or_pirate_path
     end
 
+    debugger
+
     add_specific_attributes_to_params_based_on_current_user_type
 
     treasure = Treasure.new(params[:treasure])
-
+    
     if treasure.save
       current_user.treasures << treasure
       flash[:success_treasure_created] = 'Argh! Ye treasure was made!'
@@ -96,9 +104,9 @@ class TreasuresController < ApplicationController
   def treasure_box_full?
     case current_user.type
     when 'Captain'
-      current_user_treasures(Treasure::ON_SALE).length >= 6
+      current_user.treasures_on_sale.length >= 6
     when 'Pirate'
-      current_user_treasures(Treasure::WISHLIST).length >= 6
+      current_user.treausers_on_wishlist.length >= 6
     end
 
   end
