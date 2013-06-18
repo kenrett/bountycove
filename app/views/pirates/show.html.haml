@@ -11,20 +11,36 @@
     .row 
       %h2 Available Treasures
       - @treasures.each do |treasure|
-        .large-3.columns.treasure_item
+        .large-12.columns.treasure_item
           %img{:src => "http://us.cdn1.123rf.com/168nwm/orla/orla1010/orla101000044/8041795-wooden-treasure-chest-with-gold-coins-printed-with-royal-crown--3d-render.jpg"}/
           %br
-          = link_to "#{treasure.name}", pirate_task_path(current_user, treasure)
-          .large-1.columns
+          = link_to "#{treasure.name}", pirate_treasure_path(current_user, treasure)
+          .cost #{treasure.price} gold coins
       %br
       = link_to 'View All Treasures!', pirate_treasures_path(current_user)
-      %br 
+      %br
 .row
-  .large-4.column.large-offset-1.small-11.captain_profile_treasures
+  .large-12.columns
+    = render :partial => 'shared/sub_nav_bar'      
+.row
+  .large-6.column.captain_profile_treasures
+    %h2 TBD
     .row
-      %h2 Available Quests
+      / stuff goes here
+      %br
+      = link_to 'Some Link TBD!', '#'
+
+  .large-6.column.captain_profile_treasures
+    %h2 Quests
+    .row
       - @tasks.each do |task|
         .large-12.columns.t_and_e
-          = t.name
+          = link_to "#{task.name}", pirate_task_path(current_user, task)
+          %br
+          Earns #{task.worth} gold coins
       %br  
       = link_to 'View All Quests!', pirate_tasks_path(current_user)
+.row
+  .large-12.columns.footer
+    %p Footer goes here...
+

@@ -7,3 +7,7 @@
   top: 0;
   width: 100%;
 }
+
+.sub-nav dd {
+  margin-left: 9.5em;
+}

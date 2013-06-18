@@ -1,48 +1,41 @@
 
 // Captain Profile Page 
 .captain_profile_treasures {
-  min-height:150px;
+  min-height:180px;
 }
 
-.captain_profile {
+.cost {
   text-align: center;
-  height: 335px;
-
-  a {
-    position: absolute;
-    bottom: 0;
-  }
 }
 
 .treasure_item {
   height: 12em;
+  width: 11em;
+  margin-left: auto;
+  margin-right: auto;
 
   a {
-  display:block;
-  text-align:center
+  text-align: center;
+  display: block;
   }
 } 
 
 .box {
-  height: 335px;
+  height: 28em;
 }
 
 .captain_profile {
   text-align: center;
-  height: 335px;
+  height: 28em;
 
   a {
     margin-left: -18%;
-    // can't center the effing left links...
   }
 }
 
 .t_and_e {
-  height: 75px;
+  height: 6.25em;
   text-align: center;
-
-  a {
-  }
 }
 
 // Captain Tasks Index
