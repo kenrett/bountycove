@@ -1,11 +1,11 @@
 /*html,body,img,form,textarea,input,fieldset,div,p,div,ul,li,ol,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,code { margin: 0; padding: 0;}*/
 form,textarea,input { margin: 0; padding: 0;}
-/*.nav {
+.nav {
   width: 100%;
-  height: 50px;
-  position: absolute;
-  color: #bada55;
-}*/
+  height: 0px;
+  /*position: absolute;*/
+  /*color: #bada55;*/
+}
 
 
 .banner {
