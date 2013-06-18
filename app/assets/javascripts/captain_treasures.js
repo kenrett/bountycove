@@ -1,7 +1,7 @@
 var Treasure = {
   taxRate: 0,
   calculateTotal: function(price) {
-    return Math.round(price+(price*this.taxRate/100));
+    return Math.round(price + price*(this.taxRate/100));
   }
 }
 
@@ -60,6 +60,7 @@ $(document).ready(function(){
       treasureError.renderToPage();
     }
     else {
+      debugger;
       // put in success
     }
   });//end on for adding new treasure
