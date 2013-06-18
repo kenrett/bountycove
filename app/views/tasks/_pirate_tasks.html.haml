@@ -1,9 +1,10 @@
 - tasks.each do |task|
-  %li Name: #{link_to task.name, pirate_task_path(current_user, task)}
-  %li Value: #{task.worth}
-  %li Posted: #{task.created_at.strftime(time_format(task))}
-  - if accept_button
-    %a.tiny.button.success.round{:href => pirate_adds_path(current_user, task) } Accept Quest
-  - if complete_button
-    %a.tiny.button.alert.round{:href => pirate_completes_path(current_user, task) } Complete Quest 
-  %br
+  %ul
+    %li Name: #{link_to task.name, pirate_task_path(current_user, task)}
+    %li Value: #{task.worth}
+    %li Posted: #{task.created_at.strftime(time_format(task))}
+    - if accept_button
+      .accept_quest= link_to 'Accept Quest', pirate_adds_path(current_user, task), :remote => true, :class => 'tiny button success round'
+    - if complete_button
+      .accept_quest= link_to 'Complete Quest', pirate_completes_path(current_user, task), :remote => true, :class => 'tiny button alert round'
+    %br

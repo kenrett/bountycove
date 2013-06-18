@@ -18,6 +18,22 @@ class Pirate < User
                                   :source => :treasures,
                                   :class_name => 'Treasure',
                                   :conditions => {:status => Treasure::DELIVERED}
+  has_many :tasks_on_board,
+                                  :source => :tasks,
+                                  :class_name => 'Task',
+                                  :conditions => {:status => Task::ON_BOARD}
+  has_many :tasks_assigned,
+                                  :source => :tasks,
+                                  :class_name => 'Task',
+                                  :conditions => {:status => Task::ASSIGNED}
+  has_many :tasks_need_verify,
+                                  :source => :tasks,
+                                  :class_name => 'Task',
+                                  :conditions => {:status => Task::NEED_VERIFY}
+  has_many :tasks_completed,
+                                  :source => :tasks,
+                                  :class_name => 'Task',
+                                  :conditions => {:status => Task::COMPLETED}
 
   def treasures_purchaseable
     self.captain.treasures.on_sale

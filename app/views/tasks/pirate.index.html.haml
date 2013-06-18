@@ -5,9 +5,8 @@
 
     %p.top_links
       %a.button.round{:href => pirate_path(current_user) } Back
-
-    - if flash[:task_assigned]
-      = flash[:task_assigned]
+    
+    .flash_message
     
     .large-12.columns
       %h4 Available Quests
@@ -32,4 +31,3 @@
 .row 
   .large-12.columns
     %p Footer goes here...      
-     

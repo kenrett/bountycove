@@ -50,24 +50,20 @@ class PiratesController < ApplicationController
     max_tasks = 3
     if tasks_assigned_count? < max_tasks
       task.assigned!
-      flash[:task_assigned] = "You just got assigned the task!"
       current_user.tasks << task
+      render :json => {:assign => "You just got assigned the task!" }
     else
-      flash[:errors] = ["You can only have #{max_tasks} tasks at a time"]
+      render :json => {:assign => "You can only have #{max_tasks} tasks at a time!" }
     end
-
-    redirect_to pirate_tasks_path(current_user)
   end
 
   def completes
     task = Task.find(params[:task_id])
     if task.need_verify!
-      flash[:task_sent_for_verify] = "Nice Work you Finished the Task!"
+      render :json => { :completed => "Nice Work you Finished the Task!"}
     else
-      flash[:error_adding] = 'ArgH! Something went wrong'
+      render :json => { :errors => 'ArgH! Something went wrong'}
     end
-
-    redirect_to pirate_tasks_path(current_user)
   end
 
   private

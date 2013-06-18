@@ -6,18 +6,42 @@ class TasksController < ApplicationController
   include TasksHelper
 
   def index
-    if current_user_is_captain
-      @tasks = current_user.tasks
-    else
+    case current_user.type
+    when 'Captain'
+      tasks_on_board = render_task_view_to_string({
+                       tasks: current_user.tasks_on_board, 
+                       accept_button: true, 
+                       complete_button: false})
+
+      tasks_assigned = render_task_view_to_string({
+                       tasks: current_user.tasks_assigned , 
+                       accept_button: false , 
+                       complete_button: true })
+
+      tasks_need_verify = render_task_view_to_string({
+                       tasks: current_user.tasks_need_verify , 
+                       accept_button: false , 
+                       complete_button: false})
+        
+      tasks_completed = render_task_view_to_string({
+                       tasks: current_user.tasks_completed , 
+                       accept_button:false , 
+                       complete_button:false })
+      
+      render :json => {:tasks_on_board => tasks_on_board,
+                       :tasks_assigned => tasks_assigned,
+                       :tasks_need_verify => tasks_need_verify,
+                       :tasks_completed => tasks_completed }
+    when 'Pirate'
       @tasks = current_user.captain.tasks
+      
+      @tasks_on_board    = @tasks.where(status: Task::ON_BOARD)
+      @tasks_assigned    = @tasks.where(status: Task::ASSIGNED)
+      @tasks_need_verify = @tasks.where(status: Task::NEED_VERIFY)
+      @tasks_completed   = @tasks.where(status: Task::COMPLETED)
+
+      render_local_pirate_or_captain_view 'index'
     end
-
-    @tasks_on_board    = @tasks.where(status: Task::ON_BOARD)
-    @tasks_assigned    = @tasks.where(status: Task::ASSIGNED)
-    @tasks_need_verify = @tasks.where(status: Task::NEED_VERIFY)
-    @tasks_completed   = @tasks.where(status: Task::COMPLETED)
-
-    render_local_pirate_or_captain_view 'index'
   end
 
   def new
@@ -76,6 +100,13 @@ class TasksController < ApplicationController
 
   def get_task
     @task = Task.find(params[:id])
+  end
+  
+  def render_task_view_to_string(args)
+    render_to_string :partial => "pirate_tasks", :locals => {
+                     :tasks           => args[:tasks], 
+                     :accept_button   => args[:accept_button], 
+                     :complete_button => args[:complete_button]}
   end
 
 end
