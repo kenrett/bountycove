@@ -69,18 +69,6 @@ background-image: -webkit-gradient(
   letter-spacing: 1px;
 }
 
-.underwater_index {
-  background-image:url('/underwater_index.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center 5px;
-  height: 270px;
-  z-index: 9999;
-  position: relative;
-  top: 690px;
-  
-}
-
 .login {
   padding: 10px;
   margin-top: 180px;
@@ -99,6 +87,17 @@ background-image: -webkit-gradient(
   height: 420px;
 }
 
+.underwater_index {
+  background-image:url('/underwater_index.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center 5px;
+  height: 270px;
+  z-index: 9999;
+  position: relative;
+  top: 690px;
+  
+}
 
 #username,
 #password {
@@ -138,3 +137,4 @@ background-image: -webkit-gradient(
 .html {
   background-color: #ccc;
 }
+
