@@ -38,6 +38,7 @@ $(document).ready(function(){
     leftBox   = new List('.captain_profile_left', 'Task to be Verified', data.tasks_need_verify);
     rightBox  = new List('.captain_profile_right', 'Enter new Task!', data.task_form);
     botBox    = new List('.captain_profile_bottom', 'Assigned Tasks', data.tasks_assigned);
+
     
     topBox.renderToPage();
     leftBox.renderToPage();
