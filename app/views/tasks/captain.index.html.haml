@@ -1,26 +1,33 @@
-%h1 All Adventures for Captain #{current_user.username}
+.row
+  .large-12.columns
+    %h1 All Quests for Captain #{current_user.username}'s Pirates
 
-%p
-  = link_to "Create new adventure", new_captain_task_path(@captain)
-%p
-  = link_to "Back", captain_path(current_user)
+    %p.top_links
+      %a.button.round{:href => new_captain_task_path(@captain) } Create new adventure!
+    
+      %a.button.round{:href => captain_path(current_user) } Back
+  
 
-.task_on_board
-  %h3 Available Tasks
-  %ul
-    = render :partial => "captain_tasks", :locals => {:tasks => @tasks_on_board, :button => false, :assigned => false }
+    .large-12.columns
+      %h3 Available Quests
+      %ul
+        = render :partial => "captain_tasks", :locals => {:tasks => @tasks_on_board, :button => false, :assigned => false }
+  .row 
+    .large-6.columns
+      %h3 Assigned Quests
+      %ul
+        = render :partial => "captain_tasks", :locals => {:tasks => @tasks_assigned, :button => false, :assigned => true }
 
-.task_assigned
-  %h3 Assigned Tasks
-  %ul
-    = render :partial => "captain_tasks", :locals => {:tasks => @tasks_assigned, :button => false, :assigned => true }
-
-.task_need_verify
-  %h3 Verify Tasks
-  %ul
-    = render :partial => "captain_tasks", :locals => {:tasks => @tasks_need_verify, :button => true , :assigned => false}
-
-.task_completed
-  %h3 Completed Tasks
-  %ul
-    = render :partial => "captain_tasks", :locals => {:tasks => @tasks_completed, :button => false, :assigned => false }
+    .large-6.columns
+      %h3 Verify Quests
+      %ul
+        = render :partial => "captain_tasks", :locals => {:tasks => @tasks_need_verify, :button => true , :assigned => false}
+  .row
+    .large-12.columns
+      %h3 Completed Quests
+      %ul
+        = render :partial => "captain_tasks", :locals => {:tasks => @tasks_completed, :button => false, :assigned => false }
+  %br
+.row 
+  .large-12.columns
+    %p Footer goes here...      
