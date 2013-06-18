@@ -62,19 +62,7 @@ background-image: -webkit-gradient(
   color: #e89b36;
   letter-spacing: 1px;
 }
- /*need to remove px*/
-.underwater_index {
-  background-image:url('/underwater_index.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center 5px;
-  height: 270px;
-  z-index: 9999;
-  position: relative;
-  top: 690px;
-  
-}
- /*need to remove px*/
+
 .login {
   padding: 10px;
   margin-top: 180px;
@@ -94,6 +82,17 @@ background-image: -webkit-gradient(
   height: 420px;
 }
 
+.underwater_index {
+  background-image:url('/underwater_index.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center 5px;
+  height: 270px;
+  z-index: 9999;
+  position: relative;
+  top: 690px;
+  
+}
 
  /*need to remove px*/
 #username,
@@ -135,3 +134,4 @@ background-image: -webkit-gradient(
 .html {
   background-color: #ccc;
 }
+
