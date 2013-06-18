@@ -1,4 +1,7 @@
-html,body,img,form,textarea,input,fieldset,div,p,div,ul,li,ol,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,code { margin: 0; padding: 0;}
+
+/*html,body,img,form,textarea,input,fieldset,div,p,div,ul,li,ol,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,code { margin: 0; padding: 0;}*/
+form,textarea,input { margin: 0; padding: 0;}
+
 
 .banner {
   /*NEEDS TO BE CHANGED TO PERCENTAGE*/
@@ -84,40 +87,27 @@ background-image: -webkit-gradient(
     color-stop(0.02, #273F87),
     color-stop(0.54, #007EC2)
   );
-    height: 100%;
+    /*height: 100%;*/
     font-family: 'Pathway Gothic One', sans-serif;
-    font-size: 25px;
     /*color: #faaf40;*/
-    color: #e89b36;
-    letter-spacing: 15%;
+    /*color: #e89b36;*/
+    /*letter-spacing: 15%;*/
 }
 
 .small_forms {
-  background-image: linear-gradient(bottom, #FFFFFF 0%, #A5DAF5 100%);
-  background-image: -o-linear-gradient(bottom, #FFFFFF 0%, #A5DAF5 100%);
-  background-image: -moz-linear-gradient(bottom, #FFFFFF 0%, #A5DAF5 100%);
-  background-image: -webkit-linear-gradient(bottom, #FFFFFF 0%, #A5DAF5 100%);
-  background-image: -ms-linear-gradient(bottom, #FFFFFF 0%, #A5DAF5 100%);
-
-  background-image: -webkit-gradient(
-    linear,
-    left bottom,
-    left top,
-    color-stop(0, #FFFFFF),
-    color-stop(1, #A5DAF5)
-  );
-    height: 100%;
-    font-family: 'Pathway Gothic One', sans-serif;
-    font-size: 25px;
-    /*color: #faaf40;*/
-    color: #e89b36;
-    letter-spacing: 15%;
+  /*height: 100%;*/
+  font-family: 'Pathway Gothic One', sans-serif;
+  /*font-size: 25px;*/
+  /*color: #faaf40;*/
+  color: #e89b36;
+  background: #59b5e6;
+  /*letter-spacing: 15%;*/
 }
-
 
 .index_forms {
   height: 100%;
   width: 100%;
+<<<<<<< HEAD
   margin-top: 15%;
 }
 
@@ -149,7 +139,7 @@ background-image: -webkit-gradient(
   width: 100%;
   z-index: 9999;
   position: relative;
-  /*top: 0%;*/
+  /*top: 5%;*/
 }
 
 .small_footer {
@@ -157,32 +147,22 @@ background-image: -webkit-gradient(
   height: 50px;
 }
 
+/*###################################*/
+
 .login input {
   border: 0;
-/*  width: 100%;
-  height: 20%;*/
-  padding: 2%;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  background: #385ea0;
+  /*width: 100%;*/
+  height: 20%;
+  /*padding: 2%;*/
+  /*margin-top: 5px;*/
+  /*margin-bottom: 5px;*/
+  background: #fff;
+  opacity:0.1;
+  filter:alpha(opacity=10); /* For IE8 and earlier */
   font-family: 'Pathway Gothic One', sans-serif;
-  font-size: 20px;
-  letter-spacing: 1px;
-  color: #fff;
-}
-
-.login_small input {
-  border: 0;
-/*  width: 100%;
-  height: 20%;*/
-  padding: 2%;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  background: #ccc;
-  font-family: 'Pathway Gothic One', sans-serif;
-  font-size: 20px;
-  letter-spacing: 1px;
-  color: #fff;
+  font-size: 12px;
+  /*letter-spacing: 1px;*/
+  color: black;
 }
 
 .sign_up input {
@@ -192,11 +172,29 @@ background-image: -webkit-gradient(
   padding: 5px;*/
 /*  margin-top: 5px;
   margin-bottom: 5px;*/
-  background: #385ea0;
+ background: #fff;
+   opacity:0.1;
+   filter:alpha(opacity=10); /* For IE8 and earlier */
   font-family: 'Pathway Gothic One', sans-serif;
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 1px;
-  color: #fff;
+ color: black;
+}
+
+/*###################################*/
+
+.login_small input {
+  border: 0;
+/*  width: 100%;
+  height: 20%;*/
+  /*padding: 2%;*/
+  /*margin-top: 5px;*/
+  /*margin-bottom: 5px;*/
+  background: #fff;
+  font-family: 'Pathway Gothic One', sans-serif;
+  /*font-size: 20px;*/
+  /*letter-spacing: 1px;*/
+  color: #444444;
 }
 
 .sign_up_small input {
@@ -206,16 +204,27 @@ background-image: -webkit-gradient(
   padding: 5px;*/
 /*  margin-top: 5px;
   margin-bottom: 5px;*/
-  background: #ccc;
+  background: #fff;
   font-family: 'Pathway Gothic One', sans-serif;
-  font-size: 10px;
-  letter-spacing: 1px;
-  color: #fff;
+  /*font-size: 10px;*/
+  /*letter-spacing: 1px;*/
+  color: #444444;
 }
 
+/*###################################*/
 
+label {
+  font-size: 1.4em;
+  color: lightblue;
+  cursor: pointer;
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0;
+}
 
-.html {
-  background-color: #ccc;
+input.fish_button {
+  width: 100%;
+  height: 100%;
+  background: orange;
 }
 
