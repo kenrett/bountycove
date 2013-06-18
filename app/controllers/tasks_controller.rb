@@ -20,7 +20,7 @@ class TasksController < ApplicationController
     render_local_pirate_or_captain_view 'index'
   end
 
-  def newD
+  def new
     if count_of_available_tasks >= 6
       flash[:errors] = ["Only 6 available tasks allowed!"]
       redirect_to captain_tasks_path(current_user)
