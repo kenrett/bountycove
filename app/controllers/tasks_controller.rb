@@ -21,12 +21,13 @@ class TasksController < ApplicationController
   end
 
   def new
-    if count_of_available_tasks == 6
+    if count_of_available_tasks >= 6
       flash[:errors] = ["Only 6 available tasks allowed!"]
       redirect_to captain_tasks_path(current_user)
     else
       @task = Task.new
-      render_local_pirate_or_captain_view 'new'
+      form = render_to_string :partial => 'form', :locals => {captain: @captain, task: @task}
+      render :json => {:form => form}
     end
   end
 
