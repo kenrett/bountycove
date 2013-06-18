@@ -37,7 +37,7 @@ $(document).ready(function(){
   $('.captain_treasure_index').on('ajax:success', function(e, data, status, xhr){
     leftBox  = new List('.captain_profile_left', 'Treasure to deliver', data.treasures_bought);
     rightBox = new List('.captain_profile_right', 'Add Treasures!', data.new_treasure_form);
-    botBox   = new List('.treasures_delivered', 'Treasure delivered', data.treasures_delivered);
+    botBox   = new List('.captain_profile_bottom', 'Treasure delivered', data.treasures_delivered);
     
     leftBox.renderToPage();
     rightBox.renderToPage();
