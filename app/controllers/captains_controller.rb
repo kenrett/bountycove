@@ -36,4 +36,13 @@ class CaptainsController < ApplicationController
 
     redirect_to captain_tasks_path(current_user)
   end
+
+  def delivers_treasure
+    treasure = Treasure.find(params[:treasure_id])
+
+    treasure.status = Treasure::DELIVERED
+    treasure.save
+
+    redirect_to captain_treasures_path(current_user)
+  end
 end

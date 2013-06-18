@@ -7,5 +7,6 @@
     %li Tax: #{treasure.tax}
     %li Total Price: #{treasure.total_price}
 
-    = button_to 'Buy', pirate_buys_treasure_path(current_user, treasure)
+    - if on_sale
+      = button_to 'Buy', pirate_buys_treasure_path(current_user, treasure)
 
