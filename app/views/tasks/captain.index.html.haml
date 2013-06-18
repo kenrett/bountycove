@@ -3,9 +3,9 @@
     %h1 All Quests for Captain #{current_user.username}'s Pirates
 
     %p.top_links
-      
+
       .task_button= link_to "New Task", new_captain_task_path(@captain), remote: true
-    
+
       .captain_task
 
   .error
@@ -17,7 +17,7 @@
     %h3 Available Quests
     %ul
       = render :partial => "captain_tasks", :locals => {:tasks => @tasks_on_board, :button => false, :assigned => false }
-.row 
+.row
   .large-6.columns
     %h3 Assigned Quests
     %ul
@@ -33,6 +33,6 @@
     %ul
       = render :partial => "captain_tasks", :locals => {:tasks => @tasks_completed, :button => false, :assigned => false }
   %br
-.row 
+.row
   .large-12.columns
-    %p Footer goes here...      
+    %p Footer goes here...
