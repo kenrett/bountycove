@@ -23,7 +23,7 @@ function TreasureError(elem, message) {
 
 TreasureError.prototype = {
   renderToPage: function() {
-    this.createTemplate('Error', this.message);
+    this.createTemplate(this.message);
     $(this.elem).html(this.template);
   },
 
@@ -35,9 +35,9 @@ TreasureError.prototype = {
 $(document).ready(function(){
   // Clicking "Treasure Cove" to render treasure view
   $('.captain_treasure_index').on('ajax:success', function(e, data, status, xhr){
-    leftBox  = new List('.captain_profile_left', 'Treasure bought', data.treasures_bought);
+    leftBox  = new List('.captain_profile_left', 'Treasure to deliver', data.treasures_bought);
     rightBox = new List('.captain_profile_right', 'Add Treasures!', data.new_treasure_form);
-    botBox    = new List('.treasures_delivered', 'Treasure delivered', data.treasures_delivered);
+    botBox   = new List('.treasures_delivered', 'Treasure delivered', data.treasures_delivered);
     
     leftBox.renderToPage();
     rightBox.renderToPage();

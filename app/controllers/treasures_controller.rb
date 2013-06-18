@@ -58,9 +58,9 @@ class TreasuresController < ApplicationController
       
       if treasure.save
         current_user.treasures << treasure
-        flash[:success_treasure_created] = 'Argh! Ye treasure was made!'
+        render :json => {:treasure => treasure}
       else
-        flash[:error] = treasure.errors.full_messages
+        redirect_to root_path
       end
     end
   end
