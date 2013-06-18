@@ -6,8 +6,6 @@
     %title= content_for?(:title) ? yield(:title) : "Bounty Cove"
     %link{:href => "http://fonts.googleapis.com/css?family=Pathway+Gothic+One", :rel => "stylesheet", :type => "text/css"}/
     = stylesheet_link_tag    "application", :media => "all"
-    = stylesheet_link_tag    "user", :media => "all"
-    = stylesheet_link_tag    "index", :media => "all"
     = csrf_meta_tags
   %body
     = render :partial => 'shared/nav_bar'
