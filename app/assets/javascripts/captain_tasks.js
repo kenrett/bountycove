@@ -28,6 +28,8 @@ TaskError.prototype = {
   createTemplate: function(message) {
     this.template = "<div data-alert class='alert-box'>"+message+"<a href='#' class='close'>&times;</a></div>";
   }
+   
+
 }
 
 $(document).ready(function(){

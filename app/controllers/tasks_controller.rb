@@ -29,6 +29,7 @@ class TasksController < ApplicationController
         assigned: true })
 
       new_task_form = render_to_string :partial => 'form', :locals => {captain: @captain, task: Task.new}
+
       
       render :json => {:tasks_on_board => tasks_on_board,
                        :tasks_assigned => tasks_assigned,
