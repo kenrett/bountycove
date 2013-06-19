@@ -54,7 +54,7 @@ class TreasuresController < ApplicationController
       if treasure.save
         treasure_board = render_to_string :partial => 'captain_treasure_board',
                             :locals => {:treasure_board => current_user.reload.treasures_on_sale}
-        render :json => {:treasure_board => treasure_board}
+        render :json => {:treasure_board => treasure_board, :success_creation => "Argh! Yeeh treasure s' on sale!"}
       else
         redirect_to root_path
       end
@@ -70,8 +70,16 @@ class TreasuresController < ApplicationController
   def update
     Treasure.find(params[:id]).update_attributes(params[:treasure])
     treasure_board = render_to_string :partial => 'captain_treasure_board',
-                            :locals => {:treasure_board => current_user.reload.treasures_on_sale}
-    render :json => {:treasure_board => treasure_board}
+                                      :locals => {:treasure_board => current_user.treasures_on_sale}
+
+    new_treasure_form    = render_to_string :partial => 'form_treasures',
+                                            :locals => {:treasure => Treasure.new}
+
+    success_message = 'Argh! Yeh treasure changed!'
+
+    render :json => {:treasure_board => treasure_board,
+                      :new_treasure_form => new_treasure_form,
+                      :success_message => success_message}
   end
 
   def destroy

@@ -59,6 +59,22 @@ TreasureError.prototype = {
   }
 }
 
+function TreasureSuccess(elem, message) {
+  this.elem = elem;
+  this.message = message;
+}
+
+TreasureSuccess.prototype = {
+  renderToPage: function() {
+    this.createTemplate(this.message);
+    $(this.elem).html(this.template);
+  },
+
+  createTemplate: function(message) {
+    this.template = "<div data-alert class='alert-box'>"+message+"<a href='#' class='close'>&times;</a></div>";
+  }
+}
+
 $(document).ready(function(){
   // Clicking "Treasure Cove" to render treasure view
   $('#captain_treasure_cove').on('ajax:success', function(e, data, status, xhr){
@@ -76,19 +92,26 @@ $(document).ready(function(){
   // Adding a new treasure
   $('.captain_profile_right').on('ajax:success', '#new_treasure', function(e, data, status, xhr) {
     $('.captain_profile_main').html(data.treasure_board);
-  });
-
-  $('.captain_profile_right').on('ajax:error', '#new_treasure', function(e, data, status, xhr) {
+    var creationMessage = new TreasureSuccess('.error_max_treasure_limit', data.success_creation);
+    creationMessage.renderToPage();
+  }).on('ajax:error', '#new_treasure', function(e, data, status, xhr) {
     var validationError = new TreasureError('.error_max_treasure_limit', data.responseText);
     validationError.renderToPage();
   });
 
+  // Edditing a treasure
   $('.captain_profile_right').on('ajax:success', '.edit_treasure', function(e, data, status, xhr) {
     $('.captain_profile_main').html(data.treasure_board);
+
+    var rightBox = new List('.captain_profile_right', 'Add Treasures!', data.new_treasure_form);
+    rightBox.renderToPage();
+
+    var editMessage = new TreasureSuccess('.error_max_treasure_limit', data.success_message);
+    editMessage.renderToPage();
   });
 
   // Showing treasure when clicked
-  $('.captain_treasure_show').on('ajax:success', function(e, data, status, xhr) {
+  $('.captain_profile_main').on('ajax:success', '.captain_treasure_show', function(e, data, status, xhr) {
     $('.captain_treasure_show').removeClass('active');
     $(this).addClass('captain_treasure_show active');
 
