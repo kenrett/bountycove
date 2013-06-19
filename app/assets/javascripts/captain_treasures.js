@@ -54,13 +54,13 @@ TreasureError.prototype = {
   },
 
   createTemplate: function(message) {
-    this.template = "<div data-alert class='alert-box'>"+message+"<a href='#' class='close'>&times;</a></div>";
+    this.template = "<div data-alert class='alert alert-box'>"+message+"<a href='#' class='close'>&times;</a></div>";
   } 
 }
 
 $(document).ready(function(){
   // Clicking "Treasure Cove" to render treasure view
-  $('.captain_treasure_cove').on('ajax:success', function(e, data, status, xhr){
+  $('#captain_treasure_cove').on('ajax:success', function(e, data, status, xhr){
     var leftBox  = new List('.captain_profile_left', 'Treasure to deliver', data.treasures_bought);
     var rightBox = new List('.captain_profile_right', 'Add Treasures!', data.new_treasure_form);
     var botBox   = new List('.captain_profile_bottom', 'Treasure delivered', data.treasures_delivered);
@@ -79,12 +79,15 @@ $(document).ready(function(){
         var treasureError = new TreasureError('.error_max_treasure_limit', data.error);
         treasureError.renderToPage();
       }
+    else if(data.update)
+      {
+        location.reload();
+      }
     else
       {
         newTreasure = new Treasure('.captain_profile_main', data.treasure);
         newTreasure.renderToPage();
       }
-
   });//end on for adding new treasure
 
   // Showing treasure when clicked
@@ -103,8 +106,9 @@ $(document).ready(function(){
     Tax.rate = data.tax_rate;
   });//end on for editting treasure 
 
+  // Dynamically add up the total price
   $('.captain_profile_right').on('keyup', '#treasure_price', function(e) {
       var price = parseFloat(e.target.value);
       $('#total_price').html(Tax.calculatePrice(price));
-    }); 
+    });//end on for dynamic addition of total price
 });//end ready

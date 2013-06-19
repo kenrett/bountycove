@@ -67,7 +67,7 @@ class TreasuresController < ApplicationController
 
   def update
     Treasure.find(params[:id]).update_attributes(params[:treasure])
-    redirect_to_captain_or_pirate_path
+    render :json => {:update => true}
   end
 
   def destroy

@@ -18,7 +18,7 @@
           = link_to "#{treasure.name}", captain_treasure_path(current_user, treasure), :remote => true, :class => 'captain_treasure_show'
         .large-1.columns
     %br
-    = link_to "Check treasure cove", captain_treasures_path(current_user), :remote => true, :class => 'captain_treasure_cove'
+    = link_to "Check treasure cove", captain_treasures_path(current_user), :remote => true, :id => 'captain_treasure_cove'
 
 %br
 .row.box
