@@ -1,6 +1,6 @@
 var Tax = {
   rate: 0,
-  
+
   calculatePrice: function(price) {
     return Math.round(price + price*(this.rate/100));
   }
@@ -56,7 +56,7 @@ TreasureError.prototype = {
 
   createTemplate: function(message) {
     this.template = "<div data-alert class='alert alert-box'>"+message+"<a href='#' class='close'>&times;</a></div>";
-  } 
+  }
 }
 
 $(document).ready(function(){
@@ -65,7 +65,7 @@ $(document).ready(function(){
     var leftBox  = new List('.captain_profile_left', 'Treasure to deliver', data.treasures_bought);
     var rightBox = new List('.captain_profile_right', 'Add Treasures!', data.new_treasure_form);
     var botBox   = new List('.captain_profile_bottom', 'Treasure delivered', data.treasures_delivered);
-    
+
     leftBox.renderToPage();
     rightBox.renderToPage();
     botBox.renderToPage();
@@ -74,22 +74,18 @@ $(document).ready(function(){
   });//end on for rendering treasure profile view
 
   // Adding a new treasure
-  $('.captain_profile_right').on('ajax:success', 'form', function(e, data, status, xhr) {
-    if (data.error)
-      {
-        var treasureError = new TreasureError('.error_max_treasure_limit', data.error);
-        treasureError.renderToPage();
-      }
-    else if(data.update)
-      {
-        location.reload();
-      }
-    else
-      {
-        newTreasure = new Treasure('.captain_profile_main', data.treasure);
-        newTreasure.renderToPage();
-      }
-  });//end on for adding new treasure
+  $('.captain_profile_right').on('ajax:success', '#new_treasure', function(e, data, status, xhr) {
+    $('.captain_profile_main').html(data.treasure_board);
+  });
+
+  $('.captain_profile_right').on('ajax:error', '#new_treasure', function(e, data, status, xhr) {
+    var validationError = new TreasureError('.error_max_treasure_limit', data.responseText);
+    validationError.renderToPage();
+  });
+
+  $('.captain_profile_right').on('ajax:success', '.edit_treasure', function(e, data, status, xhr) {
+    $('.captain_profile_main').html(data.treasure_board);
+  });
 
   // Showing treasure when clicked
   $('.captain_treasure_show').on('ajax:success', function(e, data, status, xhr) {
@@ -99,13 +95,13 @@ $(document).ready(function(){
     var leftBox  = new List('.captain_profile_left', 'Treasure to deliver', data.treasures_bought);
     var rightBox = new List('.captain_profile_right', 'Edit Treasure!', data.new_treasure_form);
     var botBox   = new List('.captain_profile_bottom', 'Treasure delivered', data.treasures_delivered);
-    
+
     leftBox.renderToPage();
     rightBox.renderToPage();
     botBox.renderToPage();
 
     Tax.rate = data.tax_rate;
-  });//end on for editting treasure 
+  });//end on for editting treasure
 
   // Dynamically add up the total price
   $('.captain_profile_right').on('keyup', '#treasure_price', function(e) {

@@ -32,10 +32,10 @@ class TreasuresController < ApplicationController
   def new
     case current_user.type
     when 'Captain'
-      
+
       # might not be needed anymore because of AJAXing
       debugger
-      
+
     when 'Pirate'
       @treasure = Treasure.new
 
@@ -45,14 +45,16 @@ class TreasuresController < ApplicationController
 
   def create
     if treasure_box_full?
-      render :json => {:error => "ARgh! me treasure box be too full!"}
+      render :json => "ARgh! me treasure box be too full!", :status => :unprocessable_entity
     else
       add_specific_attributes_to_params_based_on_current_user_type
 
       treasure = Treasure.new(params[:treasure])
       treasure.captain = current_user
       if treasure.save
-        render :json => {:treasure => treasure}
+        treasure_board = render_to_string :partial => 'captain_treasure_board',
+                            :locals => {:treasure_board => current_user.reload.treasures_on_sale}
+        render :json => {:treasure_board => treasure_board}
       else
         redirect_to root_path
       end
@@ -67,7 +69,9 @@ class TreasuresController < ApplicationController
 
   def update
     Treasure.find(params[:id]).update_attributes(params[:treasure])
-    render :json => {:update => true}
+    treasure_board = render_to_string :partial => 'captain_treasure_board',
+                            :locals => {:treasure_board => current_user.reload.treasures_on_sale}
+    render :json => {:treasure_board => treasure_board}
   end
 
   def destroy

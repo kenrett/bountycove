@@ -8,12 +8,12 @@
   = f.text_field :photo
   = f.label :price
   = f.text_field :price, :required => true
-  
-  %strong Tax Rate: 
+
+  %strong Tax Rate:
   %span#tax_rate= number_to_percentage(current_user.tax_rate, :precision => 2)
   %br
-  %strong Total Price: 
+  %strong Total Price:
   %span#total_price 0
   %br
   = f.submit "Ahoy!", :class => 'tiny button alert round'
- 
+
