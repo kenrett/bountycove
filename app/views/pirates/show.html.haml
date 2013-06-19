@@ -1,37 +1,37 @@
 = render :partial => 'shared/nav_bar'
 - content_for :title, "Pirate's Page"
 .row
-  .large-12.columns
-  %h1.username Pirate #{current_user.username.titleize}
-  %p.intro  Hello #{current_user.name.titleize}!
+  .welcome.large-12.columns
+  %strong Hello Pirate #{current_user.name.titleize}! 
 
-.row.second_div
-  .large-10.large-offset-1.small-10.columns.small-offset-1.profile_treasures
-    .row
+.row.pirate.profile_main
+  .large-10.large-offset-1.small-10.columns.small-offset-1
+    .row 
       %h2.username Available Treasures
       - @treasures.each do |treasure|
         .large-12.columns.treasure_item
           %img{:src => "http://us.cdn1.123rf.com/168nwm/orla/orla1010/orla101000044/8041795-wooden-treasure-chest-with-gold-coins-printed-with-royal-crown--3d-render.jpg"}/
           %br
           = link_to "#{treasure.name}", pirate_treasure_path(current_user, treasure)
-          .cost #{treasure.price} gold coins
+          .cost #{treasure.price} Doubloons
       %br
       = link_to 'View All Treasures!', pirate_treasures_path(current_user)
-
       %br
 
 .row
-  .large-12.columns.third_div
+  .large-12.columns.sub_nav
     = render :partial => 'shared/pirates_sub_nav_bar'
-.row.fourth_div
-  .large-6.column.captain_profile_treasures
+%br
+
+.row.pirate.pirate.profile_left
+  .large-4.column.large-offset-1.small.11
     %h2 TBD
     .row
       / stuff goes here
       %br
       = link_to 'Some Link TBD!', '#'
 
-  .large-6.column.captain_profile_treasures
+  .large-4.column.large-offset-1.small.11.pirate.profile_right
     %h2 Quests
     .row
       - @tasks.each do |task|
@@ -39,6 +39,10 @@
           = link_to "#{task.name}", pirate_task_path(current_user, task)
           %br
           Earns #{task.worth} gold coins
-      %br
+      %br  
       = link_to 'View All Quests!', pirate_tasks_path(current_user)
+  .large-1.small-1.columns    
+%br
+.row
+  .large-12.columns.pirate.profile_bottom      
 
