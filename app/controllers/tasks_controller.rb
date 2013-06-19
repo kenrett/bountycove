@@ -23,12 +23,7 @@ class TasksController < ApplicationController
   end
 
   def new
-    if count_of_available_tasks >= 6
-      # needed anymore?
-      # render json: { error: "Only 6 available tasks allowed!"}
-    else
-      redirect_to root_path
-    end
+
   end
 
   def create

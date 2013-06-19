@@ -20,9 +20,8 @@
     = link_to "Add Pirate", new_captain_pirate_path(current_user), :remote => true, :id => 'add_pirate'
 
   .large-6.columns.captain.profile_right
-    - @tasks.each do |task|
-      .large-12.columns.t_and_e
-        = task.name
+    = render :partial => 'tasks/list_of_tasks', :locals => {:tasks => @tasks }
+
 %br
 .row
   .large-12.columns.captain.profile_bottom
