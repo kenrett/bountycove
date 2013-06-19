@@ -77,7 +77,7 @@ TreasureSuccess.prototype = {
 
 $(document).ready(function(){
   // Clicking "Treasure Cove" to render treasure view
-  $('#captain_treasure_cove').on('ajax:success', function(e, data, status, xhr){
+  $('#mid_nav_bar').on('ajax:success', '#captain_treasure_cove', function(e, data, status, xhr){
     var leftBox  = new List('.captain_profile_left', 'Treasure to deliver', data.treasures_bought);
     var rightBox = new List('.captain_profile_right', 'Add Treasures!', data.new_treasure_form);
     var botBox   = new List('.captain_profile_bottom', 'Treasure delivered', data.treasures_delivered);
@@ -97,7 +97,7 @@ $(document).ready(function(){
   }).on('ajax:error', '#new_treasure', function(e, data, status, xhr) {
     var validationError = new TreasureError('.error_max_treasure_limit', data.responseText);
     validationError.renderToPage();
-  });
+  });//end on
 
   // Edditing a treasure
   $('.captain_profile_right').on('ajax:success', '.edit_treasure', function(e, data, status, xhr) {
@@ -108,7 +108,7 @@ $(document).ready(function(){
 
     var editMessage = new TreasureSuccess('.error_max_treasure_limit', data.success_message);
     editMessage.renderToPage();
-  });
+  });// end on
 
   // Showing treasure when clicked
   $('.captain_profile_main').on('ajax:success', '.captain_treasure_show', function(e, data, status, xhr) {
@@ -124,11 +124,23 @@ $(document).ready(function(){
     botBox.renderToPage();
 
     Tax.rate = data.tax_rate;
-  });//end on for editting treasure
+  });//end on
+
+  // Delivering treasure
+  $('.captain_profile_left').on('ajax:success', 'a#deliver-treasure', function(e, data, status, xhr) {
+    var leftBox  = new List('.captain_profile_left', 'Treasure to deliver', data.treasures_to_deliver);
+    var botBox   = new List('.captain_profile_bottom', 'Treasure delivered', data.treasures_delivered);
+
+    leftBox.renderToPage();
+    botBox.renderToPage();
+
+    var deliverMessage = new TreasureSuccess('#deliver_message', data.success_message);
+    deliverMessage.renderToPage();
+  });//end on
 
   // Dynamically add up the total price
   $('.captain_profile_right').on('keyup', '#treasure_price', function(e) {
       var price = parseFloat(e.target.value);
       $('#total_price').html(Tax.calculatePrice(price));
-    });//end on for dynamic addition of total price
+    });//end on
 });//end ready

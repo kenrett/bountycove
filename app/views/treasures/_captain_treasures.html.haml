@@ -1,3 +1,4 @@
+#deliver_message
 - treasures.each do |treasure|
   %ul.treasure
     %li Name: #{treasure.name}
@@ -9,4 +10,4 @@
       Total Price:
       %span.total_price
     - if bought
-      %a.tiny.button.alert.round{:href => captain_delivers_treasure_path(current_user, treasure) }Deliver
+      = link_to 'Deliver', captain_delivers_treasure_path(current_user, treasure), :remote => true, :class => 'tiny button alert round', :id => 'deliver-treasure', :method => :post, :confirm => 'yeah'

@@ -2,7 +2,7 @@ class CaptainsController < ApplicationController
 
   include UsersHelper
   include TasksHelper
-  
+
   def create
     @captain = Captain.new(params[:captain])
     if @captain.save
@@ -41,6 +41,26 @@ class CaptainsController < ApplicationController
     treasure.status = Treasure::DELIVERED
     treasure.save
 
-    redirect_to captain_treasures_path(current_user)
+    treasures_to_deliver = render_treasure_view_to_string({
+                                  treasures: current_user.treasures_to_deliver,
+                                  on_sale: false,
+                                  bought: true})
+
+    treasures_delivered  = render_treasure_view_to_string({
+                                  treasures: current_user.treasures_delivered,
+                                  on_sale: false,
+                                  bought: false})
+
+    render :json => {:treasures_to_deliver => treasures_to_deliver,
+                       :treasures_delivered => treasures_delivered,
+                       :tax_rate => current_user.tax_rate,
+                       :success_message => "Argh! Yeah treasure was delivered!"}
+  end
+
+  def render_treasure_view_to_string(args)
+    render_to_string :partial => 'treasures/captain_treasures',
+                                    :locals => {:treasures => args[:treasures],
+                                                :on_sale => args[:on_sale],
+                                                :bought => args[:bought]}
   end
 end
