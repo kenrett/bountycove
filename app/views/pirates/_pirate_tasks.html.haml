@@ -1,0 +1,6 @@
+- tasks.each do |task|
+  .large-12.columns.t_and_e
+    = link_to "#{task.name}", pirate_task_path(current_user, task)
+    %br
+    Earns #{task.worth} gold coins
+    
