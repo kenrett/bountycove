@@ -4,6 +4,7 @@
   background-color: #7274C4;
   margin-top: 1em;
   margin-left: 0.1em;
+  padding: 0;
 
   .small.secondary.button {
     width: 100%;
@@ -64,10 +65,6 @@ ul.treasures_on_sale h1 {
   background-color: orange;
 }
 
-.sub_nav {
-  padding: 0;
-}
-
 .username {
   border: 2px solid black;
 }
@@ -78,4 +75,9 @@ ul.treasures_on_sale h1 {
   background-color: #7274C4;
   width: 100%;
   padding-left: 1em;
+}
+
+a.small.secondary.button {
+  margin-left: 4em;
+  margin-right: 4em;
 }
