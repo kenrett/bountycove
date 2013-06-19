@@ -103,12 +103,19 @@ $(document).ready(function(){
   // Editing a treasure
   $('.captain.profile_right').on('ajax:success', '.edit_treasure', function(e, data, status, xhr) {
     $('.captain.profile_main').html(data.treasure_board);
-
+    
     var rightBox = new List('.captain.profile_right', 'Add Treasures!', data.new_treasure_form);
     rightBox.renderToPage();
 
     var editMessage = new TreasureSuccess('.error_max_treasure_limit', data.success_message);
     editMessage.renderToPage();
+  }).on('ajax:error', '.edit_treasure', function(e, data, status, xhr) {
+    var error = '';
+    data.responseJSON.forEach(function(value, index) {
+      error += "<li>" +value+ "</li>";
+    });
+    updateError = new TreasureError('.error_max_treasure_limit', error.trim());
+    updateError.renderToPage();
   });// end on
 
   // Showing treasure to edit when clicked

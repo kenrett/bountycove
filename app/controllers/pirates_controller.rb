@@ -40,7 +40,7 @@ class PiratesController < ApplicationController
     if pirate.update_attributes(params[:pirate])
       
     else
-      debugger
+
       render :json => pirate.errors.full_messages, :status => :unprocessable_entity
     end
   end

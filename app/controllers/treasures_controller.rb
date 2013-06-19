@@ -18,17 +18,6 @@ class TreasuresController < ApplicationController
     end
   end
 
-  def show
-    case current_user.type
-    when 'Captain'
-      treasure = Treasure.find(params[:id])
-      render_treasure_profile_to_json(treasure)
-    when 'Pirate'
-      # treasures#show pirate
-      # debugger
-    end
-  end
-
   def new
     case current_user.type
     when 'Captain'
@@ -61,15 +50,20 @@ class TreasuresController < ApplicationController
   end
 
   def edit
-    @treasure = Treasure.find(params[:id])
-
-    render_local_pirate_or_captain_view 'edit'
+    case current_user.type
+    when 'Captain'
+      treasure = Treasure.find(params[:id])
+      render_treasure_profile_to_json(treasure)
+    when 'Pirate'
+      # treasures#show pirate
+      # debugger
+    end
   end
 
   def update
     treasure = Treasure.find(params[:id])
-
-    if tresure.update_attributes(params[:treasure])
+  
+    if treasure.update_attributes(params[:treasure])
       treasure_board = render_to_string :partial => 'captain_treasure_board',
                                         :locals => {:treasure_board => current_user.treasures_on_sale}
 
@@ -78,6 +72,7 @@ class TreasuresController < ApplicationController
 
       success_message = 'Argh! Yeh treasure changed!'
 
+      debugger
       render :json => {:treasure_board => treasure_board,
                         :new_treasure_form => new_treasure_form,
                         :success_message => success_message}
