@@ -36,6 +36,7 @@ $(document).ready(function() {
     $('.captain.profile_left').html(data.list_of_pirates);
     $('.captain.profile_left').append('<a href="/captains/c/pirates/new" data-remote="true" id="add_pirate">Add Pirate</a>');
     $('.captain.profile_right').html(data.sign_up_form);
+    $('.captain.profile_bottom').html('');
   });
 
   // Renders pirate account signup form for captain
