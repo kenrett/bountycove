@@ -1,8 +1,9 @@
-.treasures_on_sale {
+.profile_botton {
   background-color: gray;
   border: 2px solid black;
   border-radius:25px;
   min-height: 39em;
+  overflow: auto;
 
   #last { // How do I nest this?
     margin-bottom: 1.4em !important;

@@ -3,11 +3,11 @@
 .row
   .large-12.columns
   %h1.username Pirate #{current_user.username.titleize}
-  %p.intro  Hello #{current_user.name.titleize}!
+  %p.intro  Hello #{current_user.name.titleize}! 
 
 .row.second_div
-  .large-10.large-offset-1.small-10.columns.small-offset-1.profile_treasures
-    .row
+  .large-10.large-offset-1.small-10.columns.small-offset-1.captain_profile_treasures
+    .row 
       %h2.username Available Treasures
       - @treasures.each do |treasure|
         .large-12.columns.treasure_item
@@ -21,17 +21,19 @@
       %br
 
 .row
-  .large-12.columns.third_div
+  .large-12.columns.sub_nav
     = render :partial => 'shared/pirates_sub_nav_bar'
-.row.fourth_div
-  .large-6.column.captain_profile_treasures
+%br
+
+.row.pirate.profile_left
+  .large-6.column
     %h2 TBD
     .row
       / stuff goes here
       %br
       = link_to 'Some Link TBD!', '#'
 
-  .large-6.column.captain_profile_treasures
+  .large-6.column
     %h2 Quests
     .row
       - @tasks.each do |task|
@@ -39,6 +41,6 @@
           = link_to "#{task.name}", pirate_task_path(current_user, task)
           %br
           Earns #{task.worth} gold coins
-      %br
+      %br  
       = link_to 'View All Quests!', pirate_tasks_path(current_user)
 

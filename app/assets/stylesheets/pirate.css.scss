@@ -1,4 +1,4 @@
-.pirate_div {
+.sub_nav {  // This is the sub_navbar for pirates
   border: 2px solid black;
   height: 3.125em;
   background-color: #7274C4;
@@ -10,13 +10,44 @@
   }
 }
 
-.second_div, .fourth_div {
+.profile_bottom {
+  background-color: gray;
+  border: 2px solid black;
+  border-radius:25px;
+  min-height: 39em;
+  overflow: auto;
+
+  #last {
+    margin-bottom: 1.4em !important;
+  }
+  
+  label {
+    color: black;
+    font-size: 1em;
+  }
+
+  ul {
+    padding: 1em;
+
+    li {
+      color: black;
+      // margin-bottom: 2.2em;
+      font-weight: 500;
+
+      :first-child {
+        margin-top: 1.7em;
+      }
+    }
+  }
+}
+
+.profile_main, .profile_left {
   background-color: orange;
   width: 100%;
   border: 2px solid black;
 }
 
-.third_div {
+.sub_nav {
   padding: 0;
 }
 

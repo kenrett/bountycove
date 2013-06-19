@@ -2,11 +2,11 @@
 - content_for :title, "Captain's Page"
 .row
   .welcome.large-12.columns
-    %h1 Captain #{current_user.username}
-    %p Hello #{current_user.first_name}!
-.row
-  .large-10.large-offset-1.small-10.columns.small-offset-1.captain.profile_treasures
-    .row.captain.profile_main
+    %strong Hello Captain #{current_user.first_name.titleize}!
+
+.row.captain.profile_main
+  .large-10.large-offset-1.small-10.columns.small-offset-1
+    .row
       = render :partial => 'treasures/captain_treasure_board', :locals => {:treasure_board => @treasures}
     %br
 
@@ -15,8 +15,8 @@
     = render :partial => 'shared/captain_sub_nav_bar', :locals => {:user => current_user}
 %br
 
-.row.box.middle-section
-  .large-4.column.large-offset-1.small-11.captain.profile_left
+.row.box.captain.profile_left
+  .large-4.column.large-offset-1.small-11
     .row
       = render :partial => 'list_of_pirates', :locals => {:pirates => @pirates}
     = link_to "Add Pirate", new_captain_pirate_path(current_user), :remote => true, :id => 'add_pirate'
@@ -32,6 +32,3 @@
 %br
 .row
   .large-12.columns.captain.profile_bottom
-.row
-  .large-12.columns.footer
-    %p Footer goes here...
