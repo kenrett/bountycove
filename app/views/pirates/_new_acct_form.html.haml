@@ -1,8 +1,6 @@
-= render :partial => 'shared/nav_bar'
-.error
-  - if flash[:errors_signup]
-    = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:errors_signup]}
-= form_for [@captain, @pirate] do |f|
+= form_for [captain, pirate], :remote => true do |f|
+  %h1 Recruit a pirate!
+  #new_pirate_message
   = f.label :first_name
   = f.text_field :first_name
   %br
@@ -20,4 +18,4 @@
   %br
   = f.label :password_confirmation
   = f.password_field :password_confirmation
-  = f.submit "Sign Up!"
+  = f.submit "Ahoy!"

@@ -5,21 +5,77 @@ class PiratesController < ApplicationController
   include UsersHelper
   include TasksHelper
 
+  def index
+    sign_up_form = render_to_string :partial => 'new_acct_form',
+                        :locals => {:captain => current_user,
+                                    :pirate => Pirate.new}
+
+    list_pirates = render_to_string :partial => 'captains/list_of_pirates',
+                                    :locals => {:pirates => current_user.pirates}
+
+    render :json => {:sign_up_form => sign_up_form,
+                     :list_of_pirates => list_pirates}
+  end
+
+  def edit
+    pirate = Pirate.find_by_username(params[:id])
+    pirate_edit_form = render_to_string :partial => 'pirates/new_acct_form',
+                                        :locals => {:captain => current_user,
+                                                    :pirate => pirate}
+    
+    render :json => {:pirate_edit_form => pirate_edit_form}
+  end
+
   def new
-    @pirate = Pirate.new
+    sign_up_form = render_to_string :partial => 'pirates/new_acct_form',
+                          :locals => {:captain => current_user,
+                                      :pirate => Pirate.new}
+
+    render :json => {:sign_up_form => sign_up_form}
+  end
+
+  def update
+    pirate = Pirate.find_by_username(params[:id])
+    
+    if pirate.update_attributes(params[:pirate])
+      sign_up_form = render_to_string :partial => 'new_acct_form',
+                        :locals => {:captain => current_user,
+                                    :pirate => Pirate.new}
+
+      list_pirates = render_to_string :partial => 'captains/list_of_pirates',
+                                    :locals => {:pirates => current_user.pirates}
+
+      success_message = 'Argh! Your pirate got a new eyepatch!'
+
+      render :json => {:sign_up_form => sign_up_form,
+                     :list_of_pirates => list_pirates,
+                     :success_message => success_message}
+    else
+      render :json => pirate.errors.full_messages, :status => :unprocessable_entity
+    end
   end
 
   def create
-    @pirate = Pirate.new(params[:pirate])
-    @pirate.tax_rate = nil
+    pirate = Pirate.new(params[:pirate])
+    pirate.tax_rate = nil
+    pirate.captain  = current_user
 
-    if @pirate.save
-      @captain.pirates << @pirate
-      redirect_to captain_path(@captain)
+    if pirate.save
+      success_message = "Arggh! A new pirate on deck!"
+
+      sign_up_form = render_to_string :partial => 'new_acct_form',
+                        :locals => {:captain => current_user,
+                                    :pirate => Pirate.new}
+
+      list_pirates = render_to_string :partial => 'captains/list_of_pirates',
+                                      :locals => {:pirates => current_user.pirates}
+
+      render :json => {:sign_up_form => sign_up_form,
+                       :list_of_pirates => list_pirates,
+                       :success_message => success_message}
     else
-      @pirate.errors.delete(:password_digest)
-      flash[:errors_signup] = @pirate.errors.full_messages
-      render :new
+      pirate.errors.delete(:password_digest)
+      render :json => pirate.errors.full_messages, :status => :unprocessable_entity
     end
   end
 

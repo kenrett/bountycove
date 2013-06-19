@@ -1,0 +1,3 @@
+- pirates.each do |pirate|
+  .large-12.columns.t_and_e
+    = link_to "#{pirate.name}", edit_captain_pirate_path(current_user, pirate), :id => 'edit_pirate_acct', :remote => true

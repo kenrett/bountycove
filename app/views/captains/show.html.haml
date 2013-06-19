@@ -2,10 +2,10 @@
 - content_for :title, "Captain's Page"
 .row
   .welcome.large-12.columns
-    %h1 Captain #{current_user.username}
-    %p Hello #{current_user.first_name}!
-.row
-  .large-10.large-offset-1.small-10.columns.small-offset-1.captain.profile_treasures
+    %strong Hello Captain #{current_user.first_name.titleize}!
+
+.row.captain.profile_main
+  .large-11.large-offset-1.small-11.columns.small-offset-1
     .row.captain.profile_main
       = render :partial => 'treasures/captain_treasure_board', :locals => {:treasure_board => @treasures}
     %br
@@ -14,28 +14,15 @@
   .large-12.columns#mid_nav_bar
     = render :partial => 'shared/captain_sub_nav_bar', :locals => {:user => current_user}
 %br
+.row
+  .large-6.columns.captain.profile_left
+    = render :partial => 'list_of_pirates', :locals => {:pirates => @pirates}
+    = link_to "Add Pirate", new_captain_pirate_path(current_user), :remote => true, :id => 'add_pirate'
 
-.row.box.middle-section
-  .large-4.column.large-offset-1.small-11.captain.profile_left
-    .row
-      - @pirates.each do |pirate|
-        .large-12.columns.t_and_e
-          = link_to "#{pirate.name}",
-          captain_pirate_path(current_user, pirate)
-          / NEED A CAPTAIN PIRATE SHOW ROUTE
-    = link_to "Add Pirate", new_captain_pirate_path(current_user)
-
-  .large-4.column.large-offset-1.small-11.captain.profile_right
-    .row
-      - @tasks.each do |task|
-        .large-12.columns.t_and_e
-          = task.name
-    %br
-
-  .large-1.small-1.column
+  .large-6.columns.captain.profile_right
+    - @tasks.each do |task|
+      .large-12.columns.t_and_e
+        = task.name
 %br
 .row
   .large-12.columns.captain.profile_bottom
-.row
-  .large-12.columns.footer
-    %p Footer goes here...
