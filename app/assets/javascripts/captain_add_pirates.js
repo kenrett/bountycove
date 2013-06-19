@@ -38,7 +38,7 @@ $(document).ready(function() {
 
   // Add new pirate accounts for captain
   $('.captain.profile_right').on('ajax:success', '#new_pirate', function(e, data, status, xhr) {
-    $('.captain.profile_left').html(data.list_of_pirates);
+    $('.captain.profile_left div.row').html(data.list_of_pirates);
     $('.captain.profile_right').html(data.sign_up_form);
 
     var pirateSuccessMessage = new PirateSuccess('.captain.profile_right #new_pirate_message', data.success_message);
