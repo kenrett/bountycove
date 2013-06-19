@@ -77,7 +77,16 @@ ul.treasures_on_sale h1 {
   padding-left: 1em;
 }
 
-a.small.secondary.button {
-  margin-left: 4em;
-  margin-right: 4em;
+#mid_nav_bar.span {
+  padding: 0;
+  margin: 0;
+}
+
+.small.secondary.button {
+  width: 24.6%;
+}
+
+.nav_border {
+  border: 4px solid black;
+  background-color: #59b5e6;
 }
