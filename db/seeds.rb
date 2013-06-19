@@ -21,12 +21,12 @@ Treasure::STATUS.each do |status, value|
   p.treasures << t
 end
 
-50.times do |n|
+5.times do |n|
   t = Treasure.create(name: "Treasure to deliver #{n}", description: "Treasure to deliver #{n}", price: 100, tax: 5, status: Treasure::BOUGHT)
   c.treasures << t
 end
 
-3.times do |n|
+5.times do |n|
   t = Treasure.create(name: "Treasure delivered #{n}", description: "Treasure delivered #{n}", price: 100, tax: 5, status: Treasure::DELIVERED)
   c.treasures << t
 end

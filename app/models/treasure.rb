@@ -6,6 +6,8 @@ class Treasure < ActiveRecord::Base
   BOUGHT    = 2
   DELIVERED = 3
 
+  MAX = 3
+
   validates :name, :description, :presence => true, :on => :create
   validates :description, :format => { :with => /\w+/ }
   validates :price,
@@ -19,10 +21,11 @@ class Treasure < ActiveRecord::Base
   belongs_to :captain
   belongs_to :pirate
 
-  scope :wishlist, where(status: WISHLIST)
-  scope :on_sale, where(status: ON_SALE)
-  scope :bought, where(status: BOUGHT)
-  scope :delivered, where(status: DELIVERED)
+  scope :desc, order('treasures.updated_at DESC')
+  scope :wishlist, where(status: WISHLIST).desc
+  scope :on_sale, where(status: ON_SALE).desc
+  scope :bought, where(status: BOUGHT).desc
+  scope :delivered, where(status: DELIVERED).desc
 
   STATUS = { wishlist: WISHLIST,
              on_sale: ON_SALE,
