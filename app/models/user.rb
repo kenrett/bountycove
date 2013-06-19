@@ -12,10 +12,9 @@ class User < ActiveRecord::Base
   validates :first_name, :presence => true
   validates :last_name, :presence => true
   validates :email,
-            :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i,
-                         :on => :create },
+            :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i},
             :if => :validate_email?
-  validates :password, :presence => true, :on => :create
+  validates :password, :presence => true
 
   has_secure_password
 
@@ -36,5 +35,9 @@ class User < ActiveRecord::Base
 
   def is_a_pirate?
     type =='Pirate'
+  end
+
+  def validate_email?
+    true
   end
 end

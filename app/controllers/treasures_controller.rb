@@ -67,18 +67,23 @@ class TreasuresController < ApplicationController
   end
 
   def update
-    Treasure.find(params[:id]).update_attributes(params[:treasure])
-    treasure_board = render_to_string :partial => 'captain_treasure_board',
-                                      :locals => {:treasure_board => current_user.treasures_on_sale}
+    treasure = Treasure.find(params[:id])
 
-    new_treasure_form    = render_to_string :partial => 'form_treasures',
-                                            :locals => {:treasure => Treasure.new}
+    if tresure.update_attributes(params[:treasure])
+      treasure_board = render_to_string :partial => 'captain_treasure_board',
+                                        :locals => {:treasure_board => current_user.treasures_on_sale}
 
-    success_message = 'Argh! Yeh treasure changed!'
+      new_treasure_form    = render_to_string :partial => 'form_treasures',
+                                              :locals => {:treasure => Treasure.new}
 
-    render :json => {:treasure_board => treasure_board,
-                      :new_treasure_form => new_treasure_form,
-                      :success_message => success_message}
+      success_message = 'Argh! Yeh treasure changed!'
+
+      render :json => {:treasure_board => treasure_board,
+                        :new_treasure_form => new_treasure_form,
+                        :success_message => success_message}
+    else
+      render :json => treasure.errors.full_messages, :status => :unprocessable_entity
+    end
   end
 
   def destroy

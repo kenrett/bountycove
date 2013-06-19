@@ -33,10 +33,6 @@ class Captain < User
                                   :source => :tasks,
                                   :class_name => 'Task',
                                   :conditions => {:status => Task::COMPLETED}
-  def validate_email?
-    true
-  end
-
   def to_param
     username.downcase
   end
