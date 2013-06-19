@@ -4,6 +4,6 @@
   %li
     %a.small.secondary.button{:href => "#"} Pirates
   %li
-    %a.small.secondary.button{:href => "#"} Quests
+    = link_to "Create Task", captain_tasks_path(current_user), :remote => true, :id => 'captain_task_cove', :class => 'small secondary button'
   %li
     = link_to "Treasures", captain_treasures_path(user), :remote => true, :id => 'captain_treasure_cove', :class => 'small secondary button'

@@ -8,7 +8,6 @@
   .large-10.large-offset-1.small-10.columns.small-offset-1.captain_profile_treasures
     .row.captain_profile_main
       = render :partial => 'treasures/captain_treasure_board', :locals => {:treasure_board => @treasures}
-
     %br
 
 .row
@@ -25,12 +24,14 @@
           captain_pirate_path(current_user, pirate)
           / NEED A CAPTAIN PIRATE SHOW ROUTE
     = link_to "Add Pirate", new_captain_pirate_path(current_user)
-  .list_adventures.large-4.column.large-offset-1.small-11.captain_profile_right
-    = link_to "Create Adventure", captain_tasks_path(current_user), :remote => true, :class => 'captain_task_cove'
+
+  .large-4.column.large-offset-1.small-11.captain_profile_right
     .row
       - @tasks.each do |task|
         .large-12.columns.t_and_e
           = task.name
+    %br
+
   .large-1.small-1.column
 %br
 .row

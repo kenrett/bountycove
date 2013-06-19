@@ -8,16 +8,11 @@ class TasksController < ApplicationController
   def index
     case current_user.type
     when 'Captain'
-      tasks_on_board = render_task_view_to_string({
-        tasks: current_user.tasks_on_board, 
-        button: false, 
-        assigned: false})
-
-      tasks_assigned = render_task_view_to_string({
-        tasks: current_user.tasks_assigned, 
-        button: false, 
-        assigned: true })
-
+      tasks_on_board = render_to_string :partial => 'captain_task_board', 
+      :locals => { tasks_available: current_user.tasks_on_board, 
+        tasks_assigned: current_user.tasks_assigned,
+        tasks_completed: current_user.tasks_completed.limit(5) }
+      
       tasks_need_verify = render_task_view_to_string({
         tasks: current_user.tasks_need_verify, 
         button: true, 
@@ -28,12 +23,11 @@ class TasksController < ApplicationController
         button: false, 
         assigned: true })
 
-      new_task_form = render_to_string :partial => 'form', :locals => {captain: @captain, task: Task.new}
-      
+      new_task_form = render_to_string :partial => 'form', 
+      :locals => {captain: @captain, task: Task.new}      
+
       render :json => {:tasks_on_board => tasks_on_board,
-                       :tasks_assigned => tasks_assigned,
                        :tasks_need_verify => tasks_need_verify,
-                       :tasks_completed => tasks_completed,
                        :task_form => new_task_form }
 
     when 'Pirate'

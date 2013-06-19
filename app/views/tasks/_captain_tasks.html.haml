@@ -1,8 +1,8 @@
+#task_verify_message
 - tasks.each do |task|
-  %li Name: #{link_to task.name, captain_task_path(current_user, task)}
-  - if assigned
+  %ul.task
+    %li Name: #{link_to task.name, captain_task_path(current_user, task)}
     %li Assigned to: #{task.pirate.username}
-  %li Value: #{task.worth}
-  %li Posted: #{task.created_at.strftime(time_format(task))}
-  - if button
+    %li Value: #{task.worth}
+    %li Posted: #{task.created_at.strftime(time_format(task))}
     .verified_task#fun= link_to 'Confirm Complete?', captain_confirms_path(current_user, task), :remote => true, :class => 'tiny button alert round'

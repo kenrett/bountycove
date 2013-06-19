@@ -27,7 +27,7 @@
     .large-12.columns
     %h4 Completed Quests
     %ul
-      = render :partial => "pirate_tasks", :locals => {:tasks => @tasks_completed, :accept_button => false, :complete_button => false}
+      = render :partial => "pirate_tasks", :locals => {:tasks => @tasks_completed.limit(5), :accept_button => false, :complete_button => false}
   %br
 .row 
   .large-12.columns
