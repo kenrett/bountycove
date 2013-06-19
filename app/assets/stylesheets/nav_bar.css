@@ -10,7 +10,10 @@
   top: 0;
   width: 100%;
   z-index: 9999;
-  border-bottom: 2px solid gray;
+  border-bottom: 1px solid gray;
+  -moz-box-shadow: 0 0 5px #888;
+  -webkit-box-shadow: 0 0 5px#888;
+  box-shadow: 0 0 5px #888;
 }
 
 .nav ul {
