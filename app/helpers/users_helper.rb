@@ -7,6 +7,10 @@ module UsersHelper
   def current_user_is_pirate
     current_user.is_a_pirate?
   end
+  
+  def count_of_available_tasks
+    Task.count(:conditions => "status = 1")
+  end
 
   def current_user_is_captain
     current_user.is_a_captain?
