@@ -3,7 +3,7 @@
   %h3 Available Tasks
   - tasks_available.each do |task|
     %ul.task
-      %li Name: #{link_to task.name, edit_captain_task_path(current_user, task), :remote => true, :class => 'edit_task'}
+      %li Name: #{link_to task.name, edit_captain_task_path(current_user, task), :remote => true, :id => 'edit_task'}
       %li Value: #{task.worth}
       %li Posted: #{task.created_at.strftime(time_format(task))}
 
@@ -12,7 +12,7 @@
   %h3 Assigned Tasks
   - tasks_assigned.each do |task|
     %ul.task
-      %li Name: #{link_to task.name, captain_task_path(current_user, task)}
+      %li Name: #{link_to task.name, edit_captain_task_path(current_user, task), :remote => true, :id => 'edit_task'}
       %li Assigned to: #{task.pirate.username}
       %li Value: #{task.worth}
       %li Posted: #{task.created_at.strftime(time_format(task))}
@@ -22,6 +22,6 @@
   %h3 Completed Tasks
   - tasks_completed.each do |task|
     %ul.task
-      %li Name: #{link_to task.name, captain_task_path(current_user, task)}
+      %li Name: #{task.name}
       %li Value: #{task.worth}
       %li Posted: #{task.created_at.strftime(time_format(task))}

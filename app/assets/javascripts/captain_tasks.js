@@ -70,10 +70,9 @@ $(document).ready(function(){
   });//end on
   
   //Edit Task
-  $('.captain.profile_right').on('ajax:success', '.edit_tasks', function(e, data, status, xhr) {
-    var rightBox = new List('.captain.profile_right', 'Update Task!', data.edit_form);
+  $('.captain.profile_bottom').on('ajax:success', '#edit_task', function(e, data, status, xhr) {
+    var rightBox = new List('.captain.profile_right', 'Update Task!', data.task_form);
     rightBox.renderToPage();
-
     var editMessage = new TaskSuccess('.error_max_task_limit', data.success_message);
     editMessage.renderToPage();
   });// end on

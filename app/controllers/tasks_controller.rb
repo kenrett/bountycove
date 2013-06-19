@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_filter :get_captain
-  before_filter :get_task, :except => [:index, :new, :create]
+  before_filter :get_task, except: [:index, :new, :create]
 
   include UsersHelper
   include TasksHelper
@@ -25,7 +25,7 @@ class TasksController < ApplicationController
   def new
     if count_of_available_tasks >= 6
       # needed anymore?
-      # render :json => { error: "Only 6 available tasks allowed!"}
+      # render json: { error: "Only 6 available tasks allowed!"}
     else
       redirect_to root_path
     end
@@ -34,12 +34,12 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(params[:task])
     if count_of_available_tasks >= 6
-      render :json => "Only 6 available tasks allowed!", :status => :unprocessable_entity
+      render json: "Only 6 available tasks allowed!", status: :unprocessable_entity
     elsif @task.save
       @captain.tasks << @task
-      render :json => { :task_create => "A new Quest has been set!" }
+      render json: { task_create: "A new Quest has been set!" }
     else
-      render :json => "All fields must be filled", :status => :unprocessable_entity
+      render json: "All fields must be filled", status: :unprocessable_entity
     end
   end
 
@@ -49,13 +49,12 @@ class TasksController < ApplicationController
 
   def edit
     task = Task.find(params[:id])
-    edit_form = render_to_string :partial => 'form', :locals => {captain: current_user, task: task }
-    render :json => { edit_form: edit_form }
+    task_edit_form = render_to_string partial: 'form', locals: {captain: current_user, task: task}
+    render json: { task_form: task_edit_form, success_message: 'Argh! Yeh Quest changed!'}
   end
 
   def update
     Task.find(params[:id]).update_attributes(params[:task])
-    render :json => {success_message => 'Argh! Yeh Quest changed!'}
   end
 
   def destroy
@@ -78,8 +77,8 @@ class TasksController < ApplicationController
   end
 
   def render_task_profile_to_json(task)
-    tasks_on_board = render_to_string :partial => 'captain_task_board', 
-    :locals => { tasks_available: current_user.tasks_on_board, 
+    tasks_on_board = render_to_string partial: 'captain_task_board', 
+    locals: { tasks_available: current_user.tasks_on_board, 
       tasks_assigned: current_user.tasks_assigned,
       tasks_completed: current_user.tasks_completed.limit(5) }
 
@@ -88,19 +87,19 @@ class TasksController < ApplicationController
         button: true, 
         assigned: false})
 
-      new_task_form = render_to_string :partial => 'form', 
-      :locals => {captain: @captain, task: Task.new}      
+      new_task_form = render_to_string partial: 'form', 
+      locals: {captain: @captain, task: Task.new}      
 
-      render :json => {:tasks_on_board => tasks_on_board,
-       :tasks_need_verify => tasks_need_verify,
-       :task_form => new_task_form }
+      render json: {tasks_on_board: tasks_on_board,
+       tasks_need_verify: tasks_need_verify,
+       task_form: new_task_form }
      end
 
      def render_task_view_to_string(args)
-      render_to_string :partial => "captain_tasks", :locals => {
-       :tasks    => args[:tasks], 
-       :button   => args[:button], 
-       :assigned => args[:assigned]}
+      render_to_string partial: "captain_tasks", locals: {
+       tasks:    args[:tasks], 
+       button:   args[:button], 
+       assigned: args[:assigned]}
      end
 
    end
