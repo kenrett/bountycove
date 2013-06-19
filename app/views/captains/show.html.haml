@@ -1,9 +1,4 @@
 - content_for :title, "Captain's Page"
-
-.row
-  .large-12.columns
-    %h1
-      = 'Nav Bar is here'
 .row
   .large-12.columns
     %h1 Captain #{current_user.username}
@@ -18,8 +13,10 @@
           = link_to "#{treasure.name}", captain_treasure_path(current_user, treasure), :remote => true, :class => 'captain_treasure_show'
         .large-1.columns
     %br
-    = link_to "Check treasure cove", captain_treasures_path(current_user), :remote => true, :id => 'captain_treasure_cove'
-
+    = link_to "Check treasure cove", captain_treasures_path(current_user), :remote => true, :class => 'captain_treasure_cove'
+.row
+  .large-12.columns
+    = render :partial => 'shared/captain_sub_nav_bar' 
 %br
 .row.box
   .large-4.column.large-offset-1.small-11.captain_profile_left

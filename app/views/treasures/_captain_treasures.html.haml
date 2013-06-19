@@ -5,9 +5,8 @@
     %li Photo: #{treasure.photo}
     %li Price: #{treasure.price}
     %li Tax: #{treasure.tax}
-    %li
+    %li#last
       Total Price:
       %span.total_price
-
     - if bought
-      = button_to 'Deliver', captain_delivers_treasure_path(current_user, treasure)
+      %a.tiny.button.alert.round{:href => captain_delivers_treasure_path(current_user, treasure) }Deliver

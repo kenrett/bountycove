@@ -1,0 +1,51 @@
+.treasures_on_sale {
+  background-color: gray;
+  border: 2px solid black;
+  border-radius:25px;
+  min-height: 35em;
+
+  #last { // How do I nest this?
+    margin-bottom: 1.4em !important;
+  }
+
+  label {
+    color: black;
+    font-size: 1em;
+  }
+
+  ul {
+    padding: 1em;
+
+    li {
+      color: black;
+      margin-bottom: 2.2em;
+      font-weight: 500;
+
+      :first-child {
+        margin-top: 1.7em;
+      }
+    }
+  }
+}
+
+
+.tiny.button.alert.round {
+  margin-top: 1em;
+}
+
+.row.box {
+  height: 35.5em;
+}
+
+.new_treasure {
+  padding-top: 1em;
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+.treasure {
+
+  ul {
+    min-height: 4em;
+  }
+}
