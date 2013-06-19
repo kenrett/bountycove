@@ -8,19 +8,19 @@ var Tax = {
 
 function Treasure(elem, treasure) {
   this.elem = elem;
-  this.captain = window.location.pathname;
+  this.captain = window.location.pathname.split('/').pop();
   this.treasureId = treasure.id;
   this.name = treasure.name;
 }
 
 Treasure.prototype = {
   renderToPage: function() {
-    $(this.elem).append(this.template);
+    $(this.elem).append(this.createTemplate());
   },
 
   createTemplate: function() {
-    this.template = "<div class='.large-3.columns.treasure_item'><img src='http://us.cdn1.123rf.com/168nwm/orla/orla1010/orla101000044/8041795-wooden-treasure-chest-with-gold-coins-printed-with-royal-crown--3d-render.jpg' /><br />" +
-                       "<a href='/captains/" +this.captain+ "/treasures/" +this.treasureId+ "' class='captain_treasure_show' data-remote='true'>" +this.name+ "</a><div class='.large-1.columns'></div></div>";
+    return this.template = "<div class='large-3 columns treasure_item'><img src='http://us.cdn1.123rf.com/168nwm/orla/orla1010/orla101000044/8041795-wooden-treasure-chest-with-gold-coins-printed-with-royal-crown--3d-render.jpg' /><br />" +
+                       "<a href='/captains/" +this.captain+ "/treasures/" +this.treasureId+ "' class='captain_treasure_show' data-remote='true'>" +this.name+ "</a></div><div class='large-1 columns'></div>";
   }
 }
 
@@ -74,15 +74,16 @@ $(document).ready(function(){
 
   // Adding a new treasure
   $('.captain_profile_right').on('ajax:success', 'form', function(e, data, status, xhr) {
-    if (data.error) {
-      var treasureError = new TreasureError('.error_max_treasure_limit', data.error);
-      treasureError.renderToPage();
-    }
-    else {
-      newTreasure = new Treasure('.captain_profile_main', data.treasure);
-      debugger;      
-      // put in success
-    }
+    if (data.error)
+      {
+        var treasureError = new TreasureError('.error_max_treasure_limit', data.error);
+        treasureError.renderToPage();
+      }
+    else
+      {
+        newTreasure = new Treasure('.captain_profile_main', data.treasure);
+        newTreasure.renderToPage();
+      }
 
   });//end on for adding new treasure
 
