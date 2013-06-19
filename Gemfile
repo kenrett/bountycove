@@ -27,7 +27,6 @@ group :development, :test do
   gem 'better_errors'
   gem 'pry-rails'
   gem 'quiet_assets'
-  gem 'haml-rails'
   gem 'binding_of_caller'
   gem 'rspec-rails'
   gem 'capybara'
@@ -36,6 +35,7 @@ group :development, :test do
   gem 'database_cleaner'
 end
 
+gem 'haml-rails'
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
