@@ -2,7 +2,7 @@
   background-color: gray;
   border: 2px solid black;
   border-radius:25px;
-  min-height: 35em;
+  min-height: 36em;
 
   #last { // How do I nest this?
     margin-bottom: 1.4em !important;
@@ -44,6 +44,7 @@
 }
 
 .treasure {
+  border-top: 4px solid black;
 
   ul {
     min-height: 4em;
