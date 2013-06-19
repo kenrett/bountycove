@@ -1,15 +1,11 @@
+= render :partial => 'shared/nav_bar'
 - content_for :title, "Captain's Page"
-
 .row
-  .large-12.columns
-    %h1
-      = 'Nav Bar is here'
-.row
-  .large-12.columns
+  .welcome.large-12.columns
     %h1 Captain #{current_user.username}
     %p Hello #{current_user.first_name}!
 .row
-  .large-10.large-offset-1.small-10.columns.small-offset-1.captain_profile_treasures
+  .treasure_display.large-10.large-offset-1.small-10.columns.small-offset-1.captain_profile_treasures
     .row
       - @treasures.each do |treasure|
         .large-3.columns.treasure_item
@@ -22,7 +18,7 @@
 
 %br
 .row.box
-  .large-4.column.large-offset-1.small-11.captain_profile_left
+  .list_pirates.large-4.column.large-offset-1.small-11.captain_profile_left
     .row
       - @pirates.each do |pirate|
         .large-12.columns.t_and_e
@@ -30,7 +26,7 @@
           captain_pirate_path(current_user, pirate)
           / NEED A CAPTAIN PIRATE SHOW ROUTE
     = link_to "Add Pirate", new_captain_pirate_path(current_user)
-  .large-4.column.large-offset-1.small-11.captain_profile_right
+  .list_adventures.large-4.column.large-offset-1.small-11.captain_profile_right
     = link_to "Create Adventure", captain_tasks_path(current_user), :remote => true, :class => 'captain_task_cove'
     .row
       - @tasks.each do |task|
