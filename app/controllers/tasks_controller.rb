@@ -17,12 +17,7 @@ class TasksController < ApplicationController
         tasks: current_user.tasks_need_verify, 
         button: true, 
         assigned: false})
-        
-      tasks_completed = render_task_view_to_string({
-        tasks: current_user.tasks_completed.order('updated_at ASC').limit(5), 
-        button: false, 
-        assigned: true })
-
+      
       new_task_form = render_to_string :partial => 'form', 
       :locals => {captain: @captain, task: Task.new}      
 
