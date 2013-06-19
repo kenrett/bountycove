@@ -25,7 +25,7 @@ class TreasuresController < ApplicationController
       render_treasure_profile_to_json(treasure)
     when 'Pirate'
       # treasures#show pirate
-      debugger
+      # debugger
     end
   end
 
@@ -34,7 +34,7 @@ class TreasuresController < ApplicationController
     when 'Captain'
       
       # might not be needed anymore because of AJAXing
-      debugger
+      # debugger
       
     when 'Pirate'
       @treasure = Treasure.new

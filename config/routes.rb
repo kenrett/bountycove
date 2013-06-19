@@ -23,10 +23,10 @@ Daddyshop::Application.routes.draw do
   get "/pirates/:pirate_id/tasks/:task_id/adds" => "pirates#adds", :as => "pirate_adds"
 
   # Pirate Complete task
-  get "/pirates/:pirate_id/tasks/:task_id/completes" => "pirates#completes", :as => "pirate_completes"  
+  get "/pirates/:pirate_id/tasks/:task_id/completes" => "pirates#completes", :as => "pirate_completes"
 
   # Captain Confirm Task Complete
-  post "/captains/:captain_id/tasks/:task_id/confirm" => "captains#confirm", :as => "captain_confirms"
+  get "/captains/:captain_id/tasks/:task_id/confirm" => "captains#confirm", :as => "captain_confirms"
 
   # Captain delivers treasure
   post "/captains/:captain_id/treasures/:treasure_id/delivers_treasure" => "captains#delivers_treasure", :as => 'captain_delivers_treasure'
