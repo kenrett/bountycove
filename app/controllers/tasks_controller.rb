@@ -38,73 +38,69 @@ class TasksController < ApplicationController
     elsif @task.save
       @captain.tasks << @task
       render :json => { :task_create => "A new Quest has been set!" }
+    else
+      render :json => "All fields must be filled", :status => :unprocessable_entity
     end
   end
 
   def show
     task = Task.find(params[:id])
-    render_task_profile_to_json(task)
   end
 
   def edit
-    @task = Task.find(params[:id])
+    task = Task.find(params[:id])
+    edit_form = render_to_string :partial => 'form', :locals => {captain: current_user, task: task }
+    render :json => { edit_form: edit_form }
   end
 
   def update
     Task.find(params[:id]).update_attributes(params[:task])
+    render :json => {success_message => 'Argh! Yeh Quest changed!'}
+  end
 
-    new_task_form = render_to_string :partial => 'form', 
-    :locals => {captain: @captain, task: Task.new} 
+  def destroy
+    @task.destroy
+    redirect_to captain_tasks_path(@captain)
+  end
 
-    success_message = 'Argh! Yeh Quest changed!'
+  private
 
-    render :json => {:new_task_form => new_task_form,
-      :success_message => success_message}
-    end
+  def get_captain
+    @captain = Captain.find_by_username(params[:captain_id])
+  end
 
-    def destroy
-      @task.destroy
-      redirect_to captain_tasks_path(@captain)
-    end
+  def get_pirate
+    @pirate = Pirate.find_by_username(params[:pirate_id])
+  end
 
-    private
+  def get_task
+    @task = Task.find(params[:id])
+  end
 
-    def get_captain
-      @captain = Captain.find_by_username(params[:captain_id])
-    end
+  def render_task_profile_to_json(task)
+    tasks_on_board = render_to_string :partial => 'captain_task_board', 
+    :locals => { tasks_available: current_user.tasks_on_board, 
+      tasks_assigned: current_user.tasks_assigned,
+      tasks_completed: current_user.tasks_completed.limit(5) }
 
-    def get_pirate
-      @pirate = Pirate.find_by_username(params[:pirate_id])
-    end
+      tasks_need_verify = render_task_view_to_string({
+        tasks: current_user.tasks_need_verify, 
+        button: true, 
+        assigned: false})
 
-    def get_task
-      @task = Task.find(params[:id])
-    end
+      new_task_form = render_to_string :partial => 'form', 
+      :locals => {captain: @captain, task: Task.new}      
 
-    def render_task_profile_to_json(task)
-      tasks_on_board = render_to_string :partial => 'captain_task_board', 
-      :locals => { tasks_available: current_user.tasks_on_board, 
-        tasks_assigned: current_user.tasks_assigned,
-        tasks_completed: current_user.tasks_completed.limit(5) }
-
-        tasks_need_verify = render_task_view_to_string({
-          tasks: current_user.tasks_need_verify, 
-          button: true, 
-          assigned: false})
-
-        new_task_form = render_to_string :partial => 'form', 
-        :locals => {captain: @captain, task: Task.new}      
-
-        render :json => {:tasks_on_board => tasks_on_board,
-         :tasks_need_verify => tasks_need_verify,
-         :task_form => new_task_form }
-       end
-
-       def render_task_view_to_string(args)
-        render_to_string :partial => "captain_tasks", :locals => {
-         :tasks    => args[:tasks], 
-         :button   => args[:button], 
-         :assigned => args[:assigned]}
-       end
-
+      render :json => {:tasks_on_board => tasks_on_board,
+       :tasks_need_verify => tasks_need_verify,
+       :task_form => new_task_form }
      end
+
+     def render_task_view_to_string(args)
+      render_to_string :partial => "captain_tasks", :locals => {
+       :tasks    => args[:tasks], 
+       :button   => args[:button], 
+       :assigned => args[:assigned]}
+     end
+
+   end
