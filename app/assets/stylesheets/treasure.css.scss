@@ -2,7 +2,7 @@
   background-color: gray;
   border: 2px solid black;
   border-radius:25px;
-  min-height: 36em;
+  min-height: 39em;
 
   #last { // How do I nest this?
     margin-bottom: 1.4em !important;
@@ -18,7 +18,7 @@
 
     li {
       color: black;
-      margin-bottom: 2.2em;
+      // margin-bottom: 2.2em;
       font-weight: 500;
 
       :first-child {
@@ -34,7 +34,7 @@
 }
 
 .row.box {
-  height: 35.5em;
+  height: 39em;
 }
 
 .new_treasure {
