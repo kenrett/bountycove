@@ -48,11 +48,12 @@ form,textarea,input { margin: 0; padding: 0;}
 
 .above_buttons a {
   padding: 1%;
-  color: #c1dbea;
+  color: #329dd7;
+  font-weight: bold;
 }
 
 .above_buttons a:hover {
-  color: #d6e8f2;
+  color: #1c95d7;
 }
 
 

@@ -1,3 +1,16 @@
+.banner_index_small {
+  background-image:url('/nav_small.png');
+  background-color: #59b5e6;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  position: relative;
+}
+ 
+
 .login_small input {
   border: 0;
   background: #28a2e5;
@@ -43,6 +56,7 @@
   font-family: 'Pathway Gothic One', sans-serif;
   color: #e89b36;
   background: #59b5e6;
+  margin-top: -7%;
 }
 
 .small_footer {
@@ -58,3 +72,18 @@ input.fish_button_small {
   font-size: 1.2em;
 }
 
+.sign_up_small input:last-child,
+.login_small input:last-child {
+  margin-top: -5%;
+  height: 40px;
+  color: #fff;
+  font-size: 25px;
+  opacity:0.7;
+  filter:alpha(opacity=70); 
+}
+
+.sign_up_small input:last-child:hover,
+.login_small input:last-child:hover {
+ opacity:0.9;
+  filter:alpha(opacity=90); 
+}
