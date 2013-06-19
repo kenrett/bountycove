@@ -6,7 +6,7 @@ class PiratesController < ApplicationController
   include TasksHelper
 
   def new
-    sign_up_form = render_to_string :partial => 'pirates/new_acct',
+    sign_up_form = render_to_string :partial => 'pirates/new_acct_form',
                           :locals => {:captain => current_user,
                                       :pirate => Pirate.new}
 
