@@ -1,15 +1,12 @@
 - content_for :title, "Pirate's Page"
-%h1 I'm a fucking pirate!
-
 .row
   .large-12.columns
-  %h1 Pirate #{current_user.username.titleize}
-  %p Hello #{current_user.name}
-  %br
-.row
+  %h1.username Pirate #{current_user.username.titleize}
+  %p.intro  Hello #{current_user.name.titleize}! 
+.row.second_div
   .large-10.large-offset-1.small-10.columns.small-offset-1.captain_profile_treasures
     .row 
-      %h2 Available Treasures
+      %h2.username Available Treasures
       - @treasures.each do |treasure|
         .large-12.columns.treasure_item
           %img{:src => "http://us.cdn1.123rf.com/168nwm/orla/orla1010/orla101000044/8041795-wooden-treasure-chest-with-gold-coins-printed-with-royal-crown--3d-render.jpg"}/
@@ -18,11 +15,10 @@
           .cost #{treasure.price} gold coins
       %br
       = link_to 'View All Treasures!', pirate_treasures_path(current_user)
-      %br
 .row
-  .large-12.columns
+  .large-12.columns.third_div
     = render :partial => 'shared/pirates_sub_nav_bar'      
-.row
+.row.fourth_div
   .large-6.column.captain_profile_treasures
     %h2 TBD
     .row
@@ -40,7 +36,4 @@
           Earns #{task.worth} gold coins
       %br  
       = link_to 'View All Quests!', pirate_tasks_path(current_user)
-.row
-  .large-12.columns.footer
-    %p Footer goes here...
 

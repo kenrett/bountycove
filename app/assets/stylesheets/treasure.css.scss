@@ -7,7 +7,7 @@
   #last { // How do I nest this?
     margin-bottom: 1.4em !important;
   }
-
+  
   label {
     color: black;
     font-size: 1em;
@@ -28,7 +28,9 @@
   }
 }
 
-
+.treasure_item {
+  border: 2px solid black;
+}
 .tiny.button.alert.round {
   margin-top: 1em;
 }

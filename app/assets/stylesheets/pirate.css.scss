@@ -1,0 +1,37 @@
+.pirate_div {
+  border: 2px solid black;
+  height: 3.125em;
+  width: 100%;
+  background-color: #7274C4;
+
+  .small.secondary.button {
+    width: 100%;
+  }
+}
+
+.second_div, .fourth_div {
+  background-color: orange;
+  width: 100%;
+  border: 2px solid black;
+}
+
+.third_div {
+  padding: 0;
+}
+
+.username {
+  border: 2px solid black;
+}
+
+.intro {
+  border: 1px solid black;
+  font-weight: 700;
+  background-color: #7274C4;
+  width: 100%;
+  padding-left: 1em;
+}
+
+// .small.secondary.button:nth-child(2): {
+//   margin-left: 2em;
+//   margin-right: 2em;
+// }
