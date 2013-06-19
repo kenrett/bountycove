@@ -14,7 +14,7 @@
           = button_to "Delete", captain_treasure_path(current_user, treasure), :method => :delete, :confirm => "Are you sure?"
         .large-1.columns
     %br
-    = link_to "Check treasure cove", captain_treasures_path(current_user), :remote => true, :class => 'captain_treasure_cove'
+    = link_to "Check treasure cove", captain_treasures_path(current_user), :remote => true, :id => 'captain_treasure_cove'
 .row
   .large-12.columns
     = render :partial => 'shared/captain_sub_nav_bar' 
