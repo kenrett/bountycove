@@ -33,6 +33,7 @@
   .large-4.column.large-offset-1.small-11.captain_profile_right
     = link_to "Create Adventure", captain_tasks_path(current_user), :remote => true, :class => 'captain_task_cove'
     .row
+      / Only display last five completed tasks
       - @tasks.each do |task|
         .large-12.columns.t_and_e
           = task.name

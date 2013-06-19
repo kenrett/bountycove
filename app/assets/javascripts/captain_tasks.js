@@ -14,14 +14,30 @@ List.prototype = {
     this.template = "<ul class='captain_tasks_show'><h1>" +header+ "</h1>" +content+ "</ul>";
   }
 }
+  function TaskError(elem, message) {
+  this.elem = elem;
+  this.message = message;
+}
+
+TaskError.prototype = {
+  renderToPage: function() {
+    this.createTemplate(this.message);
+    $(this.elem).html(this.template);
+  },
+
+  createTemplate: function(message) {
+    this.template = "<div data-alert class='alert-box'>"+message+"<a href='#' class='close'>&times;</a></div>";
+  } 
+
+}
 
 $(document).ready(function(){
 
   $('.captain_task_cove').on('ajax:success', function(e, data, status, xhr){
     topBox    = new List('.captain_profile_treasures', 'Available Tasks', data.tasks_on_board);
-    leftBox   = new List('.captain_profile_left', 'Assigned Tasks', data.tasks_assigned);
-    rightBox  = new List('.captain_profile_right', 'Tasks to Verify', data.tasks_need_verify);
-    botBox    = new List('.captain_profile_bottom', 'Last 5 Completed Tasks', data.tasks_completed);
+    leftBox   = new List('.captain_profile_left', 'Task to be Verified', data.tasks_need_verify);
+    rightBox  = new List('.captain_profile_right', 'Enter new Task!', data.task_form);
+    botBox    = new List('.captain_profile_bottom', 'Assigned Tasks', data.tasks_assigned);
     
     topBox.renderToPage();
     leftBox.renderToPage();
@@ -29,4 +45,10 @@ $(document).ready(function(){
     botBox.renderToPage();
   });//end on
   
+  $('.captain_profile_right').on('ajax:success', 'form', function(e, data, status, xhr){
+    if(data.error) {
+      var taskError = new TaskError('.error_max_task_limit', data.error);
+      taskError.renderToPage();
+    }
+  });
 });//end ready

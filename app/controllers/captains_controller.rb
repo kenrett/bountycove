@@ -19,6 +19,7 @@ class CaptainsController < ApplicationController
     @treasures = current_user.treasures.on_sale
     @pirates = current_user.pirates
     @tasks = current_user.tasks
+    @tasks = @tasks.pop(5) if @tasks.size > 5
   end
 
   def confirm

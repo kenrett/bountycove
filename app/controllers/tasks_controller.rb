@@ -27,11 +27,14 @@ class TasksController < ApplicationController
         tasks: current_user.tasks_completed.order('updated_at ASC').limit(5) , 
         button: false , 
         assigned: true })
+
+      new_task_form = render_to_string :partial => 'task_form', :locals => {captain: @captain, task: Task.new}
       
       render :json => {:tasks_on_board => tasks_on_board,
                        :tasks_assigned => tasks_assigned,
                        :tasks_need_verify => tasks_need_verify,
-                       :tasks_completed => tasks_completed }
+                       :tasks_completed => tasks_completed,
+                       :task_form => new_task_form }
 
     when 'Pirate'
       @tasks = current_user.captain.tasks
@@ -47,23 +50,20 @@ class TasksController < ApplicationController
 
   def new
     if count_of_available_tasks >= 6
-      flash[:errors] = ["Only 6 available tasks allowed!"]
-      redirect_to captain_tasks_path(current_user)
+      # needed anymore?
+      # render :json => { error: "Only 6 available tasks allowed!"}
     else
-      @task = Task.new
-      form = render_to_string :partial => 'form', :locals => {captain: @captain, task: @task}
-      render :json => {:form => form}
+      redirect_to root_path
     end
   end
 
   def create
     @task = Task.new(params[:task])
-    if @task.save
+    if count_of_available_tasks >= 6
+      render :json => { :error => "Only 6 available tasks allowed!" }
+    elsif @task.save
       @captain.tasks << @task
-      redirect_to captain_tasks_path(@captain)
-    else
-      flash[:errors] = @task.errors.full_messages
-      redirect_to new_captain_task_path(@captain)
+      redirect_to captain_path(@captain)
     end
   end
 
@@ -102,7 +102,7 @@ class TasksController < ApplicationController
   def get_task
     @task = Task.find(params[:id])
   end
-  
+
   def render_task_view_to_string(args)
     render_to_string :partial => "captain_tasks", :locals => {
                      :tasks    => args[:tasks], 
