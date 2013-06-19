@@ -30,4 +30,7 @@ Daddyshop::Application.routes.draw do
 
   # Captain delivers treasure
   post "/captains/:captain_id/treasures/:treasure_id/delivers_treasure" => "captains#delivers_treasure", :as => 'captain_delivers_treasure'
+
+  # Captain edit pirate's account
+  get '/captains/:captain_id/pirates/:pirate_id/edits_pirate_acct' => 'captains#edits_pirate_acct', :as => 'captain_edits_pirates_acct'
 end

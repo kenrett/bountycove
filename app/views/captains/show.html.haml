@@ -18,12 +18,8 @@
 .row.box.middle-section
   .large-4.column.large-offset-1.small-11.captain.profile_left
     .row
-      - @pirates.each do |pirate|
-        .large-12.columns.t_and_e
-          = link_to "#{pirate.name}",
-          captain_pirate_path(current_user, pirate)
-          / NEED A CAPTAIN PIRATE SHOW ROUTE
-    = link_to "Add Pirate", new_captain_pirate_path(current_user)
+      = render :partial => 'list_of_pirates', :locals => {:pirates => @pirates}
+    = link_to "Add Pirate", new_captain_pirate_path(current_user), :remote => true, :id => 'add_pirate'
 
   .large-4.column.large-offset-1.small-11.captain.profile_right
     .row
