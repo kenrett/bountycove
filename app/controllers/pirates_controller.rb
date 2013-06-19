@@ -17,12 +17,32 @@ class PiratesController < ApplicationController
                      :list_of_pirates => list_pirates}
   end
 
+  def edit
+    pirate = Pirate.find_by_username(params[:id])
+    pirate_edit_form = render_to_string :partial => 'pirates/new_acct_form',
+                                        :locals => {:captain => current_user,
+                                                    :pirate => pirate}
+    
+    render :json => {:pirate_edit_form => pirate_edit_form}
+  end
+
   def new
     sign_up_form = render_to_string :partial => 'pirates/new_acct_form',
                           :locals => {:captain => current_user,
                                       :pirate => Pirate.new}
 
     render :json => {:sign_up_form => sign_up_form}
+  end
+
+  def update
+    pirate = Pirate.find_by_username(params[:id])
+    
+    if pirate.update_attributes(params[:pirate])
+      
+    else
+      debugger
+      render :json => pirate.errors.full_messages, :status => :unprocessable_entity
+    end
   end
 
   def create

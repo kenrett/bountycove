@@ -34,10 +34,6 @@ class CaptainsController < ApplicationController
     # redirect_to captain_path(current_user)
   end
 
-  def edits_pirate_acct
-    debugger;
-  end
-
   def delivers_treasure
     treasure = Treasure.find(params[:treasure_id])
 

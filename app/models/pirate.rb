@@ -40,10 +40,10 @@ class Pirate < User
   end
 
   def validate_email?
-    email.present?
+    self.email.present?
   end
 
   def to_param
-    username.downcase
+    self.username.downcase
   end
 end
