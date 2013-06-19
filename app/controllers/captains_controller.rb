@@ -25,14 +25,13 @@ class CaptainsController < ApplicationController
   def confirm
     task = Task.find(params[:task_id])
     if task.completed!
-      flash[:task_completed] = "Nice Work you Finished the Task!"
       task.pirate.coins += task.worth
       task.pirate.save
     else
       flash[:error_adding] = 'ArgH! Something went wrong'
     end
 
-    redirect_to captain_path(current_user)
+    # redirect_to captain_path(current_user)
   end
 
   def delivers_treasure

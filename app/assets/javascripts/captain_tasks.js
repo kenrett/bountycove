@@ -27,29 +27,32 @@ TaskError.prototype = {
 
   createTemplate: function(message) {
     this.template = "<div data-alert class='alert-box'>"+message+"<a href='#' class='close'>&times;</a></div>";
-  } 
-
+  }
 }
 
 $(document).ready(function(){
 
   $('.captain_task_cove').on('ajax:success', function(e, data, status, xhr){
-    topBox    = new List('.captain_profile_treasures', 'Available Tasks', data.tasks_on_board);
+    topBox    = new List('.captain_profile_treasures', 'Assigned Tasks', data.tasks_assigned);
     leftBox   = new List('.captain_profile_left', 'Task to be Verified', data.tasks_need_verify);
     rightBox  = new List('.captain_profile_right', 'Enter new Task!', data.task_form);
-    botBox    = new List('.captain_profile_bottom', 'Assigned Tasks', data.tasks_assigned);
-
+    botBox    = new List('.captain_profile_bottom', 'Available Tasks', data.tasks_on_board);
     
     topBox.renderToPage();
     leftBox.renderToPage();
     rightBox.renderToPage();
     botBox.renderToPage();
   });//end on
-  
-  $('.captain_profile_right').on('ajax:success', 'form', function(e, data, status, xhr){
-    if(data.error) {
-      var taskError = new TaskError('.error_max_task_limit', data.error);
-      taskError.renderToPage();
-    }
-  });
+
+    $('.captain_profile_right').on('ajax:success', 'new_task', function(e, data, status, xhr) {
+    if (data.error)
+      {
+        var taskError = new TaskError('.error_max_task_limit', data.error);
+        TaskError.renderToPage();
+      }
+    else if(data.update)
+      {
+        location.reload();
+      }
+    });
 });//end ready
