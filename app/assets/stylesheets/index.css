@@ -1,7 +1,7 @@
-html,body,img,form,textarea,input,fieldset,div,p,div,ul,li,ol,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,code { margin: 0; padding: 0;}
+form,textarea,input { margin: 0; padding: 0;}
 
 .banner {
-  height: 650px;
+  height: 700px; 
   background-image: linear-gradient(bottom, #FFFFFF 0%, #A5DAF5 100%);
   background-image: -o-linear-gradient(bottom, #FFFFFF 0%, #A5DAF5 100%);
   background-image: -moz-linear-gradient(bottom, #FFFFFF 0%, #A5DAF5 100%);
@@ -16,122 +16,154 @@ html,body,img,form,textarea,input,fieldset,div,p,div,ul,li,ol,dl,dt,dd,h1,h2,h3,
     color-stop(1, #A5DAF5)
   );
 }
- /*need to remove px*/
+
 .banner_index {
   background-image:url('/pirate_index_dexter.png');
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: center 5px;
+  background-position: center;
   width: 100%;
-  height: 650px;
+  height: 100%;
   z-index: 9999;
   position: relative;
-  top: 60px;
+  top: 1%;
 }
  
- /*need to remove px*/
+.banner_index_small {
+  width: 100%;
+  min-height: 50px;
+
+}
+
 .break_1 {
   width: 100%;
-  height: 270px;
+  height: 18%;
   background: #59b5e6;
   z-index: 1;
   position: absolute;
-  top: 535px;
+  top: 29%;
   background-size: contain;
+}
+
+.form_errors {
+  width: 100%;
+  height: 100%;
 }
 
 .forms {
   background-image: linear-gradient(bottom, #273F87 2%, #007EC2 54%);
-background-image: -o-linear-gradient(bottom, #273F87 2%, #007EC2 54%);
-background-image: -moz-linear-gradient(bottom, #273F87 2%, #007EC2 54%);
-background-image: -webkit-linear-gradient(bottom, #273F87 2%, #007EC2 54%);
-background-image: -ms-linear-gradient(bottom, #273F87 2%, #007EC2 54%);
+  background-image: -o-linear-gradient(bottom, #273F87 2%, #007EC2 54%);
+  background-image: -moz-linear-gradient(bottom, #273F87 2%, #007EC2 54%);
+  background-image: -webkit-linear-gradient(bottom, #273F87 2%, #007EC2 54%);
+  background-image: -ms-linear-gradient(bottom, #273F87 2%, #007EC2 54%);
 
-background-image: -webkit-gradient(
-  linear,
-  left bottom,
-  left top,
-  color-stop(0.02, #273F87),
-  color-stop(0.54, #007EC2)
-);
- /*need to remove px*/
-  height: 960px;
-  font-family: 'Pathway Gothic One', sans-serif;
-  font-size: 25px;
-  //color: #faaf40;
-  color: #e89b36;
-  letter-spacing: 1px;
+  background-image: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    color-stop(0.02, #273F87),
+    color-stop(0.54, #007EC2)
+  );
+    font-family: 'Pathway Gothic One', sans-serif;
 }
- /*need to remove px*/
+
+.small_forms {
+  font-family: 'Pathway Gothic One', sans-serif;
+  color: #e89b36;
+  background: #59b5e6;
+}
+
+.index_forms {
+  height: 100%;
+  width: 100%;
+  margin-top: 15%;
+}
+
 .underwater_index {
   background-image:url('/underwater_index.png');
-  background-size: contain;
+  /*background-size: contain;*/
   background-repeat: no-repeat;
-  background-position: center 5px;
+  background-position: center;
   height: 270px;
+  width: 100%;
   z-index: 9999;
   position: relative;
-  top: 690px;
-  
-}
- /*need to remove px*/
-.login {
-  padding: 10px;
-  margin-top: 180px;
-  margin-right: 340px;
-  float: right;
-  width: 250px;
-  height: 190px;
-}
-
- /*need to remove px*/
-.sign_up {
-  padding: 10px;
-  margin-top: 180px;
-  margin-left: 340px;
-  float: left;
-  width: 250px;
-  height: 420px;
+  /*top: 5%;*/
 }
 
 
- /*need to remove px*/
-#username,
-#password {
+.small_footer {
+  width: 100%;
+  height: 50px;
+}
+
+/*###################################*/
+
+.small_footer {
+  width: 100%;
+  height: 50px;
+}
+
+/*###################################*/
+
+.login input {
   border: 0;
-  width: 230px;
-  height: 20px;
-  padding: 5px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  background: #385ea0;
+  height: 20%;
+  background: #fff;
+  opacity:0.1;
+  filter:alpha(opacity=10); /* For IE8 and earlier */
   font-family: 'Pathway Gothic One', sans-serif;
-  font-size: 20px;
-  letter-spacing: 1px;
-  color: #fff;
+  font-size: 12px;
+  color: black;
 }
 
- /*need to remove px*/
-#captain_first_name,
-#captain_last_name,
-#captain_username,
-#captain_email,
-#captain_password,
-#captain_password_confirmation {
+.sign_up input {
   border: 0;
-  width: 230px;
-  height: 20px;
-  padding: 5px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  background: #385ea0;
+ background: #fff;
+   opacity:0.1;
+   filter:alpha(opacity=10); /* For IE8 and earlier */
   font-family: 'Pathway Gothic One', sans-serif;
-  font-size: 20px;
+  font-size: 12px;
   letter-spacing: 1px;
-  color: #fff;
+ color: black;
 }
 
+/*###################################*/
 
-.html {
-  background-color: #ccc;
+.login_small input {
+  border: 0;
+  background: #fff;
+  font-family: 'Pathway Gothic One', sans-serif;
+  color: #444444;
+}
+
+.sign_up_small input {
+  border: 0;
+  background: #fff;
+  font-family: 'Pathway Gothic One', sans-serif;
+  color: #444444;
+}
+
+.sign_up_small input {
+  border: 0;
+  background: #fff;
+  font-family: 'Pathway Gothic One', sans-serif;
+  color: #444444;
+}
+
+/*###################################*/
+
+label {
+  font-size: 1.4em;
+  color: lightblue;
+  cursor: pointer;
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+input.fish_button {
+  width: 100%;
+  height: 100%;
+  background: orange;
 }

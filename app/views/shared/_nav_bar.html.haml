@@ -2,8 +2,8 @@
   .nav
     %ul
       %li
-        Logged in as: #{link_to "#{current_user.type} #{current_user.username}", pirate_captain_profile_link}
-        (#{link_to "Logout", logout_path, :method => :post})
+        #{link_to "#{current_user.type} #{current_user.username}", pirate_captain_profile_link}
+        | #{link_to "Logout", logout_path, :method => :post}
 
       - if current_user_is_captain && count_of_tasks_need_verify > 0
         %li
