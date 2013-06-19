@@ -4,7 +4,7 @@ var Tax = {
   calculatePrice: function(price) {
     return Math.round(price + price*(this.rate/100));
   }
-}
+};
 
 function Treasure(elem, treasure) {
   this.elem = elem;
@@ -20,10 +20,11 @@ Treasure.prototype = {
   },
 
   createTemplate: function() {
-    return this.template = "<div class='large-3 columns treasure_item'><img src='" +this.imgSRC+ "' /><br />" +
+    this.template = "<div class='large-3 columns treasure_item'><img src='" +this.imgSRC+ "' /><br />" +
                        "<a href='/captains/" +this.captain+ "/treasures/" +this.treasureId+ "' class='captain_treasure_show' data-remote='true'>" +this.name+ "</a></div><div class='large-1 columns'></div>";
+    return this.template;
   }
-}
+};
 
 function List(elem, title, content) {
   this.elem = elem;
@@ -41,7 +42,7 @@ List.prototype = {
   createTemplate: function(header, content) {
     this.template = "<ul class='treasures_on_sale'><h1>" +header+ "</h1>" +content+ "</ul>";
   }
-}
+};
 
 function TreasureError(elem, message) {
   this.elem = elem;
@@ -57,7 +58,7 @@ TreasureError.prototype = {
   createTemplate: function(message) {
     this.template = "<div data-alert class='alert alert-box'>"+message+"<a href='#' class='close'>&times;</a></div>";
   }
-}
+};
 
 function TreasureSuccess(elem, message) {
   this.elem = elem;
@@ -73,14 +74,14 @@ TreasureSuccess.prototype = {
   createTemplate: function(message) {
     this.template = "<div data-alert class='alert-box'>"+message+"<a href='#' class='close'>&times;</a></div>";
   }
-}
+};
 
 $(document).ready(function(){
   // Clicking "Treasure Cove" to render treasure view
   $('#mid_nav_bar').on('ajax:success', '#captain_treasure_cove', function(e, data, status, xhr){
-    var leftBox  = new List('.captain_profile_left', 'Treasure to deliver', data.treasures_bought);
-    var rightBox = new List('.captain_profile_right', 'Add Treasures!', data.new_treasure_form);
-    var botBox   = new List('.captain_profile_bottom', 'Treasure delivered', data.treasures_delivered);
+    var leftBox  = new List('.captain.profile_left', 'Treasure to deliver', data.treasures_bought);
+    var rightBox = new List('.captain.profile_right', 'Add Treasures!', data.new_treasure_form);
+    var botBox   = new List('.captain.profile_bottom', 'Treasure delivered', data.treasures_delivered);
 
     leftBox.renderToPage();
     rightBox.renderToPage();
@@ -90,8 +91,8 @@ $(document).ready(function(){
   });//end on for rendering treasure profile view
 
   // Adding a new treasure
-  $('.captain_profile_right').on('ajax:success', '#new_treasure', function(e, data, status, xhr) {
-    $('.captain_profile_main').html(data.treasure_board);
+  $('.captain.profile_right').on('ajax:success', '#new_treasure', function(e, data, status, xhr) {
+    $('.captain.profile_main').html(data.treasure_board);
     var creationMessage = new TreasureSuccess('.error_max_treasure_limit', data.success_creation);
     creationMessage.renderToPage();
   }).on('ajax:error', '#new_treasure', function(e, data, status, xhr) {
@@ -99,25 +100,25 @@ $(document).ready(function(){
     validationError.renderToPage();
   });//end on
 
-  // Edditing a treasure
-  $('.captain_profile_right').on('ajax:success', '.edit_treasure', function(e, data, status, xhr) {
-    $('.captain_profile_main').html(data.treasure_board);
+  // Editing a treasure
+  $('.captain.profile_right').on('ajax:success', '.edit_treasure', function(e, data, status, xhr) {
+    $('.captain.profile_main').html(data.treasure_board);
 
-    var rightBox = new List('.captain_profile_right', 'Add Treasures!', data.new_treasure_form);
+    var rightBox = new List('.captain.profile_right', 'Add Treasures!', data.new_treasure_form);
     rightBox.renderToPage();
 
     var editMessage = new TreasureSuccess('.error_max_treasure_limit', data.success_message);
     editMessage.renderToPage();
   });// end on
 
-  // Showing treasure when clicked
-  $('.captain_profile_main').on('ajax:success', '.captain_treasure_show', function(e, data, status, xhr) {
-    $('.captain_treasure_show').removeClass('active');
+  // Showing treasure to edit when clicked
+  $('.captain.profile_main').on('ajax:success', '.captain_treasure_show', function(e, data, status, xhr) {
+    $('.captain.treasure_show').removeClass('active');
     $(this).addClass('captain_treasure_show active');
 
-    var leftBox  = new List('.captain_profile_left', 'Treasure to deliver', data.treasures_bought);
-    var rightBox = new List('.captain_profile_right', 'Edit Treasure!', data.new_treasure_form);
-    var botBox   = new List('.captain_profile_bottom', 'Treasure delivered', data.treasures_delivered);
+    var leftBox  = new List('.captain.profile_left', 'Treasure to deliver', data.treasures_bought);
+    var rightBox = new List('.captain.profile_right', 'Edit Treasure!', data.new_treasure_form);
+    var botBox   = new List('.captain.profile_bottom', 'Treasure delivered', data.treasures_delivered);
 
     leftBox.renderToPage();
     rightBox.renderToPage();
@@ -127,9 +128,9 @@ $(document).ready(function(){
   });//end on
 
   // Delivering treasure
-  $('.captain_profile_left').on('ajax:success', 'a#deliver-treasure', function(e, data, status, xhr) {
-    var leftBox  = new List('.captain_profile_left', 'Treasure to deliver', data.treasures_to_deliver);
-    var botBox   = new List('.captain_profile_bottom', 'Treasure delivered', data.treasures_delivered);
+  $('.captain.profile_left').on('ajax:success', 'a#deliver-treasure', function(e, data, status, xhr) {
+    var leftBox  = new List('.captain.profile_left', 'Treasure to deliver', data.treasures_to_deliver);
+    var botBox   = new List('.captain.profile_bottom', 'Treasure delivered', data.treasures_delivered);
 
     leftBox.renderToPage();
     botBox.renderToPage();
@@ -139,7 +140,7 @@ $(document).ready(function(){
   });//end on
 
   // Dynamically add up the total price
-  $('.captain_profile_right').on('keyup', '#treasure_price', function(e) {
+  $('.captain.profile_right').on('keyup', '#treasure_price', function(e) {
       var price = parseFloat(e.target.value);
       $('#total_price').html(Tax.calculatePrice(price));
     });//end on
