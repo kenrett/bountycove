@@ -1,5 +1,6 @@
 #new_pirate_message
 = form_for [captain, pirate], :remote => true do |f|
+  %h1 Recruit a pirate!
   = f.label :first_name
   = f.text_field :first_name
   %br
@@ -17,4 +18,4 @@
   %br
   = f.label :password_confirmation
   = f.password_field :password_confirmation
-  = f.submit "Pirates!"
+  = f.submit "Ahoy!"

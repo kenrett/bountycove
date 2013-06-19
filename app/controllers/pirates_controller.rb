@@ -5,6 +5,18 @@ class PiratesController < ApplicationController
   include UsersHelper
   include TasksHelper
 
+  def index
+    sign_up_form = render_to_string :partial => 'new_acct_form',
+                        :locals => {:captain => current_user,
+                                    :pirate => Pirate.new}
+
+    list_pirates = render_to_string :partial => 'captains/list_of_pirates',
+                                    :locals => {:pirates => current_user.pirates}
+
+    render :json => {:sign_up_form => sign_up_form,
+                     :list_of_pirates => list_pirates}
+  end
+
   def new
     sign_up_form = render_to_string :partial => 'pirates/new_acct_form',
                           :locals => {:captain => current_user,
