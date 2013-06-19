@@ -1,34 +1,3 @@
-.profile_botton {
-  background-color: gray;
-  border: 2px solid black;
-  border-radius:25px;
-  min-height: 39em;
-  overflow: auto;
-
-  #last { // How do I nest this?
-    margin-bottom: 1.4em !important;
-  }
-  
-  label {
-    color: black;
-    font-size: 1em;
-  }
-
-  ul {
-    padding: 1em;
-
-    li {
-      color: black;
-      // margin-bottom: 2.2em;
-      font-weight: 500;
-
-      :first-child {
-        margin-top: 1.7em;
-      }
-    }
-  }
-}
-
 .treasure_item {
   border: 2px solid black;
 }
