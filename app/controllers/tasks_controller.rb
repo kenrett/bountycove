@@ -8,26 +8,10 @@ class TasksController < ApplicationController
   def index
     case current_user.type
     when 'Captain'
-      tasks_on_board = render_to_string :partial => 'captain_task_board', 
-      :locals => { tasks_available: current_user.tasks_on_board, 
-        tasks_assigned: current_user.tasks_assigned,
-        tasks_completed: current_user.tasks_completed.limit(5) }
-      
-      tasks_need_verify = render_task_view_to_string({
-        tasks: current_user.tasks_need_verify, 
-        button: true, 
-        assigned: false})
-      
-      new_task_form = render_to_string :partial => 'form', 
-      :locals => {captain: @captain, task: Task.new}      
-
-      render :json => {:tasks_on_board => tasks_on_board,
-                       :tasks_need_verify => tasks_need_verify,
-                       :task_form => new_task_form }
-
+      render_task_profile_to_json(Task.new)
     when 'Pirate'
       @tasks = current_user.captain.tasks
-      
+
       @tasks_on_board    = @tasks.where(status: Task::ON_BOARD)
       @tasks_assigned    = @tasks.where(status: Task::ASSIGNED)
       @tasks_need_verify = @tasks.where(status: Task::NEED_VERIFY)
@@ -35,6 +19,7 @@ class TasksController < ApplicationController
 
       render_local_pirate_or_captain_view 'index'
     end
+
   end
 
   def new
@@ -57,46 +42,69 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task = Task.find(params[:id])
-
-    render_local_pirate_or_captain_view 'show'
+    task = Task.find(params[:id])
+    render_task_profile_to_json(task)
   end
 
   def edit
     @task = Task.find(params[:id])
-
-    render_local_pirate_or_captain_view 'edit'
   end
 
   def update
-    @task.update_attributes params[:task]
-    redirect_to captain_tasks_path(@captain)
-  end
+    Task.find(params[:id]).update_attributes(params[:task])
 
-  def destroy
-    @task.destroy
-    redirect_to captain_tasks_path(@captain)
-  end
+    new_task_form = render_to_string :partial => 'form', 
+    :locals => {captain: @captain, task: Task.new} 
 
-  private
+    success_message = 'Argh! Yeh Quest changed!'
 
-  def get_captain
-    @captain = Captain.find_by_username(params[:captain_id])
-  end
+    render :json => {:new_task_form => new_task_form,
+      :success_message => success_message}
+    end
 
-  def get_pirate
-    @pirate = Pirate.find_by_username(params[:pirate_id])
-  end
+    def destroy
+      @task.destroy
+      redirect_to captain_tasks_path(@captain)
+    end
 
-  def get_task
-    @task = Task.find(params[:id])
-  end
+    private
 
-  def render_task_view_to_string(args)
-    render_to_string :partial => "captain_tasks", :locals => {
-                     :tasks    => args[:tasks], 
-                     :button   => args[:button], 
-                     :assigned => args[:assigned]}
-  end
+    def get_captain
+      @captain = Captain.find_by_username(params[:captain_id])
+    end
 
-end
+    def get_pirate
+      @pirate = Pirate.find_by_username(params[:pirate_id])
+    end
+
+    def get_task
+      @task = Task.find(params[:id])
+    end
+
+    def render_task_profile_to_json(task)
+      tasks_on_board = render_to_string :partial => 'captain_task_board', 
+      :locals => { tasks_available: current_user.tasks_on_board, 
+        tasks_assigned: current_user.tasks_assigned,
+        tasks_completed: current_user.tasks_completed.limit(5) }
+
+        tasks_need_verify = render_task_view_to_string({
+          tasks: current_user.tasks_need_verify, 
+          button: true, 
+          assigned: false})
+
+        new_task_form = render_to_string :partial => 'form', 
+        :locals => {captain: @captain, task: Task.new}      
+
+        render :json => {:tasks_on_board => tasks_on_board,
+         :tasks_need_verify => tasks_need_verify,
+         :task_form => new_task_form }
+       end
+
+       def render_task_view_to_string(args)
+        render_to_string :partial => "captain_tasks", :locals => {
+         :tasks    => args[:tasks], 
+         :button   => args[:button], 
+         :assigned => args[:assigned]}
+       end
+
+     end

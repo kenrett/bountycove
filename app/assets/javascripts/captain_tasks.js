@@ -14,7 +14,7 @@ List.prototype = {
     this.template = "<ul class='captain_tasks_show'><h1>" +header+ "</h1>" +content+ "</ul>";
   }
 }
-  function TaskError(elem, message) {
+function TaskError(elem, message) {
   this.elem = elem;
   this.message = message;
 }
@@ -51,9 +51,9 @@ $(document).ready(function(){
 
   $('#mid_nav_bar').on('ajax:success','#captain_task_cove', function(e, data, status, xhr){
 
-    leftBox   = new List('.profile_left', 'Task to be Verified', data.tasks_need_verify);
-    rightBox  = new List('.profile_right', 'Enter new Task!', data.task_form);
-    botBox   = new List('.profile_bottom', '', data.tasks_on_board);
+    leftBox   = new List('.captain.profile_left', 'Task to be Verified', data.tasks_need_verify);
+    rightBox  = new List('.captain.profile_right', 'Enter new Task!', data.task_form);
+    botBox   = new List('.captain.profile_bottom', '', data.tasks_on_board);
 
     leftBox.renderToPage();
     rightBox.renderToPage();
@@ -61,24 +61,23 @@ $(document).ready(function(){
 
   });//end on
   
-  $('.profile_right').on('ajax:success', '#new_task', function(e, data, status, xhr) {
+  //Add task
+  $('.captain.profile_right').on('ajax:success', '#new_task', function(e, data, status, xhr) {
     var creationMessage = new TaskSuccess('.error_max_task_limit', data.task_create);
     creationMessage.renderToPage();
   }).on('ajax:error', '#new_task', function(e, data, status, xhr) {
     var validationError = new TaskError('.error_max_task_limit', data.responseText);
     validationError.renderToPage();
   });//end on
+  
+  //Edit Task
+  $('.captain.profile_right').on('ajax:success', '.edit_task', function(e, data, status, xhr) {
+    debugger
+    var rightBox = new List('.captain.profile_right', 'Enter new Task!', data.new_task_form);
+    rightBox.renderToPage();
 
+    var editMessage = new TaskSuccess('.error_max_task_limit', data.success_message);
+    editMessage.renderToPage();
+  });// end on
 
-    // $('.captain_profile_right').on('ajax:success', '.new_task#new_task', function(e, data, status, xhr) {
-    // if (data.error)
-    //   {
-    //     var taskError = new TaskError('.error_max_task_limit', data.error);
-    //     taskError.renderToPage();
-    //   }
-    // else if(data.update)
-    //   {
-    //     location.reload();
-    //   }
-    // });
 });//end ready
