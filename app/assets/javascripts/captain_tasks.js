@@ -31,29 +31,54 @@ TaskError.prototype = {
 
 }
 
+function TaskSuccess(elem, message) {
+  this.elem = elem;
+  this.message = message;
+}
+
+TaskSuccess.prototype = {
+  renderToPage: function() {
+    this.createTemplate(this.message);
+    $(this.elem).html(this.template);
+  },
+
+  createTemplate: function(message) {
+    this.template = "<div data-alert class='alert-box'>"+message+"<a href='#' class='close'>&times;</a></div>";
+  }
+}
+
 $(document).ready(function(){
 
   $('#mid_nav_bar').on('ajax:success','#captain_task_cove', function(e, data, status, xhr){
 
-    leftBox   = new List('.captain_profile_left', 'Task to be Verified', data.tasks_need_verify);
-    rightBox  = new List('.captain_profile_right', 'Enter new Task!', data.task_form);
-    botBox   = new List('.captain_profile_bottom', '', data.tasks_on_board);
+    leftBox   = new List('.profile_left', 'Task to be Verified', data.tasks_need_verify);
+    rightBox  = new List('.profile_right', 'Enter new Task!', data.task_form);
+    botBox   = new List('.profile_bottom', '', data.tasks_on_board);
 
     leftBox.renderToPage();
     rightBox.renderToPage();
     botBox.renderToPage();
 
   });//end on
+  
+  $('.profile_right').on('ajax:success', '#new_task', function(e, data, status, xhr) {
+    var creationMessage = new TaskSuccess('.error_max_task_limit', data.task_create);
+    creationMessage.renderToPage();
+  }).on('ajax:error', '#new_task', function(e, data, status, xhr) {
+    var validationError = new TaskError('.error_max_task_limit', data.responseText);
+    validationError.renderToPage();
+  });//end on
 
-    $('.captain_profile_right').on('ajax:success', '.new_task#new_task', function(e, data, status, xhr) {
-    if (data.error)
-      {
-        var taskError = new TaskError('.error_max_task_limit', data.error);
-        taskError.renderToPage();
-      }
-    else if(data.update)
-      {
-        location.reload();
-      }
-    });
+
+    // $('.captain_profile_right').on('ajax:success', '.new_task#new_task', function(e, data, status, xhr) {
+    // if (data.error)
+    //   {
+    //     var taskError = new TaskError('.error_max_task_limit', data.error);
+    //     taskError.renderToPage();
+    //   }
+    // else if(data.update)
+    //   {
+    //     location.reload();
+    //   }
+    // });
 });//end ready

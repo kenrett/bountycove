@@ -6,7 +6,7 @@
     %p Hello #{current_user.first_name}!
 .row
   .large-10.large-offset-1.small-10.columns.small-offset-1.captain_profile_treasures
-    .row.captain_profile_main
+    .row.profile_main
       = render :partial => 'treasures/captain_treasure_board', :locals => {:treasure_board => @treasures}
     %br
 
@@ -16,7 +16,7 @@
 %br
 
 .row.box.middle-section
-  .large-4.column.large-offset-1.small-11.captain_profile_left
+  .large-4.column.large-offset-1.small-11.profile_left
     .row
       - @pirates.each do |pirate|
         .large-12.columns.t_and_e
@@ -25,7 +25,7 @@
           / NEED A CAPTAIN PIRATE SHOW ROUTE
     = link_to "Add Pirate", new_captain_pirate_path(current_user)
 
-  .large-4.column.large-offset-1.small-11.captain_profile_right
+  .large-4.column.large-offset-1.small-11.profile_right
     .row
       - @tasks.each do |task|
         .large-12.columns.t_and_e
@@ -35,7 +35,7 @@
   .large-1.small-1.column
 %br
 .row
-  .large-12.columns.captain_profile_bottom
+  .large-12.columns.profile_bottom
 .row
   .large-12.columns.footer
     %p Footer goes here...

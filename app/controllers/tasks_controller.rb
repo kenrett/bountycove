@@ -49,10 +49,10 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(params[:task])
     if count_of_available_tasks >= 6
-      render :json => { :error => "Only 6 available tasks allowed!" }
+      render :json => "Only 6 available tasks allowed!", :status => :unprocessable_entity
     elsif @task.save
       @captain.tasks << @task
-      redirect_to captain_path(@captain)
+      render :json => { :task_create => "A new Quest has been set!" }
     end
   end
 
