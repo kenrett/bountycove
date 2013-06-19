@@ -38,9 +38,19 @@ class PiratesController < ApplicationController
     pirate = Pirate.find_by_username(params[:id])
     
     if pirate.update_attributes(params[:pirate])
-      
-    else
+      sign_up_form = render_to_string :partial => 'new_acct_form',
+                        :locals => {:captain => current_user,
+                                    :pirate => Pirate.new}
 
+      list_pirates = render_to_string :partial => 'captains/list_of_pirates',
+                                    :locals => {:pirates => current_user.pirates}
+
+      success_message = 'Argh! Your pirate got a new eyepatch!'
+
+      render :json => {:sign_up_form => sign_up_form,
+                     :list_of_pirates => list_pirates,
+                     :success_message => success_message}
+    else
       render :json => pirate.errors.full_messages, :status => :unprocessable_entity
     end
   end
@@ -51,7 +61,7 @@ class PiratesController < ApplicationController
     pirate.captain  = current_user
 
     if pirate.save
-      success_message = "Arggh! You've created a new pirate!"
+      success_message = "Arggh! A new pirate on deck!"
 
       sign_up_form = render_to_string :partial => 'new_acct_form',
                         :locals => {:captain => current_user,
