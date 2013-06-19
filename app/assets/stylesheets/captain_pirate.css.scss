@@ -43,9 +43,14 @@
 .t_and_e {
   height: 6.25em;
   text-align: center;
+  border: 2px solid black;
 }
 
 // Captain Tasks Index
+
+ul.task {
+  border: 2px solid black;
+}
 
 .top_links {
   text-align: center;

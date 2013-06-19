@@ -41,9 +41,26 @@
   }
 }
 
+form#new_pirate.new_pirate label {
+  color: black;
+}
+
+ul.treasures_on_sale h1 {
+  border-bottom: 4px solid black;
+}
+
+.profile_main { 
+  border: 2px solid black;
+  height: 12.1em;
+}
+
 .profile_right, .profile_left {
   background-color: orange;
   border: 2px solid black;
+}
+
+.profile_bottom {
+  background-color: orange;
 }
 
 .sub_nav {
