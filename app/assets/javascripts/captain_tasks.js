@@ -46,24 +46,28 @@ TaskSuccess.prototype = {
     this.template = "<div data-alert class='alert-box'>"+message+"<a href='#' class='close'>&times;</a></div>";
   }
 }
-
-$(document).ready(function(){
-
-  $('#mid_nav_bar').on('ajax:success','#captain_task_cove', function(e, data, status, xhr){
-
-    leftBox   = new List('.captain.profile_left', 'Task to be Verified', data.tasks_need_verify);
-    rightBox  = new List('.captain.profile_right', 'Enter new Task!', data.task_form);
-    botBox   = new List('.captain.profile_bottom', '', data.tasks_on_board);
+var reloadPage = function (){ 
+    var leftBox   = new List('.captain.profile_left', 'Task to be Verified', data.tasks_need_verify);
+    var rightBox  = new List('.captain.profile_right', 'Enter new Task!', data.task_form);
+    var botBox   = new List('.captain.profile_bottom', '', data.tasks_on_board);
 
     leftBox.renderToPage();
     rightBox.renderToPage();
     botBox.renderToPage();
+  }
+
+$(document).ready(function(){
+
+  $('#mid_nav_bar').on('ajax:success','#captain_task_cove', function(e, data, status, xhr){
+    reloadPage
   });//end on
   
   //Add task
   $('.captain.profile_right').on('ajax:success', '#new_task', function(e, data, status, xhr) {
     var creationMessage = new TaskSuccess('.error_max_task_limit', data.task_create);
     creationMessage.renderToPage();
+      reloadPage;
+
   }).on('ajax:error', '#new_task', function(e, data, status, xhr) {
     var validationError = new TaskError('.error_max_task_limit', data.responseText);
     validationError.renderToPage();
@@ -73,8 +77,11 @@ $(document).ready(function(){
   $('.captain.profile_bottom').on('ajax:success', '#edit_task', function(e, data, status, xhr) {
     var rightBox = new List('.captain.profile_right', 'Update Task!', data.task_form);
     rightBox.renderToPage();
-    var editMessage = new TaskSuccess('.error_max_task_limit', data.success_message);
-    editMessage.renderToPage();
-  });// end on
+  });
 
+  //Update screen
+  $('.captain.profile_right').on('ajax:success','.edit_task', function(e, data, status, xhr){
+    reloadPage
+
+  });//end on
 });//end ready

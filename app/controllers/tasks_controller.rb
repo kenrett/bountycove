@@ -37,7 +37,8 @@ class TasksController < ApplicationController
       render json: "Only 6 available tasks allowed!", status: :unprocessable_entity
     elsif @task.save
       @captain.tasks << @task
-      render json: { task_create: "A new Quest has been set!" }
+      render_task_profile_to_json(Task.new)
+      # render json: { task_create: "A new Quest has been set!" }
     else
       render json: "All fields must be filled", status: :unprocessable_entity
     end
@@ -50,11 +51,31 @@ class TasksController < ApplicationController
   def edit
     task = Task.find(params[:id])
     task_edit_form = render_to_string partial: 'form', locals: {captain: current_user, task: task}
-    render json: { task_form: task_edit_form, success_message: 'Argh! Yeh Quest changed!'}
+    render json: { task_form: task_edit_form }
   end
 
   def update
     Task.find(params[:id]).update_attributes(params[:task])
+    
+    tasks_on_board = render_to_string partial: 'captain_task_board', 
+    locals: { tasks_available: current_user.tasks_on_board, 
+      tasks_assigned: current_user.tasks_assigned,
+      tasks_completed: current_user.tasks_completed.limit(5) }
+    
+    tasks_need_verify = render_task_view_to_string({
+    tasks: current_user.tasks_need_verify, 
+    button: true, 
+    assigned: false})
+
+    new_task_form = render_to_string partial: 'form', 
+      locals: {captain: @captain, task: Task.new}
+
+    success_message = 'Argh! Yeh Task changed!'
+
+    render :json => { :tasks_on_board => tasks_on_board,
+                      :task_form => new_task_form,
+                      :tasks_need_verify => tasks_need_verify,
+                      :success_message => success_message}
   end
 
   def destroy
@@ -79,27 +100,27 @@ class TasksController < ApplicationController
   def render_task_profile_to_json(task)
     tasks_on_board = render_to_string partial: 'captain_task_board', 
     locals: { tasks_available: current_user.tasks_on_board, 
-      tasks_assigned: current_user.tasks_assigned,
-      tasks_completed: current_user.tasks_completed.limit(5) }
+    tasks_assigned: current_user.tasks_assigned,
+    tasks_completed: current_user.tasks_completed.limit(5) }
 
-      tasks_need_verify = render_task_view_to_string({
-        tasks: current_user.tasks_need_verify, 
-        button: true, 
-        assigned: false})
+    tasks_need_verify = render_task_view_to_string({
+    tasks: current_user.tasks_need_verify, 
+    button: true, 
+    assigned: false})
 
-      new_task_form = render_to_string partial: 'form', 
-      locals: {captain: @captain, task: Task.new}      
+    new_task_form = render_to_string partial: 'form', 
+    locals: {captain: @captain, task: Task.new}      
 
-      render json: {tasks_on_board: tasks_on_board,
-       tasks_need_verify: tasks_need_verify,
+    render json: {tasks_on_board: tasks_on_board,
+    tasks_need_verify: tasks_need_verify,
        task_form: new_task_form }
-     end
+  end
 
-     def render_task_view_to_string(args)
-      render_to_string partial: "captain_tasks", locals: {
-       tasks:    args[:tasks], 
-       button:   args[:button], 
-       assigned: args[:assigned]}
-     end
-
+   def render_task_view_to_string(args)
+    render_to_string partial: "captain_tasks", locals: {
+     tasks:    args[:tasks], 
+     button:   args[:button], 
+     assigned: args[:assigned]}
    end
+
+end
