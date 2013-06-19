@@ -19,7 +19,7 @@ class Treasure < ActiveRecord::Base
   belongs_to :captain
   belongs_to :pirate
 
-  scope :wishlist, where(:status => WISHLIST)
+  scope :wishlist, where(status: WISHLIST)
   scope :on_sale, where(status: ON_SALE)
   scope :bought, where(status: BOUGHT)
   scope :delivered, where(status: DELIVERED)

@@ -11,6 +11,7 @@ function Treasure(elem, treasure) {
   this.captain = window.location.pathname.split('/').pop();
   this.treasureId = treasure.id;
   this.name = treasure.name;
+  this.imgSRC = "http://us.cdn1.123rf.com/168nwm/orla/orla1010/orla101000044/8041795-wooden-treasure-chest-with-gold-coins-printed-with-royal-crown--3d-render.jpg";
 }
 
 Treasure.prototype = {
@@ -19,7 +20,7 @@ Treasure.prototype = {
   },
 
   createTemplate: function() {
-    return this.template = "<div class='large-3 columns treasure_item'><img src='http://us.cdn1.123rf.com/168nwm/orla/orla1010/orla101000044/8041795-wooden-treasure-chest-with-gold-coins-printed-with-royal-crown--3d-render.jpg' /><br />" +
+    return this.template = "<div class='large-3 columns treasure_item'><img src='" +this.imgSRC+ "' /><br />" +
                        "<a href='/captains/" +this.captain+ "/treasures/" +this.treasureId+ "' class='captain_treasure_show' data-remote='true'>" +this.name+ "</a></div><div class='large-1 columns'></div>";
   }
 }

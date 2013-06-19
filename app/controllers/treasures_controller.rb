@@ -72,7 +72,7 @@ class TreasuresController < ApplicationController
 
   def destroy
     Treasure.find(params[:id]).destroy
-    redirect_to_captain_or_pirate_path
+    redirect_to captain_path(current_user)
   end
 
   private
