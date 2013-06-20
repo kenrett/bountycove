@@ -59,7 +59,9 @@ class TasksController < ApplicationController
 
   def render_task_profile_to_json(task)
     case current_user.type
+
     when 'Captain'
+
       tasks_on_board = render_to_string partial: 'captain_task_board', 
       locals: { tasks_available: current_user.tasks_on_board, 
       tasks_assigned: current_user.tasks_assigned,
@@ -68,7 +70,8 @@ class TasksController < ApplicationController
       tasks_need_verify = render_task_view_to_string({
       tasks: current_user.tasks_need_verify, 
       button: true, 
-      assigned: false})
+      assigned: false,
+      user_task: "captain_tasks"})
 
       new_task_form = render_to_string partial: 'form', 
       locals: {captain: @captain, task: Task.new}      
@@ -76,7 +79,9 @@ class TasksController < ApplicationController
       render json: {tasks_on_board: tasks_on_board,
       tasks_need_verify: tasks_need_verify,
          task_form: new_task_form }  
+    
     when 'Pirate'
+
       tasks_on_board = render_to_string partial: 'pirate_task_board', 
       locals: { tasks_available: current_user.captain.tasks_on_board, 
       tasks_need_verify: current_user.tasks_need_verify,
@@ -85,8 +90,8 @@ class TasksController < ApplicationController
       tasks_assigned = render_task_view_to_string({
       tasks: current_user.tasks_assigned, 
       button: false, 
-      assigned: true})
-      
+      assigned: true,
+      user_task: "pirates/pirate_tasks"})
       task_highlight = render_to_string partial: 'pirate_highlight_task',
       locals: {task: current_user.tasks_assigned.first}
 
@@ -96,7 +101,7 @@ class TasksController < ApplicationController
   end
 
    def render_task_view_to_string(args)
-    render_to_string partial: "captain_tasks", locals: {
+    render_to_string partial: args[:user_task], locals: {
      tasks:    args[:tasks], 
      button:   args[:button], 
      assigned: args[:assigned]}

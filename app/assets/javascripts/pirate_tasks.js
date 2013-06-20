@@ -49,7 +49,7 @@ TaskSuccess.prototype = {
 $(document).ready(function(){
 
   $('#mid_nav_bar').on('ajax:success','#pirate_task_cove', function(e, data, status, xhr){
-
+    
     var leftBox   = new List('.pirate.profile_left', 'Current Tasks!', data.tasks_assigned);
     var rightBox  = new List('.pirate.profile_right', '', data.task_highlight);
     var botBox    = new List('.pirate.profile_bottom', '', data.tasks_on_board);
@@ -72,12 +72,13 @@ $(document).ready(function(){
 
   //Errors on Add
 }).on('ajax:error', '.accept_quest', function(e, data, status, xhr) {
+  
   var validationError = new TaskError('.error_max_task_limit', data.assign);
   validationError.renderToPage();
   });
 
   //Complete Task
-$('.pirate.profile_left').on('ajax:success', '#verified_task', function(e, data, status, xhr) {
+$('.pirate.profile_left').on('ajax:success', '#pirate_complete', function(e, data, status, xhr) {
     
     var leftBox   = new List('.pirate.profile_left', 'Current Tasks!', data.tasks_assigned);
     var rightBox  = new List('.pirate.profile_right', '', data.task_highlight);

@@ -110,7 +110,7 @@ class PiratesController < ApplicationController
     if tasks_assigned_count? < max_tasks
       task.assigned!
       current_user.tasks << task
-      render :json => {:assign => "You just got assigned the task!" }
+      reload_page
     else
       render :json => {:assign => "You can only have #{max_tasks} tasks at a time!" }
     end
@@ -120,8 +120,9 @@ class PiratesController < ApplicationController
     task = Task.find(params[:task_id])
     if task.need_verify!
       render :json => { :completed => "Nice Work you Finished the Task!"}
+      reload_page
     else
-      render :json => { :errors => 'ArgH! Something went wrong'}
+      reload_page
     end
   end
 

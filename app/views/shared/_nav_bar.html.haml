@@ -12,7 +12,7 @@
       - if current_user_is_pirate
         %li
           Total Gold: #{current_user.coins}
-        - if count_of_available_tasks > 0
+        - if count_of_available_tasks(current_user) > 0
           %li
             There are #{link_to "available tasks!", pirate_tasks_path(current_user)}
     

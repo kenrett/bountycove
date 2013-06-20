@@ -5,4 +5,4 @@
     %li Assigned to: #{task.pirate.username}
     %li Value: #{task.worth}
     %li Posted: #{task.created_at.strftime(time_format(task))}
-    = link_to 'Completed?', pirate_completes_path(current_user, task), :remote => true, :class => 'tiny button alert round', :id => 'verified_task'
+    = link_to 'Completed?', pirate_completes_path(current_user, task), :remote => true, :class => 'tiny button alert round', :id => 'pirate_complete'
