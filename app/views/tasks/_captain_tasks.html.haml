@@ -5,4 +5,5 @@
     %li #{task.pirate.username}'s Quest
     %li #{task.worth} Doubloons
     / %li Posted: #{task.created_at.strftime(time_format(task))}
+
     = link_to 'Confirm Complete?', captain_confirms_path(current_user, task), :remote => true, :class => 'tiny button alert round', :id => 'verified_task'

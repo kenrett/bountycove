@@ -6,6 +6,7 @@
   %br
   #{@task.worth} Doubloons
 
+
 = link_to "Back", captain_tasks_path(current_user)
 = link_to "Edit", edit_captain_task_path(current_user, @task)
 = button_to "Delete", captain_task_path(@captain, @task), :method => :delete

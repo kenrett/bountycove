@@ -1,18 +1,22 @@
 // These are in the pirate task partial and the captain pirate partials
 .t_and_e {
-  padding-top: 5%;
+  // padding-top: 5%;
   height: 5.25em;
   font-family: 'Pathway Gothic One', sans-serif;
   color: #6d6e6e;
-  font-size: 1.5em;
+  font-size: 1.2em;
 }
 
 .t_and_e a {
-    font-size: 1.5em;
-    font-family: 'Pathway Gothic One', sans-serif;
-    color: #8f8e8e;
-  }
+  font-size: 1.5em;
+  font-family: 'Pathway Gothic One', sans-serif;
+  color: #8f8e8e;
+}
 
+
+.t_and_e a:hover {
+  color: #9d9c9c;
+}
 
 #add_pirate {
   font-size: 1.5em;

@@ -1,6 +1,6 @@
 - treasure_board.first(Treasure::MAX).each do |treasure|
   .large-3.columns.treasure_item
-    = image_tag("/treasure_chest.png")
+     = link_to image_tag("/treasure_chest.png"), '#{treasure_name}'
     %br
     .treasure_name #{treasure.name}
 
