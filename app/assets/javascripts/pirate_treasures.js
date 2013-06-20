@@ -40,7 +40,8 @@ TreasureSuccess.prototype = {
 
 $(document).ready(function(){
   $('#mid_nav_bar').on('ajax:success', '#pirate_treasure_cove', function(e, data, status, xhr) {
-    alert('yeah');
-    debugger;
+    $('.pirate.profile_left').html(data.t_purchased);
+    $('.pirate.profile_right').html(data.t_wishlist);
+    $('.pirate.profile_bottom').html(data.t_received);
   });
 });//end ready
