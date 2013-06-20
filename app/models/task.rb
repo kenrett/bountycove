@@ -1,5 +1,5 @@
 class Task < ActiveRecord::Base
-  attr_accessible :worth, :name, :description#, :captain_id, :pirate_id
+  attr_accessible :worth, :name, :description, :worth
 
   ON_BOARD    = 1
   ASSIGNED    = 2

@@ -57,7 +57,7 @@ class PiratesController < ApplicationController
 
   def create
     pirate = Pirate.new(params[:pirate])
-    pirate.tax_rate = nil
+    pirate.tax_rate = 5
     pirate.captain  = current_user
 
     if pirate.save

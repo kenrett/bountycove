@@ -24,11 +24,12 @@ class CaptainsController < ApplicationController
 
   def confirm
     task = Task.find(params[:task_id])
-    
+    current_pirate = task.pirate
     if task.completed!
-      task.pirate.coins += task.worth
-      task.pirate.save
-      
+
+      add_coins = current_pirate.coins + task.worth 
+      current_pirate.update_attribute('coins', add_coins )
+
       tasks_on_board = render_to_string partial: 'tasks/captain_task_board', 
       locals: { tasks_available: current_user.tasks_on_board, 
       tasks_assigned: current_user.tasks_assigned,
