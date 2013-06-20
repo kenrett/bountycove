@@ -94,9 +94,8 @@ $('.pirate').on('ajax:success', '#show_task', function(e, data, status, xhr) {
   });
 
   $('.pirate.profile_right').on('ajax:success','.accept_prof_quest', function(e, data, status, xhr){
-    var rightBox = new List('.pirate.profile_right', 'New Quests', data.tasks_available);
-    rightBox.renderToPage();
-  }).on('ajax:success', '.accept_prof_quest', function(e, data, status, xhr) {
+    $(this).closest('ul').remove();
+    
     var validationSuccess = new TaskSuccess('#quest_accepted', "Arrrghh you've cast off on a Quest!");
     validationSuccess.renderToPage();
   });

@@ -2,4 +2,4 @@
   .large-12.columns.t_and_e
     = link_to "#{pirate.name}", edit_captain_pirate_path(current_user, pirate), :id => 'edit_pirate_acct', :remote => true
     %br
-    DOUBLOONS: #{pirate.coins} &nbsp; QUESTS: #{pirate.tasks.count}
+    DOUBLOONS: #{number_with_delimiter(pirate.coins, :delimiter => ',')} &nbsp; QUESTS: #{pirate.tasks.count}
