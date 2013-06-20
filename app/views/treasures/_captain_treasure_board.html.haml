@@ -1,4 +1,4 @@
-- treasure_board.each do |treasure|
+- treasure_board.first(Treasure::MAX).each do |treasure|
   .large-3.columns.treasure_item
     = image_tag("/treasure_chest.png")
     %br

@@ -130,7 +130,7 @@ class TreasuresController < ApplicationController
   end
 
   def treasure_box_full?
-    current_user.treasures_on_sale.length >= 6
+    current_user.treasures_on_sale.length >= Treasure::MAX
   end
 
   def redirect_to_captain_or_pirate_path

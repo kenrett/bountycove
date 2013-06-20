@@ -56,26 +56,30 @@ class PiratesController < ApplicationController
   end
 
   def create
-    pirate = Pirate.new(params[:pirate])
-    pirate.tax_rate = 5
-    pirate.captain  = current_user
+    if current_user.pirates.count < Pirate::MAX
+      pirate = Pirate.new(params[:pirate])
+      pirate.tax_rate = 5
+      pirate.captain  = current_user
 
-    if pirate.save
-      success_message = "Arggh! A new pirate on deck!"
+      if pirate.save
+        success_message = "Arggh! A new pirate on deck!"
 
-      sign_up_form = render_to_string :partial => 'new_acct_form',
-                                      :locals => {:captain => current_user,
-                                                  :pirate => Pirate.new}
+        sign_up_form = render_to_string :partial => 'new_acct_form',
+                                        :locals => {:captain => current_user,
+                                                    :pirate => Pirate.new}
 
-      list_pirates = render_to_string :partial => 'captains/list_of_pirates',
-                                      :locals => {:pirates => current_user.pirates}
+        list_pirates = render_to_string :partial => 'captains/list_of_pirates',
+                                        :locals => {:pirates => current_user.pirates}
 
-      render :json => {:sign_up_form => sign_up_form,
-                       :list_of_pirates => list_pirates,
-                       :success_message => success_message}
+        render :json => {:sign_up_form => sign_up_form,
+                         :list_of_pirates => list_pirates,
+                         :success_message => success_message}
+      else
+        pirate.errors.delete(:password_digest)
+        render :json => pirate.errors.full_messages, :status => :unprocessable_entity
+      end
     else
-      pirate.errors.delete(:password_digest)
-      render :json => pirate.errors.full_messages, :status => :unprocessable_entity
+      render :json => ['Your ship is overcrowded with pirates!'].to_json, :status => :unprocessable_entity
     end
   end
 

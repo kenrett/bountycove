@@ -1,7 +1,7 @@
 .large-4.columns.captain.profile_bottom_L
   #task_available_message
   %h3 Available Tasks
-  - tasks_available.each do |task|
+  - tasks_available.first(Task::MAX).each do |task|
     %ul.task
       %li Name: #{link_to task.name, edit_captain_task_path(current_user, task), :remote => true, :id => 'edit_task'}
       %li Value: #{task.worth}
@@ -10,7 +10,7 @@
 .large-4.columns.captain.profile_bottom_M
   #task_assigned_message
   %h3 Assigned Tasks
-  - tasks_assigned.each do |task|
+  - tasks_assigned.first(Task::MAX).each do |task|
     %ul.task
       %li Name: #{link_to task.name, edit_captain_task_path(current_user, task), :remote => true, :id => 'edit_task'}
       %li Assigned to: #{task.pirate.username}
@@ -20,7 +20,7 @@
 .large-4.columns.captain.profile_bottom_R
   #task_completed_message
   %h3 Completed Tasks
-  - tasks_completed.each do |task|
+  - tasks_completed.first(Task::MAX).each do |task|
     %ul.task
       %li Name: #{task.name}
       %li Value: #{task.worth}

@@ -1,9 +1,9 @@
 #deliver_message
-- treasures.each do |treasure|
+- treasures.first(Treasure::MAX).each do |treasure|
   .treasure_div
     =image_tag "/treasure_chest.png"
     %ul.treasure
-      %li Name: #{treasure.name} 
+      %li Name: #{treasure.name}
       %li Description: #{treasure.description}
       %li Price: #{treasure.price}
       %li Tax: #{treasure.tax}

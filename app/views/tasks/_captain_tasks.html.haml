@@ -1,5 +1,5 @@
 #task_verify_message
-- tasks.each do |task|
+- tasks.first(Task::MAX).each do |task|
   %ul.task
     %li Name: #{link_to task.name, captain_task_path(current_user, task)}
     %li Assigned to: #{task.pirate.username}

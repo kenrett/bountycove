@@ -83,5 +83,6 @@ class CaptainsController < ApplicationController
      tasks:    args[:tasks],
      button:   args[:button],
      assigned: args[:assigned]}
-   end
+  end
+
 end

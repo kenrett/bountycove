@@ -1,6 +1,6 @@
 %h1 Treasure
 #treasure_message
-- treasures.each do |treasure|
+- treasures.first((Treasure::MAX)).each do |treasure|
   %ul.treasure
     %li Name: #{treasure.name}
     %li Description: #{treasure.description}
