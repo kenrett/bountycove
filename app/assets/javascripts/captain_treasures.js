@@ -96,11 +96,7 @@ $(document).ready(function(){
     var creationMessage = new TreasureSuccess('.error_max_treasure_limit', data.success_creation);
     creationMessage.renderToPage();
   }).on('ajax:error', '#new_treasure', function(e, data, status, xhr) {
-    var error = '';
-    data.responseJSON.forEach(function(value, index) {
-      error += "<li>" +value+ "</li>";
-    });
-    updateError = new TreasureError('.error_max_treasure_limit', error.trim());
+    var updateError = new TreasureError('.error_max_treasure_limit', data.responseText);
     updateError.renderToPage();
   });//end on
 

@@ -39,9 +39,24 @@ TreasureSuccess.prototype = {
 };
 
 $(document).ready(function(){
+  // Render treasure view for pirate
   $('#mid_nav_bar').on('ajax:success', '#pirate_treasure_cove', function(e, data, status, xhr) {
     $('.pirate.profile_left').html(data.t_purchased);
     $('.pirate.profile_right').html(data.t_wishlist);
     $('.pirate.profile_bottom').html(data.t_received);
+  });
+
+  // Buy treasure from treasure board
+  $('.pirate.profile_main').on('ajax:success', '#buy_treasure', function(e, data, status, xhr) {
+    $(this).closest('div').remove();
+    $('.pirate.profile_left').html(data.t_purchased);
+    $('.pirate.profile_right').html(data.t_wishlist);
+    $('.pirate.profile_bottom').html(data.t_received);
+
+    var treasureBought = new TreasureSuccess('#treasure_message', data.success_message);
+    treasureBought.renderToPage();
+  }).on('ajax:error', '#buy_treasure', function(e, data, status, xhr) {
+    var treasureBought = new TreasureError('#treasure_message', data.responseText);
+    treasureBought.renderToPage();
   });
 });//end ready

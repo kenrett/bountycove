@@ -76,28 +76,57 @@ class TreasuresController < ApplicationController
       treasure = Treasure.find(params[:id])
       render_treasure_profile_to_json(treasure)
     when 'Pirate'
-      # treasures#show pirate
-      # debugger
+      # route not required
     end
   end
 
   def update
     treasure = Treasure.find(params[:id])
-  
-    if treasure.update_attributes(params[:treasure])
-      treasure_board = render_to_string :partial => 'captain_treasure_board',
-                                        :locals => {:treasure_board => current_user.treasures_on_sale}
+    case current_user.type
+    when 'Captain'
+      if treasure.update_attributes(params[:treasure])
+        treasure_board = render_to_string :partial => 'captain_treasure_board',
+                                          :locals => {:treasure_board => current_user.treasures_on_sale}
 
-      new_treasure_form    = render_to_string :partial => 'form_treasures',
-                                              :locals => {:treasure => Treasure.new}
+        new_treasure_form    = render_to_string :partial => 'form_treasures',
+                                                :locals => {:treasure => Treasure.new}
 
-      success_message = 'Argh! Yeh treasure changed!'
+        success_message = 'Argh! Yeh treasure changed!'
 
-      render :json => {:treasure_board => treasure_board,
-                        :new_treasure_form => new_treasure_form,
-                        :success_message => success_message}
-    else
-      render :json => treasure.errors.full_messages, :status => :unprocessable_entity
+        render :json => {:treasure_board => treasure_board,
+                          :new_treasure_form => new_treasure_form,
+                          :success_message => success_message}
+      else
+        render :json => treasure.errors.full_messages, :status => :unprocessable_entity
+      end
+    when 'Pirate'
+      if current_user.coins >= treasure.total_price
+        treasure.bought!
+        treasure.save
+        current_user.treasures << treasure
+
+        treasures_wishlist  = render_to_string :partial => 'pirate_treasures', 
+                                   :locals => {:treasures => current_user.treasures.wishlist,
+                                               :wishlist => true}
+
+
+        treasures_purchased = render_to_string :partial => 'pirate_treasures',
+                                     :locals => {:treasures => current_user.treasures.bought,
+                                                 :wishlist => false}
+
+        treasures_received  = render_to_string :partial => 'pirate_treasures',
+                                     :locals => {:treasures => current_user.treasures_received,
+                                                 :wishlist => false}
+
+        success_message = "You've bought the treasure!"
+
+        render :json => {:t_wishlist => treasures_wishlist,
+                         :t_purchased => treasures_purchased,
+                         :t_received => treasures_received,
+                         :success_message => success_message}
+      else
+        render :json => 'You need more doubloons!', :status => :unprocessable_entity
+      end
     end
   end
 
