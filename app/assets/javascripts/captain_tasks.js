@@ -26,7 +26,7 @@ TaskError.prototype = {
   },
 
   createTemplate: function(message) {
-    this.template = "<div data-alert class='alert-box'>"+message+"<a href='#' class='close'>&times;</a></div>";
+    this.template = "<div data-alert class='alert alert-box'>"+message+"<a href='#' class='close'>&times;</a></div>";
   }
 }
 
@@ -51,7 +51,7 @@ $(document).ready(function(){
   $('#mid_nav_bar').on('ajax:success','#captain_task_cove', function(e, data, status, xhr){
 
     var leftBox   = new List('.captain.profile_left', 'Task to be Verified', data.tasks_need_verify);
-    var rightBox  = new List('.captain.profile_right', 'Enter new Task!', data.task_form);
+    var rightBox  = new List('.captain.profile_right', 'Create new Quest!', data.task_form);
     var botBox   = new List('.captain.profile_bottom', '', data.tasks_on_board);
 
     leftBox.renderToPage();
@@ -63,7 +63,7 @@ $(document).ready(function(){
   $('.captain.profile_right').on('ajax:success', '#new_task', function(e, data, status, xhr) {
     
     var leftBox   = new List('.captain.profile_left', 'Task to be Verified', data.tasks_need_verify);
-    var rightBox  = new List('.captain.profile_right', 'Enter new Task!', data.task_form);
+    var rightBox  = new List('.captain.profile_right', 'Create new Quest!', data.task_form);
     var botBox   = new List('.captain.profile_bottom', '', data.tasks_on_board);
 
     leftBox.renderToPage();
@@ -71,10 +71,13 @@ $(document).ready(function(){
     botBox.renderToPage();
 
   //Errors on Add
+}).on('ajax:success', '#new_task', function(e, data, status, xhr) {
+  var validationSuccess = new TaskSuccess('.error_max_task_limit', "Yer Quest has been Created!");
+  validationSuccess.renderToPage();
 }).on('ajax:error', '#new_task', function(e, data, status, xhr) {
   var validationError = new TaskError('.error_max_task_limit', data.responseText);
   validationError.renderToPage();
-  });
+});
 
   //Edit Task Get
   $('.captain.profile_bottom').on('ajax:success', '#edit_task', function(e, data, status, xhr) {
@@ -85,22 +88,36 @@ $(document).ready(function(){
   //Refresh after Edit
   $('.captain.profile_right').on('ajax:success','.edit_task', function(e, data, status, xhr){
     var leftBox   = new List('.captain.profile_left', 'Task to be Verified', data.tasks_need_verify);
-    var rightBox  = new List('.captain.profile_right', 'Enter new Task!', data.task_form);
+    var rightBox  = new List('.captain.profile_right', 'Create new Quest!', data.task_form);
     var botBox   = new List('.captain.profile_bottom', '', data.tasks_on_board);
 
     leftBox.renderToPage();
     rightBox.renderToPage();
     botBox.renderToPage();
+  }).on('ajax:success', '.edit_task', function(e, data, status, xhr) {
+    var validationSuccess = new TaskSuccess('.error_max_task_limit', "Yer Quest has been Edited");
+    validationSuccess.renderToPage();
   });
   
   //Task verified button
   $('.captain.profile_left').on('ajax:success','#verified_task', function(e, data, status, xhr){
     var leftBox   = new List('.captain.profile_left', 'Task to be Verified', data.tasks_need_verify);
-    var rightBox  = new List('.captain.profile_right', 'Enter new Task!', data.task_form);
+    var rightBox  = new List('.captain.profile_right', 'Create new Quest!', data.task_form);
     var botBox   = new List('.captain.profile_bottom', '', data.tasks_on_board);
 
     leftBox.renderToPage();
     rightBox.renderToPage();
     botBox.renderToPage();
+  }).on('ajax:success', '#verified_task', function(e, data, status, xhr) {
+    var validationSuccess = new TaskSuccess('#task_verify_message', "Yer Pirate has completed this Quest!");
+    validationSuccess.renderToPage();
+  });
+
+  $('.captain.profile_right').on('ajax:success','#verified_task', function(e, data, status, xhr){
+    var rightBox = new List('.captain.profile_right', 'Task to be Verified', data.tasks_need_verify);
+    rightBox.renderToPage();
+  }).on('ajax:success', '#verified_task', function(e, data, status, xhr) {
+    var validationSuccess = new TaskSuccess('#task_verify_message', "Yer Pirate has completed this Quest!");
+    validationSuccess.renderToPage();
   });
 });

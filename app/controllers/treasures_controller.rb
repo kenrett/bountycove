@@ -16,6 +16,7 @@ class TreasuresController < ApplicationController
                                    :locals => {:treasures => current_user.treasures_received,
                                                :wishlist => false}
 
+
       render :json => {:t_purchased => treasures_purchased,
                        :t_received => treasures_received}
     end
@@ -50,7 +51,7 @@ class TreasuresController < ApplicationController
         render :json => {:treasure_board => treasure_board, :success_creation => "Argh! Yeeh treasure s' on sale!"}
       else
         render :json => treasure.errors.full_messages, :status => :unprocessable_entity
-      end     
+      end
     end
   end
 
@@ -62,6 +63,7 @@ class TreasuresController < ApplicationController
 
   def update
     treasure = Treasure.find(params[:id])
+
     case current_user.type
     when 'Captain'
       if treasure.update_attributes(params[:treasure])
@@ -80,11 +82,12 @@ class TreasuresController < ApplicationController
         render :json => treasure.errors.full_messages, :status => :unprocessable_entity
       end
     when 'Pirate'
-      if current_user.coins >= treasure.total_price
+      if current_user.reload.coins >= treasure.total_price
+        current_user.coins -= treasure.total_price
+        current_user.update_attribute(:coins, current_user.coins)
         treasure.bought!
-        treasure.save
-        current_user.treasures << treasure
 
+        current_user.treasures << treasure
         treasures_purchased = render_to_string :partial => 'pirate_treasures',
                                      :locals => {:treasures => current_user.treasures.bought,
                                                  :wishlist => false}
@@ -97,8 +100,9 @@ class TreasuresController < ApplicationController
 
         render :json => {:t_purchased => treasures_purchased,
                          :t_received => treasures_received,
-                         :success_message => success_message}
-      
+                         :success_message => success_message,
+                         :user_coins => current_user.coins}
+
       else
         render :json => 'You need more doubloons!', :status => :unprocessable_entity
       end
@@ -107,7 +111,8 @@ class TreasuresController < ApplicationController
 
   def destroy
     Treasure.find(params[:id]).destroy
-    redirect_to captain_path(current_user)
+
+    render :json => "your treasure's gone".to_json
   end
 
   private
@@ -126,7 +131,7 @@ class TreasuresController < ApplicationController
   end
 
   def treasure_box_full?
-    current_user.treasures_on_sale.length >= 6
+    current_user.treasures_on_sale.length >= Treasure::MAX
   end
 
   def redirect_to_captain_or_pirate_path

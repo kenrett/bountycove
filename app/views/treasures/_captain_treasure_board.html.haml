@@ -1,9 +1,9 @@
-- treasure_board.each do |treasure|
+- treasure_board.first(Treasure::MAX).each do |treasure|
   .large-3.columns.treasure_item
     = image_tag("/treasure_chest.png")
     %br
     = link_to "#{treasure.name}", edit_captain_treasure_path(current_user, treasure), :remote => true, :class => "captain_treasure_show"
 
     .cost #{number_with_delimiter(treasure.total_price, :delimiter => ',')} Doubloons (+tax)
-    = button_to "DELETE", captain_treasure_path(current_user, treasure), :class => 'delete_treasure', :method => :delete, :confirm => "Are you sure?"
+    = link_to "DELETE", captain_treasure_path(current_user, treasure), :class => 'delete_treasure', :method => :delete, :confirm => "Are you sure?", :remote => true
   .large-1.columns

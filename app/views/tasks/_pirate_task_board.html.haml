@@ -1,28 +1,28 @@
 .large-4.columns.pirate.profile_bottom_L
-  %h3 Available Tasks
+  %h3 Available Quests
   #task_available_message
-  - tasks_available.each do |task|
+  - tasks_available.first(Task::MAX).each do |task|
     %ul.task
-      %li Name: #{link_to task.name, pirate_task_path(current_user, task), :remote => true, :id => 'show_task'}
-      %li Value: #{task.worth}
-      %li Posted: #{task.created_at.strftime(time_format(task))}
+      %li #{link_to task.name, pirate_task_path(current_user, task), :remote => true, :id => 'show_task'}
+      %li #{task.worth} Doubloons
+      / %li Posted: #{task.created_at.strftime(time_format(task))}
       .accept_quest= link_to 'Accept Quest', pirate_adds_path(current_user, task), :remote => true, :class => 'tiny button success round'
 
 .large-4.columns.pirate.profile_bottom_M
   %h3 Awaiting Confirmation
   #task_need_verify_message
-  - tasks_need_verify.each do |task|
+  - tasks_need_verify.first(Task::MAX).each do |task|
     %ul.task
-      %li Name: #{link_to task.name, pirate_task_path(current_user, task), :remote => true, :id => 'show_task'}
-      %li Assigned to: #{task.pirate.username}
-      %li Value: #{task.worth}
-      %li Posted: #{task.created_at.strftime(time_format(task))}
+      %li #{link_to task.name, pirate_task_path(current_user, task), :remote => true, :id => 'show_task'}
+      %li #{task.pirate.username}'s Quest
+      %li #{task.worth} Doubloons
+      / %li Posted: #{task.created_at.strftime(time_format(task))}
 
 .large-4.columns.pirate.profile_bottom_R
-  %h3 Completed Tasks
+  %h3 Completed Quests
   #task_completed_message
-  - tasks_completed.each do |task|
+  - tasks_completed.first(Task::MAX).each do |task|
     %ul.task
-      %li Name: #{task.name}
-      %li Value: #{task.worth}
-      %li Posted: #{task.created_at.strftime(time_format(task))}
+      %li #{task.name}
+      %li #{task.worth} Doubloons
+      / %li Posted: #{task.created_at.strftime(time_format(task))}

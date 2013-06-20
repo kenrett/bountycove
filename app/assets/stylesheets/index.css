@@ -79,12 +79,12 @@ form,textarea,input { margin: 0; padding: 0;}
 .break_1 {
   width: 100%;
   height: 18%;
-  background-image: url(IMAGE_URL), -webkit-gradient(linear, left top, left bottom, from(#59b5e6), to(#007EC2)); /* Saf4+, Chrome */
-  background-image: url(IMAGE_URL), -webkit-linear-gradient(top, #59b5e6, #007EC2); /* Chrome 10+, Saf5.1+ */
-  background-image: url(IMAGE_URL),    -moz-linear-gradient(top, #59b5e6, #007EC2); /* FF3.6+ */
-  background-image: url(IMAGE_URL),     -ms-linear-gradient(top, #59b5e6, #007EC2); /* IE10 */
-  background-image: url(IMAGE_URL),      -o-linear-gradient(top, #59b5e6, #007EC2); /* Opera 11.10+ */
-  background-image: url(IMAGE_URL),         linear-gradient(top, #59b5e6, #007EC2);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#59b5e6), to(#007EC2)); /* Saf4+, Chrome */
+  background-image: -webkit-linear-gradient(top, #59b5e6, #007EC2); /* Chrome 10+, Saf5.1+ */
+  background-image:    -moz-linear-gradient(top, #59b5e6, #007EC2); /* FF3.6+ */
+  background-image:     -ms-linear-gradient(top, #59b5e6, #007EC2); /* IE10 */
+  background-image:      -o-linear-gradient(top, #59b5e6, #007EC2); /* Opera 11.10+ */
+  background-image:         linear-gradient(top, #59b5e6, #007EC2);
   z-index: 1;
   position: absolute;
   top: 30%;

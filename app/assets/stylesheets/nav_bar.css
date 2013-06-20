@@ -17,7 +17,7 @@
 
 .nav ul {
   float: right;
-  padding-top: 1.5%;
+ /* padding-top: 1.5%;*/
   padding-right: 16%;
 }
 
@@ -27,4 +27,9 @@
   color: #424343;
 }li a:hover {
   color: #232323;
+}
+
+.pirate_total {
+  color: maroon;
+  padding: 0;
 }

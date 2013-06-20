@@ -1,10 +1,12 @@
 class Task < ActiveRecord::Base
-  attr_accessible :worth, :name, :description#, :captain_id, :pirate_id
+  attr_accessible :worth, :name, :description, :worth
 
   ON_BOARD    = 1
   ASSIGNED    = 2
   NEED_VERIFY = 3
   COMPLETED   = 4
+
+  MAX = 4
 
   belongs_to :captain
   belongs_to :pirate
@@ -30,6 +32,6 @@ class Task < ActiveRecord::Base
     define_method("#{key.to_s}?") { status == value }
     define_method("#{key.to_s}!") { self.status = value; self.save }
   end
-  
+
 
 end

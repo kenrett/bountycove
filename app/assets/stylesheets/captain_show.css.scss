@@ -185,10 +185,31 @@
   border-top: 3px solid #9f9f9f;
 }
 
+ul.treasure {
+  display: inline;
+}
+
 .treasure {
  font-family: 'Pathway Gothic One', sans-serif;
  color: #444444;
  font-size: 1.3em;
+
+  li {
+    color: gray;
+    font-family: 'Pathway Gothic One', sans-serif;
+    font-size: 115%;
+    vertical-align: top;
+  }
+}
+
+.treasure_div img {
+  border-right: 0.1em solid black;
+  float: left;
+  margin-right: 1em
+}
+
+#last {
+  margin-bottom: 1.5em;
 }
 
 

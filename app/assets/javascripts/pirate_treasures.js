@@ -6,6 +6,24 @@ var Tax = {
   }
 };
 
+function List(elem, title, content) {
+  this.elem = elem;
+  this.title = title;
+  this.content = content;
+}
+
+List.prototype = {
+  renderToPage: function() {
+    this.createTemplate(this.title,this.content);
+
+    $(this.elem).html(this.template);
+  },
+
+  createTemplate: function(header, content) {
+    this.template = "<ul class='treasures_on_sale'><h1>" +header+ "</h1>" +content+ "</ul>";
+  }
+};
+
 function TreasureError(elem, message) {
   this.elem = elem;
   this.message = message;
@@ -41,15 +59,24 @@ TreasureSuccess.prototype = {
 $(document).ready(function(){
   // Render treasure view for pirate
   $('#mid_nav_bar').on('ajax:success', '#pirate_treasure_cove', function(e, data, status, xhr) {
-    $('.pirate.profile_left').html(data.t_purchased);
-    $('.pirate.profile_right').html(data.t_received);
+    var leftBox  = new List('.pirate.profile_left', 'Waiting for Treasures', data.t_purchased);
+    var rightBox = new List('.pirate.profile_right', 'Looted Treasures', data.t_received);
+    
+    leftBox.renderToPage();
+    rightBox.renderToPage();
   });
 
   // Buy treasure from treasure board
   $('.pirate.profile_main').on('ajax:success', '#buy_treasure', function(e, data, status, xhr) {
     $(this).closest('div').remove();
-    $('.pirate.profile_left').html(data.t_purchased);
-    $('.pirate.profile_right').html(data.t_received);
+
+    var leftBox  = new List('.pirate.profile_left', 'Waiting for Treasures', data.t_purchased);
+    var rightBox = new List('.pirate.profile_right', 'Looted Treasures', data.t_received);
+    
+    leftBox.renderToPage();
+    rightBox.renderToPage();
+
+    $('#user_coins').html(data.user_coins);
 
     var treasureBought = new TreasureSuccess('#treasure_message', data.success_message);
     treasureBought.renderToPage();

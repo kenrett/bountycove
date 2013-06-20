@@ -88,8 +88,16 @@ $('.pirate.profile_left').on('ajax:success', '#pirate_complete', function(e, dat
     botBox.renderToPage();
   });
 
+$('.pirate.profile_right').on('ajax:success','.accept_prof_quest', function(e, data, status, xhr){
+    $(this).closest('ul').remove();
+    
+    var validationSuccess = new TaskSuccess('#quest_accepted', "Arrrghh you've cast off on a Quest!");
+    validationSuccess.renderToPage();
+});
+
 $('.pirate').on('ajax:success', '#show_task', function(e, data, status, xhr) {
     var rightBox  = new List('.pirate.profile_right', '', data.task_highlight);
     rightBox.renderToPage();
   });
+
 });

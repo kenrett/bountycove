@@ -76,13 +76,26 @@ TreasureSuccess.prototype = {
   }
 };
 
+function addCommas(nStr) {
+    nStr += '';
+    var x = nStr.split('.');
+    var x1 = x[0];
+    var x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+    
+    return x1 + x2;
+  }
+
 $(document).ready(function(){
   // Clicking "Treasure Cove" to render treasure view
   $('#mid_nav_bar').on('ajax:success', '#captain_treasure_cove', function(e, data, status, xhr){
     var leftBox  = new List('.captain.profile_left', 'Treasure to deliver', data.treasures_bought);
     var rightBox = new List('.captain.profile_right', 'Add Treasures!', data.new_treasure_form);
     var botBox   = new List('.captain.profile_bottom', 'Treasure delivered', data.treasures_delivered);
-
+    
     leftBox.renderToPage();
     rightBox.renderToPage();
     botBox.renderToPage();
@@ -149,6 +162,14 @@ $(document).ready(function(){
   // Dynamically add up the total price
   $('.captain.profile_right').on('keyup', '#treasure_price', function(e) {
       var price = parseFloat(e.target.value);
-      $('#total_price').html(Tax.calculatePrice(price));
+      var total = addCommas(Tax.calculatePrice(price));
+      $('#total_price').html(total);
     });//end on
+
+  // Delete treasure
+  $('.captain.profile_main').on('ajax:success', '.delete_treasure', function(e, data, status, xhr) {
+    $(this).closest('div').remove();
+    var deleteTreasure = new TreasureSuccess('#treasure_message', data);
+    deleteTreasure.renderToPage();
+  });//end on
 });//end ready

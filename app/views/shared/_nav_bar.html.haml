@@ -1,4 +1,12 @@
 -if current_user
   .nav.hide-for-small
     %ul
-      %li #{link_to "#{current_user.type.upcase} #{current_user.username.upcase}", pirate_captain_profile_link} &#8226; #{link_to "LOGOUT", logout_path, :method => :post}
+      - if current_user_is_pirate
+        %li.pirate_total
+          #{link_to "#{current_user.type.upcase} #{current_user.username.upcase}", pirate_captain_profile_link} &#8226; #{link_to "LOGOUT", logout_path, :method => :post}
+        %li 
+          %span#user_coins 
+            = number_with_delimiter(current_user.coins, :delimiter => ',') + ' doubloons'
+      - else      
+        %li.pirate_total
+          #{link_to "#{current_user.type.upcase} #{current_user.username.upcase}", pirate_captain_profile_link} &#8226; #{link_to "LOGOUT", logout_path, :method => :post}

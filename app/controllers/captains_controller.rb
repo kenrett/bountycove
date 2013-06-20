@@ -7,6 +7,13 @@ class CaptainsController < ApplicationController
     @captain = Captain.new(params[:captain])
     if @captain.save
       session[:user_id] = @captain.username
+
+      @captain.treasures << Treasure.create(name: "Example 1", description: 'Example of what a treasure might be.', price: 1, tax: 0)
+      @captain.treasures << Treasure.create(name: 'Example 2', description: 'Example of what a treasure might be.', price: 1, tax: 0)
+  
+      @captain.tasks << Task.create(worth: 1, name: "Click on 'Quest' to create some quests for your pirates!", description: "This is an example of a task")
+      @captain.tasks << Task.create(worth: 1, name: "Create some tasks for your pirates!", description: "This is an example of a task")
+      
       redirect_to captain_path(@captain)
     else
       @captain.errors.delete(:password_digest)
@@ -18,28 +25,28 @@ class CaptainsController < ApplicationController
   def show
     @treasures = current_user.treasures.on_sale
     @pirates = current_user.pirates
-    @tasks = current_user.tasks
+    @tasks = current_user.tasks.need_verify
     @tasks = @tasks.pop(5) if @tasks.size > 5
   end
 
   def confirm
     task = Task.find(params[:task_id])
-    
+    current_pirate = task.pirate
     if task.completed!
-      task.pirate.coins += task.worth
-      task.pirate.save
-      
-      tasks_on_board = render_to_string partial: 'tasks/captain_task_board', 
-      locals: { tasks_available: current_user.tasks_on_board, 
+      current_pirate.coins += task.worth
+      current_pirate.update_attribute(:coins, current_pirate.coins)
+
+      tasks_on_board = render_to_string partial: 'tasks/captain_task_board',
+      locals: { tasks_available: current_user.tasks_on_board,
       tasks_assigned: current_user.tasks_assigned,
       tasks_completed: current_user.tasks_completed.limit(5) }
-    
+
       tasks_need_verify = render_task_view_to_string({
-      tasks: current_user.tasks_need_verify, 
-      button: true, 
+      tasks: current_user.tasks_need_verify,
+      button: true,
       assigned: false})
 
-      new_task_form = render_to_string partial: 'tasks/form', 
+      new_task_form = render_to_string partial: 'tasks/form',
       locals: {captain: current_user, task: Task.new}
 
       render :json => { :tasks_on_board => tasks_on_board,
@@ -80,8 +87,9 @@ class CaptainsController < ApplicationController
 
   def render_task_view_to_string(args)
     render_to_string partial: 'tasks/captain_tasks', locals: {
-     tasks:    args[:tasks], 
-     button:   args[:button], 
+     tasks:    args[:tasks],
+     button:   args[:button],
      assigned: args[:assigned]}
-   end
+  end
+
 end

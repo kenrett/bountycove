@@ -6,6 +6,8 @@ class Treasure < ActiveRecord::Base
   BOUGHT    = 2
   DELIVERED = 3
 
+  MAX = 4
+
   validates :name, :description, :presence => true, :on => :create
   validates :description, :format => { :with => /\w+/ }
   validates :price,

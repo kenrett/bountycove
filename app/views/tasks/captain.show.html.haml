@@ -1,10 +1,10 @@
 = render :partial => 'shared/nav_bar'
 %h1
-  The Task: #{@task.name}
+  The Quest: #{@task.name}
 %h3
   Details: #{@task.description}
   %br
-  Value: #{@task.worth} points
+  #{@task.worth} Doubloons
 
 = link_to "Back", captain_tasks_path(current_user)
 = link_to "Edit", edit_captain_task_path(current_user, @task)

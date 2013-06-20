@@ -7,7 +7,7 @@ module UsersHelper
   def current_user_is_pirate
     current_user.is_a_pirate?
   end
-  
+
   def count_of_available_tasks(user)
     user.tasks.count(:conditions => "status = 1")
   end
@@ -15,7 +15,7 @@ module UsersHelper
   def current_user_is_captain
     current_user.is_a_captain?
   end
-  
+
   def current_user_tasks_assigned(status)
     current_user.tasks.where(status: status)
   end
@@ -27,6 +27,11 @@ module UsersHelper
 
   def pirate_captain_profile_link
     current_user_is_pirate ? pirate_path(current_user) : captain_path(current_user)
+  end
+
+
+  def current_user_has_pirates?
+    current_user.pirates.length > 0
   end
 
 end

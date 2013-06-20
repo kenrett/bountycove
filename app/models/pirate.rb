@@ -1,6 +1,7 @@
 # Child
 
 class Pirate < User
+  MAX = 4
 
   belongs_to :captain, :foreign_key => :captain_id
   has_many :treasures

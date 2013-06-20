@@ -1,13 +1,14 @@
 #deliver_message
-- treasures.each do |treasure|
-  %ul.treasure
-    %li Name: #{treasure.name}
-    %li Description: #{treasure.description}
-    %li Photo: #{treasure.photo}
-    %li Price: #{treasure.price}
-    %li Tax: #{treasure.tax}
-    %li#last
-      Total Price:
-      %span.total_price
+- treasures.first(Treasure::MAX).each do |treasure|
+  .treasure_div
+    =image_tag "/treasure_chest.png"
+    %ul.treasure
+      %li #{treasure.name}
+      %li Description: #{treasure.description}
+      %li #{number_with_delimiter(treasure.price, :delimiter => ',')} Doubloons
+      %li Tax: #{number_with_delimiter(treasure.tax, :delimiter => ',')}
+      %li#last
+        Total Doubloons:
+        %span.total_price
     - if bought
       = link_to 'Deliver', captain_delivers_treasure_path(current_user, treasure), :remote => true, :class => 'tiny button alert round', :id => 'deliver-treasure', :method => :post, :confirm => 'yeah'

@@ -1,6 +1,7 @@
 class SessionController < ApplicationController
 
   def login
+    session.clear
     @user = User.find_by_username(params[:username])
 
     if @user && @user.authenticate(params[:password])
