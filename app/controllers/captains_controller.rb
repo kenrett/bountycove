@@ -26,7 +26,9 @@ class CaptainsController < ApplicationController
     task = Task.find(params[:task_id])
     
     if task.completed!
-      pay_pirate(task)
+      task.pirate.coins += task.worth
+      task.pirate.save
+      
       tasks_on_board = render_to_string partial: 'tasks/captain_task_board', 
       locals: { tasks_available: current_user.tasks_on_board, 
       tasks_assigned: current_user.tasks_assigned,
@@ -74,11 +76,6 @@ class CaptainsController < ApplicationController
                                     :locals => {:treasures => args[:treasures],
                                                 :on_sale => args[:on_sale],
                                                 :bought => args[:bought]}
-  end
-  
-  def pay_pirate(task)
-    task.pirate.coins += task.worth
-    task.pirate.save
   end
 
   def render_task_view_to_string(args)

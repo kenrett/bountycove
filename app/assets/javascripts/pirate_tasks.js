@@ -72,7 +72,6 @@ $(document).ready(function(){
 
   //Errors on Add
 }).on('ajax:error', '.accept_quest', function(e, data, status, xhr) {
-  debugger
   var validationError = new TaskError('#task_available_message', data.responseText);
   validationError.renderToPage();
   });
