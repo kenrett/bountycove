@@ -5,8 +5,8 @@
     %ul.treasure
       %li #{treasure.name}
       %li Description: #{treasure.description}
-      %li #{treasure.price} Doubloons
-      %li Tax: #{treasure.tax}
+      %li #{number_with_delimiter(treasure.price, :delimiter => ',')} Doubloons
+      %li Tax: #{number_with_delimiter(treasure.tax, :delimiter => ',')}
       %li#last
         Total Doubloons:
         %span.total_price

@@ -7,6 +7,13 @@ class CaptainsController < ApplicationController
     @captain = Captain.new(params[:captain])
     if @captain.save
       session[:user_id] = @captain.username
+
+      @captain.treasures << Treasure.create(name: "Example 1", description: 'Example of what a treasure might be.', price: 1, tax: 0)
+      @captain.treasures << Treasure.create(name: 'Example 2', description: 'Example of what a treasure might be.', price: 1, tax: 0)
+  
+      @captain.tasks << Task.create(worth: 1, name: "Click on 'Quest' to create some quests for your pirates!", description: "This is an example of a task")
+      @captain.tasks << Task.create(worth: 1, name: "Create some tasks for your pirates!", description: "This is an example of a task")
+      
       redirect_to captain_path(@captain)
     else
       @captain.errors.delete(:password_digest)
