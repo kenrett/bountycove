@@ -26,21 +26,20 @@ class CaptainsController < ApplicationController
     task = Task.find(params[:task_id])
     current_pirate = task.pirate
     if task.completed!
+      current_pirate.coins += task.worth
+      current_pirate.update_attribute(:coins, current_pirate.coins)
 
-      add_coins = current_pirate.coins + task.worth 
-      current_pirate.update_attribute('coins', add_coins )
-
-      tasks_on_board = render_to_string partial: 'tasks/captain_task_board', 
-      locals: { tasks_available: current_user.tasks_on_board, 
+      tasks_on_board = render_to_string partial: 'tasks/captain_task_board',
+      locals: { tasks_available: current_user.tasks_on_board,
       tasks_assigned: current_user.tasks_assigned,
       tasks_completed: current_user.tasks_completed.limit(5) }
-    
+
       tasks_need_verify = render_task_view_to_string({
-      tasks: current_user.tasks_need_verify, 
-      button: true, 
+      tasks: current_user.tasks_need_verify,
+      button: true,
       assigned: false})
 
-      new_task_form = render_to_string partial: 'tasks/form', 
+      new_task_form = render_to_string partial: 'tasks/form',
       locals: {captain: current_user, task: Task.new}
 
       render :json => { :tasks_on_board => tasks_on_board,
@@ -81,8 +80,8 @@ class CaptainsController < ApplicationController
 
   def render_task_view_to_string(args)
     render_to_string partial: 'tasks/captain_tasks', locals: {
-     tasks:    args[:tasks], 
-     button:   args[:button], 
+     tasks:    args[:tasks],
+     button:   args[:button],
      assigned: args[:assigned]}
    end
 end

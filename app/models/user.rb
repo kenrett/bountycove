@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
                   :password,
                   :password_confirmation,
                   :name,
-                  :tax_rate
+                  :tax_rate,
+                  :coins
 
   validates :username, :uniqueness => true, :presence => true
   validates :first_name, :presence => true

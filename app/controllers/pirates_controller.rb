@@ -86,25 +86,6 @@ class PiratesController < ApplicationController
     @tasks = @pirate.tasks.on_board
   end
 
-  def buys_treasure
-    treasure = Treasure.find(params[:treasure_id])
-
-    if purchaseable?(treasure)
-      current_user.coins -= treasure.total_price
-
-      current_user.save
-      current_user.treasures << treasure
-      treasure.bought!
-
-      flash[:treasure_bought] = 'You bought that treasure!'
-    else
-      flash[:error_deficit_gold] = 'Argh! You need more gold to purchase!'
-    end
-
-    redirect_to pirate_treasures_path(current_user)
-  end
-
-
   def adds
     task = Task.find(params[:task_id])
     max_tasks = 3
@@ -129,7 +110,7 @@ class PiratesController < ApplicationController
 
   private
 
-  def purchaseable?(treasure)
+  def can_purchase?(treasure)
     current_user.coins >= treasure.total_price
   end
 
@@ -143,22 +124,22 @@ class PiratesController < ApplicationController
 
   def render_task_view_to_string(args)
     render_to_string partial: "pirate_tasks", locals: {
-                             tasks:    args[:tasks], 
-                             button:   args[:button], 
+                             tasks:    args[:tasks],
+                             button:   args[:button],
                              assigned: args[:assigned]}
   end
 
   def reload_page
-      tasks_on_board = render_to_string partial: 'tasks/pirate_task_board', 
-      locals: { tasks_available: current_user.captain.tasks_on_board, 
+      tasks_on_board = render_to_string partial: 'tasks/pirate_task_board',
+      locals: { tasks_available: current_user.captain.tasks_on_board,
       tasks_need_verify: current_user.tasks_need_verify,
       tasks_completed: current_user.tasks_completed.limit(5) }
 
       tasks_assigned = render_task_view_to_string({
-      tasks: current_user.tasks_assigned, 
-      button: false, 
+      tasks: current_user.tasks_assigned,
+      button: false,
       assigned: true})
-      
+
       task_highlight = render_to_string partial: 'tasks/pirate_highlight_task',
       locals: {task: current_user.tasks_assigned.first}
 
