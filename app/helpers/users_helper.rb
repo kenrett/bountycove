@@ -8,8 +8,8 @@ module UsersHelper
     current_user.is_a_pirate?
   end
   
-  def count_of_available_tasks
-    Task.count(:conditions => "status = 1")
+  def count_of_available_tasks(user)
+    user.tasks.count(:conditions => "status = 1")
   end
 
   def current_user_is_captain

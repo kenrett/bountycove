@@ -11,12 +11,11 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(params[:task])
-    if count_of_available_tasks >= 6
+    if count_of_available_tasks(current_user) >= 6
       render json: "Only 6 available tasks allowed!", status: :unprocessable_entity
     elsif @task.save
       @captain.tasks << @task
       render_task_profile_to_json(Task.new)
-      # render json: { task_create: "A new Quest has been set!" }
     else
       render json: "All fields must be filled", status: :unprocessable_entity
     end
