@@ -59,4 +59,9 @@ $(document).ready(function(){
     var treasureBought = new TreasureError('#treasure_message', data.responseText);
     treasureBought.renderToPage();
   });
+
+  // Edit wishlist treasure
+  $('.pirate.profile_right').on('ajax:success', '#wishlist_edit_treasure', function(e, data, status, xhr) {
+    $('.pirate.profile_right').html(data.wishlist_edit_form);
+  });
 });//end ready

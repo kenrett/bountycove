@@ -71,12 +71,15 @@ class TreasuresController < ApplicationController
   end
 
   def edit
+    treasure = Treasure.find(params[:id])
+    
     case current_user.type
     when 'Captain'
-      treasure = Treasure.find(params[:id])
       render_treasure_profile_to_json(treasure)
     when 'Pirate'
-      # route not required
+      wishlist_edit_form = render_to_string :partial => 'form_treasures', :locals => {:treasure => treasure}
+
+      render :json => {:wishlist_edit_form => wishlist_edit_form}
     end
   end
 
