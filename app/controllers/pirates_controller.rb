@@ -141,7 +141,7 @@ class PiratesController < ApplicationController
       
       tasks_available = render_task_view_to_string({
       tasks: current_user.captain.tasks_on_board, 
-      button: false, 
+      button: false,
       assigned: true,
       user_task: "pirates/pirate_tasks"})
 

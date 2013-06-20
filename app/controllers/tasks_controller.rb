@@ -64,7 +64,6 @@ class TasksController < ApplicationController
     case current_user.type
 
     when 'Captain'
-
       tasks_on_board = render_to_string partial: 'captain_task_board', 
       locals: { tasks_available: current_user.tasks_on_board, 
       tasks_assigned: current_user.tasks_assigned,
@@ -106,7 +105,7 @@ class TasksController < ApplicationController
       render json: {
       tasks_on_board: tasks_on_board,
       tasks_assigned: tasks_assigned, 
-      tasks_available: tasks_available, 
+      tasks_available: tasks_available,
       task_highlight: task_highlight }
     end
   end

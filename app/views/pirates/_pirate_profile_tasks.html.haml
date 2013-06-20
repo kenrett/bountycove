@@ -7,4 +7,3 @@
       %li Value: #{task.worth}
       %li Posted: #{task.created_at.strftime(time_format(task))}
       .accept_prof_quest= link_to 'Accept Quest', pirate_adds_path(current_user, task), :remote => true, :class => 'tiny button success round'
-
