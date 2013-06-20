@@ -71,10 +71,13 @@ $(document).ready(function(){
     botBox.renderToPage();
 
   //Errors on Add
+}).on('ajax:success', '#new_task', function(e, data, status, xhr) {
+  var validationError = new TaskError('.error_max_task_limit', "Yer Quest has been Created!");
+  validationError.renderToPage();
 }).on('ajax:error', '#new_task', function(e, data, status, xhr) {
   var validationError = new TaskError('.error_max_task_limit', data.responseText);
   validationError.renderToPage();
-  });
+});
 
   //Edit Task Get
   $('.captain.profile_bottom').on('ajax:success', '#edit_task', function(e, data, status, xhr) {
@@ -91,6 +94,9 @@ $(document).ready(function(){
     leftBox.renderToPage();
     rightBox.renderToPage();
     botBox.renderToPage();
+  }).on('ajax:success', '.edit_task', function(e, data, status, xhr) {
+    var validationError = new TaskError('.error_max_task_limit', "Yer Quest has been Edited");
+    validationError.renderToPage();
   });
   
   //Task verified button
@@ -102,5 +108,16 @@ $(document).ready(function(){
     leftBox.renderToPage();
     rightBox.renderToPage();
     botBox.renderToPage();
+  }).on('ajax:success', '#verified_task', function(e, data, status, xhr) {
+    var validationError = new TaskError('#task_verify_message', "Yer Pirate has completed this Quest!");
+    validationError.renderToPage();
+  });
+
+  $('.captain.profile_right').on('ajax:success','#verified_task', function(e, data, status, xhr){
+    var rightBox = new List('.captain.profile_right', 'Task to be Verified', data.tasks_need_verify);
+    rightBox.renderToPage();
+  }).on('ajax:success', '#verified_task', function(e, data, status, xhr) {
+    var validationError = new TaskError('#task_verify_message', "Yer Pirate has completed this Quest!");
+    validationError.renderToPage();
   });
 });

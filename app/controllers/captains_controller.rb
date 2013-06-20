@@ -18,7 +18,7 @@ class CaptainsController < ApplicationController
   def show
     @treasures = current_user.treasures.on_sale
     @pirates = current_user.pirates
-    @tasks = current_user.tasks
+    @tasks = current_user.tasks.need_verify
     @tasks = @tasks.pop(5) if @tasks.size > 5
   end
 
