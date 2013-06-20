@@ -25,9 +25,10 @@ class CaptainsController < ApplicationController
   def confirm
     task = Task.find(params[:task_id])
     
+    task.pirate.coins += task.worth
+    task.pirate.save
+    
     if task.completed!
-      task.pirate.coins += task.worth
-      task.pirate.save
       tasks_on_board = render_to_string partial: 'tasks/captain_task_board', 
       locals: { tasks_available: current_user.tasks_on_board, 
       tasks_assigned: current_user.tasks_assigned,
@@ -41,11 +42,9 @@ class CaptainsController < ApplicationController
       new_task_form = render_to_string partial: 'tasks/form', 
       locals: {captain: current_user, task: Task.new}
 
-      debugger
       render :json => { :tasks_on_board => tasks_on_board,
                         :task_form => new_task_form,
                         :tasks_need_verify => tasks_need_verify}
-
     else
       flash[:error_adding] = 'ArgH! Something went wrong'
     end
