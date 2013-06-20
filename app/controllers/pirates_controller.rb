@@ -82,6 +82,7 @@ class PiratesController < ApplicationController
   def show
     @pirate = Pirate.find_by_username(params[:id])
     @treasures = @pirate.treasures_purchaseable
+    @treasures_bought = @pirate.treasures.bought
     @tasks = @pirate.tasks.on_board
   end
 

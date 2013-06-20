@@ -8,11 +8,6 @@ class TreasuresController < ApplicationController
     when 'Captain'
       render_treasure_profile_to_json(Treasure.new)
     when 'Pirate'
-      treasures_wishlist  = render_to_string :partial => 'pirate_treasures', 
-                                   :locals => {:treasures => current_user.treasures.wishlist,
-                                               :wishlist => true}
-
-
       treasures_purchased = render_to_string :partial => 'pirate_treasures',
                                    :locals => {:treasures => current_user.treasures.bought,
                                                :wishlist => false}
@@ -21,8 +16,7 @@ class TreasuresController < ApplicationController
                                    :locals => {:treasures => current_user.treasures_received,
                                                :wishlist => false}
 
-      render :json => {:t_wishlist => treasures_wishlist,
-                       :t_purchased => treasures_purchased,
+      render :json => {:t_purchased => treasures_purchased,
                        :t_received => treasures_received}
     end
   end
@@ -49,38 +43,21 @@ class TreasuresController < ApplicationController
       treasure = Treasure.new(params[:treasure])
       current_user.treasures << treasure
 
-      case current_user.type
-      when 'Captain'
-        if treasure.save
-          treasure_board = render_to_string :partial => 'captain_treasure_board',
-                                          :locals => {:treasure_board => current_user.reload.treasures_on_sale}
+      if treasure.save
+        treasure_board = render_to_string :partial => 'captain_treasure_board',
+                                        :locals => {:treasure_board => current_user.reload.treasures_on_sale}
 
-          render :json => {:treasure_board => treasure_board, :success_creation => "Argh! Yeeh treasure s' on sale!"}
-        else
-          render :json => treasure.errors.full_messages, :status => :unprocessable_entity
-        end
-      when 'Pirate'
-        if treasure.save
-
-        else
-          render :json => treasure.errors.full_messages, :status => :unprocessable_entity
-        end
-      end
-     
+        render :json => {:treasure_board => treasure_board, :success_creation => "Argh! Yeeh treasure s' on sale!"}
+      else
+        render :json => treasure.errors.full_messages, :status => :unprocessable_entity
+      end     
     end
   end
 
   def edit
     treasure = Treasure.find(params[:id])
-    
-    case current_user.type
-    when 'Captain'
-      render_treasure_profile_to_json(treasure)
-    when 'Pirate'
-      wishlist_edit_form = render_to_string :partial => 'form_treasures', :locals => {:treasure => treasure}
 
-      render :json => {:wishlist_edit_form => wishlist_edit_form}
-    end
+    render_treasure_profile_to_json(treasure)
   end
 
   def update
@@ -108,11 +85,6 @@ class TreasuresController < ApplicationController
         treasure.save
         current_user.treasures << treasure
 
-        treasures_wishlist  = render_to_string :partial => 'pirate_treasures', 
-                                   :locals => {:treasures => current_user.treasures.wishlist,
-                                               :wishlist => true}
-
-
         treasures_purchased = render_to_string :partial => 'pirate_treasures',
                                      :locals => {:treasures => current_user.treasures.bought,
                                                  :wishlist => false}
@@ -123,10 +95,10 @@ class TreasuresController < ApplicationController
 
         success_message = "You've bought the treasure!"
 
-        render :json => {:t_wishlist => treasures_wishlist,
-                         :t_purchased => treasures_purchased,
+        render :json => {:t_purchased => treasures_purchased,
                          :t_received => treasures_received,
                          :success_message => success_message}
+      
       else
         render :json => 'You need more doubloons!', :status => :unprocessable_entity
       end
@@ -154,13 +126,7 @@ class TreasuresController < ApplicationController
   end
 
   def treasure_box_full?
-    case current_user.type
-    when 'Captain'
-      current_user.treasures_on_sale.length >= 6
-    when 'Pirate'
-      current_user.treausers_on_wishlist.length >= 6
-    end
-
+    current_user.treasures_on_sale.length >= 6
   end
 
   def redirect_to_captain_or_pirate_path

@@ -17,6 +17,7 @@
 .row
   .large-6.columns.pirate.profile_left
     #treasure_message
+    = render :partial => 'treasures/pirate_treasures', :locals => {:treasures => @treasures_bought}
 
   .large-6.columns.pirate.profile_right
     = render :partial => "pirate_profile_tasks", :locals => { tasks: @tasks.limit(5) }

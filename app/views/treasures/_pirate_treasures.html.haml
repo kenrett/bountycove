@@ -4,11 +4,6 @@
     %li Name: #{treasure.name}
     %li Description: #{treasure.description}
     %li Photo: #{treasure.photo}
-    - unless wishlist
-      %li Price: #{treasure.price}
-      %li Tax: #{treasure.tax}
-      %li Total Price: #{treasure.total_price}
-
-    -if wishlist
-      = link_to 'Edit', edit_pirate_treasure_path(current_user, treasure), :remote => true, :id => 'wishlist_edit_treasure'
-
+    %li Price: #{treasure.price}
+    %li Tax: #{treasure.tax}
+    %li Total Price: #{treasure.total_price}
