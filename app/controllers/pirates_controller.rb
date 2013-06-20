@@ -92,7 +92,7 @@ class PiratesController < ApplicationController
 
   def adds
     task = Task.find(params[:task_id])
-    max_tasks = 3
+    max_tasks = 4
     if tasks_assigned_count? < max_tasks
       task.assigned!
       current_user.tasks << task
