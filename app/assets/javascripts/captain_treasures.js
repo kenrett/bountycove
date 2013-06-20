@@ -91,8 +91,8 @@ $(document).ready(function(){
   });//end on for rendering treasure profile view
 
   // Adding a new treasure
-  $('.captain.profile_right').on('ajax:success', '#new_treasure', function(e, data, status, xhr) {
-    $('.captain.profile_main').html(data.treasure_board);
+  $('.captain.profile_right').on('ajax:success', '.new_treasure', function(e, data, status, xhr) {
+    $('.captain.profile_main div').html(data.treasure_board);
     var creationMessage = new TreasureSuccess('.error_max_treasure_limit', data.success_creation);
     creationMessage.renderToPage();
   }).on('ajax:error', '#new_treasure', function(e, data, status, xhr) {

@@ -1,7 +1,6 @@
-%ul.button-group.sub-nav.contain-to-grid.pirate_div
-  %li
-    = link_to "Overview", pirate_path(user), :class => 'a small radius button'
-  %li
-    = link_to "Create Task", pirate_tasks_path(current_user), :remote => true, :id => 'pirate_task_cove', :class => 'a small radius button'
-  %li
-    = link_to "Treasures", pirate_treasures_path(user), :remote => true, :id => 'pirate_treasure_cove', :class => 'a small radius button'
+%span
+  = link_to "Overview", pirate_path(user), :class => 'a small radius button'
+%span
+  = link_to "Quests", pirate_tasks_path(current_user), :remote => true, :id => 'pirate_task_cove', :class => 'a small radius button'
+%span
+  = link_to "Treasures", pirate_treasures_path(current_user), :remote => true, :id => 'pirate_treasure_cove', :class => 'a small radius button'

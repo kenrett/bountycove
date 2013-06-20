@@ -1,3 +1,4 @@
+#treasure_message
 - treasures.each do |treasure|
   %ul.treasure
     %li Name: #{treasure.name}
@@ -7,6 +8,6 @@
     %li Tax: #{treasure.tax}
     %li Total Price: #{treasure.total_price}
 
-    - if on_sale
-      = button_to 'Buy', pirate_buys_treasure_path(current_user, treasure)
+    -if wishlist
+      = link_to 'Edit', edit_pirate_treasure_path(current_user, treasure), :remote => true
 

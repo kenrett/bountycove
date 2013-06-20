@@ -8,13 +8,22 @@ class TreasuresController < ApplicationController
     when 'Captain'
       render_treasure_profile_to_json(Treasure.new)
     when 'Pirate'
-      @treasures_bought    = current_user_treasures(Treasure::BOUGHT)
-      @treasures_wishlist  = current_user_treasures(Treasure::WISHLIST)
-      @treasures_delivered = current_user_treasures(Treasure::DELIVERED)
+      treasures_wishlist  = render_to_string :partial => 'pirate_treasures', 
+                                   :locals => {:treasures => current_user.treasures.wishlist,
+                                               :wishlist => true}
 
-      captain_treasures   = current_user.captain.treasures
-      @treasures_on_sale  = captain_treasures.where(status: Treasure::ON_SALE)
-      render_local_pirate_or_captain_view 'index'
+
+      treasures_purchased = render_to_string :partial => 'pirate_treasures',
+                                   :locals => {:treasures => current_user.treasures.bought,
+                                               :wishlist => false}
+
+      treasures_received  = render_to_string :partial => 'pirate_treasures',
+                                   :locals => {:treasures => current_user.treasures_received,
+                                               :wishlist => false}
+
+      render :json => {:t_wishlist => treasures_wishlist,
+                       :t_purchased => treasures_purchased,
+                       :t_received => treasures_received}
     end
   end
 
@@ -38,14 +47,26 @@ class TreasuresController < ApplicationController
       add_specific_attributes_to_params_based_on_current_user_type
 
       treasure = Treasure.new(params[:treasure])
-      treasure.captain = current_user
-      if treasure.save
-        treasure_board = render_to_string :partial => 'captain_treasure_board',
-                            :locals => {:treasure_board => current_user.reload.treasures_on_sale}
-        render :json => {:treasure_board => treasure_board, :success_creation => "Argh! Yeeh treasure s' on sale!"}
-      else
-        redirect_to root_path
+      current_user.treasures << treasure
+
+      case current_user.type
+      when 'Captain'
+        if treasure.save
+          treasure_board = render_to_string :partial => 'captain_treasure_board',
+                                          :locals => {:treasure_board => current_user.reload.treasures_on_sale}
+
+          render :json => {:treasure_board => treasure_board, :success_creation => "Argh! Yeeh treasure s' on sale!"}
+        else
+          render :json => treasure.errors.full_messages, :status => :unprocessable_entity
+        end
+      when 'Pirate'
+        if treasure.save
+
+        else
+          render :json => treasure.errors.full_messages, :status => :unprocessable_entity
+        end
       end
+     
     end
   end
 
@@ -72,7 +93,6 @@ class TreasuresController < ApplicationController
 
       success_message = 'Argh! Yeh treasure changed!'
 
-      debugger
       render :json => {:treasure_board => treasure_board,
                         :new_treasure_form => new_treasure_form,
                         :success_message => success_message}
