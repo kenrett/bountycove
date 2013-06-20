@@ -4,7 +4,6 @@
   background-color: #7274C4;
   margin-top: 1em;
   margin-left: 0.1em;
-  padding: 0;
 
   .small.secondary.button {
     width: 100%;
@@ -13,9 +12,7 @@
 
 
 .treasures_on_sale {
-  background-color: gray;
-  border: 2px solid black;
-  border-radius:25px;
+  background-color: #acacac;
   min-height: 39em;
   overflow: auto;
 
@@ -43,18 +40,20 @@
   }
 }
 
-form#new_pirate.new_pirate label {
-  color: black;
-}
-
 ul.treasures_on_sale h1 {
-  border-bottom: 4px solid black;
+ font-family: 'Pathway Gothic One', sans-serif; 
+ color: #444444;
 }
+  
 
 .profile_main { 
   height: 12.1em;
 }
 
+
+.sub_nav {
+  padding: 0;
+}
 
 .username {
   border: 2px solid black;
@@ -68,16 +67,23 @@ ul.treasures_on_sale h1 {
   padding-left: 1em;
 }
 
-#mid_nav_bar.span {
-  padding: 0;
-  margin: 0;
-}
-
-.small.secondary.button {
-  width: 24.6%;
-}
-
-.nav_border {
-  border: 4px solid black;
-  background-color: #59b5e6;
+.new_task input {
+  background-color: #e0dfdf;
+  margin-bottom: -2%;
+}input:focus {
+  background-color: #edebeb;
+}input:last-child {
+  margin-top: 5%;
+  width: 100%;
+  height: 30px;
+  border: 0;
+  font-size: 1em;
+  color: #e0dfdf;
+  background-color: #198ac8;
+}label {
+  font-size: 1.5em;
+  font-family: 'Pathway Gothic One', sans-serif;
+  font-color: #444444;
+}input:last-child:hover {
+  background-color: #1780b9;
 }

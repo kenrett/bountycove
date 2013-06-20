@@ -8,14 +8,29 @@
 }
 
 .treasure_item {
-  background-color: #b5b4b4;
-  margin-right: 2%;  
+  // background-color: #b5b4b4;
+  margin-right: 2%;
+  height: 215px;
+}
+
+.treasure_item a {
+  font-family: 'Pathway Gothic One', sans-serif;
+  color: #444444;
+  font-size: 1.5em;
+}
+
+.cost {
+  font-family: 'Pathway Gothic One', sans-serif;
+  color: #6d6e6e;
+  font-size: 1.2em;
+  margin-bottom: 2%;
+  margin-top: 2%;
 }
 
 .profile_main {
   background-color: #acacac;
   padding: 1%;
-  min-height: 225px; 
+  min-height: 245px; 
   border-bottom: 3px solid #9f9f9f;
 }
 
@@ -58,10 +73,22 @@
 
 .profile_left {
   background-color: #acacac;
-  border-bottom: 3px solid #9f9f9f;
+  padding-bottom: 3%;
 }
 
 .profile_right {
     background-color: #acacac;
+    padding-bottom: 3%;
+}
+
+.welcome p {
+  margin-bottom: 0;
+  font-family: 'Pathway Gothic One', sans-serif;
+  font-size: 2em;
+  color: #424343;
+}
+
+.pirates_name {
+  margin-right: 5%;
 }
 

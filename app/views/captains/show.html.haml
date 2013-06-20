@@ -2,7 +2,8 @@
 - content_for :title, "Captain's Page"
 .row.captain.items_treasure
   .welcome.large-12.columns
-    %strong Hello Captain #{current_user.first_name.titleize}!
+    %p
+      Hello, Captain #{current_user.first_name.titleize}!
 
 .row.captain.profile_main
   .large-11.large-offset-1.small-11.columns.small-offset-1
@@ -17,7 +18,8 @@
 .row
   .large-6.columns.captain.profile_left
     = render :partial => 'list_of_pirates', :locals => {:pirates => @pirates}
-    = link_to "Add Pirate", new_captain_pirate_path(current_user), :remote => true, :id => 'add_pirate'
+    = link_to "+ ADD PIRATE", new_captain_pirate_path(current_user), :remote => true, :id => 'add_pirate'
+
   .large-6.columns.captain.profile_right
     = render :partial => 'tasks/list_of_tasks', :locals => {:tasks => @tasks }
 
