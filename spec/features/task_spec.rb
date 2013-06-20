@@ -19,32 +19,35 @@ describe 'Task' do
 
   context 'with valid information' do
     describe 'when all inputs are filled in correctly' do
-      it 'will create a new task' do
-        fill_in 'task_name', with: task.name
-        fill_in 'task_description', with: task.description
-        fill_in 'task_worth', with: task.worth
-        click_button 'Create Task'
-        expect(page.current_path).to eq captain_tasks_path(captain)
-      end
+      pending
+      # it 'will create a new task' do
+      #   fill_in 'task_name', with: task.name
+      #   fill_in 'task_description', with: task.description
+      #   fill_in 'task_worth', with: task.worth
+      #   click_button 'Create Task'
+      #   expect(page.current_path).to eq captain_tasks_path(captain)
+      # end
     end
   end
 
   context 'with invalid information:' do
     describe 'worth value is not an integer' do
-      it 'will return errors' do
-        fill_in 'task_worth', with: 'yeah'
-        click_button 'Create Task'
+      pending
+      # it 'will return errors' do
+      #   fill_in 'task_worth', with: 'yeah'
+      #   click_button 'Create Task'
 
-        expect(page).to have_content "Worth is not a number"
-      end
+      #   expect(page).to have_content "Worth is not a number"
+      # end
     end
 
     describe 'without any information' do
-      it 'will return errors' do
-        click_button 'Create Task'
+      pending
+      # it 'will return errors' do
+      #   click_button 'Create Task'
 
-        expect(page).to have_content "Worth can't be blank" && "Worth is not a number" && "Name has already been taken" && "Description can't be blank"
-      end
+      #   expect(page).to have_content "Worth can't be blank" && "Worth is not a number" && "Name has already been taken" && "Description can't be blank"
+      # end
     end
   end
 end
