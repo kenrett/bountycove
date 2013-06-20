@@ -1,9 +1,9 @@
 - treasure_board.each do |treasure|
-  .large-3.columns.treasure_item
-    %img{:src => "http://us.cdn1.123rf.com/168nwm/orla/orla1010/orla101000044/8041795-wooden-treasure-chest-with-gold-coins-printed-with-royal-crown--3d-render.jpg"}/
+  .large-3.columns.treasure_item.twelve-point-star
+    = image_tag("/treasure_chest.png")
     %br
     = link_to "#{treasure.name}", edit_captain_treasure_path(current_user, treasure), :remote => true, :class => "captain_treasure_show"
 
     .cost #{treasure.price} Doubloons 
-    = button_to "Delete", captain_treasure_path(current_user, treasure), :method => :delete, :confirm => "Are you sure?"
+    = button_to "DELETE", captain_treasure_path(current_user, treasure), :class => 'delete_treasure', :method => :delete, :confirm => "Are you sure?"
   .large-1.columns

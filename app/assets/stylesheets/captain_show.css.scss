@@ -6,3 +6,62 @@
 .captain_profile_main {
   background-image: url('scroll.png');
 }
+
+.treasure_item {
+  background-color: #b5b4b4;
+  margin-right: 2%;  
+}
+
+.profile_main {
+  background-color: #acacac;
+  padding: 1%;
+  min-height: 225px; 
+  border-bottom: 3px solid #9f9f9f;
+}
+
+.tiny.button.alert.round {
+  margin-top: 1em;
+}
+
+
+.new_treasure {
+  padding-top: 1em;
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+.button_group {
+  width: auto;
+}
+
+.button_group li a {
+  width: 230px;
+  height: 40px;
+  background-color: #ccc;
+}
+
+.delete_treasure {
+  width: 100%;
+  border: 0px;
+  height: 1.5em;
+  background-color: #198ac8;
+  font-size: 0.8em;
+}
+
+#mid_nav_bar {
+}
+
+// Captain Profile Page 
+.profile_bottom {
+  min-height: 280px;
+}
+
+.profile_left {
+  background-color: #acacac;
+  border-bottom: 3px solid #9f9f9f;
+}
+
+.profile_right {
+    background-color: #acacac;
+}
+
