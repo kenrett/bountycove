@@ -51,11 +51,11 @@ $(document).ready(function(){
   $('#mid_nav_bar').on('ajax:success','#pirate_task_cove', function(e, data, status, xhr){
 
     var leftBox   = new List('.pirate.profile_left', 'New Tasks!', data.tasks_available);
-    var rightBox  = new List('.pirate.profile_right', 'Current Tasks!', data.task_current);
-    var botBox   = new List('.pirate.profile_bottom', '', data.tasks_completed);
+    //var rightBox  = new List('.pirate.profile_right', 'Highlight Task!', data.task_highlight);
+    var botBox   = new List('.pirate.profile_bottom', '', data.tasks_on_board);
 
     leftBox.renderToPage();
-    rightBox.renderToPage();
+    //rightBox.renderToPage();
     botBox.renderToPage();
   });
 

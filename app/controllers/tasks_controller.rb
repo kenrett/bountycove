@@ -11,8 +11,8 @@ class TasksController < ApplicationController
       render_task_profile_to_json(Task.new)
     when 'Pirate'
 
-      tasks_on_board = render_to_string partial: 'captain_task_board', 
-      locals: { tasks_available: current_user.tasks_on_board, 
+      tasks_on_board = render_to_string partial: 'pirate_task_board', 
+      locals: { tasks_available: current_user.captain.tasks_on_board, 
       tasks_assigned: current_user.tasks_assigned,
       tasks_completed: current_user.tasks_completed.limit(5) }
 
@@ -20,17 +20,13 @@ class TasksController < ApplicationController
       tasks: current_user.tasks_need_verify, 
       button: true, 
       assigned: false})
-
-      task_highlight = render_to_string partial: 'highlight_task',
-      locals: {pirate: current_user, task: current_user.tasks_assigned.first}
+      
+      # task_highlight = render_to_string partial: 'pirate_highlight_task',
+      # locals: {task: current_user.tasks_assigned.first}
 
       render json: {tasks_on_board: tasks_on_board,
-      tasks_need_verify: tasks_need_verify, task_form: new_task_form }
+      tasks_need_verify: tasks_need_verify}#, task_highlight: task_highlight }
     end
-
-  end
-
-  def new
 
   end
 
