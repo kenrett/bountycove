@@ -92,4 +92,12 @@ $('.pirate').on('ajax:success', '#show_task', function(e, data, status, xhr) {
     var rightBox  = new List('.pirate.profile_right', '', data.task_highlight);
     rightBox.renderToPage();
   });
+
+  $('.pirate.profile_right').on('ajax:success','.accept_prof_quest', function(e, data, status, xhr){
+    var rightBox = new List('.pirate.profile_right', 'New Quests', data.tasks_available);
+    rightBox.renderToPage();
+  }).on('ajax:success', '.accept_prof_quest', function(e, data, status, xhr) {
+    var validationSuccess = new TaskSuccess('#quest_accepted', "Arrrghh you've cast off on a Quest!");
+    validationSuccess.renderToPage();
+  });
 });

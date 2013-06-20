@@ -60,7 +60,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
 
-  def render_task_profile_to_json(success)
+  def render_task_profile_to_json(task)
     case current_user.type
 
     when 'Captain'
@@ -84,11 +84,16 @@ class TasksController < ApplicationController
          task_form: new_task_form}  
     
     when 'Pirate'
-
       tasks_on_board = render_to_string partial: 'pirate_task_board', 
       locals: { tasks_available: current_user.captain.tasks_on_board, 
       tasks_need_verify: current_user.tasks_need_verify,
       tasks_completed: current_user.tasks_completed.limit(5) }
+
+      tasks_available = render_task_view_to_string({
+      tasks: current_user.captain.tasks_on_board, 
+      button: true, 
+      assigned: false,
+      user_task: "pirates/pirate_tasks"})
 
       tasks_assigned = render_task_view_to_string({
       tasks: current_user.tasks_assigned, 
@@ -98,8 +103,11 @@ class TasksController < ApplicationController
       task_highlight = render_to_string partial: 'pirate_highlight_task',
       locals: {task: current_user.tasks_assigned.first}
 
-      render json: {tasks_on_board: tasks_on_board,
-      tasks_assigned: tasks_assigned, task_highlight: task_highlight }
+      render json: {
+      tasks_on_board: tasks_on_board,
+      tasks_assigned: tasks_assigned, 
+      tasks_available: tasks_available, 
+      task_highlight: task_highlight }
     end
   end
 
