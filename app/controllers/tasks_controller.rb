@@ -43,9 +43,9 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to captain_tasks_path(@captain)
+    render :json => "This Quest has been removed".to_json
   end
-
+  
   private
 
   def get_captain

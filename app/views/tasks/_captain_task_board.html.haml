@@ -5,8 +5,7 @@
     %ul.task
       %li #{link_to task.name, edit_captain_task_path(current_user, task), :remote => true, :id => 'edit_task'}
       %li #{task.worth} Doubloons
-      / %li Posted: #{task.created_at.strftime(time_format(task))}
-
+      %li #{link_to 'Delete Quest', captain_task_path(current_user, task), :method => :delete, :remote => true, :class => 'delete_task'}
 
 .large-4.columns.captain.profile_bottom_M
   #task_assigned_message
@@ -16,8 +15,7 @@
       %li #{link_to task.name, edit_captain_task_path(current_user, task), :remote => true, :id => 'edit_task'}
       %li #{task.pirate.username}'s Quest
       %li #{task.worth} Doubloons
-      / %li Posted: #{task.created_at.strftime(time_format(task))}
-
+      %li #{link_to 'Delete Quest', captain_task_path(current_user, task), :method => :delete, :remote => true, :class => 'delete_task'}
 
 .large-4.columns.captain.profile_bottom_R
   #task_completed_message
@@ -26,5 +24,4 @@
     %ul.task
       %li #{task.name}
       %li #{task.worth} Doubloons
-      / %li Posted: #{task.created_at.strftime(time_format(task))}
 

@@ -120,4 +120,12 @@ $(document).ready(function(){
     var validationSuccess = new TaskSuccess('#task_verify_message', "Yer Pirate has completed this Quest!");
     validationSuccess.renderToPage();
   });
+
+    // Delete Task
+  $('.captain').on('ajax:success', '.delete_task', function(e, data, status, xhr) {
+    $(this).closest('ul.task').remove();
+    var deleteTask = new TreasureSuccess('#task_verify_message', data);
+    deleteTask.renderToPage();
+  });//end on
+
 });
