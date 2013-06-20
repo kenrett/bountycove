@@ -34,7 +34,6 @@ $(document).ready(function() {
   // Renders pirate page
   $('#mid_nav_bar').on('ajax:success', '#captain_pirates_cove', function(e, data, status, xhr) {
     $('.captain.profile_left').html(data.list_of_pirates);
-    $('.captain.profile_left').append('<a href="/captains/c/pirates/new" data-remote="true" id="add_pirate">Add Pirate</a>');
     $('.captain.profile_right').html(data.sign_up_form);
     $('.captain.profile_bottom').html('');
   });
@@ -42,7 +41,6 @@ $(document).ready(function() {
   // Edit a pirate account
   $('.captain.profile_right').on('ajax:success', '.edit_pirate', function(e, data, status, xhr) {
     $('.captain.profile_left').html(data.list_of_pirates);
-    $('.captain.profile_left').append('<a href="/captains/c/pirates/new" data-remote="true" id="add_pirate">Add Pirate</a>');
     $('.captain.profile_right').html(data.sign_up_form);
     $('.captain.profile_bottom').html('');
 
@@ -72,7 +70,6 @@ $(document).ready(function() {
   // Add new pirate accounts for captain
   $('.captain.profile_right').on('ajax:success', '#new_pirate', function(e, data, status, xhr) {
     $('.captain.profile_left').html(data.list_of_pirates);
-    $('.captain.profile_left').append('<a href="/captains/c/pirates/new" data-remote="true" id="add_pirate">Add Pirate</a>');
     $('.captain.profile_right').html(data.sign_up_form);
 
     var pirateSuccessMessage = new PirateSuccess('.captain.profile_right #new_pirate_message', data.success_message);
