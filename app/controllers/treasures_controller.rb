@@ -111,7 +111,8 @@ class TreasuresController < ApplicationController
 
   def destroy
     Treasure.find(params[:id]).destroy
-    redirect_to captain_path(current_user)
+
+    render :json => "your treasure's gone".to_json
   end
 
   private
