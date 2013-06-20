@@ -61,18 +61,17 @@ $(document).ready(function(){
   $('#mid_nav_bar').on('ajax:success', '#pirate_treasure_cove', function(e, data, status, xhr) {
     var leftBox  = new List('.pirate.profile_left', 'Waiting for Treasures', data.t_purchased);
     var rightBox = new List('.pirate.profile_right', 'Looted Treasures', data.t_received);
-    
+
     leftBox.renderToPage();
     rightBox.renderToPage();
   });
 
   // Buy treasure from treasure board
   $('.pirate.profile_main').on('ajax:success', '#buy_treasure', function(e, data, status, xhr) {
-    $(this).closest('div').remove();
-    
+    $(this).parent().parent().remove();
     var leftBox  = new List('.pirate.profile_left', 'Waiting for Treasures', data.t_purchased);
     var rightBox = new List('.pirate.profile_right', 'Looted Treasures', data.t_received);
-    
+
     leftBox.renderToPage();
     rightBox.renderToPage();
 
