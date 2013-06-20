@@ -4,6 +4,6 @@
     %br
     = link_to "#{treasure.name}", edit_captain_treasure_path(current_user, treasure), :remote => true, :class => "captain_treasure_show"
 
-    .cost #{treasure.price} Doubloons 
+    .cost #{number_with_delimiter(treasure.total_price, :delimiter => ',')} Doubloons (+tax)
     = button_to "DELETE", captain_treasure_path(current_user, treasure), :class => 'delete_treasure', :method => :delete, :confirm => "Are you sure?"
   .large-1.columns

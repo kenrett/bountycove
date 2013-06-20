@@ -1,8 +1,8 @@
 - treasure_board.each do |treasure|
   .large-3.columns.treasure_item
-    %img{:src => "http://us.cdn1.123rf.com/168nwm/orla/orla1010/orla101000044/8041795-wooden-treasure-chest-with-gold-coins-printed-with-royal-crown--3d-render.jpg"}/
+    = image_tag("/treasure_chest.png")
     %br
 
     .cost #{treasure.price} Doubloons 
-    = button_to "Loot", edit_pirate_treasure_path(current_user, treasure), :remote => true
+    = button_to "Loot", edit_pirate_treasure_path(current_user, treasure), :remote => true, :class => 'delete_treasure'
   .large-1.columns
