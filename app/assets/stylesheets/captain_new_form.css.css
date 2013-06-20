@@ -10,7 +10,7 @@
 .new_pirate label {
   font-size: 1.5em;
   font-family: 'Pathway Gothic One', sans-serif;
-  font-color: #444444;
+  font-color: #8f8e8e;
 }
 
 .new_pirate input:last-child {
@@ -25,36 +25,5 @@
 
 .new_pirate input:last-child:hover {
   background-color: #1780b9;
-}
-
-.profile_right h1 {
- font-family: 'Pathway Gothic One', sans-serif; 
- color: #444444;
-}
-
-.profile_right h3 {
-   font-family: 'Pathway Gothic One', sans-serif;
-}
-
-.profile_left h3 {
-   font-family: 'Pathway Gothic One', sans-serif;
-}
-
-.profile_left h1 {
- font-family: 'Pathway Gothic One', sans-serif; 
- color: #444444;
-}
-
-.profile_bottom {
-  min-height:180px;
-}
-
-.profile_bottom h3 {
-  min-height: 20px;
-  font-family: 'Pathway Gothic One', sans-serif; 
-  color: #444444;
-}h1 {
-  font-family: 'Pathway Gothic One', sans-serif; 
-  color: #444444;
 }
 

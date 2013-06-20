@@ -1,20 +1,29 @@
 .welcome {
   margin-top: 10%;
   margin-bottom: 1em;
+  
+  p {
+   margin-bottom: 0;
+   font-family: 'Pathway Gothic One', sans-serif;
+   font-size: 2em;
+   color: #8f8e8e;
+ }
 }
 
 .treasure_item {
-  // background-color: #b5b4b4;
   margin-right: 2%;
   height: 215px;
+
+  a {
+   font-family: 'Pathway Gothic One', sans-serif;
+   color: #444444;
+   font-size: 1.5em;
+  }
 }
 
-.treasure_item a {
-  font-family: 'Pathway Gothic One', sans-serif;
-  color: #444444;
-  font-size: 1.5em;
+.treasure_item a:hover {
+  color: #565555;
 }
-
 .cost {
   font-family: 'Pathway Gothic One', sans-serif;
   color: #6d6e6e;
@@ -24,7 +33,6 @@
 }
 
 .profile_main {
-  // background-color: #acacac;
   padding: 1%;
   min-height: 245px; 
 }
@@ -42,23 +50,15 @@
 
 .button_group {
   width: auto;
-}
-
-.button_group li a {
-  width: 230px;
-  height: 40px;
-  background-color: #ccc;
+ 
+  li a {
+   width: 230px;
+   height: 40px;
+   background-color: #ccc;
+ }
 }
 
 .delete_treasure {
-  width: 100%;
-  border: 0px;
-  height: 1.5em;
-  background-color: #edebeb;
-  font-size: 0.8em;
-}
-
-.loot_treasure {
   width: 100%;
   border: 0px;
   height: 1.5em;
@@ -70,36 +70,43 @@
   background-color: #dadada;
 }
 
+
+.loot_treasure {
+  width: 100%;
+  border: 0px;
+  height: 1.5em;
+  background-color: #edebeb;
+  font-size: 0.8em;
+}
+
 .loot_treasure:hover {
   background-color: #dadada;
 }
 
 
 #mid_nav_bar {
-  border-top: 3px solid #9f9f9f;
+  border-top: 2px solid #9f9f9f;
 }
 
-// Captain Profile Page 
+#mid_nav_bar a {
+  margin-right: -1%;
+}
+
 .profile_bottom {
-  min-height: 280px;
+  min-height: 300px;
 }
 
+.captain.profile_right,
 .captain.profile_left {
-  // background-color: #acacac;
   padding-bottom: 3%;
 }
 
-.captain.profile_right {
-    // background-color: #acacac;
-    padding-bottom: 3%;
+.pirate.profile_right,
+.pirate.profile_left {
+  // padding-bottom: 3%;
+  min-height: 300px;
 }
 
-.welcome p {
-  margin-bottom: 0;
-  font-family: 'Pathway Gothic One', sans-serif;
-  font-size: 2em;
-  color: #424343;
-}
 
 .pirates_name {
   margin-right: 5%;
@@ -107,6 +114,9 @@
 
 ul.treasure {
   display: inline;
+  font-family: 'Pathway Gothic One', sans-serif;
+  color: #444444;
+  font-size: 1.3em;
 
   li {
     color: gray;
@@ -124,6 +134,78 @@ ul.treasure {
 
 #last {
   margin-bottom: 1.5em;
+
+.profile_section {
+  min-height: 300px;
+}
+
+.pirate_tasks_show h1 {
+  margin-bottom: 0;
+}
+// .sub_nav {  // This is the sub_navbar for pirates
+//   border: 2px solid black;
+//   height: 3.125em;
+//   background-color: #7274C4;
+//   margin-top: 1em;
+//   margin-left: 0.1em;
+//   padding: 0;
+
+  // .small.secondary.button {
+  //   font-family: 'Pathway Gothic One', sans-serif; 
+  //   font-size: 1em;
+  //   // width: 100%;
+  // }
+// }
+
+#sub_overview,
+#captain_pirates_cove,
+#pirate_task_cove,
+#captain_task_cove,
+#pirate_treasure_cove,
+#captain_treasure_cove {
+  font-family: 'Pathway Gothic One', sans-serif; 
+  font-size: 1em;
+}
+
+.treasures_on_sale {
+  min-height: 39em;
+  overflow: auto;
+ 
+ //  h1 {
+ //   font-family: 'Pathway Gothic One', sans-serif; 
+ //   color: #444444;
+ // }
+}
+
+.intro {
+  border: 1px solid black;
+  font-weight: 700;
+  background-color: #7274C4;
+  width: 100%;
+  padding-left: 1em;
+}
+
+// .profile_right h1 {
+//  font-family: 'Pathway Gothic One', sans-serif; 
+//  color: #444444;
+// }
+
+// .profile_left h1 {
+//  font-family: 'Pathway Gothic One', sans-serif; 
+//  color: #444444;
+// }
+
+// .profile_right h3 {
+//    font-family: 'Pathway Gothic One', sans-serif;
+// }
+
+// .profile_left h3 {
+//    font-family: 'Pathway Gothic One', sans-serif;
+// }
+
+.profile_bottom {
+  min-height: 300px;
+  border-top: 3px solid #9f9f9f;
 }
 
 
