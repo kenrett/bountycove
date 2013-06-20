@@ -1,20 +1,19 @@
-.new_task input {
+.edit_pirate input {
   background-color: #e0dfdf;
-  margin-bottom: 2%;
+  margin-bottom: -2%;
 }
 
-.new_task input:focus {
+.edit_pirate input:focus {
   background-color: #edebeb;
 }
 
-.new_task label {
+.edit_pirate label {
   font-size: 1.5em;
   font-family: 'Pathway Gothic One', sans-serif;
-  font-color: #8f8e8e;
-  margin-bottom: 1%;
+  font-color: #444444;
 }
 
-.new_task input:last-child {
+.edit_pirate input:last-child {
   margin-top: 5%;
   width: 100%;
   height: 30px;
@@ -24,6 +23,6 @@
   background-color: #198ac8;
 }
 
-.new_task input:last-child:hover {
+.edit_pirate input:last-child:hover {
   background-color: #1780b9;
 }

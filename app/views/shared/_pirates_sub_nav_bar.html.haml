@@ -1,5 +1,5 @@
 %span
-  = link_to "Overview", pirate_path(user), :class => 'small secondary button'
+  = link_to "Overview", pirate_path(user), :id => 'sub_overview', :class => 'small secondary button'
 %span
   = link_to "Quests", pirate_tasks_path(current_user), :remote => true, :id => 'pirate_task_cove', :class => 'small secondary button'
 %span
