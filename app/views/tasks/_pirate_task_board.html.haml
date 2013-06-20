@@ -4,7 +4,7 @@
   - tasks_available.first(Task::MAX).each do |task|
     %ul.task
       %li #{link_to task.name, pirate_task_path(current_user, task), :remote => true, :id => 'show_task'}
-      %li #{task.worth} Doubloons
+      %li #{task.worth} doubloons
       / %li Posted: #{task.created_at.strftime(time_format(task))}
       .accept_quest= link_to 'Accept Quest', pirate_adds_path(current_user, task), :remote => true, :class => 'tiny button success round'
 
@@ -14,8 +14,8 @@
   - tasks_need_verify.first(Task::MAX).each do |task|
     %ul.task
       %li #{link_to task.name, pirate_task_path(current_user, task), :remote => true, :id => 'show_task'}
-      %li #{task.pirate.username}'s Quest
-      %li #{task.worth} Doubloons
+      %li #{task.pirate.username}'s quest
+      %li #{task.worth} doubloons
       / %li Posted: #{task.created_at.strftime(time_format(task))}
 
 .large-4.columns.pirate.profile_bottom_R
@@ -24,5 +24,5 @@
   - tasks_completed.first(Task::MAX).each do |task|
     %ul.task
       %li #{task.name}
-      %li #{task.worth} Doubloons
+      %li #{task.worth} doubloons
       / %li Posted: #{task.created_at.strftime(time_format(task))}

@@ -58,10 +58,10 @@ $(document).ready(function(){
     rightBox.renderToPage();
     botBox.renderToPage();
   });
-  
+
   //Add task
   $('.captain.profile_right').on('ajax:success', '#new_task', function(e, data, status, xhr) {
-    
+
     var leftBox   = new List('.captain.profile_left', 'Task to be Verified', data.tasks_need_verify);
     var rightBox  = new List('.captain.profile_right', 'Create new Quest!', data.task_form);
     var botBox   = new List('.captain.profile_bottom', '', data.tasks_on_board);
@@ -72,7 +72,7 @@ $(document).ready(function(){
 
   //Errors on Add
 }).on('ajax:success', '#new_task', function(e, data, status, xhr) {
-  var validationSuccess = new TaskSuccess('.error_max_task_limit', "Yer Quest has been Created!");
+  var validationSuccess = new TaskSuccess('.error_max_task_limit', "Yer created a quest!");
   validationSuccess.renderToPage();
 }).on('ajax:error', '#new_task', function(e, data, status, xhr) {
   var validationError = new TaskError('.error_max_task_limit', data.responseText);
@@ -98,7 +98,7 @@ $(document).ready(function(){
     var validationSuccess = new TaskSuccess('.error_max_task_limit', "Yer Quest has been Edited");
     validationSuccess.renderToPage();
   });
-  
+
   //Task verified button
   $('.captain.profile_left').on('ajax:success','#verified_task', function(e, data, status, xhr){
     var leftBox   = new List('.captain.profile_left', 'Task to be Verified', data.tasks_need_verify);

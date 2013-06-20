@@ -85,7 +85,7 @@ function addCommas(nStr) {
     while (rgx.test(x1)) {
         x1 = x1.replace(rgx, '$1' + ',' + '$2');
     }
-    
+
     return x1 + x2;
   }
 
@@ -95,7 +95,7 @@ $(document).ready(function(){
     var leftBox  = new List('.captain.profile_left', 'Treasure to deliver', data.treasures_bought);
     var rightBox = new List('.captain.profile_right', 'Add Treasures!', data.new_treasure_form);
     var botBox   = new List('.captain.profile_bottom', 'Treasure delivered', data.treasures_delivered);
-    
+
     leftBox.renderToPage();
     rightBox.renderToPage();
     botBox.renderToPage();
@@ -109,14 +109,18 @@ $(document).ready(function(){
     var creationMessage = new TreasureSuccess('.error_max_treasure_limit', data.success_creation);
     creationMessage.renderToPage();
   }).on('ajax:error', '#new_treasure', function(e, data, status, xhr) {
-    var updateError = new TreasureError('.error_max_treasure_limit', data.responseText);
+    var error = '';
+    data.responseJSON.forEach(function(value, index) {
+      error += "<li>" +value+ "</li>";
+    });
+    updateError = new TreasureError('.error_max_treasure_limit', error.trim());
     updateError.renderToPage();
   });//end on
 
   // Editing a treasure
   $('.captain.profile_right').on('ajax:success', '.edit_treasure', function(e, data, status, xhr) {
     $('.captain.profile_main').html(data.treasure_board);
-    
+
     var rightBox = new List('.captain.profile_right', 'Add Treasures!', data.new_treasure_form);
     rightBox.renderToPage();
 

@@ -5,6 +5,7 @@
   - tasks.first(Task::MAX).each do |task|
     .large-12.columns.t_and_e
       %li #{link_to task.name, captain_task_path(current_user, task)}
-      %li #{task.pirate.username}'s Quest
-      %li #{task.worth} Doubloons
+      %li #{task.pirate.username}'s quest
+      %li #{task.worth} doubloons
+      %li Posted: #{task.created_at.strftime(time_format(task))}
       = link_to 'Confirm Complete?', captain_confirms_path(current_user, task), :remote => true, :class => 'tiny button alert round', :id => 'verified_task'

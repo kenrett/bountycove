@@ -112,7 +112,7 @@ class TreasuresController < ApplicationController
   def destroy
     Treasure.find(params[:id]).destroy
 
-    render :json => "your treasure's gone".to_json
+    render :json => "You threw the treasure overboard!".to_json
   end
 
   private
