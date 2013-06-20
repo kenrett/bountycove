@@ -11,7 +11,7 @@
 
 .treasure_on_sale
   %ul
-    %h1 Treasures on Sale
+    %h1 Treasures For Sale
     - if @treasures_on_sale
       = render :partial => 'pirate_treasures', :locals => {:treasures => @treasures_on_sale, :on_sale => true}
 
@@ -21,9 +21,9 @@
     %h1 Wishlist
     - @treasures_wishlist.each do |treasure|
       %li.treasure
-        %li Name: #{treasure.name}
+        %li #{treasure.name}
         %li Description: #{treasure.description}
-        %li Photo: #{treasure.photo}
+        / %li Photo: #{treasure.photo}
         = link_to 'Edit', edit_pirate_treasure_path(current_user, treasure)
         = link_to 'Delete', pirate_treasure_path(current_user, treasure), :method => :delete, :confirm => "Are you sure you want to delete this?"
 

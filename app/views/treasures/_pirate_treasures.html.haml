@@ -2,9 +2,9 @@
 #treasure_message
 - treasures.first((Treasure::MAX)).each do |treasure|
   %ul.treasure
-    %li Name: #{treasure.name}
+    %li #{treasure.name}
     %li Description: #{treasure.description}
-    %li Photo: #{treasure.photo}
-    %li Price: #{treasure.price}
+    / %li Photo: #{treasure.photo}
+    %li #{treasure.price} Doubloons
     %li Tax: #{treasure.tax}
-    %li Total Price: #{treasure.total_price}
+    %li Total: #{treasure.total_price} Doubloons

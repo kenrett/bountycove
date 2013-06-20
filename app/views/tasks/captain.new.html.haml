@@ -4,7 +4,7 @@
   .error
   - if flash[:errors]
     = render :partial => 'shared/signup_errors', :locals => {:errors => flash[:errors]}
-    %h1 Create a new adventure for your 'lil pirate
+    %h1 Create A New Quest For Your 'lil Pirate
   = render 'form', :task => @task, :captain => @captain
   %p
     = link_to "Back", captain_tasks_path(@captain)
