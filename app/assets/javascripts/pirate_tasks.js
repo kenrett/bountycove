@@ -72,8 +72,8 @@ $(document).ready(function(){
 
   //Errors on Add
 }).on('ajax:error', '.accept_quest', function(e, data, status, xhr) {
-  
-  var validationError = new TaskError('.error_max_task_limit', data.assign);
+  debugger
+  var validationError = new TaskError('#task_available_message', data.responseText);
   validationError.renderToPage();
   });
 
@@ -88,5 +88,9 @@ $('.pirate.profile_left').on('ajax:success', '#pirate_complete', function(e, dat
     rightBox.renderToPage();
     botBox.renderToPage();
   });
-  
+
+$('.pirate').on('ajax:success', '#show_task', function(e, data, status, xhr) {
+    var rightBox  = new List('.pirate.profile_right', '', data.task_highlight);
+    rightBox.renderToPage();
+  });
 });

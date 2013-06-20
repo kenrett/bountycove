@@ -2,12 +2,3 @@
   .nav.hide-for-small
     %ul
       %li #{link_to "#{current_user.type.upcase} #{current_user.username.upcase}", pirate_captain_profile_link} &#8226; #{link_to "LOGOUT", logout_path, :method => :post}
-
-      - if current_user_is_captain && count_of_tasks_need_verify > 0
-        %li You have tasks pending for #{link_to "Verification!", captain_tasks_path(current_user)}
-
-      - if current_user_is_pirate
-        %li Total Gold: #{current_user.coins}
-        - if count_of_available_tasks(current_user) > 0
-          %li There are #{link_to "available tasks!", pirate_tasks_path(current_user)}
-    

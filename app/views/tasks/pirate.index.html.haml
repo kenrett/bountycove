@@ -1,8 +1,7 @@
 = render :partial => 'shared/nav_bar'
 .row
   .large-12.columns    
-    %h1 All Quests for Pirate #{current_user.username} 
-    %h5 Total Gold: #{current_user.coins}
+    %h1 All Quests for Pirate #{current_user.username}
 
     %p.top_links
       %a.button.round{:href => pirate_path(current_user) } Back

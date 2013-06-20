@@ -112,7 +112,7 @@ class PiratesController < ApplicationController
       current_user.tasks << task
       reload_page
     else
-      render :json => {:assign => "You can only have #{max_tasks} tasks at a time!" }
+      render :json => "You can only have #{max_tasks} tasks at a time!"
     end
   end
 

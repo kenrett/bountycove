@@ -1,6 +1,6 @@
 .large-4.columns.pirate.profile_bottom_L
-  #task_available_message
   %h3 Available Tasks
+  #task_available_message
   - tasks_available.each do |task|
     %ul.task
       %li Name: #{link_to task.name, pirate_task_path(current_user, task), :remote => true, :id => 'show_task'}
@@ -9,8 +9,8 @@
       .accept_quest= link_to 'Accept Quest', pirate_adds_path(current_user, task), :remote => true, :class => 'tiny button success round'
 
 .large-4.columns.pirate.profile_bottom_M
-  #task_need_verify_message
   %h3 Awaiting Confirmation
+  #task_need_verify_message
   - tasks_need_verify.each do |task|
     %ul.task
       %li Name: #{link_to task.name, pirate_task_path(current_user, task), :remote => true, :id => 'show_task'}
@@ -19,8 +19,8 @@
       %li Posted: #{task.created_at.strftime(time_format(task))}
 
 .large-4.columns.pirate.profile_bottom_R
-  #task_completed_message
   %h3 Completed Tasks
+  #task_completed_message
   - tasks_completed.each do |task|
     %ul.task
       %li Name: #{task.name}

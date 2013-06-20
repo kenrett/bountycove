@@ -23,6 +23,9 @@ class TasksController < ApplicationController
 
   def show
     task = Task.find(params[:id])
+    task_highlight = render_to_string partial: 'pirate_highlight_task',
+      locals: {task: task }
+    render :json => {task_highlight: task_highlight}
   end
 
   def edit
@@ -33,9 +36,7 @@ class TasksController < ApplicationController
 
   def update
     Task.find(params[:id]).update_attributes(params[:task])
-    success_message = 'Argh! Yeh Task changed!'
-    render_task_profile_to_json(Task.new)
-
+    render_task_profile_to_json(success_message)
   end
 
   def destroy
@@ -57,7 +58,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
 
-  def render_task_profile_to_json(task)
+  def render_task_profile_to_json(success)
     case current_user.type
 
     when 'Captain'
@@ -77,8 +78,8 @@ class TasksController < ApplicationController
       locals: {captain: @captain, task: Task.new}      
 
       render json: {tasks_on_board: tasks_on_board,
-      tasks_need_verify: tasks_need_verify,
-         task_form: new_task_form }  
+         tasks_need_verify: tasks_need_verify,
+         task_form: new_task_form}  
     
     when 'Pirate'
 

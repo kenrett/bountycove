@@ -61,8 +61,6 @@ $(document).ready(function(){
   
   //Add task
   $('.captain.profile_right').on('ajax:success', '#new_task', function(e, data, status, xhr) {
-    var creationMessage = new TaskSuccess('.error_max_task_limit', data.task_create);
-    creationMessage.renderToPage();
     
     var leftBox   = new List('.captain.profile_left', 'Task to be Verified', data.tasks_need_verify);
     var rightBox  = new List('.captain.profile_right', 'Enter new Task!', data.task_form);
@@ -78,7 +76,7 @@ $(document).ready(function(){
   validationError.renderToPage();
   });
 
-  //Edit Task
+  //Edit Task Get
   $('.captain.profile_bottom').on('ajax:success', '#edit_task', function(e, data, status, xhr) {
     var rightBox = new List('.captain.profile_right', 'Update Task!', data.task_form);
     rightBox.renderToPage();
