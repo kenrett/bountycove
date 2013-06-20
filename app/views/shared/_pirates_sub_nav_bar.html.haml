@@ -1,7 +1,7 @@
 %ul.button-group.sub-nav.contain-to-grid.pirate_div
   %li
-    %a.small.radius.button{:href => "#"} Overview
+    = link_to "Overview", pirate_path(user), :class => 'a small radius button'
   %li
-    %a.small.radius.button{:href => "#"} Quests 
+    = link_to "Create Task", pirate_tasks_path(current_user), :remote => true, :id => 'pirate_task_cove', :class => 'a small radius button'
   %li
-    %a.small.radius.button{:href => "#"} Treasures
+    = link_to "Treasures", pirate_treasures_path(user), :remote => true, :id => 'pirate_treasure_cove', :class => 'a small radius button'

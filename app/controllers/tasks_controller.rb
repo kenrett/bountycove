@@ -10,14 +10,22 @@ class TasksController < ApplicationController
     when 'Captain'
       render_task_profile_to_json(Task.new)
     when 'Pirate'
-      @tasks = current_user.captain.tasks
 
-      @tasks_on_board    = @tasks.where(status: Task::ON_BOARD)
-      @tasks_assigned    = @tasks.where(status: Task::ASSIGNED)
-      @tasks_need_verify = @tasks.where(status: Task::NEED_VERIFY)
-      @tasks_completed   = @tasks.where(status: Task::COMPLETED)
+      tasks_on_board = render_to_string partial: 'captain_task_board', 
+      locals: { tasks_available: current_user.tasks_on_board, 
+      tasks_assigned: current_user.tasks_assigned,
+      tasks_completed: current_user.tasks_completed.limit(5) }
 
-      render_local_pirate_or_captain_view 'index'
+      tasks_need_verify = render_task_view_to_string({
+      tasks: current_user.tasks_need_verify, 
+      button: true, 
+      assigned: false})
+
+      task_highlight = render_to_string partial: 'highlight_task',
+      locals: {pirate: current_user, task: current_user.tasks_assigned.first}
+
+      render json: {tasks_on_board: tasks_on_board,
+      tasks_need_verify: tasks_need_verify, task_form: new_task_form }
     end
 
   end
