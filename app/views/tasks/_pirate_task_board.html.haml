@@ -14,9 +14,7 @@
   - tasks_need_verify.first(Task::MAX).each do |task|
     %ul.task
       %li #{link_to task.name, pirate_task_path(current_user, task), :remote => true, :id => 'show_task'}
-      %li #{task.pirate.username}'s quest
       %li #{task.worth} doubloons
-      / %li Posted: #{task.created_at.strftime(time_format(task))}
 
 .large-4.columns.pirate.profile_bottom_R
   %h3 Completed Quests
@@ -25,4 +23,3 @@
     %ul.task
       %li #{task.name}
       %li #{task.worth} doubloons
-      / %li Posted: #{task.created_at.strftime(time_format(task))}

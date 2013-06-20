@@ -2,8 +2,6 @@
 - treasures.first((Treasure::MAX)).each do |treasure|
   %ul.treasure
     %li #{treasure.name}
-    %li Description: #{treasure.description}
+    %li #{treasure.description}
     / %li Photo: #{treasure.photo}
-    %li #{treasure.price} Doubloons
-    %li Tax: #{number_with_delimiter(treasure.tax, :delimiter => ',')}
-    %li Total: #{number_with_delimiter(treasure.total_price, :delimiter => ',')} Doubloons
+    %li #{number_with_delimiter(treasure.total_price, :delimiter => ',')} doubloons (+tax)

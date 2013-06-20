@@ -69,7 +69,7 @@ $(document).ready(function(){
   // Buy treasure from treasure board
   $('.pirate.profile_main').on('ajax:success', '#buy_treasure', function(e, data, status, xhr) {
     $(this).closest('div').remove();
-
+    
     var leftBox  = new List('.pirate.profile_left', 'Waiting for Treasures', data.t_purchased);
     var rightBox = new List('.pirate.profile_right', 'Looted Treasures', data.t_received);
     
