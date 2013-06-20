@@ -58,9 +58,22 @@
   font-size: 0.8em;
 }
 
+.loot_treasure {
+  width: 100%;
+  border: 0px;
+  height: 1.5em;
+  background-color: #edebeb;
+  font-size: 0.8em;
+}
+
 .delete_treasure:hover {
   background-color: #dadada;
 }
+
+.loot_treasure:hover {
+  background-color: #dadada;
+}
+
 
 #mid_nav_bar {
   border-top: 3px solid #9f9f9f;
@@ -71,12 +84,12 @@
   min-height: 280px;
 }
 
-.profile_left {
+.captain.profile_left {
   // background-color: #acacac;
   padding-bottom: 3%;
 }
 
-.profile_right {
+.captain.profile_right {
     // background-color: #acacac;
     padding-bottom: 3%;
 }

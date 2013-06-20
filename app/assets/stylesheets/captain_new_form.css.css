@@ -32,6 +32,14 @@
  color: #444444;
 }
 
+.profile_right h3 {
+   font-family: 'Pathway Gothic One', sans-serif;
+}
+
+.profile_left h3 {
+   font-family: 'Pathway Gothic One', sans-serif;
+}
+
 .profile_left h1 {
  font-family: 'Pathway Gothic One', sans-serif; 
  color: #444444;

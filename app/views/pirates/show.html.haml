@@ -2,7 +2,8 @@
 - content_for :title, "Pirate's Page"
 .row
   .welcome.large-12.columns
-    %strong Hello Pirate #{current_user.first_name.titleize}!
+    %p
+      Hello, Pirate #{current_user.first_name.titleize}!
 
 .row.pirate.profile_main
   .large-11.large-offset-1.small-11.columns.small-offset-1
