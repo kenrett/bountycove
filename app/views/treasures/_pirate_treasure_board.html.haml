@@ -2,7 +2,8 @@
   .large-3.columns.treasure_item
     = image_tag("/treasure_chest.png")
     %br
+    .treasure_name #{treasure.name}
 
-    .cost #{treasure.price} Doubloons
+    .cost #{number_with_delimiter(treasure.total_price, :delimiter => ',')} Doubloons (+tax)
     = link_to "LOOT", pirate_treasure_path(current_user, treasure), :remote => true, :id => 'buy_treasure', :method => :put, :confirm => 'Ready to loot?!'
   .large-1.columns

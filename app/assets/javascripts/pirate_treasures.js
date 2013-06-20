@@ -50,6 +50,7 @@ $(document).ready(function(){
     $(this).closest('div').remove();
     $('.pirate.profile_left').html(data.t_purchased);
     $('.pirate.profile_right').html(data.t_received);
+    $('#user_coins').html(data.user_coins);
 
     var treasureBought = new TreasureSuccess('#treasure_message', data.success_message);
     treasureBought.renderToPage();

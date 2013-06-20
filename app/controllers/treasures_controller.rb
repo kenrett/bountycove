@@ -86,7 +86,6 @@ class TreasuresController < ApplicationController
         current_user.coins -= treasure.total_price
         current_user.update_attribute(:coins, current_user.coins)
         treasure.bought!
-        treasure.save
 
         current_user.treasures << treasure
         treasures_purchased = render_to_string :partial => 'pirate_treasures',
