@@ -50,59 +50,42 @@ $(document).ready(function(){
 
   $('#mid_nav_bar').on('ajax:success','#pirate_task_cove', function(e, data, status, xhr){
 
-    var leftBox   = new List('.pirate.profile_left', 'New Tasks!', data.tasks_available);
-    //var rightBox  = new List('.pirate.profile_right', 'Highlight Task!', data.task_highlight);
-    var botBox   = new List('.pirate.profile_bottom', '', data.tasks_on_board);
+    var leftBox   = new List('.pirate.profile_left', 'Current Tasks!', data.tasks_assigned);
+    var rightBox  = new List('.pirate.profile_right', '', data.task_highlight);
+    var botBox    = new List('.pirate.profile_bottom', '', data.tasks_on_board);
 
     leftBox.renderToPage();
-    //rightBox.renderToPage();
+    rightBox.renderToPage();
     botBox.renderToPage();
   });
 
-  //Add task
-  $('.pirate.profile_right').on('ajax:success', '#new_task', function(e, data, status, xhr) {
-    var creationMessage = new TaskSuccess('.error_max_task_limit', data.task_create);
-    creationMessage.renderToPage();
+  //Accept task
+  $('.pirate.profile_bottom').on('ajax:success', '.accept_quest', function(e, data, status, xhr) {
     
-    var leftBox   = new List('.pirate.profile_left', 'New Tasks!', data.tasks_need_verify);
-    var rightBox  = new List('.pirate.profile_right', 'Enter new Task!', data.task_form);
-    var botBox   = new List('.pirate.profile_bottom', '', data.tasks_on_board);
+    var leftBox   = new List('.pirate.profile_left', 'Current Tasks!', data.tasks_assigned);
+    var rightBox  = new List('.pirate.profile_right', '', data.task_highlight);
+    var botBox    = new List('.pirate.profile_bottom', '', data.tasks_on_board);
 
-    // leftBox.renderToPage();
-    // rightBox.renderToPage();
+    leftBox.renderToPage();
+    rightBox.renderToPage();
     botBox.renderToPage();
 
   //Errors on Add
-}).on('ajax:error', '#new_task', function(e, data, status, xhr) {
-  var validationError = new TaskError('.error_max_task_limit', data.responseText);
+}).on('ajax:error', '.accept_quest', function(e, data, status, xhr) {
+  var validationError = new TaskError('.error_max_task_limit', data.assign);
   validationError.renderToPage();
   });
 
-  //Edit Task
-  $('.pirate.profile_bottom').on('ajax:success', '#edit_task', function(e, data, status, xhr) {
-    var rightBox = new List('.pirate.profile_right', 'Update Task!', data.task_form);
-    rightBox.renderToPage();
-  });
-
-  //Refresh after Edit
-  $('.pirate.profile_right').on('ajax:success','.edit_task', function(e, data, status, xhr){
-    var leftBox   = new List('.pirate.profile_left', 'Task to be Verified', data.tasks_need_verify);
-    var rightBox  = new List('.pirate.profile_right', 'Enter new Task!', data.task_form);
-    var botBox   = new List('.pirate.profile_bottom', '', data.tasks_on_board);
+  //Complete Task
+$('.pirate.profile_left').on('ajax:success', '#verified_task', function(e, data, status, xhr) {
+    
+    var leftBox   = new List('.pirate.profile_left', 'Current Tasks!', data.tasks_assigned);
+    var rightBox  = new List('.pirate.profile_right', '', data.task_highlight);
+    var botBox    = new List('.pirate.profile_bottom', '', data.tasks_on_board);
 
     leftBox.renderToPage();
     rightBox.renderToPage();
     botBox.renderToPage();
   });
   
-  //Task verified button
-  $('.pirate.profile_left').on('ajax:success','#verified_task', function(e, data, status, xhr){
-    var leftBox   = new List('.pirate.profile_left', 'Task to be Verified', data.tasks_need_verify);
-    var rightBox  = new List('.pirate.profile_right', 'Enter new Task!', data.task_form);
-    var botBox   = new List('.pirate.profile_bottom', '', data.tasks_on_board);
-
-    leftBox.renderToPage();
-    rightBox.renderToPage();
-    botBox.renderToPage();
-  });
 });

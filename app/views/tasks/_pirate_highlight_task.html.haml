@@ -1,7 +1,10 @@
-%h3 Your Newest Task
-%ul
-  %li Name: #{task.name}
-  %li Description: #{task.description}
-  %li Worth: #{task.worth}
-  %li Created_at: #{task.created_at}
-  %li Updated_at: #{task.updated_at}
+- if task
+  %h3 Your Newest Task
+  %ul
+    %li Name: #{task.name}
+    %li Description: #{task.description}
+    %li Worth: #{task.worth}
+    %li Task created: #{task.created_at.strftime(time_format(task))}
+    %li Assigned: #{task.updated_at.strftime(time_format(task))}
+- else
+  %h1 No Tasks!

@@ -19,7 +19,7 @@
     /= render :partial => 'list_of_pirates', :locals => {:pirates => @pirates}
 
   .large-6.columns.pirate.profile_right
-    = render :partial => "pirate_tasks", :locals => { tasks: @tasks.limit(5) }
+    = render :partial => "pirate_profile_tasks", :locals => { tasks: @tasks.limit(5) }
 
 %br
 .row
