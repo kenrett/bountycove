@@ -4,8 +4,7 @@
   background-color: #59b5e6;
   background-position: center;
   background-size: contain;
-  padding-left: 1em;
-  height: 5em;
+  height: 78px;
   list-style: none;
   position: fixed;
   width: 100%;
@@ -28,11 +27,4 @@
   color: #424343;
 }li a:hover {
   color: #232323;
-}
-
-.small.radius.button {
-  margin-left: 9.5em;
-  background-color: black;
-  color: white;
-  height: 100%;
 }

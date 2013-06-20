@@ -31,3 +31,22 @@
  font-family: 'Pathway Gothic One', sans-serif; 
  color: #444444;
 }
+
+.profile_left h1 {
+ font-family: 'Pathway Gothic One', sans-serif; 
+ color: #444444;
+}
+
+.profile_bottom {
+  min-height:180px;
+}
+
+.profile_bottom h3 {
+  min-height: 20px;
+  font-family: 'Pathway Gothic One', sans-serif; 
+  color: #444444;
+}h1 {
+  font-family: 'Pathway Gothic One', sans-serif; 
+  color: #444444;
+}
+

@@ -1,9 +1,4 @@
 // Captain Profile Page 
-.profile_bottom {
-  min-height:180px;
-  border: 2px solid black;
-}
-
 .cost {
   text-align: center;
 }
@@ -37,7 +32,9 @@
 // Captain Tasks Index
 
 ul.task {
-  border: 2px solid black;
+  font-family: 'Pathway Gothic One', sans-serif; 
+  font-size: 1.4em;
+  color: #444444;
 }
 
 .top_links {

@@ -12,7 +12,6 @@
 
 
 .treasures_on_sale {
-  // background-color: #acacac;
   min-height: 39em;
   overflow: auto;
 }
@@ -27,13 +26,8 @@ ul.treasures_on_sale h1 {
   height: 12.1em;
 }
 
-
 .sub_nav {
   padding: 0;
-}
-
-.username {
-  border: 2px solid black;
 }
 
 .intro {
@@ -46,7 +40,7 @@ ul.treasures_on_sale h1 {
 
 .new_task input {
   background-color: #e0dfdf;
-  margin-bottom: -2%;
+  margin-bottom: 2%;
 }
 
 .new_task input:focus {
@@ -57,6 +51,7 @@ ul.treasures_on_sale h1 {
   font-size: 1.5em;
   font-family: 'Pathway Gothic One', sans-serif;
   font-color: #444444;
+  margin-bottom: 1%;
 }
 
 .new_task input:last-child {

@@ -1,9 +1,9 @@
 .error_max_task_limit
 = form_for [captain, task], :remote => true do |f|
   = f.label "Name"
-  = f.text_field(:name, :placeholder =>  "Name")
+  = f.text_field(:name)
   = f.label "Description"
-  = f.text_field(:description, :placeholder => "Description")
+  = f.text_field(:description)
   = f.label "Worth How Much Gold?"
-  = f.text_field(:worth, :placeholder => "Value")
-  = f.submit "Create!",:class => 'tiny button alert round'
+  = f.text_field(:worth)
+  = f.submit "Create!",:class => 'new_pirate_button'

@@ -3,10 +3,6 @@
   margin-bottom: 1em;
 }
 
-.captain_profile_main {
-  background-image: url('scroll.png');
-}
-
 .treasure_item {
   // background-color: #b5b4b4;
   margin-right: 2%;
@@ -31,7 +27,6 @@
   // background-color: #acacac;
   padding: 1%;
   min-height: 245px; 
-  border-bottom: 3px solid #9f9f9f;
 }
 
 .tiny.button.alert.round {
@@ -59,11 +54,16 @@
   width: 100%;
   border: 0px;
   height: 1.5em;
-  background-color: #198ac8;
+  background-color: #edebeb;
   font-size: 0.8em;
 }
 
+.delete_treasure:hover {
+  background-color: #dadada;
+}
+
 #mid_nav_bar {
+  border-top: 3px solid #9f9f9f;
 }
 
 // Captain Profile Page 
