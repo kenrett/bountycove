@@ -1,6 +1,5 @@
 == Dev BootCamp Final project
 
-Bounty Cove focuses on a fun, interactive way to teach children the importance of financial responsibility. We created an app that invites parents to prepare a list of every day tasks, Quests, that they would like their children to complete. A child logs into their parent created account, and can see the value of each task along with a list of treasures that they can purchase with their accrued "doubloons" (Pirate money). Children are also welcome to add "wish list" items that a parent can choose to include or not.
-
+A six-day project built from scratch. The idea of the project was to create an interactive way to make chores fun for kids using a pirate theme. Parents can sign up and prepare a list of every day tasks that their children can complete. Each task completed will reward the child with some "doubloons", which can then be exchanged for rewards created by the parents.
 
 http://bountycove.herokuapp.com/
